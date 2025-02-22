@@ -77,6 +77,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Keyboard (Arrows)",
+                    "id": "9a99a600-079e-4090-ad81-61b3f0931ca4",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "c23ae64d-c467-43bd-ab8e-8ca821340746",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "ef32d9cb-3014-4b56-9d41-394d9ab6b5a2",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "92ac9575-ba2c-472e-a3b9-f50883e7c0f1",
                     "path": "<Keyboard>/j",

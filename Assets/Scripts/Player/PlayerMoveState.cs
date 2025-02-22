@@ -70,7 +70,7 @@ public class PlayerMoveState : BaseState
     public override void ExitState()
     {
         _rb.velocity = new Vector2(0, 0);
-        _rb.gravityScale = 1;
+        _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
     }
     #endregion
 
