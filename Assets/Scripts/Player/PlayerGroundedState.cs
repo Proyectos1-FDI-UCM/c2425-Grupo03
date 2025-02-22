@@ -85,6 +85,7 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     public override void EnterState()
     {
+
     }
     
     /// <summary>
@@ -94,7 +95,7 @@ public class PlayerGroundedState : BaseState
     {
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -102,9 +103,17 @@ public class PlayerGroundedState : BaseState
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+
+    protected override void OnStateSetUp()
+    {
+        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+    }
+
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
+
+
     protected override void UpdateState()
     {
         

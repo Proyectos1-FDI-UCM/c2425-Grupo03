@@ -74,14 +74,17 @@ public class PlayerJumpState : BaseState
         
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    protected override void OnStateSetUp()
+    {
+        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+    }
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
