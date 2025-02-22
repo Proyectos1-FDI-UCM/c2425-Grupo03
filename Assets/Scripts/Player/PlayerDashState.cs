@@ -107,7 +107,7 @@ public class PlayerDashState : BaseState
         }
         else
         {
-            ChangeState(Ctx.GetStateByType<EmptyState>());
+            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
     }
     
@@ -139,7 +139,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (Time.time > _finishDashingTime) ChangeState(Ctx.GetStateByType<EmptyState>());
+        if (Time.time > _finishDashingTime) ChangeState(Ctx.GetStateByType<PlayerFallingState>());
     }
 
     #endregion   

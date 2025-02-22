@@ -133,8 +133,8 @@ GameObject:
   - component: {fileID: 3300598}
   - component: {fileID: 3300599}
   - component: {fileID: 3300600}
-  - component: {fileID: 3300601}
   - component: {fileID: 3300602}
+  - component: {fileID: 3300603}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -151,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 3300597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42, y: 0.08, z: 0}
+  m_LocalPosition: {x: 8.18, y: 3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -231,21 +231,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &3300601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3300597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6f7d693054f10499b3fcd6cd4481a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 127094309}
-  - {fileID: 127094306}
 --- !u!61 &3300602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -291,6 +276,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &3300603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4deab3d5a4db94195e749d7ff11c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states:
+  - {fileID: 127094309}
+  - {fileID: 127094306}
+  _gravityScale: 1
 --- !u!1 &127094304
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,8 +301,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 127094305}
-  - component: {fileID: 127094306}
   - component: {fileID: 127094309}
+  - component: {fileID: 127094306}
   m_Layer: 0
   m_Name: PlayerMovement
   m_TagString: Untagged
@@ -338,9 +339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _distance: 5
-  _duration: 0
+  _duration: 0.1
   _rechargeTime: 0.5
-  _playerDirectionTEST: {x: 1, y: 0}
   _playerTrigger: {fileID: 3300600}
 --- !u!114 &127094309
 MonoBehaviour:
