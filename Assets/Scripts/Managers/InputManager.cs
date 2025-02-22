@@ -212,7 +212,7 @@ public class InputManager : MonoBehaviour
         // El estado lo consultaremos a través de los métodos públicos que 
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
         // y FireWasReleasedThisFrame)
-        _fire = _theController.Player.Fire;
+        //_fire = _theController.Player.Fire;
     }
 
     /// <summary>
