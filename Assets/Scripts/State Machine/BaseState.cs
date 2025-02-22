@@ -72,14 +72,12 @@ public abstract class BaseState : MonoBehaviour
     /// <summary>
     /// Metodo llamado tras establecer el contexto de un estado.
     /// </summary>
-    public virtual void OnStateSetUp() { }
+    protected virtual void OnStateSetUp() { }
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public abstract void EnterState();
-
-    
 
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
@@ -90,7 +88,7 @@ public abstract class BaseState : MonoBehaviour
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
-    public abstract void CheckSwitchState();
+    protected abstract void CheckSwitchState();
 
     /// <summary>
     /// Actualiza el estado actual, mira si hay que cambiar de estado y si tiene un estado hijo lo actualiza.

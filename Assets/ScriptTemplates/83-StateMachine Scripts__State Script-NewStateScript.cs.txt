@@ -69,16 +69,6 @@ public class #SCRIPTNAME# : BaseState
     {
         #NOTRIM#
     }
-
-    /// <summary>
-    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
-    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
-    /// </summary>
-    public override void CheckSwitchState()
-    {
-        #NOTRIM#
-    }
-
     #endregion
     
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -92,6 +82,15 @@ public class #SCRIPTNAME# : BaseState
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
     protected override void UpdateState()
+    {
+        #NOTRIM#
+    }
+
+    /// <summary>
+    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// </summary>
+    protected override void CheckSwitchState()
     {
         #NOTRIM#
     }
