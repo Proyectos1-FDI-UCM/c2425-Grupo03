@@ -65,7 +65,7 @@ public class PlayerFallingState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
     }
     public void ResetCoyoteTime()
     {
@@ -86,10 +86,7 @@ public class PlayerFallingState : BaseState
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    protected override void OnStateSetUp()
-    {
-        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
-    }
+
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
