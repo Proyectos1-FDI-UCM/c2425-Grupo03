@@ -132,7 +132,8 @@ public class PlayerGroundedState : BaseState
         }
         else if (_ctx.PlayerInput.Dash.IsPressed())
         {
-            ChangeState(_ctx.GetStateByType<PlayerDashState>());
+            PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
+            if(Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
         }
     }
     #endregion   

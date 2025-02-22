@@ -30,7 +30,6 @@ public class StateMachine : MonoBehaviour
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    BaseState previousState;
     #endregion
 
     // ---- PROPIEDADES ----

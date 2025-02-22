@@ -52,12 +52,7 @@ public class PlayerDashState : BaseState
     /// <summary>
     /// Tiempo en el que debe terminar el dash
     /// </summary>
-    float _finishDashingTime;
-
-    /// <summary>
-    /// Tiempo en el que se podrá volver a hacer un dash
-    /// </summary>
-    float _nextAvailableDashTime = -1;
+    public float _finishDashingTime;
 
     /// <summary>
     /// El Rigidbody del jugador.
@@ -70,6 +65,11 @@ public class PlayerDashState : BaseState
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
+
+    /// <summary>
+    /// Tiempo en el que se podrá volver a hacer un dash
+    /// </summary>
+    public float NextAvailableDashTime { get; private set; }
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -80,7 +80,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     void Start()
     {
-        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+        _rb = GetComponentInParent<Rigidbody2D>();
     }
     #endregion
 
@@ -96,19 +96,15 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        if (Time.time > _nextAvailableDashTime)
-        {
-            _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
-                                        , 0);
-            _rb.gravityScale = 0;
-            _finishDashingTime = Time.time + _duration;
-            _nextAvailableDashTime = Time.time + _rechargeTime;
-            _playerTrigger.enabled = false;
-        }
-        else
-        {
-            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
-        }
+        print("Dashing!");
+        print(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration);
+        _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
+                                    , 0);
+        print(_rb.velocity);
+        _rb.gravityScale = 0;
+        _finishDashingTime = _duration;
+        NextAvailableDashTime = Time.time + _rechargeTime;
+        _playerTrigger.enabled = false;
     }
     
     /// <summary>
@@ -116,9 +112,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _rb.velocity = Vector2.zero;
-        _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
-        _playerTrigger.enabled = true;
+        print("Exit dash");
     }
     #endregion
 
@@ -131,6 +125,9 @@ public class PlayerDashState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        if(_finishDashingTime > 0) _finishDashingTime -= Time.deltaTime;
+        _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
+                                    , 0);
     }
 
     /// <summary>
@@ -139,7 +136,14 @@ public class PlayerDashState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (Time.time > _finishDashingTime) ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+        if (_finishDashingTime <= 0)
+        {
+            _rb.velocity = Vector2.zero * -0.1f;
+
+            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+            _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
+            _playerTrigger.enabled = true;
+        }
     }
 
     #endregion   
