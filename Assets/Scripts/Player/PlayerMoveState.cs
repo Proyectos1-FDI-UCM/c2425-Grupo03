@@ -32,7 +32,7 @@ public class PlayerMoveState : BaseState
     /// El Rigidbody del jugador.
     /// </summary>
     Rigidbody2D _rb;
-
+    private float _moveDir;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -60,7 +60,6 @@ public class PlayerMoveState : BaseState
     public override void EnterState()
     {
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
-        _rb.velocity = new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection * _speed, 0);
         _rb.gravityScale = 0;
     }
     
@@ -91,7 +90,20 @@ public class PlayerMoveState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+    }
+
+    protected override void FixedUpdateState()
+    {
+        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
+        if (_moveDir < 0)
+        {
+            GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Left;
+        }
+        else
+        {
+            GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Right;
+        }
+        _rb.velocity = new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection * _speed, 0);
     }
 
     /// <summary>
