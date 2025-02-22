@@ -14,7 +14,8 @@ using UnityEngine;
 /// <summary>
 /// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D))] //Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+[SelectionBase] //Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
 public class PlayerStateMachine : StateMachine
 {
     /// <summary>
@@ -32,7 +33,13 @@ public class PlayerStateMachine : StateMachine
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-
+    /// <summary>
+    /// <para>La gravedad del Rigidbody.</para>
+    /// Se usa para saber devolver el valor inicial de la gravedad al Rigidbody cuando se cambia.
+    /// </summary>
+    [SerializeField]
+    [Tooltip("Rigidbody's gravity scale. This value overrides the rigidbody's value.")][Min(0)]
+    private float _gravityScale;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -49,12 +56,18 @@ public class PlayerStateMachine : StateMachine
     /// <para>Right = 1, Left = -1.</para>
     /// Puedes hacer <c>(short)LookingDirection</c> para obtener el valor 1 o -1 directamente.
     /// </summary>
-    public PlayerLookingDirection LookingDirection { get; set; }
+    public PlayerLookingDirection LookingDirection { get; set; } = PlayerLookingDirection.Left;
 
     /// <summary>
     /// Rigidbody2D del jugador.
     /// </summary>
     public Rigidbody2D Rigidbody { get; private set; }
+
+    /// <summary>
+    /// <para>Getter de <paramref name="_gravityScale"/> de solo lectura.</para>
+    /// <returns>Devuelve el valor de <paramref name="_gravityScale"/>.</returns>
+    /// </summary>
+    public float GravityScale => _gravityScale;
 
     /// <summary>
     /// El input actions del jugador.
@@ -68,11 +81,12 @@ public class PlayerStateMachine : StateMachine
     // Documentar cada método que aparece aquí con ///<summary>
 
     /// <summary>
-    /// 
+    /// Establece los valores iniciales en Awake.
     /// </summary>
     protected override void OnAwake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
+        Rigidbody.gravityScale = _gravityScale;
 
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();

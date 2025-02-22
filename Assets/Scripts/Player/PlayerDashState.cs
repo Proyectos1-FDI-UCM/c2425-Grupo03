@@ -28,7 +28,7 @@ public class PlayerDashState : BaseState
     /// Cuanto tarda en recorrer la distancia indicada
     /// </summary>
     [Tooltip("Duration of the dash in seconds.")]
-    [SerializeField][Range(0, 1)] float _duration;
+    [SerializeField][Range(0.1f, 1)] float _duration;
 
     /// <summary>
     /// Cuanto tarda en poder volver a hacer un dash
@@ -74,6 +74,14 @@ public class PlayerDashState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+
+    /// <summary>
+    /// Coge el Rigidbody del contexto para tener la referencia.
+    /// </summary>
+    void Start()
+    {
+        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -109,7 +117,7 @@ public class PlayerDashState : BaseState
     public override void ExitState()
     {
         _rb.velocity = Vector2.zero;
-        _rb.gravityScale = 1;
+        _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
         _playerTrigger.enabled = true;
     }
     #endregion
@@ -117,12 +125,6 @@ public class PlayerDashState : BaseState
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
-
-    
-    protected override void OnStateSetUp()
-    {
-        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
-    }
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
