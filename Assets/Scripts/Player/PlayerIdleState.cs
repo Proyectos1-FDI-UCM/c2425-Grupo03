@@ -89,14 +89,14 @@ public class PlayerIdleState : BaseState
     { 
         if (_moveDir != 0)
         {
-            if (_moveDir < 0)
-            {
-                GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Left;
-            }
-            else
-            {
-                GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Right;
-            }
+            //if (_moveDir < 0)
+            //{
+            //    GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Left;
+            //}
+            //else
+            //{
+            //    GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Right;
+            //}
             ChangeState(Ctx.GetStateByType<PlayerMoveState>());
         }
     }

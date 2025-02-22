@@ -291,6 +291,7 @@ MonoBehaviour:
   _states:
   - {fileID: 1958822113}
   - {fileID: 1958822114}
+  _gravityScale: 1
 --- !u!1001 &599027521
 PrefabInstance:
   m_ObjectHideFlags: 0
