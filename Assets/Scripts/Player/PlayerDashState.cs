@@ -13,10 +13,6 @@ using UnityEngine;
 /// </summary>
 public class PlayerDashState : BaseState
 {
-    Rigidbody2D _rb; //ESTO DEBERIA ESTAR EN EL CONTEXTO
-
-
-
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
@@ -41,12 +37,6 @@ public class PlayerDashState : BaseState
     [SerializeField][Min(0)] float _rechargeTime;
 
     /// <summary>
-    /// Direccion en la que mira el jugador
-    /// Esto debería estar en el contexto
-    /// </summary>
-    [SerializeField] Vector2 _playerDirectionTEST;
-
-    /// <summary>
     /// El trigger a desactivar mientras hace el dash para que los enemigos no hagan daño al jugador
     /// </summary>
     [Tooltip("Trigger deactivated while dashing.")]
@@ -69,6 +59,11 @@ public class PlayerDashState : BaseState
     /// </summary>
     float _nextAvailableDashTime = -1;
 
+    /// <summary>
+    /// El Rigidbody del jugador.
+    /// </summary>
+    Rigidbody2D _rb;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -79,10 +74,6 @@ public class PlayerDashState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Start()
-    {
-        _rb = GetComponentInParent<Rigidbody2D>();
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -99,7 +90,8 @@ public class PlayerDashState : BaseState
     {
         if (Time.time > _nextAvailableDashTime)
         {
-            _rb.velocity = new Vector2(_distance*_playerDirectionTEST.x / _duration, 0);
+            _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
+                                        , 0);
             _rb.gravityScale = 0;
             _finishDashingTime = Time.time + _duration;
             _nextAvailableDashTime = Time.time + _rechargeTime;
@@ -121,10 +113,16 @@ public class PlayerDashState : BaseState
         _playerTrigger.enabled = true;
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
+
+    
+    protected override void OnStateSetUp()
+    {
+        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+    }
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.

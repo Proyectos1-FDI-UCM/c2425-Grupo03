@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Estado para testear
+// Adrián Isasi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -11,8 +11,7 @@ using UnityEngine.InputSystem;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado para testear el dash, no debería ser usado
 /// </summary>
 public class EmptyState : BaseState
 {
@@ -27,7 +26,6 @@ public class EmptyState : BaseState
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
-    PlayerInputActions inputActions;
 
     #endregion
 
@@ -39,11 +37,6 @@ public class EmptyState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Start()
-    {
-        inputActions = new PlayerInputActions();
-        inputActions.Player.Enable();
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -93,7 +86,7 @@ public class EmptyState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if(inputActions.Player.Dash.IsPressed()) ChangeState(Ctx.GetStateByType<PlayerDashState>());
+        if(GetCTX<PlayerStateMachine>().PlayerInput.Dash.IsPressed()) ChangeState(Ctx.GetStateByType<PlayerDashState>());
     }
 
     #endregion   
