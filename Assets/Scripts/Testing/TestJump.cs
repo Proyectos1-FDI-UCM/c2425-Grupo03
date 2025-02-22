@@ -36,7 +36,7 @@ public class TestJump : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     float _direction;
-
+    PlayerStateMachine _playerStateMachine;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -64,7 +64,7 @@ public class TestJump : MonoBehaviour
     }
     void Start()
     {
-        
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
     /// <summary>
@@ -74,6 +74,7 @@ public class TestJump : MonoBehaviour
     {
         _direction = _action.Player.Move.ReadValue<float>();
         _rb.velocity = new Vector2(_direction * _speed, _rb.velocity.y);
+        _playerStateMachine.LookingDirection = (PlayerStateMachine.PlayerLookingDirection) (int) _direction;
     }
 
     private void FixedUpdate()

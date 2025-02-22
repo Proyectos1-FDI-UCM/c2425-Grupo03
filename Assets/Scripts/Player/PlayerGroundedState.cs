@@ -5,7 +5,17 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
+
+//---------------------------------------------------------
+// Estado del jugador cuando esta en el suelo
+// Chenlinjia Yi
+// Kingless Dungeon
+// Proyectos 1 - Curso 2024-25
+//---------------------------------------------------------
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
 
@@ -19,7 +29,7 @@ public class PlayerGroundedState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    [SerializeField][Min(0)] float _jumpBufferTime;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -32,6 +42,9 @@ public class PlayerGroundedState : BaseState
     // Ejemplo: _maxHealthPoints
     Rigidbody2D _rigidbody;
     PlayerStateMachine _ctx;
+    float _jumpBuffer;
+    
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -46,6 +59,15 @@ public class PlayerGroundedState : BaseState
     {
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
+        _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
+    }
+
+    private void Update()
+    {
+        if ( _jumpBuffer > 0)
+        {
+            _jumpBuffer-=Time.deltaTime;
+        }
     }
     #endregion
 
@@ -70,7 +92,6 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
     }
     #endregion
     
@@ -95,16 +116,21 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_ctx.PlayerInput.Jump.IsPressed())
+        if (_jumpBuffer > 0)
         {
             ChangeState(Ctx.GetStateByType<PlayerJumpState>());
         }
         else if (_rigidbody.velocity.y < 0)
         {
-            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+            PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();
+            ChangeState(fallingState);
+            fallingState.ResetCoyoteTime();
+        }
+        else if (_ctx.PlayerInput.Dash.IsPressed())
+        {
+            ChangeState(_ctx.GetStateByType<PlayerDashState>());
         }
     }
-
     #endregion   
 
 } // class PlayerGroundedState 

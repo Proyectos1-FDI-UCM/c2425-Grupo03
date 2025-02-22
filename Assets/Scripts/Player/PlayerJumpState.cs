@@ -100,6 +100,10 @@ public class PlayerJumpState : BaseState
         {
             ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
+        else if (_ctx.PlayerInput.Dash.IsPressed())
+        {
+            ChangeState(_ctx.GetStateByType<PlayerDashState>());
+        }
     }
 
     #endregion   

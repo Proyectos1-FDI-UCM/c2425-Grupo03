@@ -19,7 +19,7 @@ public class PlayerFallingState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    [SerializeField][Min(0)] float _maxCoyoteTime;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -32,6 +32,7 @@ public class PlayerFallingState : BaseState
     // Ejemplo: _maxHealthPoints
     Rigidbody2D _rigidbody;
     PlayerStateMachine _ctx;
+    float _coyoteTime;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -66,13 +67,16 @@ public class PlayerFallingState : BaseState
     {
         
     }
-    
+    public void ResetCoyoteTime()
+    {
+        _coyoteTime = _maxCoyoteTime;
+    }
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
     {
-        
+        _coyoteTime = 0;
     }
     #endregion
     
@@ -88,7 +92,10 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        if (_coyoteTime > 0)
+        {
+            _coyoteTime -= Time.deltaTime;
+        }
     }
 
     /// <summary>
@@ -97,9 +104,18 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
+        
         if (_rigidbody.velocity.y == 0)
         {
-            ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+            ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
+        }
+        else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.IsPressed())
+        {
+            ChangeState(_ctx.GetStateByType<PlayerJumpState>());
+        }
+        else if (_ctx.PlayerInput.Dash.IsPressed())
+        {
+            ChangeState(_ctx.GetStateByType<PlayerDashState>());
         }
     }
 
