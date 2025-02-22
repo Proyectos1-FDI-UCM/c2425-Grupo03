@@ -1,17 +1,15 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado que permite hacer un dash al jugador.
 // Adrian Isasi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
-// Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Clase que extiende BaseState para hacer el estado Dash del jugador.
 /// </summary>
 public class PlayerDashState : BaseState
 {
@@ -22,12 +20,37 @@ public class PlayerDashState : BaseState
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [SerializeField] float _distance;
-    [SerializeField] float _duration;
-    [SerializeField] float _rechargeTime;
-    [SerializeField] float _immuneTime;
-    [SerializeField] Vector2 _playerDirectionTEST; //ESTO DEBERIA ESTAR EN EL CONTEXTO
+
+    [Header("Dash properties")]
+    /// <summary>
+    /// Distancia que se mueve el jugador al hacer un dash
+    /// </summary>
+    [Tooltip("Distance moved while dashing in units.")]
+    [SerializeField][Min(0)] float _distance;
+
+    /// <summary>
+    /// Cuanto tarda en recorrer la distancia indicada
+    /// </summary>
+    [Tooltip("Duration of the dash in seconds.")]
+    [SerializeField][Range(0, 1)] float _duration;
+
+    /// <summary>
+    /// Cuanto tarda en poder volver a hacer un dash
+    /// </summary>
+    [Tooltip("Time needed after dashing to dash again. Starts counting after dash began.")]
+    [SerializeField][Min(0)] float _rechargeTime;
+
+    /// <summary>
+    /// Direccion en la que mira el jugador
+    /// Esto debería estar en el contexto
+    /// </summary>
+    [SerializeField] Vector2 _playerDirectionTEST;
+
+    /// <summary>
+    /// El trigger a desactivar mientras hace el dash para que los enemigos no hagan daño al jugador
+    /// </summary>
+    [Tooltip("Trigger deactivated while dashing.")]
+    [SerializeField] BoxCollider2D _playerTrigger;
 
 
     #endregion
@@ -36,7 +59,14 @@ public class PlayerDashState : BaseState
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
 
+    /// <summary>
+    /// Tiempo en el que debe terminar el dash
+    /// </summary>
     float _finishDashingTime;
+
+    /// <summary>
+    /// Tiempo en el que se podrá volver a hacer un dash
+    /// </summary>
     float _nextAvailableDashTime = -1;
 
     #endregion
@@ -58,24 +88,22 @@ public class PlayerDashState : BaseState
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
 
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Pone los valores que hacen el dash y establece el tiempo para finalizar el dash.
+    /// Si no se puede hacer un dash cambia a otro estado.
     /// </summary>
     public override void EnterState()
     {
         if (Time.time > _nextAvailableDashTime)
         {
-            print("Dashing!");
-            _rb.velocity = new Vector2(_distance / _duration, 0);
+            _rb.velocity = new Vector2(_distance*_playerDirectionTEST.x / _duration, 0);
             _rb.gravityScale = 0;
             _finishDashingTime = Time.time + _duration;
             _nextAvailableDashTime = Time.time + _rechargeTime;
+            _playerTrigger.enabled = false;
         }
         else
         {
@@ -88,18 +116,15 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        print("Not Dashing!");
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = 1;
+        _playerTrigger.enabled = true;
     }
     #endregion
     
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
