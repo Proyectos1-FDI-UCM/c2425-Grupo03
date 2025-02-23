@@ -1,10 +1,11 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
@@ -22,8 +23,16 @@ public class Basic_Attack_He : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     #endregion
-    [SerializeField] float _attackRadius;
+    [Header("Propiedad del ataque")]
+    [SerializeField,Min(1)] float _attackRadius;
+    [SerializeField] float _attackSpeed;
+    [Header("Propiedad del combo")]
+    [SerializeField,Min(1)] float _comboDuration;
+    [SerializeField] int _combo;
+    [SerializeField] int _comboExtraDamage;
+    [Space(20f)]
     [SerializeField] int _enemyCount;
+    [SerializeField] float _damage;
     
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -39,20 +48,25 @@ public class Basic_Attack_He : MonoBehaviour
     private CircleCollider2D _circleCollider;
     private PlayerInputActions _playerInput;
     private InputAction _attack;
+    [SerializeField] private float _countAttackTime = 0;
+    [SerializeField] private bool _hadAttacked;
+    [SerializeField] private float _comboTime = 0;
+
+    private List<Collider2D> _enemyInAttackRange = new List<Collider2D>();
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -64,10 +78,10 @@ public class Basic_Attack_He : MonoBehaviour
         _attack = _playerInput.Player.Attack;
         _attack.Enable();
 
-
-
         _circleCollider = GetComponent<CircleCollider2D>();
         _circleCollider.radius = _attackRadius;
+
+        _hadAttacked = false;
     }
 
     /// <summary>
@@ -75,7 +89,14 @@ public class Basic_Attack_He : MonoBehaviour
     /// </summary>
     void Update()
     {
-        IsAttacking();
+        CheckAttackSpeed(_attackSpeed, ref _hadAttacked);
+        if (_attack.triggered && !_hadAttacked)
+        {
+            _hadAttacked = true;
+            CheckCombo(ref _combo);
+            Attacking();
+        }
+        
     }
     #endregion
 
@@ -97,28 +118,56 @@ public class Basic_Attack_He : MonoBehaviour
     // mayúscula, incluida la primera letra)
 
     #endregion   
-    private void IsAttacking()
+    private void Attacking()
     {
-        if (_attack.triggered)
+        int extra = 0;
+        Debug.Log($"Attacking, attack radius: {_attackRadius}, enemy in attack radius: {_enemyCount}, actual combo: {_combo}");
+        if (_combo == 2) extra += _comboExtraDamage;
+        foreach(Collider2D enemy in _enemyInAttackRange)
         {
-            Debug.Log($"Attacking, attack radius: {_attackRadius}, enemy in attack radius: {_enemyCount}");
+            enemy.gameObject.GetComponent<enemy>().RemoveHealth(_damage + extra);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _enemyCount++;
+        _enemyInAttackRange.Add(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _enemyCount--;
+        _enemyInAttackRange.Remove(collision);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void CheckCombo(ref int _combo)
     {
-        _enemyCount++;
+        if (_combo == 1) _combo = 2;
+        else if (_combo == 2) _combo = 3;
+        else _combo = 1;
     }
+
+    private void CheckAttackSpeed(float _attackSpeed, ref bool _hadAttacked)
+    {
+        if (_hadAttacked) _countAttackTime = _countAttackTime + Time.deltaTime;
+        if (_countAttackTime > _attackSpeed)
+        {
+            _countAttackTime = 0;
+            _hadAttacked = false;
+        }
+    }
+
+    private void CheckComboDuration()
+    {
+        _comboTime += _comboTime + Time.deltaTime;
+        if ( _comboTime > _comboDuration )
+        {
+            _combo = 1;
+            _comboTime = 0;
+        }
+    }
+
 
 } // class Basic_Attack_He 
 // namespace
