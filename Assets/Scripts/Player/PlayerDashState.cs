@@ -22,7 +22,7 @@ public class PlayerDashState : BaseState
     /// Distancia que se mueve el jugador al hacer un dash
     /// </summary>
     [Tooltip("Distance moved while dashing in units.")]
-    [SerializeField][Min(0)] float _distance;
+    [SerializeField][Range(0, 8)] float _distance;
 
     /// <summary>
     /// Cuanto tarda en recorrer la distancia indicada
@@ -33,14 +33,14 @@ public class PlayerDashState : BaseState
     /// <summary>
     /// Cuanto tarda en poder volver a hacer un dash
     /// </summary>
-    [Tooltip("Time needed after dashing to dash again. Starts counting after dash began.")]
+    [Tooltip("Time needed after dashing to dash again in seconds. Starts counting after dash began.")]
     [SerializeField][Min(0)] float _rechargeTime;
 
     /// <summary>
-    /// El trigger a desactivar mientras hace el dash para que los enemigos no hagan daño al jugador
+    /// El trigger a desactivar mientras hace el dash para que los enemigos no hagan daño al jugador.
     /// </summary>
     [Tooltip("Trigger deactivated while dashing.")]
-    [SerializeField] BoxCollider2D _playerTrigger;
+    [SerializeField] BoxCollider2D _playerHitTrigger; //Preferiblemente debería estar en el contexto
 
 
     #endregion
@@ -50,14 +50,25 @@ public class PlayerDashState : BaseState
     // Documentar cada atributo que aparece aquí.
 
     /// <summary>
-    /// Tiempo en el que debe terminar el dash
+    /// Tiempo en el que debe terminar el dash.
     /// </summary>
-    public float _finishDashingTime;
+    float _finishDashingTime;
+
+
+    /// <summary>
+    /// La posicion donde debe terminar el dash
+    /// </summary>
+    float _finishDashingPositionX;
 
     /// <summary>
     /// El Rigidbody del jugador.
     /// </summary>
     Rigidbody2D _rb;
+
+    /// <summary>
+    /// Velocidad a la que se hace el dash.
+    /// </summary>
+    float _dashSpeed;
 
     #endregion
 
@@ -96,15 +107,24 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        print("Dashing!");
-        print(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration);
-        _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
-                                    , 0);
-        print(_rb.velocity);
+        //Acelera al jugador para hacer el dash, calcula la velocidad haciendo. -> v = d / t
+        _dashSpeed = _distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration;
+        _rb.velocity = new Vector2(_dashSpeed, 0);
+        
+        //Quita la gravedad para que no caiga si dasheas en el aire.
         _rb.gravityScale = 0;
+
+        //establece el tiempo que dura el dash.
         _finishDashingTime = _duration;
+
+        //calcula el siguiente timpo cuando se puede volver a hacer el dash.
         NextAvailableDashTime = Time.time + _rechargeTime;
-        _playerTrigger.enabled = false;
+
+        //desactiva el trigger para que no se pueda golpear al jugador.
+        _playerHitTrigger.enabled = false;
+
+        //Mira a ver si el dash podrías atravesar una pared.
+        CheckDashLimit();
     }
     
     /// <summary>
@@ -112,7 +132,17 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        print("Exit dash");
+        //Quita la velocidad.
+        _rb.velocity = Vector2.zero;
+
+        //Reestablece la gravedad.
+        _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
+
+        //Vuelve a activar el trigger para que golpeen al jugador.
+        _playerHitTrigger.enabled = true;
+
+        //Reestablece la posición final del dash al máximo para que permita volver a hacer un dash.
+        _finishDashingPositionX = 0;
     }
     #endregion
 
@@ -125,24 +155,38 @@ public class PlayerDashState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        if(_finishDashingTime > 0) _finishDashingTime -= Time.deltaTime;
-        _rb.velocity = new Vector2(_distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration
-                                    , 0);
+        //Baja el tiempo de para ver cuando termina el dash
+        if (_finishDashingTime > 0)
+        {
+            _finishDashingTime -= Time.deltaTime;
+        }
+
+        //Vuelve a establecer la velocidad del dash (Hay problemas si no se hace, creo que es por la fricción)
+        _rb.velocity = new Vector2(_dashSpeed, 0);
     }
 
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
-    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en sí.
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_finishDashingTime <= 0)
+        if (_finishDashingTime <= 0 || (_finishDashingPositionX != 0 && Mathf.Abs(_rb.transform.position.x - _finishDashingPositionX) < 1))
         {
-            _rb.velocity = Vector2.zero * -0.1f;
-
             ChangeState(Ctx.GetStateByType<PlayerFallingState>());
-            _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
-            _playerTrigger.enabled = true;
+        }
+    }
+
+    /// <summary>
+    /// <para>Hace un raycast en la dirección del dash para ver si el dash podría atravesar una pared.</para>
+    /// Simplemente es una doble comprobación para asegurarme de que el jugador no atraviesa un muro.
+    /// </summary>
+    private void CheckDashLimit()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2((int)GetCTX<PlayerStateMachine>().LookingDirection, 0), _distance, 1 << 10);
+        if (hit.distance < _distance)
+        {
+            _finishDashingPositionX = hit.point.x;
         }
     }
 
