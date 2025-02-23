@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Barra de vida basica que puede sumar y restar vida.
 // Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -21,7 +21,15 @@ public class PlayerHealthBar : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    /// <summary>
+    /// Valor de vida maxima.
+    /// </summary>
+    [Tooltip("Vida maxima del jugador")]
     [SerializeField] private float _maxHealth = 100f;
+
+    /// <summary>
+    /// Slider del inspector.
+    /// </summary>
     [SerializeField] private Slider _healthSlider;
 
     #endregion
@@ -35,6 +43,9 @@ public class PlayerHealthBar : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Vida actual del jugador.
+    /// </summary>
     private float _currentHealth;
 
     #endregion
@@ -69,7 +80,14 @@ public class PlayerHealthBar : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            DecreaseHealth(10f);
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            IncreaseHealth(10f);
+        }
     }
     #endregion
 
