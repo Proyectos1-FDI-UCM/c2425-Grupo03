@@ -571,13 +571,14 @@ GameObject:
   - component: {fileID: 2057430604}
   - component: {fileID: 2057430603}
   - component: {fileID: 2057430602}
-  - component: {fileID: 2057430601}
   - component: {fileID: 2057430607}
   - component: {fileID: 2057430606}
   - component: {fileID: 2057430608}
   - component: {fileID: 2057430609}
   - component: {fileID: 2057430611}
   - component: {fileID: 2057430610}
+  - component: {fileID: 2057430613}
+  - component: {fileID: 2057430612}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -585,20 +586,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2057430601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2057430600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3839fc35e46f15747abbe92228972302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rb: {fileID: 2057430602}
-  _speed: 5
 --- !u!50 &2057430602
 Rigidbody2D:
   serializedVersion: 4
@@ -773,7 +760,8 @@ MonoBehaviour:
   - {fileID: 2057430606}
   - {fileID: 2057430609}
   - {fileID: 2057430611}
-  _gravityScale: 5
+  - {fileID: 2057430613}
+  - {fileID: 2057430612}
 --- !u!114 &2057430609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +776,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _maxCoyoteTime: 0.3
+  _hitDistance: 1.1
+  _DebugRayCast: 1
 --- !u!61 &2057430610
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -849,7 +839,34 @@ MonoBehaviour:
   _distance: 5
   _duration: 0.2
   _rechargeTime: 0.5
-  _playerTrigger: {fileID: 2057430610}
+  _playerHitTrigger: {fileID: 2057430610}
+--- !u!114 &2057430612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057430600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bb00de01e44934489fbe8fc2ad1b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 0
+--- !u!114 &2057430613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057430600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aac379063e568043a64e8b41602f7a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 0
+  _speed: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

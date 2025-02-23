@@ -20,6 +20,9 @@ public class PlayerFallingState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField][Min(0)] float _maxCoyoteTime;
+    [SerializeField] RaycastHit2D _hit;
+    [SerializeField] float _hitDistance;
+    [SerializeField] bool _DebugRayCast;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -33,6 +36,7 @@ public class PlayerFallingState : BaseState
     Rigidbody2D _rigidbody;
     PlayerStateMachine _ctx;
     float _coyoteTime;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -96,6 +100,10 @@ public class PlayerFallingState : BaseState
         {
             _coyoteTime -= Time.deltaTime;
         }
+        _hit = Physics2D.Raycast(gameObject.transform.position, Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
+
+        if (_DebugRayCast)
+        Debug.DrawRay(gameObject.transform.position,Vector2.down*_hitDistance, Color.red);
     }
 
     /// <summary>
@@ -104,8 +112,7 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
-        if (_rigidbody.velocity.y == 0)
+        if (_hit.collider != null)
         {
             ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
