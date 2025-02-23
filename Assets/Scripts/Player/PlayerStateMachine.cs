@@ -33,18 +33,17 @@ public class PlayerStateMachine : StateMachine
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-    /// <summary>
-    /// <para>La gravedad del Rigidbody.</para>
-    /// Se usa para saber devolver el valor inicial de la gravedad al Rigidbody cuando se cambia.
-    /// </summary>
-    [SerializeField]
-    [Tooltip("Rigidbody's gravity scale. This value overrides the rigidbody's value.")][Min(0)]
-    private float _gravityScale;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
+    /// <summary>
+    /// <para>La gravedad del Rigidbody.</para>
+    /// Se usa para saber devolver el valor inicial de la gravedad al Rigidbody cuando se cambia.
+    /// </summary>
+    private float _gravityScale;
 
     #endregion
 
@@ -86,7 +85,7 @@ public class PlayerStateMachine : StateMachine
     protected override void OnAwake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
-        Rigidbody.gravityScale = _gravityScale;
+        _gravityScale = Rigidbody.gravityScale;
 
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();
