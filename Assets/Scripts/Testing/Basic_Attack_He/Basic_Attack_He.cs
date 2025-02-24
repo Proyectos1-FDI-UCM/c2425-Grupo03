@@ -5,9 +5,11 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Collections.Generic;
+
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 // Añadir aquí el resto de directivas using
 
 
@@ -24,17 +26,20 @@ public class Basic_Attack_He : MonoBehaviour
 
     #endregion
     [Header("Propiedad del ataque")]
-    [SerializeField,Min(1)] float _attackRadius;
+    [SerializeField, Min(0)] float _attackRadius;
     [SerializeField] float _attackSpeed;
-    [Header("Propiedad del combo")]
-    [SerializeField,Min(1)] float _comboDuration;
-    [SerializeField] int _combo;
-    [SerializeField] int _comboExtraDamage;
-    [Space(20f)]
-    [SerializeField] int _enemyCount;
     [SerializeField] float _damage;
-    
-    
+    [Header("Propiedad del combo")]
+    [SerializeField, Min(1)] float _comboDuration;
+
+    [SerializeField] int _comboExtraDamage;
+    [SerializeField] float _endOfCombo;
+
+    [Space(20f)]
+
+
+
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -45,20 +50,17 @@ public class Basic_Attack_He : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     #endregion
-    private CircleCollider2D _circleCollider;
     private PlayerInputActions _playerInput;
     private InputAction _attack;
-    [SerializeField] private float _countAttackTime = 0;
-    [SerializeField] private bool _hadAttacked;
-    [SerializeField] private float _comboTime = 0;
-
-    private List<Collider2D> _enemyInAttackRange = new List<Collider2D>();
+    private int _combo;
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
+    public float NextAttackTime{ get; private set; }
+
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -73,15 +75,9 @@ public class Basic_Attack_He : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _enemyCount = 0;
         _playerInput = new PlayerInputActions();
         _attack = _playerInput.Player.Attack;
         _attack.Enable();
-
-        _circleCollider = GetComponent<CircleCollider2D>();
-        _circleCollider.radius = _attackRadius;
-
-        _hadAttacked = false;
     }
 
     /// <summary>
@@ -89,14 +85,14 @@ public class Basic_Attack_He : MonoBehaviour
     /// </summary>
     void Update()
     {
-        CheckAttackSpeed(_attackSpeed, ref _hadAttacked);
-        if (_attack.triggered && !_hadAttacked)
+        if (Time.time > _endOfCombo) _combo = 1;
+
+        if (_attack.triggered && Time.time > NextAttackTime)
         {
-            _hadAttacked = true;
-            CheckCombo(ref _combo);
-            Attacking();
+            NextAttackTime = Time.time + _attackSpeed;
+            UpdateCombo();
+            Attack(1);
         }
-        
     }
     #endregion
 
@@ -118,54 +114,28 @@ public class Basic_Attack_He : MonoBehaviour
     // mayúscula, incluida la primera letra)
 
     #endregion   
-    private void Attacking()
+    private void Attack(int direction)
     {
-        int extra = 0;
-        Debug.Log($"Attacking, attack radius: {_attackRadius}, enemy in attack radius: {_enemyCount}, actual combo: {_combo}");
-        if (_combo == 2) extra += _comboExtraDamage;
-        foreach(Collider2D enemy in _enemyInAttackRange)
+        int extraDamage = 0;
+        Vector2 position = transform.position + (new Vector3(_attackRadius,0) * direction);
+        RaycastHit2D[] enemyInArea;
+
+        enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0,0), _attackRadius, 1 << 10);
+
+        if (_combo == 3) extraDamage += _comboExtraDamage;
+
+        foreach (RaycastHit2D enemy in enemyInArea)
         {
-            enemy.gameObject.GetComponent<enemy>().RemoveHealth(_damage + extra);
+            enemy.collider.GetComponent<enemy>().RemoveHealth(_damage + extraDamage);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void UpdateCombo()
     {
-        _enemyCount++;
-        _enemyInAttackRange.Add(collision);
-    }
+        _endOfCombo = Time.time + _comboDuration;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _enemyCount--;
-        _enemyInAttackRange.Remove(collision);
-    }
-
-    private void CheckCombo(ref int _combo)
-    {
         if (_combo == 1) _combo = 2;
         else if (_combo == 2) _combo = 3;
         else _combo = 1;
-    }
-
-    private void CheckAttackSpeed(float _attackSpeed, ref bool _hadAttacked)
-    {
-        if (_hadAttacked) _countAttackTime = _countAttackTime + Time.deltaTime;
-        if (_countAttackTime > _attackSpeed)
-        {
-            _countAttackTime = 0;
-            _hadAttacked = false;
-        }
-    }
-
-    private void CheckComboDuration()
-    {
-        _comboTime += _comboTime + Time.deltaTime;
-        if ( _comboTime > _comboDuration )
-        {
-            _combo = 1;
-            _comboTime = 0;
-        }
     }
 
 
