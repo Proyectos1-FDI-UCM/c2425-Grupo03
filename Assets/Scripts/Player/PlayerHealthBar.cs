@@ -24,7 +24,9 @@ public class PlayerHealthBar : MonoBehaviour
     /// <summary>
     /// Valor de vida maxima.
     /// </summary>
+
     [Tooltip("Vida maxima del jugador")]
+    [Min(0)]
     [SerializeField] private float _maxHealth = 100f;
 
     /// <summary>
@@ -118,7 +120,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// </summary>
     public void SetHealth(int newHealth)
     {
-        _currentHealth = Mathf.Clamp(newHealth, 0, _maxHealth);
+        _currentHealth = MathfClampHealth(newHealth);
 
         UpdateHealthBar();
     }
@@ -132,6 +134,11 @@ public class PlayerHealthBar : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    private float MathfClampHealth(float value)
+    {
+        return Mathf.Clamp(value, 0f, _maxHealth);
+    }
+
     /// <summary>
     /// Metodo para sumar vida
     /// </summary>
@@ -139,7 +146,7 @@ public class PlayerHealthBar : MonoBehaviour
     private void IncreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
-        _currentHealth = Mathf.Clamp(_currentHealth + health, 0f, _maxHealth);
+        _currentHealth = MathfClampHealth(_currentHealth + health);
         UpdateHealthBar();
     }
 
@@ -150,7 +157,7 @@ public class PlayerHealthBar : MonoBehaviour
     private void DecreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
-        _currentHealth = Mathf.Clamp(_currentHealth - health, 0f, _maxHealth);
+        _currentHealth = MathfClampHealth(_currentHealth - health);
         UpdateHealthBar();
     }
 
