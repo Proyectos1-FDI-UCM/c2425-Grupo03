@@ -20,6 +20,12 @@ public class CameraManager : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    //Posicion Jugador u objeto.
+    [SerializeField] Transform _playerPosition; 
+    [SerializeField] float _velocityCamera;
+    [SerializeField] Vector3 _displacementCamera;
+    
+
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -30,14 +36,14 @@ public class CameraManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    
     #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
-    #endregion
+    #endregion 
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -47,21 +53,16 @@ public class CameraManager : MonoBehaviour
     // - Hay que borrar los que no se usen 
     
     /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
+
     /// </summary>
-    void Start()
+    void LateUpdate()
     {
-        
+        Vector3 positionFinal = _playerPosition.position + _displacementCamera;
+        Vector3 smoothedMovement = Vector3.Lerp(transform.position, positionFinal, _velocityCamera);
+        transform.position = smoothedMovement;
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
+ 
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
