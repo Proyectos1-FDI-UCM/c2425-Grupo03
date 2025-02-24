@@ -64,7 +64,7 @@ public class PlayerJumpState : BaseState
     public override void EnterState()
     {
         SetSubState(Ctx.GetStateByType<PlayerIdleState>());
-        _rigidbody.velocity = _rigidbody.velocity + Vector2.up * Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale));
     }
 
     /// <summary>

@@ -71,6 +71,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        GetCTX<PlayerStateMachine>().Rigidbody.velocity *= Vector2.up; 
     }
     #endregion
 
@@ -81,10 +82,6 @@ public class PlayerMoveState : BaseState
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    protected override void OnStateSetUp()
-    {
-        
-    }
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
@@ -102,11 +99,6 @@ public class PlayerMoveState : BaseState
         }
 
         _rb.velocity = new Vector2(_moveDir * _speed, _rb.velocity.y);
-    }
-
-    protected override void FixedUpdateState()
-    {
-        
     }
 
     /// <summary>
