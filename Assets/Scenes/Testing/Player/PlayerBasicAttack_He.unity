@@ -166,13 +166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db7b35f5019dd142952569084337086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRadius: 2
+  _attackRadius: 3
   _attackSpeed: 2
   _damage: 10
   _comboDuration: 5
-  _combo: 0
   _comboExtraDamage: 10
-  _hadAttacked: 0
+  _endOfCombo: 0
 --- !u!1 &759834208
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,9 +348,8 @@ MonoBehaviour:
   _attackSpeed: 0
   _damage: 0
   _comboDuration: 0
-  _combo: 0
   _comboExtraDamage: 0
-  _hadAttacked: 0
+  _endOfCombo: 0
 --- !u!1 &902647545
 GameObject:
   m_ObjectHideFlags: 0
