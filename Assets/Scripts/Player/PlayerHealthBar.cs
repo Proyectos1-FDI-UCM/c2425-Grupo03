@@ -69,6 +69,9 @@ public class PlayerHealthBar : MonoBehaviour
     /// </summary>
     void Start()
     {
+        _healthSlider.minValue = 0;
+        _healthSlider.maxValue = 1;
+
         // Inicializar la vida al max.
         _currentHealth = _maxHealth;
 
@@ -80,14 +83,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            DecreaseHealth(10f);
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            IncreaseHealth(10f);
-        }
+     
     }
     #endregion
 
@@ -117,6 +113,16 @@ public class PlayerHealthBar : MonoBehaviour
         DecreaseHealth(10f);
     }
 
+    /// <summary>
+    /// Setter que permite ajustar vida desde fuera.
+    /// </summary>
+    public void SetHealth(int newHealth)
+    {
+        _currentHealth = Mathf.Clamp(newHealth, 0, _maxHealth);
+
+        UpdateHealthBar();
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -125,33 +131,44 @@ public class PlayerHealthBar : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    
+
     /// <summary>
     /// Metodo para sumar vida
     /// </summary>
-    /// <param name="_health"></param>
-    private void IncreaseHealth(float _health)
+    /// <param name="health"></param>
+    private void IncreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
-        _currentHealth = Mathf.Clamp(_currentHealth + _health, 0f, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth + health, 0f, _maxHealth);
         UpdateHealthBar();
     }
 
     /// <summary>
     /// Metodo para restar vida.
     /// </summary>
-    /// <param name="_health"></param>
-    private void DecreaseHealth(float _health)
+    /// <param name="health"></param>
+    private void DecreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
-        _currentHealth = Mathf.Clamp(_currentHealth - _health, 0f, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth - health, 0f, _maxHealth);
         UpdateHealthBar();
     }
 
     private void UpdateHealthBar()
     {
         // Controlamos el Slider como un porcentaje (0-1)
-        _healthSlider.value = _currentHealth;
+        //_healthSlider.value = _currentHealth;
+
+        if (_maxHealth <= 0)
+        {
+            _healthSlider.value = 0;
+        }
+        else
+        {
+            //El slider value = 1, es decir, barra llena si _currentHealth == _maxHealth.
+            _healthSlider.value = _currentHealth / _maxHealth;
+           
+        }
     }
     #endregion
 
