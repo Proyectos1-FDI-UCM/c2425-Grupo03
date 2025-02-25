@@ -55,10 +55,6 @@ public class PlayerAttackState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// El índice del combo en el que esta el jugador
-    /// </summary>
-    private int _combo;
-    /// <summary>
     /// El tiempo cuando termina el tiempo de gracia
     /// </summary>
     private float _endOfCombo;
@@ -86,13 +82,17 @@ public class PlayerAttackState : BaseState
     /// El tiempo en el que se podrá volver a hacer un ataque
     /// </summary>
     public float NextAttackTime { get; private set; }
+    /// <summary>
+    /// El índice del combo en el que esta el jugador
+    /// </summary>
+    public int Combo { get; set; }
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     private void Start()
     {
-        //Coger el 
+        //Coger el rigidbody del contexto
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
         _animator = GetCTX<PlayerStateMachine>().Animator;
     }
@@ -112,8 +112,6 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-
-        
         //Coger la dirección donde mira el jugador del contexto
         _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
 
@@ -128,7 +126,7 @@ public class PlayerAttackState : BaseState
         Attack(_direction);
 
         //La animación
-        _animator.SetInteger("AttackIndex", _combo);
+        _animator.SetInteger("AttackIndex", Combo);
     }
     
     /// <summary>
@@ -176,7 +174,7 @@ public class PlayerAttackState : BaseState
         RaycastHit2D[] enemyInArea;
         enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
 
-        if (_combo == 3) extraDamage += _comboExtraDamage;
+        if (Combo == 3) extraDamage += _comboExtraDamage;
 
         foreach (RaycastHit2D enemy in enemyInArea)
         {
@@ -190,15 +188,15 @@ public class PlayerAttackState : BaseState
     private void UpdateCombo()
     {
         //Comprobar si sigue en el tiempo de gracia
-        if (Time.time > _endOfCombo) _combo = 0;
+        if (Time.time > _endOfCombo) Combo = 0;
         //Actualizar el tiempo de gracia
         _endOfCombo = Time.time + _comboDuration;
 
         //Actualizar el combo
-        if(_combo == 0) _combo = 1;
-        else if (_combo == 1) _combo = 2;
-        else if (_combo == 2) _combo = 3;
-        else _combo = 1;
+        if(Combo == 0) Combo = 1;
+        else if (Combo == 1) Combo = 2;
+        else if (Combo == 2) Combo = 3;
+        else Combo = 1;
 
         
     }
