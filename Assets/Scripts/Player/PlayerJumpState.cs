@@ -79,7 +79,7 @@ public class PlayerJumpState : BaseState
         {
             SetSubState(Ctx.GetStateByType<PlayerIdleState>());
         }
-        _ctx.Animator.SetBool("IsJumping", false);
+        _ctx.Animator.SetBool("IsJumping", true);
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class PlayerJumpState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _ctx.Animator.SetBool("IsJumping", false);
     }
     #endregion
 
