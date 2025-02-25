@@ -70,6 +70,10 @@ public class PlayerAttackState : BaseState
     /// El rigidbody del player
     /// </summary>
     private Rigidbody2D _rb;
+    /// <summary>
+    /// El rigidbody del player
+    /// </summary>
+    private Animator _animator;
 
     #endregion
 
@@ -90,6 +94,7 @@ public class PlayerAttackState : BaseState
     {
         //Coger el 
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+        _animator = GetCTX<PlayerStateMachine>().Animator;
     }
     #endregion
 
@@ -107,6 +112,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
+
         
         //Coger la dirección donde mira el jugador del contexto
         _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
@@ -122,6 +128,9 @@ public class PlayerAttackState : BaseState
 
         //Atacar en la dirección donde mira el jugador
         Attack(_direction);
+
+        //La animación
+        _animator.SetInteger("AttackIndex", _combo);
     }
     
     /// <summary>
@@ -129,7 +138,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetInteger("AttackIndex", 0);
     }
     #endregion
     
@@ -147,6 +156,8 @@ public class PlayerAttackState : BaseState
     {
         //Poner la velocidad del rigidbody a cero
         _rb.velocity = Vector3.zero;
+
+
     }
 
     /// <summary>

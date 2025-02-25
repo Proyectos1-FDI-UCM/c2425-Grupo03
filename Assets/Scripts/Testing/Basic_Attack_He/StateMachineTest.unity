@@ -430,7 +430,7 @@ MonoBehaviour:
   _maxCoyoteTime: 0.2
   _hitDistance: 1.2
   _debugRayCast: 0
-  _maxSpeed: 0
+  _maxSpeed: -10
 --- !u!114 &127094311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,8 +1347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _attackRadius: 1.5
-  _attackSpeed: 1
-  _damage: 10
+  _attackSpeed: 2
+  _damage: 1
   _comboDuration: 5
   _comboExtraDamage: 10
 --- !u!4 &1268547058
