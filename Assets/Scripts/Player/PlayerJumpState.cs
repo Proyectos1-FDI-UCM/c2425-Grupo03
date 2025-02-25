@@ -30,8 +30,9 @@ public class PlayerJumpState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Rigidbody2D _rigidbody;
-    PlayerStateMachine _ctx;
+    Rigidbody2D _rigidbody;//El rigidbody del jugador
+    PlayerStateMachine _ctx;//el contexto para acceder a parametros globales del playerstatemachine
+    float _moveDir; //para detectar si el jugador esta en movimiento
     #endregion
 
     // ---- PROPIEDADES ----
@@ -42,8 +43,12 @@ public class PlayerJumpState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    /// <summary>
+    /// Metodo llamado al instanciar el script
+    /// </summary>
     private void Start()
     {
+        // Asigna la referencia a _ctx y _rigidbody
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
     }
@@ -60,11 +65,21 @@ public class PlayerJumpState : BaseState
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Determina si el subestado es Move o Idle dependiendo de si esta en movimiento el jugador
     /// </summary>
     public override void EnterState()
     {
-        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale));
+      
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale)); // le aplica una fuerza hacia arriba para que salte el jugador
+        if (_moveDir != 0)//si movimiento no es nulo
+        {
+            SetSubState(Ctx.GetStateByType<PlayerMoveState>());
+        }
+        else
+        {
+            SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+        }
+        _ctx.Animator.SetBool("IsJumping", false);
     }
 
     /// <summary>
@@ -88,7 +103,7 @@ public class PlayerJumpState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();//_moveDir será 0 si no esta moviendo el jugador
     }
 
     /// <summary>
@@ -97,11 +112,11 @@ public class PlayerJumpState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_rigidbody.velocity.y <= 0)
+        if (_rigidbody.velocity.y <= 0) //detecta si esta cayendo el jugador, pasa su estado a falling
         {
             ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
-        else if (_ctx.PlayerInput.Dash.IsPressed())
+        else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador presiona al dash.
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if (Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
