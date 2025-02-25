@@ -11,7 +11,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// putito quien lo lea
+/// 
 /// </summary>
 public class CameraManager : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
 
     //Posicion Jugador u objeto.
     [SerializeField] Transform _playerPosition; 
-    [SerializeField] float _velocityCamera;
+    [SerializeField][Min(0)] float _velocityCamera;
     [SerializeField] Vector3 _displacementCamera;
     
 
@@ -50,12 +50,12 @@ public class CameraManager : MonoBehaviour
     
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen 
+    // - Hay que borrar los que no se usen   
     
     /// <summary>
 
     /// </summary>
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector3 positionFinal = _playerPosition.position + _displacementCamera;
         Vector3 smoothedMovement = Vector3.Lerp(transform.position, positionFinal, _velocityCamera);
