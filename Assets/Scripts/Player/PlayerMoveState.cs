@@ -15,8 +15,6 @@ public class PlayerMoveState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [Header("Movement Properties")]
     /// <summary>
     /// Velocidad con la cual se mueve el jugador.
@@ -32,6 +30,10 @@ public class PlayerMoveState : BaseState
     /// El Rigidbody del jugador.
     /// </summary>
     Rigidbody2D _rb;
+    SpriteRenderer _sprite;
+    /// <summary>
+    /// La dirección del movimiento del jugador.
+    /// </summary>
     private float _moveDir;
     #endregion
 
@@ -46,6 +48,7 @@ public class PlayerMoveState : BaseState
     public void Start()
     {
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+        _sprite = GetCTX<PlayerStateMachine>().SpriteRenderer;
     }
     #endregion
 
@@ -71,7 +74,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        GetCTX<PlayerStateMachine>().Rigidbody.velocity *= Vector2.up; 
+        GetCTX<PlayerStateMachine>().Rigidbody.velocity *= Vector2.up;
     }
     #endregion
 
@@ -92,10 +95,12 @@ public class PlayerMoveState : BaseState
         if (_moveDir < 0)
         {
             GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Left;
+            _sprite.flipX = true;
         }
         else if(_moveDir > 0) 
         {
             GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Right;
+            _sprite.flipX = false;
         }
 
         _rb.velocity = new Vector2(_moveDir * _speed, _rb.velocity.y);

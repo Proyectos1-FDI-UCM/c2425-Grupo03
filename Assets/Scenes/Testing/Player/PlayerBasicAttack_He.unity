@@ -131,7 +131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 310674678}
-  - component: {fileID: 310674680}
   - component: {fileID: 310674679}
   m_Layer: 0
   m_Name: Trigger
@@ -169,49 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRadius: 3
   _attackSpeed: 2
-  _comboDuration: 5
-  _combo: 0
-  _comboExtraDamage: 0
-  _enemyCount: 0
   _damage: 10
-  _countAttackTime: 0
-  _hadAttacked: 0
-  _comboTime: 0
---- !u!58 &310674680
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310674677}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  _comboDuration: 5
+  _comboExtraDamage: 10
+  _endOfCombo: 0
 --- !u!1 &759834208
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,14 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRadius: 3
   _attackSpeed: 0
-  _comboDuration: 0
-  _combo: 0
-  _comboExtraDamage: 0
-  _enemyCount: 0
   _damage: 0
-  _countAttackTime: 0
-  _hadAttacked: 0
-  _comboTime: 0
+  _comboDuration: 0
+  _comboExtraDamage: 0
+  _endOfCombo: 0
 --- !u!1 &902647545
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +364,6 @@ GameObject:
   - component: {fileID: 902647552}
   - component: {fileID: 902647553}
   - component: {fileID: 902647554}
-  - component: {fileID: 902647556}
-  - component: {fileID: 902647555}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -478,8 +432,8 @@ Transform:
   m_GameObject: {fileID: 902647545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1984476, y: -1.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.1984476, y: -0.599, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 877037698}
@@ -601,63 +555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
---- !u!58 &902647555
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902647545}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &902647556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902647545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db7b35f5019dd142952569084337086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackRadius: 3
-  _attackSpeed: 0
-  _comboDuration: 0
-  _combo: 0
-  _comboExtraDamage: 0
-  _enemyCount: 0
-  _damage: 0
-  _countAttackTime: 0
-  _hadAttacked: 0
-  _comboTime: 0
 --- !u!1 &970697612
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +793,7 @@ Transform:
   m_GameObject: {fileID: 1088100231}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -1.29, z: 0}
+  m_LocalPosition: {x: 0.02, y: -0.92, z: 0}
   m_LocalScale: {x: 0.36640623, y: 0.375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
