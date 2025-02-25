@@ -14,8 +14,8 @@ using UnityEngine;
 /// <summary>
 /// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))] //Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
-[SelectionBase] //Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
+[RequireComponent(typeof(Rigidbody2D))] // Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+[SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
 public class PlayerStateMachine : StateMachine
 {
     /// <summary>
@@ -63,6 +63,11 @@ public class PlayerStateMachine : StateMachine
     public Rigidbody2D Rigidbody { get; private set; }
 
     /// <summary>
+    /// El sprite renderer del jugador.
+    /// </summary>
+    public SpriteRenderer SpriteRenderer { get; private set; }
+
+    /// <summary>
     /// <para>Getter de <paramref name="_gravityScale"/> de solo lectura.</para>
     /// <returns>Devuelve el valor de <paramref name="_gravityScale"/>.</returns>
     /// </summary>
@@ -86,6 +91,7 @@ public class PlayerStateMachine : StateMachine
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         _gravityScale = Rigidbody.gravityScale;
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();
