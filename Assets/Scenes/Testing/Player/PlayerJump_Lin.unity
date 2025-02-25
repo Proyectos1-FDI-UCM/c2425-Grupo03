@@ -1103,7 +1103,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 2040665247}
   - component: {fileID: 2040665246}
   - component: {fileID: 2040665245}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: PlataformTest (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
