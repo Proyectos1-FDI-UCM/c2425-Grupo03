@@ -135,11 +135,11 @@ public class PlayerGroundedState : BaseState
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if(Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
         }
-        //else if (_ctx.PlayerInput.Attack.IsPressed())
-        //{
-        //    PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
-        //    if (Time.time > attackState.NextAttackTime) ChangeState(attackState);
-        //}
+        else if (_ctx.PlayerInput.Attack.IsPressed())
+        {
+            PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
+            if (Time.time > attackState.NextAttackTime) ChangeState(attackState);
+        }
     }
     #endregion   
 

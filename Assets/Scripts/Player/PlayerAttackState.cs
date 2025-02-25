@@ -99,7 +99,6 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
 
         //Coger la dirección donde mira el jugador del contexto
         _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
