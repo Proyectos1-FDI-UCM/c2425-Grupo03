@@ -117,8 +117,6 @@ public class PlayerAttackState : BaseState
         //Coger la dirección donde mira el jugador del contexto
         _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
 
-        //Comprobar si sigue en el tiempo de gracia
-        if (Time.time > _endOfCombo) _combo = 1;
 
         //Calcular el tiempo para realizar el siguiente ataque
         NextAttackTime = Time.time + _attackSpeed;
@@ -156,8 +154,6 @@ public class PlayerAttackState : BaseState
     {
         //Poner la velocidad del rigidbody a cero
         _rb.velocity = Vector3.zero;
-
-
     }
 
     /// <summary>
@@ -193,11 +189,18 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void UpdateCombo()
     {
+        //Comprobar si sigue en el tiempo de gracia
+        if (Time.time > _endOfCombo) _combo = 0;
+        //Actualizar el tiempo de gracia
         _endOfCombo = Time.time + _comboDuration;
 
-        if (_combo == 1) _combo = 2;
+        //Actualizar el combo
+        if(_combo == 0) _combo = 1;
+        else if (_combo == 1) _combo = 2;
         else if (_combo == 2) _combo = 3;
         else _combo = 1;
+
+        
     }
 
     
