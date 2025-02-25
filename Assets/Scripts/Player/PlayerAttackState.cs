@@ -1,17 +1,17 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Clase para hacer el estado de ataque del jugador
 /// </summary>
 public class PlayerAttackState : BaseState
 {
@@ -20,8 +20,31 @@ public class PlayerAttackState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [Header("Propiedad del ataque")]
+    /// <summary>
+    /// El radio de ataque del jugador
+    /// </summary>
+    [SerializeField, Min(0)] float _attackRadius;
+    /// <summary>
+    /// El tiempo de espera entre dos ataques
+    /// </summary>
+    [SerializeField] float _attackSpeed;
+    /// <summary>
+    /// El daño del ataque basico
+    /// </summary>
+    [SerializeField] float _damage;
+    [Header("Propiedad del combo")]
+    /// <summary>
+    /// El tiempo de gracia para encadenar combo
+    /// </summary>
+    [SerializeField, Min(1)] float _comboDuration;
+    /// <summary>
+    /// El daño extra añadido al ataque si encadenas el combo
+    /// </summary>
+    [SerializeField,Min(0)] int _comboExtraDamage;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,17 +54,35 @@ public class PlayerAttackState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// El índice del combo en el que esta el jugador
+    /// </summary>
+    private int _combo;
+    /// <summary>
+    /// El tiempo cuando termina el tiempo de gracia
+    /// </summary>
+    private float _endOfCombo;
+    /// <summary>
+    /// La dirección donde mira el jugador
+    /// </summary>
+    private int _direction;
+
     #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
+
+    /// <summary>
+    /// El tiempo en el que se podrá volver a hacer un ataque
+    /// </summary>
+    public float NextAttackTime { get; private set; }
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,13 +93,28 @@ public class PlayerAttackState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
-        
+        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+
+        //Coger la dirección donde mira el jugador del contexto
+        _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
+
+        //Comprobar si sigue en el tiempo de gracia
+        if (Time.time > _endOfCombo) _combo = 1;
+
+        //Calcular el tiempo para realizar el siguiente ataque
+        NextAttackTime = Time.time + _attackSpeed;
+
+        //Actualizar combo
+        UpdateCombo();
+
+        //Atacar en la dirección donde mira el jugador
+        Attack(_direction);
     }
     
     /// <summary>
@@ -82,7 +138,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+
     }
 
     /// <summary>
@@ -91,7 +147,45 @@ public class PlayerAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        if(Time.time > NextAttackTime) ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+    }
+
+    /// <summary>
+    /// Hacer un CirclecastAll en la capa del "Enemy" en la dirección donde mira el jugador.
+    /// Añadir el daño extra del combo si lo hay, y hace daño a todos los enemigos que están en el circlecast.
+    /// </summary>
+    private void Attack(int direction)
+    {
+        int extraDamage = 0;
+        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
+        RaycastHit2D[] enemyInArea;
+        enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
+
+
+        if (_combo == 3) extraDamage += _comboExtraDamage;
+
+        foreach (RaycastHit2D enemy in enemyInArea)
+        {
+            enemy.collider.GetComponent<enemy>().RemoveHealth(_damage + extraDamage);
+        }
+    }
+
+    /// <summary>
+    /// Actualizar el tiempo de gracia, y actualiza el combo
+    /// </summary>
+    private void UpdateCombo()
+    {
+        _endOfCombo = Time.time + _comboDuration;
+
+        if (_combo == 1) _combo = 2;
+        else if (_combo == 2) _combo = 3;
+        else _combo = 1;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + (_direction * new Vector3(_attackRadius,0)),_attackRadius);
     }
 
     #endregion   
