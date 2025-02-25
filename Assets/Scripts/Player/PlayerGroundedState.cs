@@ -40,10 +40,10 @@ public class PlayerGroundedState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Rigidbody2D _rigidbody;
-    PlayerStateMachine _ctx;
-    float _jumpBuffer;
-    
+    Rigidbody2D _rigidbody; //El rigidbody del jugador
+    PlayerStateMachine _ctx; //el contexto para acceder a parametros globales del playerstatemachine
+    float _jumpBuffer; //tiempo en el que el jugador puede saltar sin llegar al suelo
+    float _moveDir; //para detectar si el jugador esta en movimiento
 
     #endregion
 
@@ -55,18 +55,25 @@ public class PlayerGroundedState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    /// <summary>
+    /// Metodo llamado al instanciar el script
+    /// </summary>
     private void Start()
     {
+        // Asigna la referencia a _ctx y _rigidbody
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
+        //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
     }
-
+    /// <summary>
+    /// Metodo que actualiza todo el rato
+    /// </summary>
     private void Update()
     {
         if ( _jumpBuffer > 0)
         {
-            _jumpBuffer-=Time.deltaTime;
+            _jumpBuffer-=Time.deltaTime;// Va restando al tiempo de jumpBuffer segun el tiempo. 
         }
     }
     #endregion
@@ -82,10 +89,18 @@ public class PlayerGroundedState : BaseState
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Determina si el subestado es Move o Idle dependiendo de si esta en movimiento el jugador
     /// </summary>
     public override void EnterState()
     {
-        SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+        if (_moveDir != 0)//si movimiento no es nulo
+        {
+            SetSubState(Ctx.GetStateByType<PlayerMoveState>());
+        }
+        else
+        {
+            SetSubState(Ctx.GetStateByType<PlayerIdleState>());
+        }
     }
     
     /// <summary>
@@ -93,6 +108,8 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        _ctx.Animator.SetBool("IsIdle", false);
+        _ctx.Animator.SetBool("IsRunning", false);
     }
     #endregion
 
@@ -111,7 +128,17 @@ public class PlayerGroundedState : BaseState
 
     protected override void UpdateState()
     {
-        
+        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>(); //_moveDir será 0 si no esta moviendo el jugador
+        if (_ctx.PlayerInput.Move.ReadValue<float>() != 0 )
+        {
+            _ctx.Animator.SetBool("IsRunning", true);
+            _ctx.Animator.SetBool("IsIdle", false);
+        }
+        else
+        {
+            _ctx.Animator.SetBool("IsIdle", true);
+            _ctx.Animator.SetBool("IsRunning", false);
+        }
     }
 
     /// <summary>
@@ -120,17 +147,17 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_jumpBuffer > 0)
+        if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, para a jumpState
         {
             ChangeState(Ctx.GetStateByType<PlayerJumpState>());
         }
-        else if (_rigidbody.velocity.y < 0)
+        else if (_rigidbody.velocity.y < 0) //si esta cayendo el jugador, pasa a Falling
         {
             PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();
             ChangeState(fallingState);
             fallingState.ResetCoyoteTime();
         }
-        else if (_ctx.PlayerInput.Dash.IsPressed())
+        else if (_ctx.PlayerInput.Dash.IsPressed()) //detecta si presionas al Dash
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if(Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
