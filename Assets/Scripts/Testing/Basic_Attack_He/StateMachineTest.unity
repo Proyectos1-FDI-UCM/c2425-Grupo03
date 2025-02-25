@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 3300600}
   - component: {fileID: 3300602}
   - component: {fileID: 3300603}
+  - component: {fileID: 3300604}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -297,6 +298,27 @@ MonoBehaviour:
   - {fileID: 127094308}
   - {fileID: 127094307}
   - {fileID: 1268547057}
+--- !u!95 &3300604
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300597}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &127094304
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +429,8 @@ MonoBehaviour:
   _isRootState: 1
   _maxCoyoteTime: 0.2
   _hitDistance: 1.2
-  _DebugRayCast: 1
+  _debugRayCast: 0
+  _maxSpeed: 0
 --- !u!114 &127094311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,7 +1346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _attackRadius: 1
+  _attackRadius: 1.5
   _attackSpeed: 1
   _damage: 10
   _comboDuration: 5
