@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 3300599}
   - component: {fileID: 3300600}
   - component: {fileID: 3300602}
-  - component: {fileID: 3300603}
   - component: {fileID: 3300604}
   - component: {fileID: 3300605}
+  - component: {fileID: 3300606}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -278,25 +278,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &3300603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3300597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4deab3d5a4db94195e749d7ff11c0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 127094311}
-  - {fileID: 127094310}
-  - {fileID: 127094309}
-  - {fileID: 127094306}
-  - {fileID: 127094308}
-  - {fileID: 127094307}
 --- !u!95 &3300604
 Animator:
   serializedVersion: 5
@@ -370,6 +351,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3300606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4deab3d5a4db94195e749d7ff11c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states:
+  - {fileID: 127094311}
+  - {fileID: 127094310}
+  - {fileID: 127094309}
+  - {fileID: 127094306}
+  - {fileID: 127094312}
+  - {fileID: 127094308}
+  - {fileID: 127094307}
 --- !u!1001 &12810442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,6 +449,7 @@ GameObject:
   - component: {fileID: 127094311}
   - component: {fileID: 127094310}
   - component: {fileID: 127094309}
+  - component: {fileID: 127094312}
   - component: {fileID: 127094308}
   - component: {fileID: 127094307}
   m_Layer: 0
@@ -545,7 +547,8 @@ MonoBehaviour:
   _isRootState: 1
   _maxCoyoteTime: 0.2
   _hitDistance: 1.2
-  _DebugRayCast: 1
+  _debugRayCast: 0
+  _maxSpeed: -20
 --- !u!114 &127094311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +563,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _jumpBufferTime: 0.3
+--- !u!114 &127094312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127094304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e062beab3220c704ea632ca1dbecafd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _attackRadius: 1.5
+  _attackSpeed: 0.1
+  _damage: 5
+  _comboDuration: 1
+  _comboExtraDamage: 5
 --- !u!1 &466991605
 GameObject:
   m_ObjectHideFlags: 0
