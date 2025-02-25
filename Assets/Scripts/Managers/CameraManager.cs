@@ -19,11 +19,19 @@ public class CameraManager : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    //Posicion Jugador u objeto.
-    [SerializeField] Transform _playerPosition; 
+  
+    /// <summary>
+    /// Posicion Jugador u objeto.
+    /// </summary>
+    [SerializeField] Transform _playerPosition;
+    /// <summary>
+    /// velocidad de la Cámara
+    /// </summary>
     [SerializeField][Min(0)] float _velocityCamera;
-    [SerializeField] Vector3 _displacementCamera;
+    /// <summary>
+    /// Margen de la Cámara respecto al objetivo
+    /// </summary>
+    [SerializeField] Vector3 _displacementCamera; //dista de la camara (posicion del jugador)
     
 
     #endregion
@@ -51,14 +59,16 @@ public class CameraManager : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen   
-    
-    /// <summary>
 
-    /// </summary>
     void FixedUpdate()
     {
+        //Objetivo final de la camara (Jugador)
         Vector3 positionFinal = _playerPosition.position + _displacementCamera;
+
+        //Hacer que el movimiento se vea gradual
         Vector3 smoothedMovement = Vector3.Lerp(transform.position, positionFinal, _velocityCamera);
+        
+        //Mover la Cámara
         transform.position = smoothedMovement;
     }
 
