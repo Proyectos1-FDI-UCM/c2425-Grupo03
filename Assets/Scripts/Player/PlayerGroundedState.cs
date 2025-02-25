@@ -150,7 +150,9 @@ public class PlayerGroundedState : BaseState
         if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, para a jumpState
         {
             ChangeState(Ctx.GetStateByType<PlayerJumpState>());
+  
         }
+        else if (_jumpBuffer < 0) _jumpBuffer = 0;
         else if (_rigidbody.velocity.y < 0) //si esta cayendo el jugador, pasa a Falling
         {
             PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();

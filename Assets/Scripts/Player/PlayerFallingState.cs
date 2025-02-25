@@ -122,10 +122,11 @@ public class PlayerFallingState : BaseState
         {
             _coyoteTime -= Time.deltaTime;
         }
+        else if (_coyoteTime < 0) _coyoteTime = 0;
 
         //Definimos los dos Raycast
-        _hitLeft = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - 0.4f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
-        _hitRight = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.4f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
+        _hitLeft = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
+        _hitRight = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
 
 
         if (_debugRayCast) //pinta el raycast si debugRayCast es true
