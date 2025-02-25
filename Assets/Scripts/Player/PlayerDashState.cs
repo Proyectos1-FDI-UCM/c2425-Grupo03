@@ -91,7 +91,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     void Start()
     {
-        _rb = GetComponentInParent<Rigidbody2D>();
+        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
     }
     #endregion
 
@@ -120,11 +120,14 @@ public class PlayerDashState : BaseState
         //calcula el siguiente timpo cuando se puede volver a hacer el dash.
         NextAvailableDashTime = Time.time + _rechargeTime;
 
-        //desactiva el trigger para que no se pueda golpear al jugador.
+        //Desactiva el trigger para que no se pueda golpear al jugador.
         _playerHitTrigger.enabled = false;
 
         //Mira a ver si el dash podrías atravesar una pared.
         CheckDashLimit();
+
+        //Comienza la animación del dash
+        GetCTX<PlayerStateMachine>().Animator.SetBool("IsDashing", true);
     }
     
     /// <summary>
@@ -143,6 +146,9 @@ public class PlayerDashState : BaseState
 
         //Reestablece la posición final del dash al máximo para que permita volver a hacer un dash.
         _finishDashingPositionX = 0;
+
+        //Termina la animación del dash
+        GetCTX<PlayerStateMachine>().Animator.SetBool("IsDashing", false);
     }
     #endregion
 
