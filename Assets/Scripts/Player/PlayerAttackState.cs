@@ -66,6 +66,10 @@ public class PlayerAttackState : BaseState
     /// La dirección donde mira el jugador
     /// </summary>
     private int _direction;
+    /// <summary>
+    /// El rigidbody del player
+    /// </summary>
+    private Rigidbody2D _rb;
 
     #endregion
 
@@ -82,7 +86,11 @@ public class PlayerAttackState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    private void Start()
+    {
+        //Coger el 
+        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -99,7 +107,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-
+        
         //Coger la dirección donde mira el jugador del contexto
         _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
 
@@ -137,7 +145,8 @@ public class PlayerAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-
+        //Poner la velocidad del rigidbody a cero
+        _rb.velocity = Vector3.zero;
     }
 
     /// <summary>
@@ -160,7 +169,6 @@ public class PlayerAttackState : BaseState
         RaycastHit2D[] enemyInArea;
         enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
 
-
         if (_combo == 3) extraDamage += _comboExtraDamage;
 
         foreach (RaycastHit2D enemy in enemyInArea)
@@ -181,6 +189,7 @@ public class PlayerAttackState : BaseState
         else _combo = 1;
     }
 
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
