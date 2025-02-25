@@ -11,7 +11,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// 
+/// Componente responsable de la gestión de la cámara del juego
 /// </summary>
 public class CameraManager : MonoBehaviour
 {
