@@ -141,7 +141,7 @@ public class PlayerGroundedState : BaseState
             _ctx.Animator.SetBool("IsRunning", true);
             _ctx.Animator.SetBool("IsIdle", false);
             PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
-            attackState.Combo = 0;
+            attackState.ResetAttackCombo();
 
         }
         else
