@@ -44,10 +44,6 @@ public class PlayerGroundedState : BaseState
     PlayerStateMachine _ctx; //el contexto para acceder a parametros globales del playerstatemachine
     float _jumpBuffer; //tiempo en el que el jugador puede saltar sin llegar al suelo
     float _moveDir; //para detectar si el jugador esta en movimiento
-    //Booleana para el ataque presionado
-    private bool _attackPressed = false;
-    private InputAction _basicAttack;
-
     #endregion
 
     // ---- PROPIEDADES ----
@@ -68,10 +64,6 @@ public class PlayerGroundedState : BaseState
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
-        //_ctx.PlayerInput.Attack.started += (InputAction.CallbackContext context) => _attackPressed = true;
-        //Dar al botón de ataque su propio InputAction para que pueda funcionar con triggered
-        _basicAttack = _ctx.PlayerInput.Attack;
-        _basicAttack.Enable();
     }
     /// <summary>
     /// Metodo que actualiza todo el rato
@@ -174,10 +166,8 @@ public class PlayerGroundedState : BaseState
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if(Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
         }
-        else if (_basicAttack.triggered)
+        else if (_ctx.PlayerInput.Attack.triggered)
         {
-            //Para no poder atacar de nuevo
-            //_attackPressed = false;
             PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
             if (Time.time > attackState.NextAttackTime) ChangeState(attackState);
         }
