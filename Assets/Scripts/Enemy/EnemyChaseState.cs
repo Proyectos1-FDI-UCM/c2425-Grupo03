@@ -90,7 +90,27 @@ public class EnemyChaseState : BaseState
         _ctx.LookingDirection = (_ctx._playerTransform.position.x - _ctx.transform.position.x) > 0 ?
             EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
 
-        _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+        if (CheckGround())
+        {
+            _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+        }
+        else
+        {
+            _rb.velocity = Vector3.zero;
+        }
+    }
+
+    /// <summary>
+    /// Método para que el enemigo no se caiga de las plataformas.
+    /// Hace un raycast en la dirección que mira el enemigo
+    /// </summary>
+    /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
+    private bool CheckGround()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f*(float)_ctx.LookingDirection, gameObject.transform.position.y),
+            Vector2.down, 1.2f, LayerMask.GetMask("Ground"));
+
+        return hit.collider != null;
     }
 
     /// <summary>
