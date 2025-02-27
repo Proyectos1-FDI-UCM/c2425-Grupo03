@@ -189,7 +189,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     private void CheckDashLimit()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2((int)GetCTX<PlayerStateMachine>().LookingDirection, 0), _distance, 1 << 10);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2((int)GetCTX<PlayerStateMachine>().LookingDirection, 0), _distance, 1 << 3);
         if (hit.distance < _distance)
         {
             _finishDashingPositionX = hit.point.x;
