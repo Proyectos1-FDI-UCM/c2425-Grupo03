@@ -33,22 +33,12 @@ public class EnemyStateMachine : StateMachine
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [Header("Player Information")]
-    /// <summary>
-    /// El Transform del Player. 
-    /// </summary>
-    [Tooltip("The player's transform.")]
-    public Transform _playerTransform;
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    /// <summary>
-    /// Variable para saber cuando el jugador entra en la distancia de detección.
-    /// </summary>
-    public bool IsPlayerInChaseRange { get; set; }
+    
 
     #endregion
 
@@ -72,6 +62,16 @@ public class EnemyStateMachine : StateMachine
     /// SpriteRenderer del enemigo.
     /// </summary>
     public SpriteRenderer SpriteRenderer { get; private set; }
+
+    /// <summary>
+    /// Variable para saber cuando el jugador entra en la distancia de detección.
+    /// </summary>
+    public bool IsPlayerInChaseRange { get; set; }
+
+    /// <summary>
+    /// El Transform del jugador. 
+    /// </summary>
+    public Transform PlayerTransform { get; set; }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----

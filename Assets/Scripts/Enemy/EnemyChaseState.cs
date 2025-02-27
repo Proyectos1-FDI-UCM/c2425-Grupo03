@@ -18,14 +18,25 @@ public class EnemyChaseState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Velocidad a la que camina el enemigo.
+    /// </summary>
     [SerializeField]
+    [Tooltip("Enemy walking speed in units per second")]
     float _enemyWalkingSpeed;
 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
     EnemyStateMachine _ctx;
+
+    /// <summary>
+    /// Referencia del rigidbody del enemigo.
+    /// </summary>
     Rigidbody2D _rb;
 
     #endregion
@@ -38,9 +49,12 @@ public class EnemyChaseState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+
     private void Start()
     {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();   
+        //Coge la referencia al rigidbody por comodidad
         _rb = _ctx.Rigidbody;
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -71,6 +85,7 @@ public class EnemyChaseState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        //Al salir del estado de chase, el enemigo nunca se debería mover
         _rb.velocity = Vector3.zero;
     }
     #endregion
@@ -87,9 +102,11 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _ctx.LookingDirection = (_ctx._playerTransform.position.x - _ctx.transform.position.x) > 0 ?
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
             EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
 
+        //Si todavía hay plataforma se mueve, sino se detiene
         if (CheckGround())
         {
             _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
@@ -102,7 +119,7 @@ public class EnemyChaseState : BaseState
 
     /// <summary>
     /// Método para que el enemigo no se caiga de las plataformas.
-    /// Hace un raycast en la dirección que mira el enemigo
+    /// Hace un raycast en la dirección que mira el enemigo.
     /// </summary>
     /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
     private bool CheckGround()
@@ -121,6 +138,7 @@ public class EnemyChaseState : BaseState
     {
         if (!_ctx.IsPlayerInChaseRange)
         {
+            //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
         /*else if((_ctx._playerTransform.position - _ctx.transform.position).magnitude < attackDistance)

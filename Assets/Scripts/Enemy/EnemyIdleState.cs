@@ -25,6 +25,9 @@ public class EnemyIdleState : BaseState
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
 
+    /// <summary>
+    /// Contexto del estado.
+    /// </summary>
     EnemyStateMachine _ctx;
 
     #endregion
@@ -39,13 +42,15 @@ public class EnemyIdleState : BaseState
     #region Métodos de MonoBehaviour
     private void Start()
     {
+        //Coge una referencia al contexto para evitar el upcasting y por comodidad
         _ctx = GetCTX<EnemyStateMachine>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Si el jugador está en el trigger lo indica al contexto.
         _ctx.IsPlayerInChaseRange = true;
-        _ctx._playerTransform = collision.transform;
+        //Añade la posición del jugador al contexto.
+        _ctx.PlayerTransform = collision.transform;
     }
     
     #endregion
