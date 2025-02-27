@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 /// <summary>
@@ -15,6 +16,12 @@ public class PlayerMoveState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+        /// <summary>
+    /// El estado de ataque del jugador.
+    /// </summary>
+    [Tooltip("The player's attack state.")]
+    [SerializeField] PlayerAttackState _attackState;
+    
     [Header("Movement Properties")]
     /// <summary>
     /// Velocidad con la cual se mueve el jugador.
@@ -66,7 +73,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        if (_attackState != null) _attackState.ResetAttackCombo();
     }
     
     /// <summary>
