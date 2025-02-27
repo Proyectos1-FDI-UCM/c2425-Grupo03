@@ -187,7 +187,7 @@ public class PlayerAttackState : BaseState
 
         foreach (RaycastHit2D enemy in enemyInArea)
         {
-            enemy.collider.GetComponent<enemy>().RemoveHealth(_damage + extraDamage);
+            enemy.collider.GetComponent<HarmManager>().DamageDummy((int)_damage + extraDamage);
         }
     }
 

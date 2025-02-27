@@ -39,16 +39,7 @@ public class HarmManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        ///<summary> 
-        /// Esta condición se debería quitar tan pronto como se implemente 
-        /// la forma golpear al enemigo. Con la ayuda de esta condición he podido 
-        /// comprobar si funcionaba el método del Script correctament e.
-        ///</summary>
-
-        {
-            DamageDummy(1); // Llama al método "DamageDummy" para que la variable "Damagecaused"
-        }
+        
     }
     #endregion
 
