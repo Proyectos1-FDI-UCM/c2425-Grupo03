@@ -72,6 +72,12 @@ public class EnemyStateMachine : StateMachine
     /// El Transform del jugador. 
     /// </summary>
     public Transform PlayerTransform { get; set; }
+
+
+    /// <summary>
+    /// El rango de ataque del enemigo
+    /// </summary>
+    public float AttackDistance { get; set; }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
