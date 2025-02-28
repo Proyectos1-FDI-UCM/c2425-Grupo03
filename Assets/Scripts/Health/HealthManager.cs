@@ -5,7 +5,6 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 // Añadir aquí el resto de directivas using
@@ -50,10 +49,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     private int _health;
 
-    /// <summary>
-    /// Evento para cuando la vida de la entidad es 0
-    /// </summary>
-    private UnityEvent _onDeath;
+
 
     /// <summary>
     /// Evento para cuando la entidad reciba daño
@@ -72,14 +68,20 @@ public class HealthManager : MonoBehaviour
     /// Propiedad para la vida
     /// </summary>
     public int Health { get { return _health; } private set { _health = value; } }
-    
+
+    /// <summary>
+    /// Evento para cuando la vida de la entidad es 0
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _onDeath;
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -132,12 +134,12 @@ public class HealthManager : MonoBehaviour
         if(_health - removedHealth < 0)
         {
             _health = 0;
+            _onDeath.Invoke();
         }
         else
         {
             _health = _health - removedHealth;
         }
-        IsEntityDead();
     }
 
     /// <summary>
@@ -176,7 +178,6 @@ public class HealthManager : MonoBehaviour
     {
         if(_health <= 0 && gameObject.GetComponent<EnemyStateMachine>())
         {
-            _onDeath.AddListener(gameObject.GetComponent<EnemyStateMachine>().DeathState);
             _onDeath.Invoke();
         }
     }

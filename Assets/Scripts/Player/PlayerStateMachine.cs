@@ -8,6 +8,7 @@
 // IMPORTANTE: No uses los métodos del MonoBehaviour: Awake(), Start(), Update, etc. (NINGUNO)
 
 using UnityEngine;
+using UnityEngine.Rendering;
 // Añadir aquí el resto de directivas using
 
 
@@ -16,6 +17,9 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))] // Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
 [RequireComponent(typeof(Animator))] // Obliga que el GameObject que contenga a este componente tenga un Animator
+
+// Obliga que tenga el componente HealthManager
+[RequireComponent(typeof(HealthManager))]
 [SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
 public class PlayerStateMachine : StateMachine
 {
@@ -107,6 +111,12 @@ public class PlayerStateMachine : StateMachine
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
+
+    protected override void OnStart()
+    {
+        //Subscripción al muerte del HealthManager
+        //GetComponent<HealthManager>()._onDeath.AddListener();
+    }
 
     #endregion
 

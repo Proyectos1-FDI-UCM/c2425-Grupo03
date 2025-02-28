@@ -14,7 +14,10 @@ using UnityEngine;
 /// <summary>
 /// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))] // Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+[RequireComponent(typeof(Rigidbody2D))]// Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+
+// Obliga que tenga el componente HealthManager
+[RequireComponent(typeof(HealthManager))]
 [SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
 public class EnemyStateMachine : StateMachine
 {
@@ -88,6 +91,19 @@ public class EnemyStateMachine : StateMachine
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
+    /// <summary>
+    /// Método para notificar de la muerte del enemigo a la máquina de estados.
+    /// </summary>
+    public void Death() {
+        Debug.Log("This enemy has died!");
+    }
+
+
+
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
 
     protected override void OnAwake()
     {
@@ -95,21 +111,10 @@ public class EnemyStateMachine : StateMachine
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    /// <summary>
-    /// Método para notificar de la muerte del enemigo a la máquina de estados.
-    /// </summary>
-    public void Death() {
-        Debug.Log("This enemy has died!");
-    } 
-
-    #endregion
-
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
+    protected override void OnStart()
+    {
+        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+    }
 
     /// <summary>
     /// Forzar el cambio de estado a muerte
