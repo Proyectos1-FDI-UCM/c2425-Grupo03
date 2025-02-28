@@ -169,7 +169,10 @@ public class PlayerAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if(Time.time > NextAttackTime) ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+        if (Time.time > NextAttackTime)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+        }
     }
 
     /// <summary>
@@ -183,7 +186,10 @@ public class PlayerAttackState : BaseState
         RaycastHit2D[] enemyInArea;
         enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
 
-        if (_combo == 3) extraDamage += _comboExtraDamage;
+        if (_combo == 3) 
+        { 
+            extraDamage += _comboExtraDamage; 
+        }
 
         foreach (RaycastHit2D enemy in enemyInArea)
         {
@@ -197,16 +203,31 @@ public class PlayerAttackState : BaseState
     private void UpdateCombo()
     {
         //Comprobar si sigue en el tiempo de gracia
-        if (Time.time > _endOfCombo) _combo = 0;
-
+        if (Time.time > _endOfCombo)
+        {
+            _combo = 0;
+        }
         //Actualizar el tiempo de gracia
         _endOfCombo = Time.time + _comboDuration;
 
         //Actualizar el combo
-        if(_combo == 0) _combo = 1;
-        else if (_combo == 1) _combo = 2;
-        else if (_combo == 2) _combo = 3;
-        else _combo = 1;  
+        if (_combo == 0)
+        {
+            _combo = 1;
+        }
+
+        else if (_combo == 1)
+        {
+            _combo = 2;
+        }
+        else if (_combo == 2)
+        {
+            _combo = 3;
+        }
+        else
+        {
+            _combo = 1;
+        }
     }
 
     private void OnDrawGizmos()

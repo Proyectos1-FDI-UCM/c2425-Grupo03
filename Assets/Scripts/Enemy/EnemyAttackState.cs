@@ -156,7 +156,6 @@ public class EnemyAttackState : BaseState
     {
         _ctx.PlayerTransform.GetComponent<HealthManager>().RemoveHealth(_damage);
         _nextAttackTime = Time.time + _attackSpeed;
-        Debug.Log($"El skeleton ha hecho {_damage} daño al jugador");
     }
 
     private void OnDrawGizmos()
