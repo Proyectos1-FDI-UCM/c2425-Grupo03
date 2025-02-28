@@ -32,7 +32,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int _initialHealth;
 
-    [SerializeField] private UnityEvent OnDeath;
+    
     #endregion
 
 
@@ -50,6 +50,18 @@ public class HealthManager : MonoBehaviour
     /// La vida que tiene la entidad
     /// </summary>
     private int _health;
+
+    /// <summary>
+    /// Evento para cuando la vida de la entidad es 0
+    /// </summary>
+    private UnityEvent _onDeath;
+
+    /// <summary>
+    /// Evento para cuando la entidad reciba daño
+    /// </summary>
+    private UnityEvent _onDamaged;
+
+
 
 
     // ---- PROPIEDADES ----
@@ -167,7 +179,7 @@ public class HealthManager : MonoBehaviour
     {
         if(_health <= 0)
         {
-            OnDeath.Invoke();
+            _onDeath.Invoke();
         }
     }
     #endregion
