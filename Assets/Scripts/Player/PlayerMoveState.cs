@@ -121,7 +121,7 @@ public class PlayerMoveState : BaseState
     {
         if (GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>() == 0)
         {
-            ChangeState(Ctx.GetStateByType<PlayerIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerIdleState>());
         }
     }
 

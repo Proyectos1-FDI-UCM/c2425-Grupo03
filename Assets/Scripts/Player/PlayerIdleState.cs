@@ -98,7 +98,7 @@ public class PlayerIdleState : BaseState
             //{
             //    GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Right;
             //}
-            ChangeState(Ctx.GetStateByType<PlayerMoveState>());
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerMoveState>());
         }
     }
     #endregion   
