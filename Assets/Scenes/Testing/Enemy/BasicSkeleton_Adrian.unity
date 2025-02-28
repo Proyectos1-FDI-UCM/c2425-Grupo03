@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _waitTime: 2
+  _waitTime: 5
 --- !u!114 &456405386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,9 +1024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 200
   _initialHealth: 250
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1205845746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,21 +1398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _initialHealth: 150
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1223990122}
-        m_TargetAssemblyTypeName: EnemyStateMachine, Assembly-CSharp
-        m_MethodName: DeathState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1240825673
 GameObject:
   m_ObjectHideFlags: 0
