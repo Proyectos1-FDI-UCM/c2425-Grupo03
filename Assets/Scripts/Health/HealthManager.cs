@@ -32,7 +32,6 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [SerializeField] private int _initialHealth;
 
-    
     #endregion
 
 
@@ -161,8 +160,6 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-
-
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -177,8 +174,9 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     private void IsEntityDead()
     {
-        if(_health <= 0)
+        if(_health <= 0 && gameObject.GetComponent<EnemyStateMachine>())
         {
+            _onDeath.AddListener(gameObject.GetComponent<EnemyStateMachine>().DeathState);
             _onDeath.Invoke();
         }
     }
