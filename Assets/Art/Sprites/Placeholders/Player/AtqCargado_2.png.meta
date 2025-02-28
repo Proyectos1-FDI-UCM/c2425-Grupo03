@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -95,7 +95,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: AtqCargado_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13
+        width: 93
+        height: 123
+      alignment: 9
+      pivot: {x: 0.6645373, y: 0.43694478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2f28c0d07a9c44a9cc2115223c8429
+      internalID: 1483688474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtqCargado_2_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 13
+        width: 118
+        height: 130
+      alignment: 9
+      pivot: {x: 0.41117963, y: 0.41131634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d64e34e3dc65f424391f0aa3afaaacb6
+      internalID: -963712959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +148,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      AtqCargado_2_0: 1483688474
+      AtqCargado_2_1: 910294619
+      AtqCargado_2_2: -963712959
+      AtqCargado_2_3: -1292940283
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

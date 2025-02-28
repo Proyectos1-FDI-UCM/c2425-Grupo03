@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _distance: 5
-  _duration: 0.1
+  _duration: 0.2
   _rechargeTime: 0.5
   _playerHitTrigger: {fileID: 931607675}
 --- !u!1 &1427124087
@@ -2171,7 +2171,7 @@ Transform:
   m_GameObject: {fileID: 1845753918}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -16.07, y: 2.68, z: 0}
+  m_LocalPosition: {x: -16.07, y: 2.39, z: 0}
   m_LocalScale: {x: 9.717859, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
