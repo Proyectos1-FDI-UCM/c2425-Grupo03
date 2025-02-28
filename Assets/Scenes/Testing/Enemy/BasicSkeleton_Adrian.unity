@@ -163,6 +163,8 @@ GameObject:
   m_Component:
   - component: {fileID: 456405383}
   - component: {fileID: 456405382}
+  - component: {fileID: 456405385}
+  - component: {fileID: 456405386}
   - component: {fileID: 456405384}
   - component: {fileID: 456405381}
   m_Layer: 10
@@ -259,6 +261,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _enemyWalkingSpeed: 2
+--- !u!114 &456405385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456405380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6295cd0befa8a34bb77edd2e587778d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _waitTime: 2
+--- !u!114 &456405386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456405380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab1a28ebf3bb2f4c8461e43b4e06bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _attackRadius: 1
+  _attackSpeed: 1
+  _damage: 1
 --- !u!1 &548897163
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,6 +775,7 @@ GameObject:
   - component: {fileID: 931607678}
   - component: {fileID: 931607677}
   - component: {fileID: 931607676}
+  - component: {fileID: 931607681}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -977,6 +1010,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &931607681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931607673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 200
+  _initialHealth: 250
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1205845746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1273,7 @@ GameObject:
   - component: {fileID: 1223990123}
   - component: {fileID: 1223990122}
   - component: {fileID: 1223990125}
+  - component: {fileID: 1223990126}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -1245,6 +1296,8 @@ MonoBehaviour:
   _states:
   - {fileID: 456405381}
   - {fileID: 456405384}
+  - {fileID: 456405386}
+  - {fileID: 456405385}
 --- !u!50 &1223990123
 Rigidbody2D:
   serializedVersion: 4
@@ -1334,6 +1387,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &1223990126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223990121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _initialHealth: 150
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1223990122}
+        m_TargetAssemblyTypeName: EnemyStateMachine, Assembly-CSharp
+        m_MethodName: DeathState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1240825673
 GameObject:
   m_ObjectHideFlags: 0

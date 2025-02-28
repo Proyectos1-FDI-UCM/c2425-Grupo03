@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -40,6 +40,11 @@ public class EnemyDeathState : BaseState
     /// </summary>
     private float _deadTime;
 
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private EnemyStateMachine _ctx;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -47,10 +52,10 @@ public class EnemyDeathState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -61,12 +66,17 @@ public class EnemyDeathState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemyStateMachine>();
+
+        //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
     }
     
@@ -94,7 +104,7 @@ public class EnemyDeathState : BaseState
         //Tras el tiempo de espera el enemigo "muere"
         if(Time.time > _deadTime)
         {
-            Destroy(gameObject);
+            Destroy(_ctx.gameObject);
         }
     }
 

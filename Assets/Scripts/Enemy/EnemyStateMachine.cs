@@ -28,17 +28,16 @@ public class EnemyStateMachine : StateMachine
     {
         Right = 1,
         Left = -1,
-    }   
-    
+    }
+
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    
 
     #endregion
 
@@ -78,6 +77,12 @@ public class EnemyStateMachine : StateMachine
     /// El rango de ataque del enemigo
     /// </summary>
     public float AttackDistance { get; set; }
+
+    /// <summary>
+    /// La vida del enemigo
+    /// </summary>
+    public float Health { get; set; }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -105,6 +110,14 @@ public class EnemyStateMachine : StateMachine
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Forzar el cambio de estado a muerte
+    /// </summary>
+    public void DeathState()
+    {
+        ChangeState(gameObject.GetComponentInChildren<EnemyDeathState>());
+    }
 
     #endregion
 

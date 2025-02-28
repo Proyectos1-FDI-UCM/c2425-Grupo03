@@ -30,7 +30,7 @@ public class EnemyAttackState : BaseState
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
-    [SerializeField] float _damage;
+    [SerializeField] int _damage;
 
     #endregion
 
@@ -136,16 +136,16 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _attackRadius)
+        if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude > _attackRadius)
         {
             //Si el jugador está fuera del rango de ataque, persigue al jugador
-            ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
-        //Se podria simplificar?
-        else if((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _attackRadius && !_ctx.IsPlayerInChaseRange)
+
+        else if(!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
-            ChangeState(Ctx.GetStateByType<EnemyIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
     }
 
@@ -154,7 +154,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     private void Attack()
     {
-        //_ctx.PlayerTransform.HarmManager();
+        _ctx.PlayerTransform.GetComponent<HealthManager>().RemoveHealth(_damage);
         _nextAttackTime = Time.time + _attackSpeed;
         Debug.Log($"El skeleton ha hecho {_damage} daño al jugador");
     }
