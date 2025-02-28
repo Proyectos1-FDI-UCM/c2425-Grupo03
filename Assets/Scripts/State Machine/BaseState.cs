@@ -5,8 +5,8 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
-// Añadir aquí el resto de directivas using
 
 
 /// <summary>
@@ -23,21 +23,14 @@ public abstract class BaseState : MonoBehaviour
     /// <summary>
     /// Booleana que determina si el estado es raiz o si es un subestado.
     /// </summary>
-    [SerializeReference] bool _isRootState = false;
+    [SerializeReference] 
+    bool _isRootState = false;
 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    /// <summary>
-    /// Contiene al estado padre actual de este estado.
-    /// </summary>
-    BaseState _currParentState;
-
-    /// <summary>
-    /// Contiene al estado hijo de este estado.
-    /// </summary>
-    BaseState _currSubState;
+    
 
     #endregion
 
@@ -50,6 +43,23 @@ public abstract class BaseState : MonoBehaviour
     /// El contexto del estado. Es decir, la maquina de estados que lo contiene.
     /// </summary>
     protected StateMachine Ctx { get; private set; }
+
+    public bool IsRootState => _isRootState;
+
+    /// <summary>
+    /// Contiene al estado padre actual de este estado.
+    /// </summary>
+    public BaseState CurrParentState { get; private set; }
+
+    /// <summary>
+    /// Contiene al estado hijo de este estado.
+    /// </summary>
+    public BaseState CurrSubState { get; private set; }
+
+    /// <summary>
+    /// El siguiente estado al que transicionar.
+    /// </summary>
+    public BaseState NextSubState { get; private set; }
 
     #endregion
 
@@ -88,16 +98,22 @@ public abstract class BaseState : MonoBehaviour
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
-    protected abstract void CheckSwitchState();
+    protected virtual void CheckSwitchState() { }
 
     /// <summary>
     /// Actualiza el estado actual, mira si hay que cambiar de estado y si tiene un estado hijo lo actualiza.
     /// </summary>
     public void UpdateStates()
     {
+        // Actualiza el estado
         UpdateState();
+        // Llama al método que hace las transiciones
         CheckSwitchState();
-        if (_currSubState != null) _currSubState.UpdateStates();
+        // Si tiene un estado hijo actualiza el estado hijo
+        if (CurrSubState != null) CurrSubState.UpdateStates();
+
+        // Mira si hay transición de subestado
+        CheckNewSubState();
     }
     
     /// <summary>
@@ -106,7 +122,7 @@ public abstract class BaseState : MonoBehaviour
     public void FixedUpdateStates()
     {
         FixedUpdateState();
-        if (_currSubState != null) _currSubState.FixedUpdateState();
+        if (CurrSubState != null) CurrSubState.FixedUpdateState();
     }
 
     /// <summary>
@@ -115,13 +131,10 @@ public abstract class BaseState : MonoBehaviour
     /// </summary>
     /// <param name="newState">El estado al que transicionar.</param>
     /// <exception cref="UnityException">Llamado si la transicion no ha sido posible.</exception>
+    [Obsolete("The state no longer manages state transtitions. Instead use Ctx.ChangeState(newState)", false)]
     public void ChangeState(BaseState newState)
     {
-        ExitState();
-        newState.EnterState();
-        if (_isRootState) Ctx.CurrState = newState;
-        else if (_currParentState != null) _currParentState.SetSubState(newState);
-        else throw new UnityException($"Current state, {Ctx.CurrState}, is a substate without a parent. Can't change to {newState.GetType()} state");
+        Ctx.ChangeState(newState);
     }
 
     /// <summary>
@@ -130,7 +143,7 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerEnter(Collider2D other)
     {
         TriggerEnter(other);
-        if (_currSubState != null) _currSubState.ExecuteTriggerEnter(other);
+        if (CurrSubState != null) CurrSubState.ExecuteTriggerEnter(other);
     }
     /// <summary>
     /// Metodo llamado al salir de un trigger.
@@ -138,7 +151,7 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerExit(Collider2D other)
     {
         TriggerExit(other);
-        if (_currSubState != null) _currSubState.ExecuteTriggerExit(other);
+        if (CurrSubState != null) CurrSubState.ExecuteTriggerExit(other);
     }
     /// <summary>
     /// Metodo llamado al estar en un trigger.
@@ -146,7 +159,7 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerStay(Collider2D other)
     {
         TriggerStay(other);
-        if (_currSubState != null) _currSubState.ExecuteTriggerStay(other);
+        if (CurrSubState != null) CurrSubState.ExecuteTriggerStay(other);
     }
     /// <summary>
     /// Metodo llamado al dejar de tocar un collider.
@@ -154,7 +167,7 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteCollisionEnter(Collision2D collision)
     {
         CollisionEnter(collision);
-        if (_currSubState != null) _currSubState.ExecuteCollisionEnter(collision);
+        if (CurrSubState != null) CurrSubState.ExecuteCollisionEnter(collision);
     }
     /// <summary>
     /// Metodo llamado al dejar de tocar un collider.
@@ -162,7 +175,7 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteCollisionExit(Collision2D collision)
     {
         CollisionExit(collision);
-        if (_currSubState != null) _currSubState.ExecuteCollisionExit(collision);
+        if (CurrSubState != null) CurrSubState.ExecuteCollisionExit(collision);
     }
 
     /// <summary>
@@ -171,8 +184,26 @@ public abstract class BaseState : MonoBehaviour
     /// <param name="state">El estado que sera el nuevo subestado.</param>
     public void SetSubState(BaseState state)
     {
-        _currSubState = state;
-        _currSubState.SetParentState(this);
+        if (!state.IsRootState)
+        {
+            NextSubState = state;
+        }
+        else throw new UnityException("Can't make the state " + state.GetType() + " a substate of " + this + " because it is a root state.");
+    }
+
+    /// <summary>
+    /// Mira si hay que hacer una transición del estado hijo.
+    /// </summary>
+    public void CheckNewSubState()
+    {
+        if (CurrSubState != NextSubState && NextSubState != null)
+        {
+            NextSubState.EnterState();
+            CurrSubState?.ExitState();
+
+            CurrSubState = NextSubState;
+            CurrSubState.SetParentState(this);
+        }
     }
 
     /// <summary>
@@ -181,7 +212,7 @@ public abstract class BaseState : MonoBehaviour
     /// <param name="state">El nuevo estado padre del estado.</param>
     public void SetParentState(BaseState state)
     {
-        _currParentState = state;
+        CurrParentState = state;
     }
 
     #endregion

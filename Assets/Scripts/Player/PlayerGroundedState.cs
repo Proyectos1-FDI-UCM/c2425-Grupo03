@@ -5,15 +5,6 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System;
-
-//---------------------------------------------------------
-// Estado del jugador cuando esta en el suelo
-// Chenlinjia Yi
-// Kingless Dungeon
-// Proyectos 1 - Curso 2024-25
-//---------------------------------------------------------
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using

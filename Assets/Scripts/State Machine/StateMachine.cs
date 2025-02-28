@@ -40,6 +40,11 @@ public class StateMachine : MonoBehaviour
     // Esta en publico por que debe ser modificado por todos los estados para cambiar el comportamiento de la maquina.
     public BaseState CurrState { get; set; }
 
+    /// <summary>
+    /// El siguiente estado al que transicionar.
+    /// </summary>
+    BaseState NextState { get; set; }
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -74,9 +79,14 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // Actualiza el estado actual
         CurrState.UpdateStates();
 
+        // Notifica del update a la máquina de estados hija
         OnUpdate();
+
+        // Mira si hay que hacer una transición de estados.
+        CheckStateChange();
     }
 
     /// <summary>
@@ -157,6 +167,22 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Establece el estado al que transicionar tras terminar de actualizar el estado actual.
+    /// </summary>
+    /// <param name="nextState">Siguiente estado</param>
+    public void ChangeState(BaseState nextState)
+    {
+        if (nextState.IsRootState)
+        {
+            NextState = nextState;
+        }
+        else
+        {
+            CurrState.SetSubState(nextState);
+        }
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -178,6 +204,20 @@ public class StateMachine : MonoBehaviour
     /// sin tener que reescribir el comportamiento ya predefinido en esta clase
     /// </summary>
     protected virtual void OnUpdate() { }
+
+    /// <summary>
+    /// Comprueba si hay que cambiar de estados y hace el cambio.
+    /// </summary>
+    private void CheckStateChange()
+    {
+        if(CurrState != NextState && NextState != null)
+        {
+            CurrState.ExitState();
+            NextState.EnterState();
+
+            CurrState = NextState;
+        }
+    }
 
     #endregion
 
