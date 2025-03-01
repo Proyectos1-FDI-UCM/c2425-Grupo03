@@ -91,14 +91,6 @@ public class EnemyStateMachine : StateMachine
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
-    /// <summary>
-    /// Método para notificar de la muerte del enemigo a la máquina de estados.
-    /// </summary>
-    public void Death() {
-        Debug.Log("This enemy has died!");
-    }
-
-
 
     #endregion
 
