@@ -20,16 +20,50 @@ public class EnemyInvocadorAttackState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [Header("Propiedad del ataque")]
+    /// <summary>
+    /// El tiempo de espera entre dos ataques
+    /// </summary>
+    [SerializeField] float _attackSpeed;
+    /// <summary>
+    /// El daño del disparo.
+    /// </summary>
+    [SerializeField] int _damage;
+    [SerializeField] EnemyStateMachine _enemyToInvoke;
+
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
     // El convenio de nombres de Unity recomienda que los atributos
-    // privados se nombren en formato _camelCase (comienza con _, 
-    // primera palabra en minúsculas y el resto con la 
-    // primera letra en mayúsculas)
-    // Ejemplo: _maxHealthPoints
+    // privados se nombren en formato _camelCase
+
+    /// <summary>
+    /// La dirección donde mira el enemigo, no es necesario para realizar el ataque, solo sirve para 
+    /// ver el rango de ataque del enemigo
+    /// </summary>
+    private int _direction;
+
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private EnemyInvocadorStateMachine _ctx;
+
+    /// <summary>
+    /// El tiempo cuando el enemigo pueda volver a disparar
+    /// </summary>
+    private float _nextShootTime;
+
+    /// <summary>
+    /// El tiempo cuando el enemigo pueda volver a invocar.
+    /// </summary>
+    private float _nextInvokeTime;
 
     #endregion
 
@@ -38,10 +72,17 @@ public class EnemyInvocadorAttackState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+    private void Start()
+    {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,7 +93,7 @@ public class EnemyInvocadorAttackState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -68,6 +109,17 @@ public class EnemyInvocadorAttackState : BaseState
     {
         
     }
+
+    [ContextMenu("Invoke")]
+    public void Invoke() {
+        Debug.Log("Invoking!");
+        Instantiate(_enemyToInvoke, new Vector2(transform.position.x + 1, transform.position.y), transform.rotation);
+    }
+
+    public void Shoot() {
+
+    }
+
     #endregion
     
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -82,7 +134,7 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        // decide between shoot and invoke
     }
 
     /// <summary>
