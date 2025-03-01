@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _waitTime: 5
+  _waitTime: 0
 --- !u!114 &456405386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,6 +865,7 @@ MonoBehaviour:
   - {fileID: 1382513033}
   - {fileID: 1382513032}
   - {fileID: 1382513031}
+  - {fileID: 1382513038}
 --- !u!212 &931607677
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1024,6 +1025,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 200
   _initialHealth: 250
+  _onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1205845746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _initialHealth: 150
+  _onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1240825673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,6 +1609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1382513030}
+  - component: {fileID: 1382513038}
   - component: {fileID: 1382513037}
   - component: {fileID: 1382513036}
   - component: {fileID: 1382513035}
@@ -1677,6 +1685,7 @@ MonoBehaviour:
   _damage: 5
   _comboDuration: 1
   _comboExtraDamage: 5
+  _chargeTime: 1.5
 --- !u!114 &1382513034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1739,6 +1748,22 @@ MonoBehaviour:
   _duration: 0.2
   _rechargeTime: 0.5
   _playerHitTrigger: {fileID: 931607675}
+--- !u!114 &1382513038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382513029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405ef61fd0edfec4084cd501a77ab2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _chargedAttackRadius: 2
+  _chargedDamage: 30
+  _chargingTime: 2
 --- !u!1 &1427124087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,6 +1906,10 @@ PrefabInstance:
     - target: {fileID: 7868700022024137938, guid: da49a3b93bece7644b8e31124e42407e, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850702203573671888, guid: da49a3b93bece7644b8e31124e42407e, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
