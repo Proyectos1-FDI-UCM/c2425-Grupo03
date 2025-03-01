@@ -80,11 +80,11 @@ public class EnemyStateMachine : StateMachine
     /// El rango de ataque del enemigo
     /// </summary>
     public float AttackDistance { get; set; }
-
+    
     /// <summary>
-    /// La vida del enemigo
+    /// El animator del enemigo.
     /// </summary>
-    public float Health { get; set; }
+    public Animator Animator { get; private set; }
 
     #endregion
 
@@ -101,6 +101,7 @@ public class EnemyStateMachine : StateMachine
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Animator = GetComponent<Animator>();
     }
 
     protected override void OnStart()
