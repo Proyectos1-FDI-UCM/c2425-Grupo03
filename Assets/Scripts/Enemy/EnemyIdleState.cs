@@ -78,7 +78,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator.SetBool("IsChasing", false);
+        _animator.SetBool("IsIdle", true);
     }
     
     /// <summary>
@@ -86,6 +86,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        _animator.SetBool("IsIdle", false);
     }
     #endregion
     

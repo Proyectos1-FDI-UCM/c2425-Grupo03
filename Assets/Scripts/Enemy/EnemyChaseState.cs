@@ -96,7 +96,6 @@ public class EnemyChaseState : BaseState
         //Al salir del estado de chase, el enemigo nunca se debería mover
         _rb.velocity = Vector3.zero;
         _animator.SetBool("IsChasing", false);
-        Debug.Log("Saliendo del estado chase");
     }
     #endregion
     
@@ -115,6 +114,8 @@ public class EnemyChaseState : BaseState
         //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
         _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
             EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyStateMachine.EnemyLookingDirection.Left;
 
         //Si todavía hay plataforma se mueve, sino se detiene
         if (CheckGround())
