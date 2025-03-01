@@ -43,8 +43,10 @@ public class PlayerAttackState : BaseState
     /// </summary>
     [SerializeField,Min(0)] int _comboExtraDamage;
 
-    #endregion
+    [SerializeField, Min(0)] private float _chargeTime = 1.5f;
+  
 
+    #endregion
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -75,6 +77,8 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private Animator _animator;
 
+    PlayerStateMachine _ctx;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -96,6 +100,7 @@ public class PlayerAttackState : BaseState
         //Coger el rigidbody del contexto
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
         _animator = GetCTX<PlayerStateMachine>().Animator;
+        _ctx = GetCTX<PlayerStateMachine>();
     }
     #endregion
 
@@ -133,9 +138,10 @@ public class PlayerAttackState : BaseState
 
         //Atacar en la dirección donde mira el jugador
         Attack(_direction);
-
-        //La animación
         _animator.SetInteger("AttackIndex", _combo);
+
+      
+        //La animación
     }
     
     /// <summary>
@@ -144,6 +150,7 @@ public class PlayerAttackState : BaseState
     public override void ExitState()
     {
         _animator.SetInteger("AttackIndex", 0);
+
     }
     #endregion
     
@@ -161,6 +168,7 @@ public class PlayerAttackState : BaseState
     {
         //Poner la velocidad del rigidbody a cero
         _rb.velocity = Vector3.zero;
+
     }
 
     /// <summary>
@@ -171,8 +179,16 @@ public class PlayerAttackState : BaseState
     {
         if (Time.time > NextAttackTime)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+            if (_ctx.PlayerInput.Attack.IsPressed())
+            {
+                Ctx.ChangeState(Ctx.GetStateByType<PlayerChargedAttackState>());
+            }
+            else
+            {
+                Ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+            }
         }
+
     }
 
     /// <summary>
