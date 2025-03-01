@@ -50,7 +50,7 @@ public class EnemyAttackState : BaseState
     private int _direction;
 
     /// <summary>
-    /// El animator del player
+    /// El animator del enemigo
     /// </summary>
     private Animator _animator;
 
@@ -79,6 +79,9 @@ public class EnemyAttackState : BaseState
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
 
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+
         //Informar al contexto el rango de ataque del enemigo
         _ctx.AttackDistance = _attackRadius;
     }
@@ -98,6 +101,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        _animator.SetBool("IsAttack", true);
         _direction = (int)_ctx.LookingDirection;
         Attack();
     }
@@ -107,7 +111,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        //cosas del animator
+        _animator.SetBool("IsAttack", false);
     }
     #endregion
     

@@ -30,6 +30,11 @@ public class EnemyIdleState : BaseState
     /// </summary>
     EnemyStateMachine _ctx;
 
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -44,6 +49,10 @@ public class EnemyIdleState : BaseState
     {
         //Coge una referencia al contexto para evitar el upcasting y por comodidad
         _ctx = GetCTX<EnemyStateMachine>();
+
+        _animator = _ctx.GetComponent<Animator>();
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -69,6 +78,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        _animator.SetBool("IsChasing", false);
     }
     
     /// <summary>

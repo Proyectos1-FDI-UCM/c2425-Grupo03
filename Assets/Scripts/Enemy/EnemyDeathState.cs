@@ -45,6 +45,11 @@ public class EnemyDeathState : BaseState
     /// </summary>
     private EnemyStateMachine _ctx;
 
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -72,12 +77,18 @@ public class EnemyDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        
 
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
 
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
+
+        _animator.SetBool("IsDead", true);
     }
     
     /// <summary>

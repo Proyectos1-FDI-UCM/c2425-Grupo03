@@ -39,6 +39,11 @@ public class EnemyChaseState : BaseState
     /// </summary>
     Rigidbody2D _rb;
 
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -52,8 +57,11 @@ public class EnemyChaseState : BaseState
 
     private void Start()
     {
+        
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyStateMachine>();   
+        _ctx = GetCTX<EnemyStateMachine>();
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
         //Coge la referencia al rigidbody por comodidad
         _rb = _ctx.Rigidbody;
     }
@@ -77,7 +85,7 @@ public class EnemyChaseState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        _animator.SetBool("IsChasing", true);
     }
     
     /// <summary>
@@ -87,6 +95,8 @@ public class EnemyChaseState : BaseState
     {
         //Al salir del estado de chase, el enemigo nunca se debería mover
         _rb.velocity = Vector3.zero;
+        _animator.SetBool("IsChasing", false);
+        Debug.Log("Saliendo del estado chase");
     }
     #endregion
     
@@ -139,6 +149,7 @@ public class EnemyChaseState : BaseState
         if (!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
+            _animator.SetBool("IsChasing", false);
             ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
         else if((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance)
