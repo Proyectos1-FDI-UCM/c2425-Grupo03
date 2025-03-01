@@ -82,7 +82,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        //GetComponent<EnemyInvocadorAttackState>().Invoke();
+        GetComponent<EnemyInvocadorAttackState>().Invoke();
     }
     #endregion
     
