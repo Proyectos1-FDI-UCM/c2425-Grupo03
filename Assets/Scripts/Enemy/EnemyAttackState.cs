@@ -64,6 +64,12 @@ public class EnemyAttackState : BaseState
     /// </summary>
     private float _nextAttackTime;
 
+    /// <summary>
+    /// Booleana para ver si ha terminado de atacar
+    /// </summary>
+    /// 
+    private bool _attackfinished;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -101,9 +107,11 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        _attackfinished = false;
         _animator.SetBool("IsAttack", true);
         _direction = (int)_ctx.LookingDirection;
         Attack();
+        _attackfinished = true;
     }
     
     /// <summary>
@@ -111,7 +119,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsAttack", false);
+        //_animator.SetBool("IsAttack", false);
     }
     #endregion
     
@@ -127,11 +135,13 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        /*
         //Comprueba el tiempo del siguiente ataque para atacar al jugador que sigue dentro del rango de ataque
         if(Time.time > _nextAttackTime)
         {
             Attack();
         }
+        */
     }
 
     /// <summary>
@@ -140,16 +150,24 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
+        
+        if(Time.time > _nextAttackTime && _attackfinished)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            _animator.SetBool("IsAttack", false);
+        }
+        /*
         if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude > _attackRadius)
         {
             //Si el jugador está fuera del rango de ataque, persigue al jugador
             Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
-
+        */
         else if(!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
             Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
+            _animator.SetBool("IsAttack", false);
         }
     }
 

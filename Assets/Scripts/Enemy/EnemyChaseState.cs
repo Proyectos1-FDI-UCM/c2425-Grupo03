@@ -85,6 +85,7 @@ public class EnemyChaseState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        _animator.SetBool("IsAttack", false);
         _animator.SetBool("IsChasing", true);
     }
     
