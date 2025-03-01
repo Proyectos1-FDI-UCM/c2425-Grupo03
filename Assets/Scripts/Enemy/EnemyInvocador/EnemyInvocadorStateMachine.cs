@@ -40,7 +40,8 @@ public class EnemyInvocadorStateMachine : StateMachine
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    private bool isFirstHit = true;
+    private bool _isFirstHit = true;
+    private Transform[] _spawnPoints;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -63,6 +64,11 @@ public class EnemyInvocadorStateMachine : StateMachine
     /// SpriteRenderer del enemigo.
     /// </summary>
     public SpriteRenderer SpriteRenderer { get; private set; }
+
+    /// <summary>
+    /// El Transform del jugador. 
+    /// </summary>
+    public Transform PlayerTransform { get; set; }
 
     /// <summary>
     /// Variable para saber cuando el jugador entra en la distancia de detección.
@@ -112,9 +118,9 @@ public class EnemyInvocadorStateMachine : StateMachine
 
     public void TPState(int removedHealth)
     {
-        if (isFirstHit) {
+        if (_isFirstHit) {
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
-            isFirstHit = false;
+            _isFirstHit = false;
         }
     }
 

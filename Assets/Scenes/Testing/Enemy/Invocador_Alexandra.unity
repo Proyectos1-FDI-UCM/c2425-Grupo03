@@ -1179,7 +1179,7 @@ MonoBehaviour:
   _isRootState: 1
   _attackSpeed: 0
   _damage: 0
-  _enemyToInvoke: {fileID: 4051256077954446262, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
+  _enemyToInvoke: {fileID: 4752918805132756057, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
 --- !u!114 &810891272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,11 +2414,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4564690295959494375, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.08
+      value: -2.64
       objectReference: {fileID: 0}
     - target: {fileID: 4564690295959494375, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.53
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4564690295959494375, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2458,7 +2458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4752918805132756057, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2486,7 +2486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2044138640
 SpriteRenderer:
   m_ObjectHideFlags: 0
