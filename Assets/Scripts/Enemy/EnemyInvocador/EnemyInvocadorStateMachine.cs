@@ -99,7 +99,7 @@ public class EnemyInvocadorStateMachine : StateMachine
     protected override void OnStart()
     {
         GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
-        GetComponent<HealthManager>()._onDamaged.AddListener(TPState);
+        // GetComponent<HealthManager>()._onDamaged.AddListener(TPState);
     }
 
     /// <summary>
