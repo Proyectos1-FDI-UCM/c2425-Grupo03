@@ -65,6 +65,9 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     private float _nextInvokeTime;
 
+    private Transform _playerTransform; 
+    private float _randomNr;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -99,7 +102,7 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        _playerTransform = _ctx.PlayerTransform.transform;
     }
     
     /// <summary>
@@ -107,17 +110,17 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
     }
 
     [ContextMenu("Invoke")]
     public void Invoke() {
         Debug.Log("Invoking!");
-        Instantiate(_enemyToInvoke, new Vector2(transform.position.x + 1, transform.position.y), transform.rotation);
+        if (_enemyToInvoke != null) {
+            Instantiate(_enemyToInvoke, new Vector2(_playerTransform.position.x + 1, _playerTransform.position.y), _playerTransform.rotation);
+        }
     }
 
     public void Shoot() {
-
     }
 
     #endregion
@@ -134,7 +137,11 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        // decide between shoot and invoke
+        _randomNr = Random.Range(0, 4);
+        if (_randomNr > 3) {
+            Invoke();
+        }
+        else Shoot();
     }
 
     /// <summary>
