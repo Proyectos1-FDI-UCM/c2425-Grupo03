@@ -16,11 +16,7 @@ public class PlayerMoveState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-        /// <summary>
-    /// El estado de ataque del jugador.
-    /// </summary>
-    [Tooltip("The player's attack state.")]
-    [SerializeField] PlayerAttackState _attackState;
+    
     
     [Header("Movement Properties")]
     /// <summary>
@@ -42,6 +38,11 @@ public class PlayerMoveState : BaseState
     /// La dirección del movimiento del jugador.
     /// </summary>
     private float _moveDir;
+
+    /// <summary>
+    /// El estado de ataque del jugador.
+    /// </summary>
+    PlayerAttackState _attackState;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -49,13 +50,14 @@ public class PlayerMoveState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     public void Start()
     {
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
         _sprite = GetCTX<PlayerStateMachine>().SpriteRenderer;
+        _attackState = Ctx.GetStateByType<PlayerAttackState>();
     }
     #endregion
 

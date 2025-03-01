@@ -16,7 +16,7 @@ public class HarmIndicatorManager : MonoBehaviour
     // 
     #region Atributos del Inspector (serialized fields)
     [SerializeField]
-    private TMP_Text DamageText; // Aquí se asigna el texto encima del dummy
+    private Canvas DamageText; // Aquí se asigna el texto encima del dummy
 
     #endregion
 
@@ -41,23 +41,22 @@ public class HarmIndicatorManager : MonoBehaviour
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
-    public void UpdateDamageText(int damage)
     ///<summary>
     /// Este es el método principal del script. Gracias a él, el texto de daño
     /// causado encima del dummy cambiará cuando se le llame desde el script
     /// "HarmManager"
     ///</summary>
+    public void UpdateDamageText(int damage)
     {
-        DamageText.text = $"{damage}";
-        ///<summary>
         /// Cambia el texto al nuevo valor de daño actual
         /// después de la suma en el método "DamageDummy"
-        ///</summary>
+        //DamageText.text = $"{damage}";
     }
 
-    public void AskForHealth()
+    public void AskForHealth(int damage)
     {
-        DamageText.text = GetComponent<HealthManager>()?.Health.ToString();
+        Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform);
+        text.GetComponent<DamageNumberScript>().SetText(damage.ToString());
     }
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
