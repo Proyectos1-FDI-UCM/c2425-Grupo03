@@ -56,10 +56,11 @@ public class Bala : MonoBehaviour
     /// </summary>
      void Awake()
     {
-         direccion =  _objective.transform.position - transform.position;
+         direccion =  (_objective.transform.position - transform.position).normalized ;
+
         float angle = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-
+        
     }
     void Start()
     {

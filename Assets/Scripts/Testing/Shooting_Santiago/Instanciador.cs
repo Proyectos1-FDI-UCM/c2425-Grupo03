@@ -5,7 +5,6 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Collections.Generic;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -14,13 +13,13 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Enemigo : MonoBehaviour
+public class Instanciador : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [SerializeField] Instanciador instanciador;
+    [SerializeField] GameObject _instancia;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -53,7 +52,7 @@ public class Enemigo : MonoBehaviour
     /// </summary>
     void Start()
     {
-        instanciador.InstanciarEnemigo();
+        
     }
 
     /// <summary>
@@ -72,10 +71,12 @@ public class Enemigo : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    
-
+    public void InstanciarEnemigo()
+    {
+        Instantiate(_instancia, transform.position, transform.rotation);
+    }
     #endregion
-
+    
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -83,7 +84,7 @@ public class Enemigo : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion
+    #endregion   
 
-} // class Enemigo 
+} // class Instanciador 
 // namespace
