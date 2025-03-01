@@ -33,6 +33,11 @@ public class HarmIndicatorManager : MonoBehaviour
     // No se necesitan métodos aquí, ya se hace todo el trabajo en el método público "UpdateDamageText";
     #region Métodos de MonoBehaviour
 
+    private void Awake()
+    {
+        GetComponent<HealthManager>()._onDamaged.AddListener(AskForHealth);
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -50,10 +55,14 @@ public class HarmIndicatorManager : MonoBehaviour
         ///</summary>
     }
 
+    public void AskForHealth()
+    {
+        DamageText.text = GetComponent<HealthManager>()?.Health.ToString();
+    }
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     // No hay métodos privados en el script.
     #region Métodos Privados o Protegidos
-
 
     #endregion
 

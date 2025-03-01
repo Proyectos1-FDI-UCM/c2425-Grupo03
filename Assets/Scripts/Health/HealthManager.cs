@@ -51,10 +51,7 @@ public class HealthManager : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Evento para cuando la entidad reciba daño
-    /// </summary>
-    private UnityEvent _onDamaged;
+
 
 
 
@@ -74,6 +71,12 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent _onDeath;
+
+    /// <summary>
+    /// Evento para cuando la entidad reciba daño
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _onDamaged;
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -140,6 +143,8 @@ public class HealthManager : MonoBehaviour
         {
             _health = _health - removedHealth;
         }
+
+        _onDamaged.Invoke();
     }
 
     /// <summary>
