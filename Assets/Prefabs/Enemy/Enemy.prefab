@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _waitTime: 1.1
+  _waitTime: 1.4
 --- !u!114 &5438967828372433778
 MonoBehaviour:
   m_ObjectHideFlags: 0
