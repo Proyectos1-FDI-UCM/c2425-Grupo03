@@ -76,7 +76,9 @@ public class PlayerAttackState : BaseState
     /// El rigidbody del player
     /// </summary>
     private Animator _animator;
-
+    /// <summary>
+    /// El contexto del playerstatemachine
+    /// </summary>
     PlayerStateMachine _ctx;
 
     #endregion
@@ -174,6 +176,7 @@ public class PlayerAttackState : BaseState
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// Si el jugador mantiene la tecla atacar, pasa al estado playerxhargedattack, sino pasa al grounded state.
     /// </summary>
     protected override void CheckSwitchState()
     {
@@ -245,6 +248,9 @@ public class PlayerAttackState : BaseState
             _combo = 1;
         }
     }
+    /// <summary>
+    /// Dibuja el rango de ataque basico
+    /// </summary>
 
     private void OnDrawGizmos()
     {
