@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyInvokeState : BaseState
+public class EnemyInvocadorAttackState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -96,5 +96,5 @@ public class EnemyInvokeState : BaseState
 
     #endregion   
 
-} // class EnemyInvokeState 
+} // class EnemyInvocadorAttackState 
 // namespace

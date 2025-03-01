@@ -643,7 +643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 707469647}
   - component: {fileID: 707469646}
-  - component: {fileID: 707469645}
+  - component: {fileID: 707469648}
   - component: {fileID: 707469644}
   - component: {fileID: 707469643}
   - component: {fileID: 707469642}
@@ -793,23 +793,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &707469645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707469640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48b9d194a2d8d3a4991dc0c2e6c03d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 0}
-  - {fileID: 810891258}
-  - {fileID: 0}
-  - {fileID: 810891258}
 --- !u!50 &707469646
 Rigidbody2D:
   serializedVersion: 4
@@ -846,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 707469640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.63, y: 1.94, z: 0}
+  m_LocalPosition: {x: -14.01, y: 1.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -854,6 +837,24 @@ Transform:
   - {fileID: 810891260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &707469648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707469640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b9d194a2d8d3a4991dc0c2e6c03d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _states:
+  - {fileID: 810891266}
+  - {fileID: 810891267}
+  - {fileID: 810891264}
+  - {fileID: 810891265}
+  - {fileID: 810891258}
 --- !u!1 &709637295
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,11 +16,6 @@ public class PlayerMoveState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-        /// <summary>
-    /// El estado de ataque del jugador.
-    /// </summary>
-    [Tooltip("The player's attack state.")]
-    [SerializeField] PlayerAttackState _attackState;
     
     [Header("Movement Properties")]
     /// <summary>
@@ -73,7 +68,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        if (_attackState != null) _attackState.ResetAttackCombo();
+        GetComponent<PlayerAttackState>().ResetAttackCombo();
     }
     
     /// <summary>

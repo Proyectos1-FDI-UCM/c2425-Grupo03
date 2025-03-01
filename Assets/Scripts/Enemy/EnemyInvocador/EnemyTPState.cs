@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Estado durante el cual el enemigo se teletransporta a una posición predeterminada del mapa.
+// Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -13,7 +13,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyShootState : BaseState
+public class EnemyTPState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -58,7 +58,6 @@ public class EnemyShootState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
     }
     
     /// <summary>
@@ -96,5 +95,5 @@ public class EnemyShootState : BaseState
 
     #endregion   
 
-} // class EnemyShootState 
+} // class EnemyTPState 
 // namespace
