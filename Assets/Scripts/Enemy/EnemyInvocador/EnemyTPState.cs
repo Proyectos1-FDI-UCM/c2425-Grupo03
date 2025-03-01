@@ -20,8 +20,11 @@ public class EnemyTPState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    // Punto al que se teletransporta
+    [SerializeField] Transform _teleportPoint;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,6 +34,10 @@ public class EnemyTPState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private bool _hasTeleported;
+    private EnemyInvocadorStateMachine _ctx;
+    private Animator _animator;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -38,10 +45,10 @@ public class EnemyTPState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,12 +59,22 @@ public class EnemyTPState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        if (_teleportPoint != null)
+        {
+            _ctx = GetCTX<EnemyInvocadorStateMachine>();
+            _animator = _ctx.GetComponent<Animator>();
+
+            _hasTeleported = true;
+
+            transform.position = _teleportPoint.position;
+
+        }
     }
     
     /// <summary>
@@ -65,7 +82,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        //GetComponent<EnemyInvocadorAttackState>().Invoke();
     }
     #endregion
     
@@ -90,7 +107,8 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        //_ctx.ChangeState(< EnemyInvocadorIdleState >);
+        Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
     }
 
     #endregion   

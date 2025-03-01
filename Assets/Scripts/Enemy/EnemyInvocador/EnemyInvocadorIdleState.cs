@@ -21,7 +21,7 @@ public class EnemyInvocadorIdleState : BaseState
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,6 +31,10 @@ public class EnemyInvocadorIdleState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private EnemyInvocadorStateMachine _ctx;
+    private Animator _animator;
+    private Rigidbody2D _rb;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -38,10 +42,19 @@ public class EnemyInvocadorIdleState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+    private void Start()
+    {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+        _rb = _ctx.Rigidbody;
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,13 +65,13 @@ public class EnemyInvocadorIdleState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
-        
+        _animator.SetBool("IsIdle", true);
     }
     
     /// <summary>
@@ -66,7 +79,7 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("IsIdle", false);
     }
     #endregion
     
@@ -91,7 +104,20 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        // Si el jugador está en el rango de ataque cambia al estado de ataque.
+        if (_ctx.IsPlayerInAttackRange)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorAttackState>());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        _ctx.IsPlayerInAttackRange = true;
+
+        //Añade la posición del jugador al ctx.
+        _ctx.PlayerTransform = collision.transform;
     }
 
     #endregion   
