@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -20,7 +21,7 @@ public class EnemyInvocadorAttackState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    [Header("Propiedad del ataque")]
+    [Header("Shoot Properties")]
     /// <summary>
     /// El tiempo de espera entre dos ataques
     /// </summary>
@@ -29,6 +30,9 @@ public class EnemyInvocadorAttackState : BaseState
     /// El daño del disparo.
     /// </summary>
     [SerializeField] int _damage;
+    [Header("Invoke Properties")]
+    [SerializeField] int _invokeCooldown;
+    [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
     [SerializeField] EnemyStateMachine _enemyToInvoke;
 
     #endregion
@@ -56,16 +60,21 @@ public class EnemyInvocadorAttackState : BaseState
     private EnemyInvocadorStateMachine _ctx;
 
     /// <summary>
-    /// El tiempo cuando el enemigo pueda volver a disparar
+    /// El tiempo cuando el enemigo pueda volver a hacer una accion.
     /// </summary>
-    private float _nextShootTime;
-
+    private float _lastAttackTime;
+    
     /// <summary>
-    /// El tiempo cuando el enemigo pueda volver a invocar.
+    /// El índice del spawnpoint actual.
     /// </summary>
-    private float _nextInvokeTime;
-
-    private Transform _playerTransform; 
+    static private int _spawnpointIndex = 1;
+    /// <summary>
+    /// El Transform del spawnpoint actual.
+    /// </summary>
+    private Transform _spawnpointTransform;
+    /// <summary>
+    /// Un número aleatorio que determina si el enemigo dispara o invoca otro enemigo.
+    /// </summary>
     private float _randomNr;
 
     #endregion
@@ -102,7 +111,6 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _playerTransform = _ctx.PlayerTransform.transform;
     }
     
     /// <summary>
@@ -116,11 +124,22 @@ public class EnemyInvocadorAttackState : BaseState
     public void Invoke() {
         Debug.Log("Invoking!");
         if (_enemyToInvoke != null) {
-            Instantiate(_enemyToInvoke, new Vector2(_playerTransform.position.x + 1, _playerTransform.position.y), _playerTransform.rotation);
+            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
+
+            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+            {            
+                _spawnpointIndex = 1;
+            }
+            else
+            {
+                _spawnpointIndex++;
+            }
         }
     }
 
     public void Shoot() {
+        Debug.Log("Shooting!");
     }
 
     #endregion
@@ -137,11 +156,15 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _randomNr = Random.Range(0, 4);
-        if (_randomNr > 3) {
-            Invoke();
+        if (Time.time > _lastAttackTime + _invokeCooldown) {
+            _randomNr = UnityEngine.Random.Range(1, 11);
+            if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
+            {
+                Invoke();
+            }
+            else Shoot();
+            _lastAttackTime = Time.time;
         }
-        else Shoot();
     }
 
     /// <summary>

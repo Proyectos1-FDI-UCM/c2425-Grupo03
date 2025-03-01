@@ -40,8 +40,18 @@ public class EnemyInvocadorStateMachine : StateMachine
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Bool para determinar si el enemigo ha sido dañado o no.
+    /// </summary>
     private bool _isFirstHit = true;
-    private Transform[] _spawnPoints;
+    /// <summary>
+    /// El transform de la carpeta de Spawnpoints. 
+    /// </summary>
+    private Transform _allSpawnpoints;
+    /// <summary>
+    /// El numero de spawnpoints.
+    /// </summary>
+    static private int _spawnpointCount = 3;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -69,6 +79,11 @@ public class EnemyInvocadorStateMachine : StateMachine
     /// El Transform del jugador. 
     /// </summary>
     public Transform PlayerTransform { get; set; }
+
+    /// <summary>
+    /// El array de los transforms de spawnpoints.
+    /// </summary>
+    public Transform[] Spawnpoints { get; private set; }
 
     /// <summary>
     /// Variable para saber cuando el jugador entra en la distancia de detección.
@@ -100,6 +115,8 @@ public class EnemyInvocadorStateMachine : StateMachine
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _allSpawnpoints = transform.parent.GetChild(1);
+        Spawnpoints = _allSpawnpoints.GetComponentsInChildren<Transform>();
     }
 
     protected override void OnStart()
