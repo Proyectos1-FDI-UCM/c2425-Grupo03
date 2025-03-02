@@ -934,8 +934,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _states:
-  - {fileID: 810891268}
   - {fileID: 810891266}
+  - {fileID: 810891268}
   - {fileID: 810891267}
   - {fileID: 810891272}
 --- !u!1 &709637295
@@ -1312,7 +1312,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
+  m_Offset: {x: 0.19556928, y: 1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1323,7 +1323,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15, y: 4}
+  m_Size: {x: 7.4705663, y: 4}
   m_EdgeRadius: 0
 --- !u!4 &810891260
 Transform:
@@ -1382,10 +1382,12 @@ MonoBehaviour:
   _isRootState: 1
   _attackSpeed: 0
   _damage: 0
-  _invokeCooldown: 5
-  _invokeProbabilty: 0.2
+  _invokeCooldown: 1
+  _invokeProbabilty: 1
   _enemyToInvoke: {fileID: 4051256077954446262, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
   _magicBullet: {fileID: 8274049569712046361, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
+  _waitTimeShoot: 1
+  _invokingTime: 1
 --- !u!114 &810891272
 MonoBehaviour:
   m_ObjectHideFlags: 0

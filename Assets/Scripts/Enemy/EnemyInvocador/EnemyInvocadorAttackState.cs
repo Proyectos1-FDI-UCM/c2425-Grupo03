@@ -41,6 +41,11 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     [SerializeField] GameObject _magicBullet;
 
+
+   [SerializeField] float _waitTimeShoot;
+
+    [SerializeField] float _invokingTime;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -83,6 +88,24 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     private float _randomNr;
 
+    /// <summary>
+    /// Tiempo de espera para disparar más tiempo del momento del juego
+    /// </summary>
+    private float _shootTime;
+
+    /// <summary>
+    /// Tiempo de espera para invocar más tiempo del momento del juego
+    /// </summary>
+    private float _invokeTime;
+
+    /// <summary>
+    /// Booleana para ver si ha terminado de atacar
+    /// </summary>
+    /// 
+    private bool _attackFinished;
+
+    
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -95,11 +118,12 @@ public class EnemyInvocadorAttackState : BaseState
     #region Métodos de MonoBehaviour
     private void Start()
     {
-        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
-
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Si el jugador sale del trigger pone el range a false.
+        _ctx.IsPlayerInAttackRange = false;
     }
     #endregion
 
@@ -117,6 +141,15 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+
+        _animator.SetBool("IsAttack", true);
+        _attackFinished = false;
+
     }
     
     /// <summary>
@@ -124,6 +157,8 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        
+       _animator.SetBool("IsAttack", false);
     }
 
     [ContextMenu("Invoke")]
@@ -145,6 +180,7 @@ public class EnemyInvocadorAttackState : BaseState
     }
 
     public void Shoot() {
+        
         Instantiate(_magicBullet, transform.position, transform.rotation);
         Debug.Log("Shooting!");
     }
@@ -163,15 +199,60 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        if (Time.time > _lastAttackTime + _invokeCooldown) {
-            _randomNr = UnityEngine.Random.Range(1, 11);
-            if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
-            {
-                Invoke();
-            }
-            else Shoot();
-            _lastAttackTime = Time.time;
-        }
+         if (Time.time > _lastAttackTime + _invokeCooldown )
+          {
+              _randomNr = UnityEngine.Random.Range(1, 11);
+
+              if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
+              {
+                  Debug.Log("Invoking!");
+                  Invoke();
+                  _attackFinished = true;
+              }
+              else
+              {
+                  Shoot();
+                  _attackFinished = true;
+              }
+              _lastAttackTime = Time.time;
+          }
+
+        /* if (Time.time > _lastAttackTime + _invokeCooldown && !_attackFinished) {
+             _randomNr = UnityEngine.Random.Range(1, 11);
+            _invokeTime = Time.time + _invokingTime;
+            _shootTime = Time.time + _waitTimeShoot;
+
+
+             if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
+             {
+
+                 Debug.Log("Invoking!");
+                 _animator.SetBool("IsAttack", false);
+                 _animator.SetBool("IsInvoking", true);
+
+                 if (Time.time > _invokeTime )
+                 {
+                     Invoke();
+                     _lastAttackTime = Time.time;
+                     _animator.SetBool("IsInvoking", false);
+                     _animator.SetBool("IsAttack", true);
+                 }
+
+
+             }
+             else
+             {
+
+                 if (Time.time > _shootTime)
+                 {
+                     Shoot();
+                     _attackFinished = true;
+                     _lastAttackTime = Time.time;
+                 }
+
+             }
+             
+          }*/
     }
 
     /// <summary>
@@ -180,7 +261,24 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
+        /*if ( _attackfinished)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+            _animator.SetBool("IsAttack", false);
+        }
         
+        if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude > _attackRadius)
+        {
+            //Si el jugador está fuera del rango de ataque, persigue al jugador
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+        }*/
+        
+         if (!_ctx.IsPlayerInAttackRange && _attackFinished)
+        {
+            //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+            _animator.SetBool("IsAttack", false);
+        }
     }
 
     #endregion   

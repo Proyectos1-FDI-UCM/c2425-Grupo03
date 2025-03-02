@@ -100,6 +100,11 @@ public class EnemyInvocadorStateMachine : StateMachine
     /// </summary>
     public float Health { get; set; }
 
+    /// <summary>
+    /// El animator del enemigo.
+    /// </summary>
+    public Animator Animator { get; private set; }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----

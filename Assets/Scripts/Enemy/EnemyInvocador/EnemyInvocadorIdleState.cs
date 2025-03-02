@@ -52,7 +52,18 @@ public class EnemyInvocadorIdleState : BaseState
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
+
+
         _rb = _ctx.Rigidbody;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Si el jugador está en el trigger lo indica al contexto.
+        _ctx.IsPlayerInAttackRange = true;
+
+        //Añade la posición del jugador al ctx.
+        _ctx.PlayerTransform = collision.transform;
     }
 
     #endregion
@@ -71,7 +82,8 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator.SetBool("IsIdle", true);
+       
+        _animator?.SetBool("IsIdle", true);
     }
     
     /// <summary>
@@ -111,15 +123,7 @@ public class EnemyInvocadorIdleState : BaseState
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-       
-        _ctx.IsPlayerInAttackRange = true;
-
-        //Añade la posición del jugador al ctx.
-        _ctx.PlayerTransform = collision.transform;
-    }
-
+   
     #endregion   
 
 } // class EnemyInvocadorIdleState 
