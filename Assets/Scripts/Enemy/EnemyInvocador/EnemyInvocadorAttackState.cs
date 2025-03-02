@@ -35,8 +35,14 @@ public class EnemyInvocadorAttackState : BaseState
     [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
     [SerializeField] EnemyStateMachine _enemyToInvoke;
 
+
+    /// <summary>
+    /// Proyectil del enemigo.
+    /// </summary>
+    [SerializeField] GameObject _magicBullet;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -139,6 +145,7 @@ public class EnemyInvocadorAttackState : BaseState
     }
 
     public void Shoot() {
+        Instantiate(_magicBullet, transform.position, transform.rotation);
         Debug.Log("Shooting!");
     }
 

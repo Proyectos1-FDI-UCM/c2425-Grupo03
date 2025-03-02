@@ -16,12 +16,15 @@ using static UnityEngine.GraphicsBuffer;
 /// </summary>
 public class Bala : MonoBehaviour
 {
+
+
+
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    [SerializeField] GameObject _objective;
+    
     [SerializeField][Min (0)] float _velocity;
 
     #endregion
@@ -34,7 +37,11 @@ public class Bala : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Vector3 direccion;
+    Vector3 direction;
+
+    private PlayerStateMachine _player;
+    private EnemyInvocadorStateMachine _ctx;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -54,11 +61,12 @@ public class Bala : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-     void Awake()
+    void Awake()
     {
-         direccion =  (_objective.transform.position - transform.position).normalized ;
+        _player = FindObjectOfType<PlayerStateMachine>();
+        direction =  (_player.transform.position - transform.position).normalized; //_ctx.PlayerTransform.position.x
 
-        float angle = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
         
     }
@@ -72,7 +80,7 @@ public class Bala : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.position +=  direccion * Time.deltaTime * _velocity;
+        transform.position +=  direction * Time.deltaTime * _velocity;
     }
     #endregion
 
