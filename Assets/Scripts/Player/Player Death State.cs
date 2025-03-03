@@ -17,7 +17,10 @@ public class PlayerDeathState : BaseState
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-
+    /// <summary>
+    /// El tiempo de espera
+    /// </summary>
+    [SerializeField, Min(0)] private float _waitTime;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -30,10 +33,6 @@ public class PlayerDeathState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Fin de tiempo de espera
-    /// </summary>
-
-    /// <summary>
     /// Referencia del tipo PlayerStatemachine del contexto.
     /// </summary>
     private PlayerStateMachine _ctx;
@@ -42,6 +41,10 @@ public class PlayerDeathState : BaseState
     /// El animador del enemigo
     /// </summary>
     private Animator _animator;
+    /// <summary>
+    /// Fin de tiempo de espera
+    /// </summary>
+    private float _deadTime;
 
     #endregion
 
@@ -76,6 +79,9 @@ public class PlayerDeathState : BaseState
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
 
+        //Calcular el tiempo de la muerte
+        _deadTime = Time.time + _waitTime;
+
         _animator.SetBool("IsDead", true);
     }
 
@@ -98,12 +104,23 @@ public class PlayerDeathState : BaseState
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
-    protected override void UpdateState()
+    protected override void CheckSwitchState()
     {
-
+        //Tras el tiempo de espera el jugador reaparece.
+        if (Time.time > _deadTime)
+        {
+            _ctx.transform.position = Vector3.zero;
+            HealthManager hm = _ctx.GetComponent<HealthManager>();
+            hm.SetHealth(hm.MaxHealth);
+            _ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+        }
     }
 
-    #endregion   
+    protected override void UpdateState()
+    {
+    }
 
-} // class EnemyDeathState 
+    #endregion
+
+} // class PlayerDeathState
 // namespace

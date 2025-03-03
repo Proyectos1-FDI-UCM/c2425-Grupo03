@@ -58,6 +58,7 @@ public class HealthManager : MonoBehaviour
     /// Propiedad para la vida
     /// </summary>
     public int Health { get { return _health; } private set { _health = value; } }
+    public int MaxHealth { get { return _maxHealth; } private set { _maxHealth = value; } }
 
     /// <summary>
     /// Evento para cuando la vida de la entidad es 0
