@@ -49,13 +49,6 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     private int _health;
 
-
-
-
-
-
-
-
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
@@ -134,17 +127,20 @@ public class HealthManager : MonoBehaviour
     /// <param name="removedHealth"></param>
     public void RemoveHealth(int removedHealth)
     {
-        if(_health - removedHealth <= 0)
+        if (_health > 0)
         {
-            _health = 0;
-            _onDeath.Invoke();
-        }
-        else
-        {
-            _health = _health - removedHealth;
-        }
+            if (_health - removedHealth <= 0)
+            {
+                _health = 0;
+                _onDeath.Invoke();
+            }
+            else
+            {
+                _health = _health - removedHealth;
+            }
 
-        _onDamaged.Invoke(removedHealth);
+            _onDamaged.Invoke(removedHealth);
+        }
     }
 
     /// <summary>
