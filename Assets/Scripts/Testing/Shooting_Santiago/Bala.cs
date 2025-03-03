@@ -39,6 +39,13 @@ public class Bala : MonoBehaviour
     // Ejemplo: _maxHealthPoints
     Vector3 direction;
 
+    private Vector3 _originalPosition;
+
+    private Vector3 _distance;
+
+    [SerializeField] float _maxDistance;
+    [SerializeField] int _damage;
+
     private PlayerStateMachine _player;
     private EnemyInvocadorStateMachine _ctx;
 
@@ -65,13 +72,19 @@ public class Bala : MonoBehaviour
     {
         _player = FindObjectOfType<PlayerStateMachine>();
         direction =  (_player.transform.position - transform.position).normalized; //_ctx.PlayerTransform.position.x
+        _originalPosition = transform.position;
+
+        
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
         
     }
-    void Start()
+    private void OnTriggerEnter2D(UnityEngine.Collider2D other)
     {
+
+            Destroy(gameObject);
+            other.GetComponent<HealthManager>().RemoveHealth(_damage);
         
     }
 
@@ -81,6 +94,11 @@ public class Bala : MonoBehaviour
     void Update()
     {
         transform.position +=  direction * Time.deltaTime * _velocity;
+        _distance = _originalPosition - transform.position;
+        if ( _distance.magnitude >= _maxDistance)
+        {
+            Destroy(gameObject);
+        }
     }
     #endregion
 

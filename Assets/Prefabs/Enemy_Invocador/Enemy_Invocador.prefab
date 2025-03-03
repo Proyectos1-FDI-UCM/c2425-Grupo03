@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 411743475415990822}
   - component: {fileID: 4104814656814512056}
   - component: {fileID: 1427640961608142798}
+  - component: {fileID: 8719321965046077272}
   m_Layer: 10
   m_Name: Invocador
   m_TagString: Untagged
@@ -423,6 +424,19 @@ MonoBehaviour:
   - {fileID: 4894896949926512459}
   - {fileID: 9211518800480732035}
   - {fileID: 1182801888833405018}
+--- !u!114 &8719321965046077272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517685308528235565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
 --- !u!1 &4599733437207699549
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +584,8 @@ MonoBehaviour:
   _name: 
   _teleportPoint: {fileID: 3977072330819180501}
   immunityTime: 0
+  _waitTimeTp: 0
+  _waitTimePostTp: 0
 --- !u!114 &6408419066844692140
 MonoBehaviour:
   m_ObjectHideFlags: 0
