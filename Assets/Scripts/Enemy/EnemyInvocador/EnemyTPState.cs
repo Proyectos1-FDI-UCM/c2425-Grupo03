@@ -25,6 +25,15 @@ public class EnemyTPState : BaseState
     [SerializeField] Transform _teleportPoint;
     [SerializeField] int immunityTime;
 
+    /// <summary>
+    /// Valor de tiempo para hacer teletransporte
+    /// </summary>
+    [SerializeField][Min(0)] float _waitTimeTp;
+    /// <summary>
+    /// Valor de tiempo para terminar el estado de teletransporte después de hacer Tp
+    /// </summary>
+    [SerializeField][Min(0)] float _waitTimePostTp;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -34,6 +43,16 @@ public class EnemyTPState : BaseState
     private EnemyInvocadorStateMachine _ctx;
     private Animator _animator;
     private int currentHealth;
+
+    /// <summary>
+    /// Tiempo de espera para teletransportarse más tiempo del momento del juego
+    /// </summary>
+    private float _tpTime;
+
+    /// <summary>
+    /// Comprobar si ya se ha realizado el teletransporte
+    /// </summary>
+    private bool _tpDone;
 
     #endregion
 
@@ -64,13 +83,19 @@ public class EnemyTPState : BaseState
     {
         _ctx = GetCTX<EnemyInvocadorStateMachine>();
         _animator = _ctx.GetComponent<Animator>();
-        // deactivate collider
-        
-        if (_teleportPoint != null)
-        {
-            _ctx.transform.position = _teleportPoint.position;
-            Debug.Log("Teleporting!");
-        }
+        // deactivate collider!!
+
+
+        _tpTime = Time.time + _waitTimeTp;
+        _tpDone = false;
+        Debug.Log("Teleporting!");
+
+        _animator.SetBool("IsDisappearing", true);
+        /*  if (_teleportPoint != null)
+          {
+              _ctx.transform.position = _teleportPoint.position;
+              Debug.Log("Teleporting!");
+          }*/
     }
     
     /// <summary>
@@ -80,7 +105,7 @@ public class EnemyTPState : BaseState
     {
         // reactivate collider
 
-        _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerInvokeState>());
+       // _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerInvokeState>());
     }
     #endregion
     
@@ -96,7 +121,23 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        //hacer Tp
+        if (Time.time > _tpTime && !_tpDone)
+        {
+            _ctx.transform.position = _teleportPoint.position;
+            _animator.SetBool("IsDisappearing", false);
+            _animator.SetBool("IsAppearing", true);
+            _tpDone = true;
+        }
+        //Después de hacer Tp
+        if (Time.time > _tpTime + _waitTimePostTp && _tpDone)
+        {
+            
+            _animator.SetBool("IsAppearing", false);
+            //ActivarCollider!!
+
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+        }
     }
 
     /// <summary>
@@ -106,7 +147,7 @@ public class EnemyTPState : BaseState
     protected override void CheckSwitchState()
     {
         //_ctx.ChangeState(< EnemyInvocadorIdleState >);
-        Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+        //Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
     }
 
     #endregion   

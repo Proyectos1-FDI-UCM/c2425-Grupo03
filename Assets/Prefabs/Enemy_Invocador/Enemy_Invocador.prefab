@@ -587,7 +587,7 @@ MonoBehaviour:
   _waitTimeShoot: 1
   _invokingTime: 1
   _abilityCooldown: 1
-  _invokeProbabilty: 0.3
+  _invokeProbabilty: 0.5
 --- !u!114 &4894896949926512459
 MonoBehaviour:
   m_ObjectHideFlags: 0

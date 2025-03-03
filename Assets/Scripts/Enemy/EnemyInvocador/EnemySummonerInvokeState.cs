@@ -117,7 +117,7 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("IsInvoking", false);
     }
     #endregion
     

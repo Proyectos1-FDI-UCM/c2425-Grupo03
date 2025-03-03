@@ -118,7 +118,7 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("IsAttack", false);
     }
     #endregion
     
