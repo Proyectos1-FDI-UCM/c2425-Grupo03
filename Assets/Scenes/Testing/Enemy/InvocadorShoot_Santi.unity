@@ -2074,7 +2074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6408419066844692140, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: _invokeProbabilty
-      value: 0
+      value: 0.315
       objectReference: {fileID: 0}
     - target: {fileID: 7191960438516511554, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_Name

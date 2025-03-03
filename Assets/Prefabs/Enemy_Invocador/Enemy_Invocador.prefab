@@ -586,8 +586,8 @@ MonoBehaviour:
   _name: 
   _teleportPoint: {fileID: 3977072330819180501}
   immunityTime: 0
-  _waitTimeTp: 0
-  _waitTimePostTp: 0
+  _waitTimeTp: 1
+  _waitTimePostTp: 1
 --- !u!114 &6408419066844692140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
   _waitTimeShoot: 1
   _invokingTime: 1
   _abilityCooldown: 1
-  _invokeProbabilty: 0.5
+  _invokeProbabilty: 0.37
 --- !u!114 &4894896949926512459
 MonoBehaviour:
   m_ObjectHideFlags: 0
