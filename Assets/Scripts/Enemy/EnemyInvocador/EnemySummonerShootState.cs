@@ -37,6 +37,11 @@ public class EnemySummonerShootState : BaseState
     /// Valor de tiempo para hacer disparo
     /// </summary>
     [SerializeField][Min(0)] float _waitTimeShoot;
+
+    /// <summary>
+    /// Punto de invocación de Bala
+    /// </summary>
+    [SerializeField] Transform _bulletPosition;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -66,8 +71,16 @@ public class EnemySummonerShootState : BaseState
     /// <summary>
     /// Booleana para ver si ha terminado de atacar
     /// </summary>
-    /// 
     private bool _attackFinished;
+
+
+    private Vector3 bullet;
+    
+    private Vector3 bulletP;
+
+    Vector3 bulletInst;
+
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -78,7 +91,12 @@ public class EnemySummonerShootState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    private void Awake()
+    {
+       
+        
 
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -104,13 +122,27 @@ public class EnemySummonerShootState : BaseState
         // Debug.Log("Shooting!");
         _animator.SetBool("IsAttack", true);
 
+
+        bulletP = transform.position + (_bulletPosition.transform.position - transform.position);
+        bullet.y = bulletP.y;
+        bullet.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
         _shootTime = Time.time + _waitTimeShoot;
         _attackFinished = false;
     }
 
     public void Shoot()
+
     {
-        Instantiate(_magicBullet,transform.position, transform.rotation);
+        if (_ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left)
+        {
+           bulletInst = bullet;
+        }
+        else
+        {
+            bulletInst = bulletP;
+        }
+
+        Instantiate(_magicBullet, bulletInst, transform.rotation);
     }
     
     /// <summary>
@@ -132,8 +164,19 @@ public class EnemySummonerShootState : BaseState
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
+   
     protected override void UpdateState()
     {
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            EnemyInvocadorStateMachine.EnemyLookingDirection.Left : EnemyInvocadorStateMachine.EnemyLookingDirection.Right;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left;
+
+
+
+
+
         if (Time.time > _shootTime && !_attackFinished)
         {
 

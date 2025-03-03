@@ -93,6 +93,13 @@ public class EnemySummonerInvokeState : BaseState
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
 
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            EnemyInvocadorStateMachine.EnemyLookingDirection.Left : EnemyInvocadorStateMachine.EnemyLookingDirection.Right;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left;
+
+
 
         _invokeTime = Time.time + _waitTimeInvoke;
         _animator.SetBool("IsInvoking", true);
@@ -133,6 +140,7 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+
         if (Time.time > _invokeTime )
         {
             _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];

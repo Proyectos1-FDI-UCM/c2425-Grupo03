@@ -162,7 +162,14 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-         if (Time.time > _cooldownTime )
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            EnemyInvocadorStateMachine.EnemyLookingDirection.Left : EnemyInvocadorStateMachine.EnemyLookingDirection.Right;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left;
+
+
+        if (Time.time > _cooldownTime )
           {
               _randomNr = UnityEngine.Random.Range(1, 11);
 
