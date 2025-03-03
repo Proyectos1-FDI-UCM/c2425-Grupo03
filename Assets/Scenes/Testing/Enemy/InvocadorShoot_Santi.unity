@@ -938,6 +938,8 @@ MonoBehaviour:
   - {fileID: 810891268}
   - {fileID: 810891267}
   - {fileID: 810891272}
+  - {fileID: 810891273}
+  - {fileID: 810891274}
 --- !u!1 &709637295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1271,8 @@ GameObject:
   m_Component:
   - component: {fileID: 810891260}
   - component: {fileID: 810891259}
+  - component: {fileID: 810891274}
+  - component: {fileID: 810891273}
   - component: {fileID: 810891266}
   - component: {fileID: 810891267}
   - component: {fileID: 810891268}
@@ -1353,6 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
 --- !u!114 &810891267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,7 +1371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _teleportPoint: {fileID: 0}
+  immunityTime: 0
 --- !u!114 &810891268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1380,14 +1387,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _attackSpeed: 0
-  _damage: 0
-  _invokeCooldown: 1
-  _invokeProbabilty: 1
-  _enemyToInvoke: {fileID: 4051256077954446262, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
-  _magicBullet: {fileID: 8274049569712046361, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
+  _name: 
   _waitTimeShoot: 1
   _invokingTime: 1
+  _abilityCooldown: 1
+  _invokeProbabilty: 0
 --- !u!114 &810891272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,7 +1405,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _waitTime: 1.1
+--- !u!114 &810891273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810891257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8e9b88387b1364c950785f24bc02dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _attackSpeed: 0
+  _damage: 0
+  _magicBullet: {fileID: 8274049569712046361, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
+  _waitTimeShoot: 1
+--- !u!114 &810891274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810891257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ee380eeb27fa8419c3f71cfad7bf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _enemyToInvoke: {fileID: 0}
 --- !u!1001 &1068941471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1519,6 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 0
+  _name: 
 --- !u!114 &1080789732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1532,6 +1571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 0
+  _name: 
   _speed: 10
 --- !u!114 &1080789733
 MonoBehaviour:
@@ -1546,6 +1586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _attackRadius: 1.5
   _attackSpeed: 0.1
   _damage: 5
@@ -1565,6 +1606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _maxHeight: 4
 --- !u!114 &1080789735
 MonoBehaviour:
@@ -1579,6 +1621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _maxCoyoteTime: 0.2
   _hitDistance: 1.2
   _debugRayCast: 0
@@ -1596,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _jumpBufferTime: 0.3
 --- !u!114 &1080789737
 MonoBehaviour:
@@ -1610,6 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _distance: 5
   _duration: 0.2
   _rechargeTime: 0.5
@@ -1627,6 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _chargedAttackRadius: 2
   _chargedDamage: 2
   _chargingTime: 2
@@ -2008,6 +2054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _waitTime: 1.1
 --- !u!61 &1459234010
 BoxCollider2D:
@@ -2082,6 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _attackRadius: 1
   _attackSpeed: 1
   _damage: 1
@@ -2098,6 +2146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _enemyWalkingSpeed: 2
 --- !u!114 &1459234014
 MonoBehaviour:
@@ -2112,6 +2161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
 --- !u!1 &1491310756
 GameObject:
   m_ObjectHideFlags: 0

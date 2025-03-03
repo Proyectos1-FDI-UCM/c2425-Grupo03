@@ -79,6 +79,11 @@ public class EnemyInvocadorAttackState : BaseState
     private float _invokeTime;
 
     /// <summary>
+    /// Tiempo de espera para invocar más tiempo del momento del juego
+    /// </summary>
+    private float _cooldownTime;
+
+    /// <summary>
     /// Booleana para ver si ha terminado de atacar
     /// </summary>
     /// 
@@ -125,8 +130,12 @@ public class EnemyInvocadorAttackState : BaseState
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
 
-        _animator.SetBool("IsAttack", true);
-        _attackFinished = false;
+        _animator.SetBool("IsIdle", true);
+
+        
+        _cooldownTime = Time.time + _abilityCooldown;
+
+
 
     }
     
@@ -134,8 +143,8 @@ public class EnemyInvocadorAttackState : BaseState
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
-    {   
-       _animator.SetBool("IsAttack", false);
+    {
+        _animator.SetBool("IsIdle", false);
     }
 
 
@@ -153,22 +162,25 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-         if (Time.time > _lastAttackTime + _abilityCooldown )
+         if (Time.time > _cooldownTime )
           {
               _randomNr = UnityEngine.Random.Range(1, 11);
 
               if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
               {
                   Debug.Log("Invoking!");
-                  SetSubState(_ctx.GetStateByType<EnemySummonerInvokeState>());
-                  _attackFinished = true;
-              }
+                  
+                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerInvokeState>());
+
+            }
               else
               {
-                  SetSubState(_ctx.GetStateByType<EnemySummonerShootState>());
-                  _attackFinished = true;
+                Debug.Log("SHOOTing!");
+                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>());
+                
+                  
               }
-              _lastAttackTime = Time.time;
+              
           }
 
         /* if (Time.time > _lastAttackTime + _invokeCooldown && !_attackFinished) {
@@ -227,11 +239,11 @@ public class EnemyInvocadorAttackState : BaseState
             Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }*/
         
-         if (!_ctx.IsPlayerInAttackRange && _attackFinished)
+         if (!_ctx.IsPlayerInAttackRange )
         {
             //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
             Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
-            _animator.SetBool("IsAttack", false);
+            _animator.SetBool("IsIdle", false);
         }
     }
 

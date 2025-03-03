@@ -32,8 +32,11 @@ public class EnemySummonerShootState : BaseState
     /// Proyectil del enemigo.
     /// </summary>
     [SerializeField] GameObject _magicBullet;
+
+
+    [SerializeField] float _waitTimeShoot;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -52,6 +55,17 @@ public class EnemySummonerShootState : BaseState
     /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
     private EnemyInvocadorStateMachine _ctx;
+
+    /// <summary>
+    /// Tiempo de espera para disparar más tiempo del momento del juego
+    /// </summary>
+    private float _shootTime;
+
+    /// <summary>
+    /// Booleana para ver si ha terminado de atacar
+    /// </summary>
+    /// 
+    private bool _attackFinished;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -59,10 +73,10 @@ public class EnemySummonerShootState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -73,7 +87,7 @@ public class EnemySummonerShootState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -84,9 +98,17 @@ public class EnemySummonerShootState : BaseState
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-
-         Instantiate(_magicBullet, transform.position, transform.rotation);
+   
         // Debug.Log("Shooting!");
+        _animator.SetBool("IsAttack", true);
+
+        _shootTime = Time.time + _waitTimeShoot;
+        _attackFinished = false;
+    }
+
+    public void Shoot()
+    {
+        Instantiate(_magicBullet,transform.position, transform.rotation);
     }
     
     /// <summary>
@@ -110,8 +132,17 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        if (Time.time > _shootTime && !_attackFinished)
+        {
+
+            Shoot();
+            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+            _animator.SetBool("IsAttack", false);
+            _attackFinished = true;
+
+        }
     }
+
 
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
@@ -119,7 +150,11 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());  
+       /* if (_attackFinished)
+        {
+            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+            _animator.SetBool("IsAttack", false);
+        }*/
     }
 
     #endregion   
