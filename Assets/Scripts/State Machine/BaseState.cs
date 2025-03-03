@@ -26,6 +26,9 @@ public abstract class BaseState : MonoBehaviour
     [SerializeReference] 
     bool _isRootState = false;
 
+    [SerializeReference]
+    string _name;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -44,7 +47,15 @@ public abstract class BaseState : MonoBehaviour
     /// </summary>
     protected StateMachine Ctx { get; private set; }
 
+    /// <summary>
+    /// Getter de _isRootState.
+    /// </summary>
     public bool IsRootState => _isRootState;
+    
+    /// <summary>
+    /// Getter del nombre del estado.
+    /// </summary>
+    public string Name => _name;
 
     /// <summary>
     /// Contiene al estado padre actual de este estado.

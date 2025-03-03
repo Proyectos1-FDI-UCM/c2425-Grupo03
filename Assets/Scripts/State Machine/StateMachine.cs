@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using System;
+using System.Resources;
 using UnityEngine;
 
 
@@ -145,8 +146,32 @@ public class StateMachine : MonoBehaviour
     /// <exception cref="UnityException">Si el indice esta fuera de los limites</exception>
     public BaseState GetStateByIndex(ushort index)
     {
-        if (index >= 0 && index < _states.Length) return _states[index];
-        else throw new UnityException($"State with index {index} does not exist in {this.name}");
+        if (index >= 0 && index < _states.Length)
+        {
+            return _states[index];
+        }
+        else
+        {
+            throw new UnityException($"State with index {index} does not exist in {this.name}");
+        }
+    }
+
+    /// <summary>
+    /// Busca el estado con el nombre <paramref name="name"/>.
+    /// </summary>
+    /// <param name="name">El nombre del estado a buscar.</param>
+    /// <returns>Devuelve el estado de la máquina de estados con el nombre <paramref name="name"/>.</returns>
+    public BaseState GetStateByName(string name)
+    {
+        //Busqueda del estado con el tipo deseado (Jaime me suspende por este return)
+        foreach (BaseState state in _states)
+        {
+            if (state.Name.Equals(name))
+            {
+                return state;
+            }
+        }
+        return null;
     }
 
     /// <typeparam name="T">Tipo del estado deseado.</typeparam>
@@ -154,7 +179,13 @@ public class StateMachine : MonoBehaviour
     public T GetStateByType<T>() where T : BaseState
     {
         //Busqueda del estado con el tipo deseado (Jaime me suspende por este return)
-        foreach (BaseState state in _states) if (state.GetType() == typeof(T)) return (T)state;
+        foreach (BaseState state in _states)
+        {
+            if (state.GetType() == typeof(T))
+            {
+                return (T)state;
+            }
+        }
         return null;
     }
 
