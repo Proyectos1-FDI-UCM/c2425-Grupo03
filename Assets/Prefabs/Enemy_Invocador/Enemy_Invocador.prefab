@@ -521,6 +521,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _enemyToInvoke: {fileID: 4051256077954446262, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
+  _waitTimeInvoke: 1
 --- !u!114 &9211518800480732035
 MonoBehaviour:
   m_ObjectHideFlags: 0

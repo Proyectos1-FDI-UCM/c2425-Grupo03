@@ -33,8 +33,10 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     [SerializeField] GameObject _magicBullet;
 
-
-    [SerializeField] float _waitTimeShoot;
+    /// <summary>
+    /// Valor de tiempo para hacer disparo
+    /// </summary>
+    [SerializeField][Min(0)] float _waitTimeShoot;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----

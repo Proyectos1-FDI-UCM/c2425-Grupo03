@@ -22,8 +22,14 @@ public class EnemySummonerInvokeState : BaseState
     [Header("Invoke Properties")]
     [SerializeField] EnemyStateMachine _enemyToInvoke;
 
+    /// <summary>
+    /// Valor de tiempo para hacer invocacion
+    /// </summary>
+
+    [SerializeField][Min (0)] float _waitTimeInvoke;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -46,6 +52,14 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     private Transform _spawnpointTransform;
 
+    /// <summary>
+    /// Tiempo de espera para invocar más tiempo del momento del juego
+    /// </summary>
+    private float _invokeTime;
+
+
+
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -53,10 +67,10 @@ public class EnemySummonerInvokeState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -67,7 +81,7 @@ public class EnemySummonerInvokeState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -78,20 +92,24 @@ public class EnemySummonerInvokeState : BaseState
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-        // Debug.Log("Invoking!");
-        if (_enemyToInvoke != null) {
-            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
-            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
-            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
-            {            
-                _spawnpointIndex = 1;
-            }
-            else
-            {
-                _spawnpointIndex++;
-            }
-        }
+
+        _invokeTime = Time.time + _waitTimeInvoke;
+        _animator.SetBool("IsInvoking", true);
+        // Debug.Log("Invoking!");
+        /* if (_enemyToInvoke != null) {
+             _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
+
+             Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+             if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+             {            
+                 _spawnpointIndex = 1;
+             }
+             else
+             {
+                 _spawnpointIndex++;
+             }
+         }*/
     }
     
     /// <summary>
@@ -115,16 +133,32 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
-    }
+        if (Time.time > _invokeTime )
+        {
+            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
+            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+            {
+                _spawnpointIndex = 1;
+            }
+            else
+            {
+                _spawnpointIndex++;
+            }
+            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+            _animator.SetBool("IsInvoking", false);
+        }
+
+
+    }
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
     protected override void CheckSwitchState()
     {
-        _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+        //_ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
     }
 
     #endregion   
