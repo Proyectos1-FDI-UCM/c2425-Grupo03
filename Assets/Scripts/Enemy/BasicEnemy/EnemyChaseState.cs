@@ -152,12 +152,12 @@ public class EnemyChaseState : BaseState
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             _animator.SetBool("IsChasing", false);
-            ChangeState(Ctx.GetStateByType<EnemyIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
         else if((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance)
         {
             //Si el jugador esta en el rango de ataque, pasa a atacar
-            ChangeState(Ctx.GetStateByType<EnemyAttackState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyAttackState>());
         }
     }
 

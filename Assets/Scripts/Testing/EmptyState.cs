@@ -86,7 +86,10 @@ public class EmptyState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if(GetCTX<PlayerStateMachine>().PlayerInput.Dash.IsPressed()) ChangeState(Ctx.GetStateByType<PlayerDashState>());
+        if (GetCTX<PlayerStateMachine>().PlayerInput.Dash.IsPressed())
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerDashState>());
+        }
     }
 
     #endregion   

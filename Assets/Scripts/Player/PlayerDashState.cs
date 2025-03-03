@@ -179,7 +179,7 @@ public class PlayerDashState : BaseState
     {
         if (_finishDashingTime <= 0 || (_finishDashingPositionX != 0 && Mathf.Abs(_rb.transform.position.x - _finishDashingPositionX) < 1))
         {
-            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
     }
 

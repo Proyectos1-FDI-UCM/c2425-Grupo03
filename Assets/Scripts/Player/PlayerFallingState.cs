@@ -151,16 +151,19 @@ public class PlayerFallingState : BaseState
     {
         if (_hitLeft.collider != null || _hitRight.collider != null) //detecta si esta colisionando con el suelo para pasar al estado Grounded
         {
-            ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
+            Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
         else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.IsPressed()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
         {
-            ChangeState(_ctx.GetStateByType<PlayerJumpState>());
+            Ctx.ChangeState(_ctx.GetStateByType<PlayerJumpState>());
         }
         else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador ha presionado al dash
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
-            if (Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
+            if (Time.time > dashState.NextAvailableDashTime)
+            {
+                Ctx.ChangeState(dashState);
+            }
         }
     }
 

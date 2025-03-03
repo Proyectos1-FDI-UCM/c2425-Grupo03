@@ -142,25 +142,34 @@ public class PlayerGroundedState : BaseState
     {
         if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, para a jumpState
         {
-            ChangeState(Ctx.GetStateByType<PlayerJumpState>());
-  
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
+
         }
-        else if (_jumpBuffer < 0) _jumpBuffer = 0;
+        else if (_jumpBuffer < 0)
+        {
+            _jumpBuffer = 0;
+        }
         else if (_rigidbody.velocity.y < 0) //si esta cayendo el jugador, pasa a Falling
         {
             PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();
-            ChangeState(fallingState);
+            Ctx.ChangeState(fallingState);
             fallingState.ResetCoyoteTime();
         }
         else if (_ctx.PlayerInput.Dash.IsPressed()) //detecta si presionas al Dash
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
-            if(Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
+            if (Time.time > dashState.NextAvailableDashTime)
+            {
+                Ctx.ChangeState(dashState);
+            }
         }
         else if (_ctx.PlayerInput.Attack.triggered)
         {
             PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
-            if (Time.time > attackState.NextAttackTime) ChangeState(attackState);
+            if (Time.time > attackState.NextAttackTime)
+            {
+                Ctx.ChangeState(attackState);
+            }
         }
     }
     #endregion   

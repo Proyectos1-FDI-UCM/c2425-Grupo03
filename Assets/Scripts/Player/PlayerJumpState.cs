@@ -114,12 +114,15 @@ public class PlayerJumpState : BaseState
     {
         if (_rigidbody.velocity.y <= 0) //detecta si esta cayendo el jugador, pasa su estado a falling
         {
-            ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+            Ctx.ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
         else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador presiona al dash.
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
-            if (Time.time > dashState.NextAvailableDashTime) ChangeState(dashState);
+            if (Time.time > dashState.NextAvailableDashTime)
+            {
+                Ctx.ChangeState(dashState);
+            }
         }
     }
 

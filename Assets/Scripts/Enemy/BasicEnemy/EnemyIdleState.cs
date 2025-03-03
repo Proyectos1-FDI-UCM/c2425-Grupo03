@@ -112,7 +112,7 @@ public class EnemyIdleState : BaseState
         // Si el jugador está en distancia de rango cambia al estado de rango
         if (_ctx.IsPlayerInChaseRange)
         {
-            ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
     }
 
