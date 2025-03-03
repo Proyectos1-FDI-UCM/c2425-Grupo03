@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// He Deng
+// El estado de muerte del jugador en la máquina de estados
+// Alejandro Menéndez Fierro
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -32,15 +32,14 @@ public class PlayerDeathState : BaseState
     /// <summary>
     /// Fin de tiempo de espera
     /// </summary>
-    private float _deadTime;
 
     /// <summary>
-    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// Referencia del tipo PlayerStatemachine del contexto.
     /// </summary>
     private PlayerStateMachine _ctx;
 
     /// <summary>
-    /// El animator del enemigo
+    /// El animador del enemigo
     /// </summary>
     private Animator _animator;
 
@@ -71,8 +70,6 @@ public class PlayerDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
-
-
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<PlayerStateMachine>();
 
@@ -102,14 +99,6 @@ public class PlayerDeathState : BaseState
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
     protected override void UpdateState()
-    {
-    }
-
-    /// <summary>
-    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
-    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
-    /// </summary>
-    protected override void CheckSwitchState()
     {
 
     }
