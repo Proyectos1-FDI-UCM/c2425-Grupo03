@@ -89,7 +89,18 @@ public class PlayerStateMachine : StateMachine
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
+    /// <summary>
+    /// Forzar el cambio de estado a muerte
+    /// </summary>
+    public void DeathState()
+    {
+        ChangeState(gameObject.GetComponentInChildren<PlayerDeathState>());
+    }
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
+    // Documentar cada método que aparece aquí
 
     /// <summary>
     /// Establece los valores iniciales en Awake.
@@ -106,16 +117,9 @@ public class PlayerStateMachine : StateMachine
 
         Animator = GetComponent<Animator>();
     }
-    #endregion
-
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-
     protected override void OnStart()
     {
-        //Subscripción al muerte del HealthManager
-        //GetComponent<HealthManager>()._onDeath.AddListener();
+        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
     }
 
     #endregion

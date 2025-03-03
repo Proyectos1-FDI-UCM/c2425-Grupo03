@@ -1,7 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo;
-// Script del movimiento de cámara para que siga al jugador
-// Responsable: SANTIAGO SALTO
+// Breve descripción del contenido del archivo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -11,31 +10,16 @@ using UnityEngine;
 
 
 /// <summary>
-/// Componente responsable de la gestión de la cámara del juego
+/// El estado de muerte del enemigo, espera un tiempo hasta que se "muera"
 /// </summary>
-public class CameraManager : MonoBehaviour
+public class PlayerDeathState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-  
-    /// <summary>
-    /// Posicion Jugador u objeto.
-    /// </summary>
-    [SerializeField] Transform _playerPosition;
-    /// <summary>
-    /// velocidad de la Cámara
-    /// </summary>
-    [SerializeField][Min(0)] float _velocityCamera;
-    /// <summary>
-    /// Margen de la Cámara respecto al objetivo
-    /// </summary>
-    [SerializeField] Vector3 _displacementCamera; //dista de la camara (posicion del jugador)
-    
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -44,38 +28,33 @@ public class CameraManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    
+
+    /// <summary>
+    /// Fin de tiempo de espera
+    /// </summary>
+    private float _deadTime;
+
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private PlayerStateMachine _ctx;
+
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
     #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
-    #endregion 
-    
+    #endregion
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen   
 
-    void FixedUpdate()
-    {
-        if (_playerPosition != null)
-        {
-            //Objetivo final de la camara (Jugador)
-            Vector3 positionFinal = _playerPosition.position + _displacementCamera;
-
-            //Hacer que el movimiento se vea gradual
-            Vector3 smoothedMovement = Vector3.Lerp(transform.position, positionFinal, _velocityCamera);
-
-            //Mover la Cámara
-            transform.position = smoothedMovement;
-        }
-    }
-
- 
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -86,8 +65,32 @@ public class CameraManager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+
+    /// <summary>
+    /// Metodo llamado cuando al transicionar a este estado.
+    /// </summary>
+    public override void EnterState()
+    {
+
+
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<PlayerStateMachine>();
+
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+
+        _animator.SetBool("IsDead", true);
+    }
+
+    /// <summary>
+    /// Metodo llamado antes de cambiar a otro estado.
+    /// </summary>
+    public override void ExitState()
+    {
+
+    }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -95,7 +98,23 @@ public class CameraManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    /// <summary>
+    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// </summary>
+    protected override void UpdateState()
+    {
+    }
+
+    /// <summary>
+    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// </summary>
+    protected override void CheckSwitchState()
+    {
+
+    }
+
     #endregion   
 
-} // class CameraManager 
+} // class EnemyDeathState 
 // namespace
