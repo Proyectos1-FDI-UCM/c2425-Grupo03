@@ -20,31 +20,11 @@ public class EnemyInvocadorAttackState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    [Header("Shoot Properties")]
-    /// <summary>
-    /// El tiempo de espera entre dos ataques
-    /// </summary>
-    [SerializeField] float _attackSpeed;
-    /// <summary>
-    /// El daño del disparo.
-    /// </summary>
-    [SerializeField] int _damage;
-    [Header("Invoke Properties")]
-    [SerializeField] int _invokeCooldown;
-    [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
-    [SerializeField] EnemyStateMachine _enemyToInvoke;
-
-
-    /// <summary>
-    /// Proyectil del enemigo.
-    /// </summary>
-    [SerializeField] GameObject _magicBullet;
-
-
    [SerializeField] float _waitTimeShoot;
 
     [SerializeField] float _invokingTime;
+    [SerializeField] int _abilityCooldown;
+    [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
 
     #endregion
 
@@ -104,8 +84,6 @@ public class EnemyInvocadorAttackState : BaseState
     /// 
     private bool _attackFinished;
 
-    
-
     #endregion
 
     // ---- PROPIEDADES ----
@@ -156,34 +134,10 @@ public class EnemyInvocadorAttackState : BaseState
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
-    {
-        
+    {   
        _animator.SetBool("IsAttack", false);
     }
 
-    [ContextMenu("Invoke")]
-    public void Invoke() {
-        Debug.Log("Invoking!");
-        if (_enemyToInvoke != null) {
-            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
-
-            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
-            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
-            {            
-                _spawnpointIndex = 1;
-            }
-            else
-            {
-                _spawnpointIndex++;
-            }
-        }
-    }
-
-    public void Shoot() {
-        
-        Instantiate(_magicBullet, transform.position, transform.rotation);
-        Debug.Log("Shooting!");
-    }
 
     #endregion
     
@@ -199,19 +153,19 @@ public class EnemyInvocadorAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-         if (Time.time > _lastAttackTime + _invokeCooldown )
+         if (Time.time > _lastAttackTime + _abilityCooldown )
           {
               _randomNr = UnityEngine.Random.Range(1, 11);
 
               if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
               {
                   Debug.Log("Invoking!");
-                  Invoke();
+                  SetSubState(_ctx.GetStateByType<EnemySummonerInvokeState>());
                   _attackFinished = true;
               }
               else
               {
-                  Shoot();
+                  SetSubState(_ctx.GetStateByType<EnemySummonerShootState>());
                   _attackFinished = true;
               }
               _lastAttackTime = Time.time;

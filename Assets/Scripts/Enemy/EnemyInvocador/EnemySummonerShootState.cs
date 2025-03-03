@@ -1,11 +1,10 @@
 //---------------------------------------------------------
-// Estado durante el cual el enemigo se teletransporta a una posición predeterminada del mapa.
-// Zhiyi Zhou
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Runtime.CompilerServices;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -14,27 +13,45 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyTPState : BaseState
+public class EnemySummonerShootState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    // Punto al que se teletransporta
-    [SerializeField] Transform _teleportPoint;
-    [SerializeField] int immunityTime;
-
+    [Header("Shoot Properties")]
+    /// <summary>
+    /// El tiempo de espera entre dos ataques
+    /// </summary>
+    [SerializeField] float _attackSpeed;
+    /// <summary>
+    /// El daño del disparo.
+    /// </summary>
+    [SerializeField] int _damage;
+    /// <summary>
+    /// Proyectil del enemigo.
+    /// </summary>
+    [SerializeField] GameObject _magicBullet;
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
+    // El convenio de nombres de Unity recomienda que los atributos
+    // privados se nombren en formato _camelCase (comienza con _, 
+    // primera palabra en minúsculas y el resto con la 
+    // primera letra en mayúsculas)
+    // Ejemplo: _maxHealthPoints
 
-    private EnemyInvocadorStateMachine _ctx;
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
     private Animator _animator;
-    private int currentHealth;
 
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private EnemyInvocadorStateMachine _ctx;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -42,10 +59,10 @@ public class EnemyTPState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -56,21 +73,20 @@ public class EnemyTPState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-
+    
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyInvocadorStateMachine>();
+
+        //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-        // deactivate collider
-        
-        if (_teleportPoint != null)
-        {
-            _ctx.transform.position = _teleportPoint.position;
-            Debug.Log("Teleporting!");
-        }
+
+         Instantiate(_magicBullet, transform.position, transform.rotation);
+        // Debug.Log("Shooting!");
     }
     
     /// <summary>
@@ -78,9 +94,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        // reactivate collider
-
-        _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerInvokeState>());
+        
     }
     #endregion
     
@@ -105,11 +119,10 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        //_ctx.ChangeState(< EnemyInvocadorIdleState >);
-        Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+        _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());  
     }
 
     #endregion   
 
-} // class EnemyTPState 
+} // class EnemySummonerShootState 
 // namespace

@@ -1,11 +1,10 @@
 //---------------------------------------------------------
-// Estado durante el cual el enemigo se teletransporta a una posición predeterminada del mapa.
-// Zhiyi Zhou
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Runtime.CompilerServices;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -14,26 +13,38 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyTPState : BaseState
+public class EnemySummonerInvokeState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    // Punto al que se teletransporta
-    [SerializeField] Transform _teleportPoint;
-    [SerializeField] int immunityTime;
+    [Header("Invoke Properties")]
+    [SerializeField] EnemyStateMachine _enemyToInvoke;
 
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
-
-    private EnemyInvocadorStateMachine _ctx;
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
     private Animator _animator;
-    private int currentHealth;
+
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private EnemyInvocadorStateMachine _ctx;
+    
+    /// <summary>
+    /// El índice del spawnpoint actual.
+    /// </summary>
+    static private int _spawnpointIndex = 1;
+    /// <summary>
+    /// El Transform del spawnpoint actual.
+    /// </summary>
+    private Transform _spawnpointTransform;
 
     #endregion
 
@@ -42,10 +53,10 @@ public class EnemyTPState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -56,20 +67,30 @@ public class EnemyTPState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-
+    
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyInvocadorStateMachine>();
+
+        //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-        // deactivate collider
-        
-        if (_teleportPoint != null)
-        {
-            _ctx.transform.position = _teleportPoint.position;
-            Debug.Log("Teleporting!");
+        // Debug.Log("Invoking!");
+        if (_enemyToInvoke != null) {
+            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
+
+            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+            {            
+                _spawnpointIndex = 1;
+            }
+            else
+            {
+                _spawnpointIndex++;
+            }
         }
     }
     
@@ -78,9 +99,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        // reactivate collider
-
-        _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerInvokeState>());
+        
     }
     #endregion
     
@@ -105,11 +124,10 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        //_ctx.ChangeState(< EnemyInvocadorIdleState >);
-        Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+        _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
     }
 
     #endregion   
 
-} // class EnemyTPState 
+} // class EnemySummonerInvokeState 
 // namespace
