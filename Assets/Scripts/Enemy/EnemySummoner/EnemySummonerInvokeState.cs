@@ -13,46 +13,26 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemySummonerShootState : BaseState
+public class EnemySummonerInvokeState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [Header("Shoot Properties")]
-    /// <summary>
-    /// El tiempo de espera entre dos ataques
-    /// </summary>
-    [SerializeField] float _attackSpeed;
-    /// <summary>
-    /// El daño del disparo.
-    /// </summary>
-    [SerializeField] int _damage;
-    /// <summary>
-    /// Proyectil del enemigo.
-    /// </summary>
-    [SerializeField] GameObject _magicBullet;
+    [Header("Invoke Properties")]
+    [SerializeField] EnemyStateMachine _enemyToInvoke;
 
     /// <summary>
-    /// Valor de tiempo para hacer disparo
+    /// Valor de tiempo para hacer invocacion
     /// </summary>
-    [SerializeField][Min(0)] float _waitTimeShoot;
 
-    /// <summary>
-    /// Punto de invocación de Bala
-    /// </summary>
-    [SerializeField] Transform _bulletPosition;
+    [SerializeField][Min (0)] float _waitTimeInvoke;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
-    // El convenio de nombres de Unity recomienda que los atributos
-    // privados se nombren en formato _camelCase (comienza con _, 
-    // primera palabra en minúsculas y el resto con la 
-    // primera letra en mayúsculas)
-    // Ejemplo: _maxHealthPoints
-
     /// <summary>
     /// El animator del enemigo
     /// </summary>
@@ -61,24 +41,23 @@ public class EnemySummonerShootState : BaseState
     /// <summary>
     /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
-    private EnemyInvocadorStateMachine _ctx;
-
-    /// <summary>
-    /// Tiempo de espera para disparar más tiempo del momento del juego
-    /// </summary>
-    private float _shootTime;
-
-    /// <summary>
-    /// Booleana para ver si ha terminado de atacar
-    /// </summary>
-    private bool _attackFinished;
-
-
-    private Vector3 bullet;
+    private EnemySummonerStateMachine _ctx;
     
-    private Vector3 bulletP;
+    /// <summary>
+    /// El índice del spawnpoint actual.
+    /// </summary>
+    static private int _spawnpointIndex = 1;
+    /// <summary>
+    /// El Transform del spawnpoint actual.
+    /// </summary>
+    private Transform _spawnpointTransform;
 
-    Vector3 bulletInst;
+    /// <summary>
+    /// Tiempo de espera para invocar más tiempo del momento del juego
+    /// </summary>
+    private float _invokeTime;
+
+
 
 
     #endregion
@@ -91,12 +70,7 @@ public class EnemySummonerShootState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Awake()
-    {
-       
-        
 
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -114,35 +88,35 @@ public class EnemySummonerShootState : BaseState
     public override void EnterState()
     {
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+        _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-   
-        // Debug.Log("Shooting!");
-        _animator.SetBool("IsAttack", true);
+
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
 
-        bulletP = transform.position + (_bulletPosition.transform.position - transform.position);
-        bullet.y = bulletP.y;
-        bullet.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
-        _shootTime = Time.time + _waitTimeShoot;
-        _attackFinished = false;
-    }
 
-    public void Shoot()
+        _invokeTime = Time.time + _waitTimeInvoke;
+        _animator.SetBool("IsInvoking", true);
+        // Debug.Log("Invoking!");
+        /* if (_enemyToInvoke != null) {
+             _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
-    {
-        if (_ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left)
-        {
-           bulletInst = bullet;
-        }
-        else
-        {
-            bulletInst = bulletP;
-        }
-
-        Instantiate(_magicBullet, bulletInst, transform.rotation);
+             Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+             if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+             {            
+                 _spawnpointIndex = 1;
+             }
+             else
+             {
+                 _spawnpointIndex++;
+             }
+         }*/
     }
     
     /// <summary>
@@ -150,7 +124,7 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsAttack", false);
+        _animator.SetBool("IsInvoking", false);
     }
     #endregion
     
@@ -164,45 +138,38 @@ public class EnemySummonerShootState : BaseState
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
-   
     protected override void UpdateState()
     {
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemyInvocadorStateMachine.EnemyLookingDirection.Left : EnemyInvocadorStateMachine.EnemyLookingDirection.Right;
 
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left;
-
-
-
-
-
-        if (Time.time > _shootTime && !_attackFinished)
+        if (Time.time > _invokeTime )
         {
+            _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
-            Shoot();
-            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
-            _animator.SetBool("IsAttack", false);
-            _attackFinished = true;
-
+            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation);
+            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
+            {
+                _spawnpointIndex = 1;
+            }
+            else
+            {
+                _spawnpointIndex++;
+            }
+            _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
+            _animator.SetBool("IsInvoking", false);
         }
+
+
     }
-
-
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
     protected override void CheckSwitchState()
     {
-       /* if (_attackFinished)
-        {
-            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
-            _animator.SetBool("IsAttack", false);
-        }*/
+        //_ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
     }
 
     #endregion   
 
-} // class EnemySummonerShootState 
+} // class EnemySummonerInvokeState 
 // namespace

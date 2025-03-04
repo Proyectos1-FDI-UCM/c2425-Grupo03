@@ -40,7 +40,7 @@ public class EnemyTPState : BaseState
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
 
-    private EnemyInvocadorStateMachine _ctx;
+    private EnemySummonerStateMachine _ctx;
     private Animator _animator;
     private int currentHealth;
 
@@ -81,7 +81,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+        _ctx = GetCTX<EnemySummonerStateMachine>();
         _animator = _ctx.GetComponent<Animator>();
         // deactivate collider!!
 
@@ -136,7 +136,7 @@ public class EnemyTPState : BaseState
             _animator.SetBool("IsAppearing", false);
             //ActivarCollider!!
 
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
         }
     }
 

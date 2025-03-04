@@ -19,7 +19,7 @@ using UnityEngine;
 // Obliga que tenga el componente HealthManager
 [RequireComponent(typeof(HealthManager))]
 [SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
-public class EnemyInvocadorStateMachine : StateMachine
+public class EnemySummonerStateMachine : StateMachine
 {
     /// <summary>
     /// <para>
@@ -135,7 +135,7 @@ public class EnemyInvocadorStateMachine : StateMachine
     /// </summary>
     public void DeathState()
     {
-        ChangeState(gameObject.GetComponentInChildren<EnemyInvocadorDeathState>());
+        ChangeState(gameObject.GetComponentInChildren<EnemySummonerDeathState>());
     }
 
     public void TPState(int removedHealth)
