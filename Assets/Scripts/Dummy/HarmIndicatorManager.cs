@@ -30,7 +30,6 @@ public class HarmIndicatorManager : MonoBehaviour
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    // No se necesitan métodos aquí, ya se hace todo el trabajo en el método público "UpdateDamageText";
     #region Métodos de MonoBehaviour
 
     private void Awake()

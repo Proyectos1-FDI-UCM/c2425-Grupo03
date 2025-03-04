@@ -33,6 +33,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// Slider del inspector.
     /// </summary>
     [SerializeField] private Slider _healthSlider;
+    [SerializeField] private HealthManager HealthManager;
 
     #endregion
 
@@ -121,7 +122,6 @@ public class PlayerHealthBar : MonoBehaviour
     public void SetHealth(int newHealth)
     {
         _currentHealth = MathfClampHealth(newHealth);
-
         UpdateHealthBar();
     }
 
@@ -158,6 +158,7 @@ public class PlayerHealthBar : MonoBehaviour
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
         _currentHealth = MathfClampHealth(_currentHealth - health);
+
         UpdateHealthBar();
     }
 
@@ -165,7 +166,7 @@ public class PlayerHealthBar : MonoBehaviour
     {
         // Controlamos el Slider como un porcentaje (0-1)
         //_healthSlider.value = _currentHealth;
-
+        HealthManager.SetHealth(_currentHealth);
         if (_maxHealth <= 0)
         {
             _healthSlider.value = 0;

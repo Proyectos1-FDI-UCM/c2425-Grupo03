@@ -30,7 +30,6 @@ public class HealthManager : MonoBehaviour
     /// La vida inicial que tiene la entidad
     /// </summary>
     [SerializeField] private int _initialHealth;
-
     #endregion
 
 
@@ -47,7 +46,7 @@ public class HealthManager : MonoBehaviour
     /// <summary>
     /// La vida que tiene la entidad
     /// </summary>
-    private int _health;
+    private float _health;
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -57,7 +56,7 @@ public class HealthManager : MonoBehaviour
     /// <summary>
     /// Propiedad para la vida
     /// </summary>
-    public int Health { get { return _health; } private set { _health = value; } }
+    public float Health { get { return _health; } private set { _health = value; } }
     public int MaxHealth { get { return _maxHealth; } private set { _maxHealth = value; } }
 
     /// <summary>
@@ -148,7 +147,7 @@ public class HealthManager : MonoBehaviour
     /// Poner vida a la entidad, hacer la comprobación de no superar la vida máxima ni ser inferior que 0.
     /// </summary>
     /// <param name="setHealth"></param>
-    public void SetHealth(int setHealth)
+    public void SetHealth(float setHealth)
     {
         if(setHealth > _maxHealth)
         {
