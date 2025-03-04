@@ -82,26 +82,21 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
+        //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
 
-        // deactivate collider!!
-        //_ctx.GetComponent<BoxCollider2D>().enabled = false;
-
+        //Inmunidad
         _ctx.GetComponent<HealthManager>().Inmune = true;
 
-
+        //Calcula el momento en el que se hará el tp
         _tpTime = Time.time + _waitTimeTp;
+
         _tpDone = false;
-        Debug.Log("Teleporting!");
 
         _animator.SetBool("IsDisappearing", true);
 
-        /*  if (_teleportPoint != null)
-          {
-              _ctx.transform.position = _teleportPoint.position;
-              Debug.Log("Teleporting!");
-          }*/
     }
     
     /// <summary>
@@ -109,11 +104,6 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        // reactivate collider
-        //_ctx.GetComponent<BoxCollider2D>().enabled = true;
-        //_hurtBox = _ctx.GetComponent<Collider2D>();
-        //_hurtCollider.enabled = true;
-
         _ctx.GetComponent<HealthManager>().Inmune = false;
 
     }
@@ -131,9 +121,10 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //hacer Tp
+        //Hacer Tp
         if (Time.time > _tpTime && !_tpDone)
         {
+            //Mover al enemigo a la posición de _teleportPoint
             _ctx.transform.position = _teleportPoint.position;
             _animator.SetBool("IsDisappearing", false);
             _animator.SetBool("IsAppearing", true);
@@ -141,11 +132,10 @@ public class EnemyTPState : BaseState
         }
         //Después de hacer Tp
         if (Time.time > _tpTime + _waitTimePostTp && _tpDone)
-        {
-            
+        { 
             _animator.SetBool("IsAppearing", false);
-            //ActivarCollider!!
 
+            //Cambiar al estado Idle
             Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
         }
     }
