@@ -45,12 +45,6 @@ public class EnemyAttackState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// La dirección donde mira el enemigo, no es necesario para realizar el ataque, solo sirve para 
-    /// ver el rango de ataque del enemigo
-    /// </summary>
-    private int _direction;
-
-    /// <summary>
     /// El animator del enemigo
     /// </summary>
     private Animator _animator;
@@ -69,7 +63,7 @@ public class EnemyAttackState : BaseState
     /// Booleana para ver si ha terminado de atacar
     /// </summary>
     /// 
-    private bool _attackfinished;
+    private bool _attackFinished;
 
     /// <summary>
     /// La direccion donde apunta el enemigo
@@ -113,11 +107,15 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        //raycast
+        //Coge la direccion donde mira el enemigo
         _lookingDirection = (int)_ctx.LookingDirection;
-        _attackfinished = false;
+
+        _attackFinished = false;
+
+        //Empezar la animacion
         _animator.SetBool("IsAttack", true);
-        _direction = (int)_ctx.LookingDirection;
+
+        //Calcular el tiempo del siguiente ataque
         _nextAttackTime = Time.time + _attackSpeed;
     }
     
@@ -142,12 +140,11 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
-        if (Time.time > _nextAttackTime && !_attackfinished)
+        //Cuando termina la animacion pone la booleana a true
+        if (Time.time > _nextAttackTime && !_attackFinished)
         {
-            _attackfinished = true;
+            _attackFinished = true;
         }
-        
     }
 
     /// <summary>
@@ -156,8 +153,8 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
-        if(Time.time > _nextAttackTime && _attackfinished)
+        //Ataca cuando termina la animacion del ataque, con el _attackFinished
+        if(Time.time > _nextAttackTime && _attackFinished)
         {
             Attack(_lookingDirection);
             
@@ -170,11 +167,16 @@ public class EnemyAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
+        //El rango de ataque del enemigo
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
 
+
+        //Un ducktyping para ver si el raycat que hace en la direccion donde mira el enemigo tiene un HealthManager en la capa del jugador
+        //Si hay devuelve el HealthManager del jugador
         HealthManager HM = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6)
             .collider?.GetComponent<HealthManager>();
 
+        //Si consigue el HealthManager del jugador entonces hace daño al jugador, sino no hace anda.
         if(HM != null)
         {
             HM.RemoveHealth(_damage);
