@@ -183,12 +183,6 @@ public class EnemyAttackState : BaseState
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + (new Vector3(_attackRadius, 0) * (int)_ctx.LookingDirection), _attackRadius);
-    }
-
     #endregion   
 
 } // class EnemyAttackState 
