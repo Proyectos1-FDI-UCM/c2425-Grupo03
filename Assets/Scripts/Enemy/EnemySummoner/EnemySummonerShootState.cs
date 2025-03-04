@@ -31,7 +31,7 @@ public class EnemySummonerShootState : BaseState
     /// <summary>
     /// Proyectil del enemigo.
     /// </summary>
-    [SerializeField] GameObject _magicBullet;
+    [SerializeField] MagicBullet _magicBullet;
 
     /// <summary>
     /// Valor de tiempo para hacer disparo
@@ -73,12 +73,21 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     private bool _attackFinished;
 
+    /// <summary>
+    /// Posicion de la bala en el mundo cuando mira a la izquierda
+    /// </summary>
+    private Vector3 _bulletRightPos;
 
-    private Vector3 bullet;
-    
-    private Vector3 bulletP;
+    /// <summary>
+    /// Posicion de la bala en el mundo cuando mira a la derecha
+    /// </summary>
+    private Vector3 _bulletLeftPos;
 
-    Vector3 bulletInst;
+
+    /// <summary>
+    /// Posicion de la bala en el momento de disparar
+    /// </summary>
+    private Vector3 _bulletCurrentPos;
 
 
     #endregion
@@ -91,12 +100,7 @@ public class EnemySummonerShootState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Awake()
-    {
-       
-        
-
-    }
+  
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -119,30 +123,40 @@ public class EnemySummonerShootState : BaseState
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
    
-        // Debug.Log("Shooting!");
+        // activar animator
         _animator.SetBool("IsAttack", true);
 
+        //determinar puntos de invocación de la bala
+        _bulletLeftPos = _bulletPosition.transform.position;
+        _bulletRightPos.y = _bulletLeftPos.y;
+        _bulletRightPos.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
 
-        bulletP = transform.position + (_bulletPosition.transform.position - transform.position);
-        bullet.y = bulletP.y;
-        bullet.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
+        //dar valor al tiempo de carga del ataque
         _shootTime = Time.time + _waitTimeShoot;
+
+        //indicar que el ataque no está acabado puesto que acaba de empezar
         _attackFinished = false;
     }
 
+    /// <summary>
+    /// Metodo que Instancia una bala cada vez que es llamado
+    /// </summary>
     public void Shoot()
-
     {
+        //determinar el punto actual de la posicion para la bala 
         if (_ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
         {
-           bulletInst = bullet;
+           _bulletCurrentPos = _bulletRightPos;
         }
         else
         {
-            bulletInst = bulletP;
+            _bulletCurrentPos = _bulletLeftPos;
         }
 
-        Instantiate(_magicBullet, bulletInst, transform.rotation);
+
+        Instantiate(_magicBullet, _bulletCurrentPos, transform.rotation).Setup(_ctx.PlayerTransform.position);
+
+        
     }
     
     /// <summary>
@@ -173,10 +187,7 @@ public class EnemySummonerShootState : BaseState
 
         _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
-
-
-
-
+        //Disparar después del tiempo de recarga
         if (Time.time > _shootTime && !_attackFinished)
         {
 
@@ -195,11 +206,7 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-       /* if (_attackFinished)
-        {
-            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
-            _animator.SetBool("IsAttack", false);
-        }*/
+ 
     }
 
     #endregion   

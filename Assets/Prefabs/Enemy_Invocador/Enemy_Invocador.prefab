@@ -553,7 +553,7 @@ MonoBehaviour:
   _name: 
   _attackSpeed: 0
   _damage: 0
-  _magicBullet: {fileID: 8274049569712046361, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
+  _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _waitTimeShoot: 1
   _bulletPosition: {fileID: 393862591464892332}
 --- !u!114 &1808163096419442921
@@ -585,7 +585,6 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _teleportPoint: {fileID: 3977072330819180501}
-  immunityTime: 0
   _waitTimeTp: 1
   _waitTimePostTp: 1
 --- !u!114 &6408419066844692140

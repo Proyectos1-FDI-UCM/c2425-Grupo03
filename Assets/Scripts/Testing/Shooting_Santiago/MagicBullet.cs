@@ -14,7 +14,7 @@ using static UnityEngine.GraphicsBuffer;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Bala : MonoBehaviour
+public class MagicBullet : MonoBehaviour
 {
 
 
@@ -24,8 +24,20 @@ public class Bala : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    
+    /// <summary>
+    /// Velocidad de la bala
+    /// </summary>
     [SerializeField][Min (0)] float _velocity;
+
+    /// <summary>
+    /// Distancia maxima a la que se puede mogver la bala desde el punto de instanciacion
+    /// </summary>
+    [SerializeField] float _maxDistance;
+
+    /// <summary>
+    /// Daño que produce la bala
+    /// </summary>
+    [SerializeField] int _damage;
 
     #endregion
 
@@ -37,17 +49,24 @@ public class Bala : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Vector3 direction;
 
+    /// <summary>
+    /// Direccion en la que se dirige la bala
+    /// </summary>
+    private Vector3 _direction;
+    
+    /// <summary>
+    /// Posicion de la bala al ser instanciada
+    /// </summary>
     private Vector3 _originalPosition;
 
+    /// <summary>
+    /// Distancia de la bala respecto al punto inicial de instanciacion
+    /// </summary>
     private Vector3 _distance;
 
-    [SerializeField] float _maxDistance;
-    [SerializeField] int _damage;
 
-    private PlayerStateMachine _player;
-    private EnemySummonerStateMachine _ctx;
+
 
     #endregion
 
@@ -63,29 +82,12 @@ public class Bala : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+ 
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Awake()
-    {
-        _player = FindObjectOfType<PlayerStateMachine>();
-        direction =  (_player.transform.position - transform.position).normalized; //_ctx.PlayerTransform.position.x
-        _originalPosition = transform.position;
-
-        
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-    }
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
     {
-
             Destroy(gameObject);
-            other.GetComponent<HealthManager>().RemoveHealth(_damage);
-        
+            other.GetComponent<HealthManager>().RemoveHealth(_damage);    
     }
 
     /// <summary>
@@ -93,8 +95,10 @@ public class Bala : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.position +=  direction * Time.deltaTime * _velocity;
+        transform.position +=  _direction * Time.deltaTime * _velocity;
         _distance = _originalPosition - transform.position;
+
+        //comprobar si ha llegado a la distancia máxima
         if ( _distance.magnitude >= _maxDistance)
         {
             Destroy(gameObject);
@@ -110,6 +114,13 @@ public class Bala : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public void Setup(Vector3 _playerPosition)
+    {
+        _direction = (_playerPosition - transform.position).normalized;
+
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -119,10 +130,10 @@ public class Bala : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-   
 
-   
-    #endregion   
+
+
+    #endregion
 
 } // class Bala 
 // namespace
