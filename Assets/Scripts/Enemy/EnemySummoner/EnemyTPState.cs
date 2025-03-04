@@ -44,7 +44,6 @@ public class EnemyTPState : BaseState
     private Animator _animator;
     private Collider2D _collider;
     private HealthManager _healthManager;
-    //private Collider2D _hurtCollider;
 
     /// <summary>
     /// Tiempo de espera para teletransportarse más tiempo del momento del juego
@@ -88,10 +87,7 @@ public class EnemyTPState : BaseState
 
         // deactivate collider!!
         //_ctx.GetComponent<BoxCollider2D>().enabled = false;
-        //_hurtBox = _ctx.GetComponent<Collider2D>();
-        //_hurtCollider.enabled = false;
 
-        //_ctx.gameObject.layer = LayerMask.NameToLayer("Default");
         _ctx.GetComponent<HealthManager>().Inmune = true;
 
 
@@ -118,9 +114,6 @@ public class EnemyTPState : BaseState
         //_hurtBox = _ctx.GetComponent<Collider2D>();
         //_hurtCollider.enabled = true;
 
-        //_ctx.gameObject.layer = LayerMask.NameToLayer("Enemy");
-
-        //_ctx.GetComponent<HealthManager>().enabled = true;
         _ctx.GetComponent<HealthManager>().Inmune = false;
 
     }
@@ -152,7 +145,6 @@ public class EnemyTPState : BaseState
             
             _animator.SetBool("IsAppearing", false);
             //ActivarCollider!!
-            //_ctx.GetComponent<BoxCollider2D>().enabled = true;
 
             Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
         }
