@@ -17,10 +17,13 @@ AnimatorStateMachine:
     m_Position: {x: 420, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5322588011173431479}
-    m_Position: {x: 350, y: -170, z: 0}
+    m_Position: {x: 400, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5425367299747049865}
     m_Position: {x: 150, y: -250, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1721271164213041316}
+    m_Position: {x: 185, y: -185, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4147684828455652835}
@@ -81,7 +84,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 95410c3665df9da44a920dff59854b71, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5f7c1409524923b4496422279d16f7ae, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -137,6 +140,32 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+--- !u!1102 &-1721271164213041316
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BasicEnemyWalk_Animation
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 5f7c1409524923b4496422279d16f7ae, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

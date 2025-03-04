@@ -360,7 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _waitTime: 1.4
+  _name: 
+  _waitTime: 0.6
 --- !u!114 &5438967828372433778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _attackRadius: 1
   _attackSpeed: 1
   _damage: 1
@@ -390,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
   _enemyWalkingSpeed: 2
 --- !u!114 &7663378202541641437
 MonoBehaviour:
@@ -404,3 +407,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
+  _name: 
