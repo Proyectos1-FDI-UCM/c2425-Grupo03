@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -70,6 +71,11 @@ public class EnemyAttackState : BaseState
     /// 
     private bool _attackfinished;
 
+    /// <summary>
+    /// La direccion donde apunta el enemigo
+    /// </summary>
+    private int _lookingDirection;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -107,11 +113,12 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        //raycast
+        _lookingDirection = (int)_ctx.LookingDirection;
         _attackfinished = false;
         _animator.SetBool("IsAttack", true);
         _direction = (int)_ctx.LookingDirection;
-        Attack();
-        _attackfinished = true;
+        _nextAttackTime = Time.time + _attackSpeed;
     }
     
     /// <summary>
@@ -135,7 +142,12 @@ public class EnemyAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-
+        
+        if (Time.time > _nextAttackTime && !_attackfinished)
+        {
+            _attackfinished = true;
+        }
+        
     }
 
     /// <summary>
@@ -147,30 +159,34 @@ public class EnemyAttackState : BaseState
         
         if(Time.time > _nextAttackTime && _attackfinished)
         {
+            Attack(_lookingDirection);
+            
             Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
-
-        }
-        else if(!_ctx.IsPlayerInChaseRange)
-        {
-            //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
     }
 
     /// <summary>
     /// Atacar al jugador
     /// </summary>
-    private void Attack()
+    private void Attack(int direction)
     {
-        _ctx.PlayerTransform.GetComponent<HealthManager>().RemoveHealth(_damage);
-        _nextAttackTime = Time.time + _attackSpeed;
+        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
+
+        HealthManager HM = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6)
+            .collider?.GetComponent<HealthManager>();
+
+        if(HM != null)
+        {
+            HM.RemoveHealth(_damage);
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + (_direction * new Vector3(_attackRadius, 0)), _attackRadius);
+        Gizmos.DrawWireSphere(transform.position + (new Vector3(_attackRadius, 0) * (int)_ctx.LookingDirection), _attackRadius);
     }
+
     #endregion   
 
 } // class EnemyAttackState 

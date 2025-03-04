@@ -139,7 +139,7 @@ public class PlayerAttackState : BaseState
         UpdateCombo();
 
         //Atacar en la dirección donde mira el jugador
-        Attack(_direction);
+        
         _animator.SetInteger("AttackIndex", _combo);
 
       
@@ -151,6 +151,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        Attack(_direction);
         _animator.SetInteger("AttackIndex", 0);
 
     }
@@ -202,8 +203,7 @@ public class PlayerAttackState : BaseState
     {
         int extraDamage = 0;
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
-        RaycastHit2D[] enemyInArea;
-        enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
+        RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
 
         if (_combo == 3) 
         { 
