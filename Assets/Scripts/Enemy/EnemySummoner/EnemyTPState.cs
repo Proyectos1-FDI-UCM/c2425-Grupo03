@@ -23,12 +23,12 @@ public class EnemyTPState : BaseState
 
     // Punto al que se teletransporta
     [SerializeField] Transform _teleportPoint;
-    [SerializeField] int immunityTime;
 
     /// <summary>
     /// Valor de tiempo para hacer teletransporte
     /// </summary>
     [SerializeField][Min(0)] float _waitTimeTp;
+
     /// <summary>
     /// Valor de tiempo para terminar el estado de teletransporte después de hacer Tp
     /// </summary>
@@ -42,7 +42,8 @@ public class EnemyTPState : BaseState
 
     private EnemySummonerStateMachine _ctx;
     private Animator _animator;
-    private int currentHealth;
+    private Collider2D _collider;
+    //private Collider2D _hurtCollider;
 
     /// <summary>
     /// Tiempo de espera para teletransportarse más tiempo del momento del juego
@@ -83,14 +84,20 @@ public class EnemyTPState : BaseState
     {
         _ctx = GetCTX<EnemySummonerStateMachine>();
         _animator = _ctx.GetComponent<Animator>();
-        // deactivate collider!!
 
+        // deactivate collider!!
+        //_ctx.GetComponent<BoxCollider2D>().enabled = false;
+        //_hurtBox = _ctx.GetComponent<Collider2D>();
+        //_hurtCollider.enabled = false;
+
+        _ctx.gameObject.layer = LayerMask.NameToLayer("Default");
 
         _tpTime = Time.time + _waitTimeTp;
         _tpDone = false;
         Debug.Log("Teleporting!");
 
         _animator.SetBool("IsDisappearing", true);
+
         /*  if (_teleportPoint != null)
           {
               _ctx.transform.position = _teleportPoint.position;
@@ -104,8 +111,12 @@ public class EnemyTPState : BaseState
     public override void ExitState()
     {
         // reactivate collider
+        //_ctx.GetComponent<BoxCollider2D>().enabled = true;
+        //_hurtBox = _ctx.GetComponent<Collider2D>();
+        //_hurtCollider.enabled = true;
 
-       // _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerInvokeState>());
+        _ctx.gameObject.layer = LayerMask.NameToLayer("Enemy");
+
     }
     #endregion
     
@@ -135,6 +146,7 @@ public class EnemyTPState : BaseState
             
             _animator.SetBool("IsAppearing", false);
             //ActivarCollider!!
+            //_ctx.GetComponent<BoxCollider2D>().enabled = true;
 
             Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
         }
@@ -146,8 +158,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        //_ctx.ChangeState(< EnemyInvocadorIdleState >);
-        //Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+        
     }
 
     #endregion   
