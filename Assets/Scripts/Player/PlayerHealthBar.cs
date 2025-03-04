@@ -24,10 +24,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// <summary>
     /// Valor de vida maxima.
     /// </summary>
-
-    [Tooltip("Vida maxima del jugador")]
-    [Min(0)]
-    [SerializeField] private float _maxHealth = 100f;
+    private float _maxHealth = 100f;
 
     /// <summary>
     /// Slider del inspector.
@@ -74,10 +71,6 @@ public class PlayerHealthBar : MonoBehaviour
     {
         _healthSlider.minValue = 0;
         _healthSlider.maxValue = 1;
-
-        // Inicializar la vida al max.
-        _currentHealth = _maxHealth;
-
         UpdateHealthBar();
     }
 
@@ -97,31 +90,17 @@ public class PlayerHealthBar : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-
-    /// <summary>
-    /// Metodo que puede ser invocado desde el inspector para sumar vida
-    /// </summary>
-    [ContextMenu("Sumar 10 de Vida")]
-    public void IncreaseHealth10()
-    {
-        IncreaseHealth(10f);
-    }
-
-    /// <summary>
-    /// Metodo que puede ser invocado desde el inpector para restar vida.
-    /// </summary>
-    [ContextMenu("Restar 10 de Vida")]
-    public void DecreaseHealth10()
-    {
-        DecreaseHealth(10f);
-    }
-
     /// <summary>
     /// Setter que permite ajustar vida desde fuera.
     /// </summary>
-    public void SetHealth(int newHealth)
+    public void SetHealth(float newHealth)
     {
         _currentHealth = MathfClampHealth(newHealth);
+        UpdateHealthBar();
+    }
+    public void SetMaxHealth(float maxHealth)
+    {
+        _maxHealth = MathfClampHealth(maxHealth);
         UpdateHealthBar();
     }
 
@@ -143,7 +122,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// Metodo para sumar vida
     /// </summary>
     /// <param name="health"></param>
-    private void IncreaseHealth(float health)
+    public void IncreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
         _currentHealth = MathfClampHealth(_currentHealth + health);
@@ -154,7 +133,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// Metodo para restar vida.
     /// </summary>
     /// <param name="health"></param>
-    private void DecreaseHealth(float health)
+    public void DecreaseHealth(float health)
     {
         // Asegurar que la vida no baje de 0 ni sale de _maxHealth.
         _currentHealth = MathfClampHealth(_currentHealth - health);
@@ -166,8 +145,7 @@ public class PlayerHealthBar : MonoBehaviour
     {
         // Controlamos el Slider como un porcentaje (0-1)
         //_healthSlider.value = _currentHealth;
-        HealthManager.SetHealth(_currentHealth);
-        if (_maxHealth <= 0)
+        if (_currentHealth <= 0)
         {
             _healthSlider.value = 0;
         }

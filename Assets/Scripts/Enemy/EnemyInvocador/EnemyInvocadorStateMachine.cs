@@ -138,7 +138,7 @@ public class EnemyInvocadorStateMachine : StateMachine
         ChangeState(gameObject.GetComponentInChildren<EnemyInvocadorDeathState>());
     }
 
-    public void TPState(int removedHealth)
+    public void TPState(float removedHealth)
     {
         if (_isFirstHit) {
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());

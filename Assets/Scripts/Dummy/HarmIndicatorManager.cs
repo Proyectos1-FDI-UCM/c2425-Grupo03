@@ -52,7 +52,7 @@ public class HarmIndicatorManager : MonoBehaviour
         //DamageText.text = $"{damage}";
     }
 
-    public void AskForHealth(int damage)
+    public void AskForHealth(float damage)
     {
         Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform);
         text.GetComponent<DamageNumberScript>().SetText(damage.ToString());

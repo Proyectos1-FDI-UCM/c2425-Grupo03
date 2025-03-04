@@ -46,7 +46,7 @@ public class HealthManager : MonoBehaviour
     /// <summary>
     /// La vida que tiene la entidad
     /// </summary>
-    private float _health;
+    private float _health = 0f;
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -69,7 +69,7 @@ public class HealthManager : MonoBehaviour
     /// Evento para cuando la entidad reciba daño
     /// </summary>
     [HideInInspector]
-    public UnityEvent<int> _onDamaged;
+    public UnityEvent<float> _onDamaged;
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -86,14 +86,11 @@ public class HealthManager : MonoBehaviour
     {
         //Dar una vida inicial a la entidad
         SetHealth(_initialHealth);
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
+        if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
+        {
+            gameObject.GetComponent<PlayerHealthBar>().SetHealth(_health);
+            gameObject.GetComponent<PlayerHealthBar>().SetMaxHealth(_maxHealth);
+        }
     }
     #endregion
 
@@ -109,7 +106,7 @@ public class HealthManager : MonoBehaviour
     /// Añadir vida a la entidad
     /// </summary>
     /// <param name="addedHealth"></param>
-    public void AddHealth(int addedHealth)
+    public void AddHealth(float addedHealth)
     {
         if(_health + addedHealth > _maxHealth)
         {
@@ -119,13 +116,17 @@ public class HealthManager : MonoBehaviour
         {
             _health = _health + addedHealth;
         }
+        if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
+        {
+            gameObject.GetComponent<PlayerHealthBar>().IncreaseHealth(addedHealth);
+        }
     }
 
     /// <summary>
     /// Quitar vida a la entidad
     /// </summary>
     /// <param name="removedHealth"></param>
-    public void RemoveHealth(int removedHealth)
+    public void RemoveHealth(float removedHealth)
     {
         if (_health > 0)
         {
@@ -138,7 +139,10 @@ public class HealthManager : MonoBehaviour
             {
                 _health = _health - removedHealth;
             }
-
+            if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
+            {
+                gameObject.GetComponent<PlayerHealthBar>().DecreaseHealth(removedHealth);
+            }
             _onDamaged.Invoke(removedHealth);
         }
     }
@@ -149,13 +153,16 @@ public class HealthManager : MonoBehaviour
     /// <param name="setHealth"></param>
     public void SetHealth(float setHealth)
     {
+
         if(setHealth > _maxHealth)
         {
             _health = _maxHealth;
         }
-        else if(setHealth < 0)
+        else if(setHealth <= 0)
         {
             _health = 0;
+            Debug.Log("Muerto");
+            _onDeath.Invoke();
         }
         else
         {
