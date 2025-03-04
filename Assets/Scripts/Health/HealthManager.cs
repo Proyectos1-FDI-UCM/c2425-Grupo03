@@ -59,6 +59,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     public int Health { get { return _health; } private set { _health = value; } }
     public int MaxHealth { get { return _maxHealth; } private set { _maxHealth = value; } }
+    public bool Inmune { get; set; } = false;
 
     /// <summary>
     /// Evento para cuando la vida de la entidad es 0
@@ -128,6 +129,8 @@ public class HealthManager : MonoBehaviour
     /// <param name="removedHealth"></param>
     public void RemoveHealth(int removedHealth)
     {
+        if (Inmune) { return; }
+
         if (_health > 0)
         {
             if (_health - removedHealth <= 0)

@@ -43,6 +43,7 @@ public class EnemyTPState : BaseState
     private EnemySummonerStateMachine _ctx;
     private Animator _animator;
     private Collider2D _collider;
+    private HealthManager _healthManager;
     //private Collider2D _hurtCollider;
 
     /// <summary>
@@ -90,7 +91,9 @@ public class EnemyTPState : BaseState
         //_hurtBox = _ctx.GetComponent<Collider2D>();
         //_hurtCollider.enabled = false;
 
-        _ctx.gameObject.layer = LayerMask.NameToLayer("Default");
+        //_ctx.gameObject.layer = LayerMask.NameToLayer("Default");
+        _ctx.GetComponent<HealthManager>().Inmune = true;
+
 
         _tpTime = Time.time + _waitTimeTp;
         _tpDone = false;
@@ -115,7 +118,10 @@ public class EnemyTPState : BaseState
         //_hurtBox = _ctx.GetComponent<Collider2D>();
         //_hurtCollider.enabled = true;
 
-        _ctx.gameObject.layer = LayerMask.NameToLayer("Enemy");
+        //_ctx.gameObject.layer = LayerMask.NameToLayer("Enemy");
+
+        //_ctx.GetComponent<HealthManager>().enabled = true;
+        _ctx.GetComponent<HealthManager>().Inmune = false;
 
     }
     #endregion

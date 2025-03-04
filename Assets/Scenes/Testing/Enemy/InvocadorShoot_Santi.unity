@@ -2065,12 +2065,24 @@ PrefabInstance:
       value: -2.95
       objectReference: {fileID: 0}
     - target: {fileID: 4797530526754317266, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: _hurtBox
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797530526754317266, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: _waitTimeTp
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4797530526754317266, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: _waitTimePostTp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279051425098570370, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: _maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279051425098570370, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: _initialHealth
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6408419066844692140, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: _invokeProbabilty
