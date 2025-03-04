@@ -118,7 +118,7 @@ public class EnemyAttackState : BaseState
         //Calcular el tiempo del siguiente ataque
         _nextAttackTime = Time.time + _attackSpeed;
     }
-    
+
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
@@ -127,7 +127,7 @@ public class EnemyAttackState : BaseState
         _animator.SetBool("IsAttack", false);
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -154,10 +154,10 @@ public class EnemyAttackState : BaseState
     protected override void CheckSwitchState()
     {
         //Ataca cuando termina la animacion del ataque, con el _attackFinished
-        if(Time.time > _nextAttackTime && _attackFinished)
+        if (Time.time > _nextAttackTime && _attackFinished)
         {
             Attack(_lookingDirection);
-            
+
             Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
     }
@@ -177,18 +177,18 @@ public class EnemyAttackState : BaseState
             .collider?.GetComponent<HealthManager>();
 
         //Si consigue el HealthManager del jugador entonces hace daño al jugador, sino no hace anda.
-        if(HM != null)
+        if (HM != null)
         {
             HM.RemoveHealth(_damage);
         }
     }
-
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + (new Vector3(_attackRadius, 0) * (int)_ctx.LookingDirection), _attackRadius);
     }
-
+    */
     #endregion   
 
 } // class EnemyAttackState 

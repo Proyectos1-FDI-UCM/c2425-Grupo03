@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Archivo con el código para el estado inactivo del enemigo.
-// Adrián Isasi
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,10 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// El estado inactivo del enemigo.
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-[RequireComponent (typeof(BoxCollider2D))]
-public class EnemyIdleState : BaseState
+public class EnemyKnockbackState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,17 +24,20 @@ public class EnemyIdleState : BaseState
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-
+    // Documentar cada atributo que aparece aquí.
+    // El convenio de nombres de Unity recomienda que los atributos
+    // privados se nombren en formato _camelCase (comienza con _, 
+    // primera palabra en minúsculas y el resto con la 
+    // primera letra en mayúsculas)
+    // Ejemplo: _maxHealthPoints
     /// <summary>
-    /// Contexto del estado.
+    /// El rigidbody del enemigo
+    /// </summary>
+    Rigidbody2D _rigidbody;
+    /// <summary>
+    /// el contexto del playerstatemachine
     /// </summary>
     EnemyStateMachine _ctx;
-
-    /// <summary>
-    /// El animator del enemigo
-    /// </summary>
-    private Animator _animator;
-
     #endregion
 
     // ---- PROPIEDADES ----
@@ -47,22 +50,9 @@ public class EnemyIdleState : BaseState
     #region Métodos de MonoBehaviour
     private void Start()
     {
-        //Coge una referencia al contexto para evitar el upcasting y por comodidad
         _ctx = GetCTX<EnemyStateMachine>();
-
-        _animator = _ctx.Animator;
+        _rigidbody = _ctx.Rigidbody;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<PlayerStateMachine>() != null)
-        {
-            //Si el jugador está en el trigger lo indica al contexto.
-            _ctx.IsPlayerInChaseRange = true;
-            //Añade la posición del jugador al contexto.
-            _ctx.PlayerTransform = collision.transform;
-        }
-    }
-    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -79,15 +69,13 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator?.SetBool("IsIdle", true);
     }
-    
+
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
     }
     #endregion
     
@@ -103,7 +91,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        _rigidbody.velocity *= new Vector2 (0.9f,0);
     }
 
     /// <summary>
@@ -112,14 +100,13 @@ public class EnemyIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        // Si el jugador está en distancia de rango cambia al estado de rango
-        if (_ctx.IsPlayerInChaseRange)
+      if (Mathf.Round(_rigidbody.velocity.x) == 0)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            Ctx.ChangeState(_ctx.GetStateByType < EnemyChaseState>());
         }
     }
 
     #endregion   
 
-} // class EnemyIdleState 
+} // class EnemyKnockbackState 
 // namespace

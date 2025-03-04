@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Archivo con el código para el estado inactivo del enemigo.
-// Adrián Isasi
+// Breve descripción del contenido del archivo
+// Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -8,32 +8,36 @@
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
-
 /// <summary>
-/// El estado inactivo del enemigo.
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-[RequireComponent (typeof(BoxCollider2D))]
-public class EnemyIdleState : BaseState
+public class PlayerMarDeLosLamentos : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [SerializeField] private float _skillDamage = 10f;  // Daño de la habilidad
+    [SerializeField] private float _effectDistance = 5f;  // Distancia de efecto
+    [SerializeField] private float _waveSpeed = 3f;  // Velocidad de avance de las ondas
+    [SerializeField] private float _skillDuration = 2f;  // Duración de la habilidad
+    [SerializeField] private float _animationTime = 1f;
+    [SerializeField] private GameObject _wavePrefab; // Prefab de la onda
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-
-    /// <summary>
-    /// Contexto del estado.
-    /// </summary>
-    EnemyStateMachine _ctx;
-
-    /// <summary>
-    /// El animator del enemigo
-    /// </summary>
+    // Documentar cada atributo que aparece aquí.
+    // El convenio de nombres de Unity recomienda que los atributos
+    // privados se nombren en formato _camelCase (comienza con _, 
+    // primera palabra en minúsculas y el resto con la 
+    // primera letra en mayúsculas)
+    // Ejemplo: _maxHealthPoints
+    PlayerStateMachine _ctx;
     private Animator _animator;
+    float _startTime = 0;
 
     #endregion
 
@@ -47,22 +51,22 @@ public class EnemyIdleState : BaseState
     #region Métodos de MonoBehaviour
     private void Start()
     {
-        //Coge una referencia al contexto para evitar el upcasting y por comodidad
-        _ctx = GetCTX<EnemyStateMachine>();
+        _ctx = GetCTX<PlayerStateMachine>();
+        _animator = GetComponent<Animator>();
+    }
+    private void CastSkill()
+    {   
+        // Crear ondas a ambos lados del jugador
+        CreateWave(Vector2.right);
+        CreateWave(Vector2.left);
 
-        _animator = _ctx.Animator;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CreateWave(Vector2 direction)
     {
-        if (collision.GetComponent<PlayerStateMachine>() != null)
-        {
-            //Si el jugador está en el trigger lo indica al contexto.
-            _ctx.IsPlayerInChaseRange = true;
-            //Añade la posición del jugador al contexto.
-            _ctx.PlayerTransform = collision.transform;
-        }
+        GameObject wave = Instantiate(_wavePrefab, transform.position, Quaternion.identity);
+        WaveBehavior waveBehavior = wave.GetComponent<WaveBehavior>();
+        waveBehavior.Initialize(direction, _effectDistance, _waveSpeed, _skillDuration, _skillDamage);
     }
-    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -79,7 +83,11 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator?.SetBool("IsIdle", true);
+        _animator = GetCTX<PlayerStateMachine>().Animator;
+        _startTime = Time.time;
+        // Llamar a la habilidad
+        CastSkill();
+
     }
     
     /// <summary>
@@ -87,7 +95,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
+        
     }
     #endregion
     
@@ -112,14 +120,13 @@ public class EnemyIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        // Si el jugador está en distancia de rango cambia al estado de rango
-        if (_ctx.IsPlayerInChaseRange)
+        if (Time.time - _startTime > _animationTime)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
     }
 
     #endregion   
 
-} // class EnemyIdleState 
+} // class PlayerMarDeLosLamentos 
 // namespace
