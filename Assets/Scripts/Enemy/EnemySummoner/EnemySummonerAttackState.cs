@@ -14,7 +14,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyInvocadorAttackState : BaseState
+public class EnemySummonerAttackState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -48,7 +48,7 @@ public class EnemyInvocadorAttackState : BaseState
     /// <summary>
     /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
-    private EnemyInvocadorStateMachine _ctx;
+    private EnemySummonerStateMachine _ctx;
 
     /// <summary>
     /// El tiempo cuando el enemigo pueda volver a hacer una accion.
@@ -125,7 +125,7 @@ public class EnemyInvocadorAttackState : BaseState
     public override void EnterState()
     {
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+        _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
@@ -164,9 +164,9 @@ public class EnemyInvocadorAttackState : BaseState
     {
         //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
         _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemyInvocadorStateMachine.EnemyLookingDirection.Left : EnemyInvocadorStateMachine.EnemyLookingDirection.Right;
+            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
 
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyInvocadorStateMachine.EnemyLookingDirection.Left;
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
 
         if (Time.time > _cooldownTime )
@@ -249,7 +249,7 @@ public class EnemyInvocadorAttackState : BaseState
          if (!_ctx.IsPlayerInAttackRange )
         {
             //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
             _animator.SetBool("IsIdle", false);
         }
     }

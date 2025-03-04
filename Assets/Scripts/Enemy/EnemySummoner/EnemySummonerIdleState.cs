@@ -6,7 +6,6 @@
 //---------------------------------------------------------
 
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 // Añadir aquí el resto de directivas using
 
 
@@ -14,18 +13,12 @@ using static UnityEngine.GraphicsBuffer;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Bala : MonoBehaviour
+public class EnemySummonerIdleState : BaseState
 {
-
-
-
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    
-    [SerializeField][Min (0)] float _velocity;
 
     #endregion
 
@@ -37,17 +30,10 @@ public class Bala : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Vector3 direction;
 
-    private Vector3 _originalPosition;
-
-    private Vector3 _distance;
-
-    [SerializeField] float _maxDistance;
-    [SerializeField] int _damage;
-
-    private PlayerStateMachine _player;
     private EnemySummonerStateMachine _ctx;
+    private Animator _animator;
+    private Rigidbody2D _rb;
 
     #endregion
 
@@ -59,47 +45,27 @@ public class Bala : MonoBehaviour
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Awake()
+    private void Start()
     {
-        _player = FindObjectOfType<PlayerStateMachine>();
-        direction =  (_player.transform.position - transform.position).normalized; //_ctx.PlayerTransform.position.x
-        _originalPosition = transform.position;
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemySummonerStateMachine>();
 
-        
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-        
-    }
-    private void OnTriggerEnter2D(UnityEngine.Collider2D other)
-    {
 
-            Destroy(gameObject);
-            other.GetComponent<HealthManager>().RemoveHealth(_damage);
-        
+        _rb = _ctx.Rigidbody;
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.position +=  direction * Time.deltaTime * _velocity;
-        _distance = _originalPosition - transform.position;
-        if ( _distance.magnitude >= _maxDistance)
-        {
-            Destroy(gameObject);
-        }
+        //Si el jugador está en el trigger lo indica al contexto.
+        _ctx.IsPlayerInAttackRange = true;
+
+        //Añade la posición del jugador al ctx.
+        _ctx.PlayerTransform = collision.transform;
     }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -110,8 +76,25 @@ public class Bala : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    #endregion
 
+    /// <summary>
+    /// Metodo llamado cuando al transicionar a este estado.
+    /// </summary>
+    public override void EnterState()
+    {
+       
+        _animator?.SetBool("IsIdle", true);
+    }
+    
+    /// <summary>
+    /// Metodo llamado antes de cambiar a otro estado.
+    /// </summary>
+    public override void ExitState()
+    {
+        _animator.SetBool("IsIdle", false);
+    }
+    #endregion
+    
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -119,10 +102,29 @@ public class Bala : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-   
+    /// <summary>
+    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// </summary>
+    protected override void UpdateState()
+    {
+        
+    }
+
+    /// <summary>
+    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// </summary>
+    protected override void CheckSwitchState()
+    {
+        // Si el jugador está en el rango de ataque cambia al estado de ataque.
+        if (_ctx.IsPlayerInAttackRange)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerAttackState>());
+        }
+    }
 
    
     #endregion   
 
-} // class Bala 
+} // class EnemyInvocadorIdleState 
 // namespace

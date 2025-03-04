@@ -13,20 +13,37 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyInvocadorDeathState : BaseState
+public class EnemySummonerShootState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    [Header("Shoot Properties")]
+    /// <summary>
+    /// El tiempo de espera entre dos ataques
+    /// </summary>
+    [SerializeField] float _attackSpeed;
+    /// <summary>
+    /// El daño del disparo.
+    /// </summary>
+    [SerializeField] int _damage;
+    /// <summary>
+    /// Proyectil del enemigo.
+    /// </summary>
+    [SerializeField] GameObject _magicBullet;
 
     /// <summary>
-    /// El tiempo de espera
+    /// Valor de tiempo para hacer disparo
     /// </summary>
-    [SerializeField, Min(0)] private float _waitTime;
+    [SerializeField][Min(0)] float _waitTimeShoot;
 
+    /// <summary>
+    /// Punto de invocación de Bala
+    /// </summary>
+    [SerializeField] Transform _bulletPosition;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -37,19 +54,32 @@ public class EnemyInvocadorDeathState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Fin de tiempo de espera
+    /// El animator del enemigo
     /// </summary>
-    private float _deadTime;
+    private Animator _animator;
 
     /// <summary>
     /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
-    private EnemyInvocadorStateMachine _ctx;
+    private EnemySummonerStateMachine _ctx;
 
     /// <summary>
-    /// El animator del enemigo
+    /// Tiempo de espera para disparar más tiempo del momento del juego
     /// </summary>
-    private Animator _animator;
+    private float _shootTime;
+
+    /// <summary>
+    /// Booleana para ver si ha terminado de atacar
+    /// </summary>
+    private bool _attackFinished;
+
+
+    private Vector3 bullet;
+    
+    private Vector3 bulletP;
+
+    Vector3 bulletInst;
+
 
     #endregion
 
@@ -61,7 +91,12 @@ public class EnemyInvocadorDeathState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    private void Awake()
+    {
+       
+        
 
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -78,18 +113,36 @@ public class EnemyInvocadorDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
-
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
+        _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
+   
+        // Debug.Log("Shooting!");
+        _animator.SetBool("IsAttack", true);
 
-        //Calcular el tiempo de la muerte
-        _deadTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsDead", true);
+        bulletP = transform.position + (_bulletPosition.transform.position - transform.position);
+        bullet.y = bulletP.y;
+        bullet.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
+        _shootTime = Time.time + _waitTimeShoot;
+        _attackFinished = false;
+    }
+
+    public void Shoot()
+
+    {
+        if (_ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
+        {
+           bulletInst = bullet;
+        }
+        else
+        {
+            bulletInst = bulletP;
+        }
+
+        Instantiate(_magicBullet, bulletInst, transform.rotation);
     }
     
     /// <summary>
@@ -97,7 +150,7 @@ public class EnemyInvocadorDeathState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("IsAttack", false);
     }
     #endregion
     
@@ -111,14 +164,30 @@ public class EnemyInvocadorDeathState : BaseState
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
     /// </summary>
+   
     protected override void UpdateState()
     {
-        //Tras el tiempo de espera el enemigo "muere"
-        if(Time.time > _deadTime)
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
+
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
+
+
+
+
+
+        if (Time.time > _shootTime && !_attackFinished)
         {
-            Destroy(_ctx.gameObject);
+
+            Shoot();
+            _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
+            _animator.SetBool("IsAttack", false);
+            _attackFinished = true;
+
         }
     }
+
 
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
@@ -126,11 +195,14 @@ public class EnemyInvocadorDeathState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+       /* if (_attackFinished)
+        {
+            _ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+            _animator.SetBool("IsAttack", false);
+        }*/
     }
 
     #endregion   
 
-
-} // class EnemyInvocadorDeathState 
+} // class EnemySummonerShootState 
 // namespace

@@ -13,15 +13,20 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class EnemyInvocadorIdleState : BaseState
+public class EnemySummonerDeathState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    #endregion
+    /// <summary>
+    /// El tiempo de espera
+    /// </summary>
+    [SerializeField, Min(0)] private float _waitTime;
 
+    #endregion
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,9 +36,20 @@ public class EnemyInvocadorIdleState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private EnemyInvocadorStateMachine _ctx;
+    /// <summary>
+    /// Fin de tiempo de espera
+    /// </summary>
+    private float _deadTime;
+
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    private EnemySummonerStateMachine _ctx;
+
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
     private Animator _animator;
-    private Rigidbody2D _rb;
 
     #endregion
 
@@ -45,26 +61,6 @@ public class EnemyInvocadorIdleState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Start()
-    {
-        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemyInvocadorStateMachine>();
-
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
-
-
-        _rb = _ctx.Rigidbody;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Si el jugador está en el trigger lo indica al contexto.
-        _ctx.IsPlayerInAttackRange = true;
-
-        //Añade la posición del jugador al ctx.
-        _ctx.PlayerTransform = collision.transform;
-    }
 
     #endregion
 
@@ -82,8 +78,18 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-       
-        _animator?.SetBool("IsIdle", true);
+        
+
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<EnemySummonerStateMachine>();
+
+        //Coger animator del contexto
+        _animator = _ctx.GetComponent<Animator>();
+
+        //Calcular el tiempo de la muerte
+        _deadTime = Time.time + _waitTime;
+
+        _animator.SetBool("IsDead", true);
     }
     
     /// <summary>
@@ -91,7 +97,7 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
+        
     }
     #endregion
     
@@ -107,7 +113,11 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        //Tras el tiempo de espera el enemigo "muere"
+        if(Time.time > _deadTime)
+        {
+            Destroy(_ctx.gameObject);
+        }
     }
 
     /// <summary>
@@ -116,15 +126,11 @@ public class EnemyInvocadorIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        // Si el jugador está en el rango de ataque cambia al estado de ataque.
-        if (_ctx.IsPlayerInAttackRange)
-        {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorAttackState>());
-        }
+        
     }
 
-   
     #endregion   
 
-} // class EnemyInvocadorIdleState 
+
+} // class EnemyInvocadorDeathState 
 // namespace
