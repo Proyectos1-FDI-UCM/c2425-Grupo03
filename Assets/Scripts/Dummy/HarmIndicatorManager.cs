@@ -30,7 +30,6 @@ public class HarmIndicatorManager : MonoBehaviour
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    // No se necesitan métodos aquí, ya se hace todo el trabajo en el método público "UpdateDamageText";
     #region Métodos de MonoBehaviour
 
     private void Awake()
@@ -53,7 +52,7 @@ public class HarmIndicatorManager : MonoBehaviour
         //DamageText.text = $"{damage}";
     }
 
-    public void AskForHealth(int damage)
+    public void AskForHealth(float damage)
     {
         Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform);
         text.GetComponent<DamageNumberScript>().SetText(damage.ToString());

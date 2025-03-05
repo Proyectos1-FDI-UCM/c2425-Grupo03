@@ -31,7 +31,7 @@ public class EnemyAttackState : BaseState
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
-    [SerializeField] int _damage;
+    [SerializeField] float _damage;
 
     #endregion
 
