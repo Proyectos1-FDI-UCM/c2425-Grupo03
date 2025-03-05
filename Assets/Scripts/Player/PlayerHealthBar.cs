@@ -24,7 +24,7 @@ public class PlayerHealthBar : MonoBehaviour
     /// <summary>
     /// Valor de vida maxima.
     /// </summary>
-    private float _maxHealth = 100f;
+    private float _maxHealth;
 
     /// <summary>
     /// Slider del inspector.
@@ -100,7 +100,7 @@ public class PlayerHealthBar : MonoBehaviour
     }
     public void SetMaxHealth(float maxHealth)
     {
-        _maxHealth = MathfClampHealth(maxHealth);
+        _maxHealth = maxHealth;
         UpdateHealthBar();
     }
 

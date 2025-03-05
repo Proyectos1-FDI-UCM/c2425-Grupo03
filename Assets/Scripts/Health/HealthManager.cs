@@ -88,8 +88,8 @@ public class HealthManager : MonoBehaviour
         SetHealth(_initialHealth);
         if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
         {
-            gameObject.GetComponent<PlayerHealthBar>().SetHealth(_health);
             gameObject.GetComponent<PlayerHealthBar>().SetMaxHealth(_maxHealth);
+            gameObject.GetComponent<PlayerHealthBar>().SetHealth(_health);
         }
     }
     #endregion
@@ -161,7 +161,6 @@ public class HealthManager : MonoBehaviour
         else if(setHealth <= 0)
         {
             _health = 0;
-            Debug.Log("Muerto");
             _onDeath.Invoke();
         }
         else
