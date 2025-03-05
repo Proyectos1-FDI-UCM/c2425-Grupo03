@@ -123,12 +123,6 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        if (_ctx.GetComponent<HealthManager>().Health <= 0)
-        {
-            _ctx.GetComponent<HealthManager>().Inmune = false;
-            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerDeathState>());
-            return;
-        }
 
         //Hacer Tp
         if (Time.time > _tpTime && !_tpDone)

@@ -140,7 +140,7 @@ public class EnemySummonerStateMachine : StateMachine
 
     public void TPState(float removedHealth)
     {
-        if (_isFirstHit) {
+        if (_isFirstHit && Health > 0) {
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
             _isFirstHit = false;
         }

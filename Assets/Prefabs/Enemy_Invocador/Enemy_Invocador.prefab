@@ -610,6 +610,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _waitTime: 1.1
+  _prefabEntero: {fileID: 7191960438516511554}
 --- !u!1 &5333200817857762787
 GameObject:
   m_ObjectHideFlags: 0

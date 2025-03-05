@@ -24,6 +24,7 @@ public class EnemySummonerDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+    [SerializeField] GameObject _prefabEntero;
 
     #endregion
     
@@ -117,7 +118,8 @@ public class EnemySummonerDeathState : BaseState
         if (_ctx == null) return;
         if (Time.time > _deadTime)
         {
-            Destroy(_ctx.gameObject);
+            Destroy(_prefabEntero);
+            
         }
     }
 
