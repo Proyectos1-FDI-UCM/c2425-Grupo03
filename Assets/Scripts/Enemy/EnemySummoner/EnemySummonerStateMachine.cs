@@ -138,7 +138,7 @@ public class EnemySummonerStateMachine : StateMachine
         ChangeState(gameObject.GetComponentInChildren<EnemySummonerDeathState>());
     }
 
-    public void TPState(int removedHealth)
+    public void TPState(float removedHealth)
     {
         if (_isFirstHit) {
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());

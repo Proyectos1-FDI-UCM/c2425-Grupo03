@@ -114,7 +114,8 @@ public class EnemySummonerDeathState : BaseState
     protected override void UpdateState()
     {
         //Tras el tiempo de espera el enemigo "muere"
-        if(Time.time > _deadTime)
+        if (_ctx == null) return;
+        if (Time.time > _deadTime)
         {
             Destroy(_ctx.gameObject);
         }

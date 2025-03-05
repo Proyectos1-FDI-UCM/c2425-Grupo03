@@ -86,7 +86,7 @@ public class EnemyTPState : BaseState
         _ctx = GetCTX<EnemySummonerStateMachine>();
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
-
+   
         //Inmunidad
         _ctx.GetComponent<HealthManager>().Inmune = true;
 
@@ -105,6 +105,8 @@ public class EnemyTPState : BaseState
     public override void ExitState()
     {
         _ctx.GetComponent<HealthManager>().Inmune = false;
+        _animator.SetBool("IsDisappearing", false);
+        _animator.SetBool("IsAppearing", false);
 
     }
     #endregion
@@ -121,6 +123,13 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        if (_ctx.GetComponent<HealthManager>().Health <= 0)
+        {
+            _ctx.GetComponent<HealthManager>().Inmune = false;
+            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerDeathState>());
+            return;
+        }
+
         //Hacer Tp
         if (Time.time > _tpTime && !_tpDone)
         {
