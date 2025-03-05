@@ -96,7 +96,7 @@ public class MagicBullet : MonoBehaviour
     void Update()
     {
         transform.position +=  _direction * Time.deltaTime * _velocity;
-        _distance = _originalPosition - transform.position;
+        _distance = (_originalPosition - transform.position).normalized;
 
         //comprobar si ha llegado a la distancia máxima
         if ( _distance.magnitude >= _maxDistance)
