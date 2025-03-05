@@ -124,6 +124,7 @@ public class EnemyTPState : BaseState
     protected override void UpdateState()
     {
 
+
         //Hacer Tp
         if (Time.time > _tpTime && !_tpDone)
         {
