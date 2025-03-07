@@ -112,6 +112,7 @@ public class PlayerDeathState : BaseState
             _ctx.transform.position = Vector3.zero;
             HealthManager hm = _ctx.GetComponent<HealthManager>();
             hm.SetHealth(hm.MaxHealth);
+            _ctx.GetComponent<PlayerHealthBar>()?.SetHealth(hm.MaxHealth);
             _ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
         }
     }
