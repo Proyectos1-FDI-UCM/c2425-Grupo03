@@ -171,10 +171,10 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(attackState);
             }
         }
-        else if (_ctx.PlayerInput.MarDeLosLamentos.IsPressed())
+        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed())
         {
-            PlayerMarDeLosLamentos playerMarDeLosLamentosState = _ctx.GetStateByType<PlayerMarDeLosLamentos>();
-            Ctx.ChangeState(playerMarDeLosLamentosState);
+            PlayerManoDeLasSombras playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombras>();
+            Ctx.ChangeState(playerManoDeLasSombras);
         }
     }
     #endregion   

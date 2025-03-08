@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MarDeLosLamentos",
+                    "name": "ManoDeLasSombras",
                     "type": "Button",
                     "id": "713960e5-8a63-4dfc-a495-51284db0c1b2",
                     "expectedControlType": "Button",
@@ -257,7 +257,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MarDeLosLamentos",
+                    "action": "ManoDeLasSombras",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
