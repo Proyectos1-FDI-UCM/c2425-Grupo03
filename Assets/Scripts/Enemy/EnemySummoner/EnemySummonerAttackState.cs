@@ -54,11 +54,7 @@ public class EnemySummonerAttackState : BaseState
     /// El tiempo cuando el enemigo pueda volver a hacer una accion.
     /// </summary>
     private float _lastAttackTime;
-    
-    /// <summary>
-    /// El índice del spawnpoint actual.
-    /// </summary>
-    static private int _spawnpointIndex = 1;
+
     /// <summary>
     /// El Transform del spawnpoint actual.
     /// </summary>

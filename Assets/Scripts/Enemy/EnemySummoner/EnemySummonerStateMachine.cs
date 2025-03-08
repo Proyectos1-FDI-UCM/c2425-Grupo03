@@ -48,10 +48,6 @@ public class EnemySummonerStateMachine : StateMachine
     /// El transform de la carpeta de Spawnpoints. 
     /// </summary>
     private Transform _allSpawnpoints;
-    /// <summary>
-    /// El numero de spawnpoints.
-    /// </summary>
-    static private int _spawnpointCount = 3;
     #endregion
 
     // ---- PROPIEDADES ----
