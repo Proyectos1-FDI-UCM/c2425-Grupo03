@@ -109,7 +109,25 @@ public class PlayerDeathState : BaseState
         //Tras el tiempo de espera el jugador reaparece.
         if (Time.time > _deadTime)
         {
-            _ctx.transform.position = Vector3.zero;
+            //_ctx.transform.position = Vector3.zero;
+
+            //CheckPointManager.RespawnPlayer(_ctx.gameObject);
+
+            //Transform lp = CheckPointManager.;
+            //if (lp != null)
+            //{
+            //    _ctx.transform.position = lp.position;
+            //}
+            //_ctx.transform.position = CheckPointManager.Instance.RespawnPlayer(gameObject);
+
+            CheckPointManager.Instance.RespawnPlayer(gameObject);
+
+            //Transform lastCp = CheckPointManager.Instance._lastPoint;
+            //if (lastCp != null)
+            //{
+            //    _ctx.transform.position = lastCp.position;
+            //}
+
             HealthManager hm = _ctx.GetComponent<HealthManager>();
             hm.SetHealth(hm.MaxHealth);
             _ctx.GetComponent<PlayerHealthBar>()?.SetHealth(hm.MaxHealth);
