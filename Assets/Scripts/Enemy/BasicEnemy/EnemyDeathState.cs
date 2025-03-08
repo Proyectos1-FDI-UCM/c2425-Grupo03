@@ -45,6 +45,7 @@ public class EnemyDeathState : BaseState
     /// </summary>
     private EnemyStateMachine _ctx;
 
+
     /// <summary>
     /// El animator del enemigo
     /// </summary>
@@ -77,10 +78,10 @@ public class EnemyDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
-
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
+
+        _ctx.gameObject.layer = 0;
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
