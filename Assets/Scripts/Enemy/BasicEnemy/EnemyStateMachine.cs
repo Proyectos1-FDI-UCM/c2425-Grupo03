@@ -55,10 +55,7 @@ public class EnemyStateMachine : StateMachine
     /// </summary>
     public EnemyLookingDirection LookingDirection { get; set; } = EnemyLookingDirection.Right;
 
-    /// <summary>
-    /// Rigidbody2D del enemigo.
-    /// </summary>
-    public Rigidbody2D Rigidbody { get; private set; }
+    
 
     /// <summary>
     /// SpriteRenderer del enemigo.
@@ -81,10 +78,6 @@ public class EnemyStateMachine : StateMachine
     /// </summary>
     public float AttackDistance { get; set; }
     
-    /// <summary>
-    /// El animator del enemigo.
-    /// </summary>
-    public Animator Animator { get; private set; }
 
     #endregion
 
@@ -99,9 +92,7 @@ public class EnemyStateMachine : StateMachine
 
     protected override void OnAwake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        Animator = GetComponent<Animator>();
     }
 
     protected override void OnStart()

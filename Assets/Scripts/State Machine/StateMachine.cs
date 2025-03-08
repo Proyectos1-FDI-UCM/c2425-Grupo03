@@ -6,7 +6,6 @@
 //---------------------------------------------------------
 
 using System;
-using System.Resources;
 using UnityEngine;
 
 
@@ -27,10 +26,13 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     [SerializeField] BaseState[] _states;
 
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -39,12 +41,22 @@ public class StateMachine : MonoBehaviour
     /// El estado actual de la máquina de estados.
     /// </summary>
     // Esta en publico por que debe ser modificado por todos los estados para cambiar el comportamiento de la maquina.
-    public BaseState CurrState { get; set; }
+    public BaseState CurrState { get; private set; }
 
     /// <summary>
     /// El siguiente estado al que transicionar.
     /// </summary>
     BaseState NextState { get; set; }
+
+    /// <summary>
+    /// El animator del personaje.
+    /// </summary>
+    public Animator Animator { get; private set; }
+
+    /// <summary>
+    /// Rigidbody2D del personaje.
+    /// </summary>
+    public Rigidbody2D Rigidbody { get; private set; }
 
     #endregion
 
@@ -56,6 +68,9 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        Animator = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody2D>();
+
         foreach (BaseState state in _states)
         {
             state.SetupState(this);

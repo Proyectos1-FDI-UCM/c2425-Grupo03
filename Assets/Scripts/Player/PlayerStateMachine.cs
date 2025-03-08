@@ -62,10 +62,6 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public PlayerLookingDirection LookingDirection { get; set; } = PlayerLookingDirection.Left;
 
-    /// <summary>
-    /// Rigidbody2D del jugador.
-    /// </summary>
-    public Rigidbody2D Rigidbody { get; private set; }
 
     /// <summary>
     /// El sprite renderer del jugador.
@@ -78,7 +74,6 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public float GravityScale => _gravityScale;
 
-    public Animator Animator { get; private set; }
 
     /// <summary>
     /// El input actions del jugador.
@@ -107,7 +102,6 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     protected override void OnAwake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
         _gravityScale = Rigidbody.gravityScale;
 
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -115,7 +109,6 @@ public class PlayerStateMachine : StateMachine
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();
 
-        Animator = GetComponent<Animator>();
     }
     protected override void OnStart()
     {

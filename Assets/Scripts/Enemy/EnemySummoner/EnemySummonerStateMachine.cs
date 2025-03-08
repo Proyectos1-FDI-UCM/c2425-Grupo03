@@ -65,10 +65,6 @@ public class EnemySummonerStateMachine : StateMachine
     /// </summary>
     public EnemyLookingDirection LookingDirection { get; set; } = EnemyLookingDirection.Right;
 
-    /// <summary>
-    /// Rigidbody2D del enemigo.
-    /// </summary>
-    public Rigidbody2D Rigidbody { get; private set; }
 
     /// <summary>
     /// SpriteRenderer del enemigo.
@@ -100,11 +96,6 @@ public class EnemySummonerStateMachine : StateMachine
     /// </summary>
     public float Health { get; set; }
 
-    /// <summary>
-    /// El animator del enemigo.
-    /// </summary>
-    public Animator Animator { get; private set; }
-
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -118,7 +109,6 @@ public class EnemySummonerStateMachine : StateMachine
 
     protected override void OnAwake()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _allSpawnpoints = transform.parent.GetChild(1);
         Spawnpoints = _allSpawnpoints.GetComponentsInChildren<Transform>();

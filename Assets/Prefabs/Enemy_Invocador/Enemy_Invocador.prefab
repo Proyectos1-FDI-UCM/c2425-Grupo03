@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 4797530526754317266}
   - component: {fileID: 6408419066844692140}
   - component: {fileID: 4894896949926512459}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: EnemyIdle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: 
+  _name: IdleState
 --- !u!114 &4797530526754317266
 MonoBehaviour:
   m_ObjectHideFlags: 0
