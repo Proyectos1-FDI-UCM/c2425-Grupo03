@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SuperDash",
+                    "type": "Button",
+                    "id": "383fe886-0aae-4799-87b7-aeef60b8f8d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -258,6 +267,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ManoDeLasSombras",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16d9fae3-b8e7-449b-bb58-80b14e1f3154",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SuperDash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
