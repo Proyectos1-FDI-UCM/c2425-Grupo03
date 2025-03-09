@@ -33,6 +33,7 @@ public class Checkpoint : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    //Para evitar reactivación
     private bool _isActivated = false;
 
     #endregion
@@ -66,7 +67,7 @@ public class Checkpoint : MonoBehaviour
     // mayúscula, incluida la primera letra)
 
     /// <summary>
-    /// 
+    /// Método que llama cuando otro collider entra en el trigger de este objeto
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,7 +75,8 @@ public class Checkpoint : MonoBehaviour
         if (collision.GetComponent<PlayerStateMachine>() && !_isActivated)
         {
             _isActivated = true;
-;
+
+            //Notificar al CheckpointManager que este es el último checkpoint
             CheckpointManager.Instance.SetCheckpoint(this.transform);
 
             if (_animator != null)

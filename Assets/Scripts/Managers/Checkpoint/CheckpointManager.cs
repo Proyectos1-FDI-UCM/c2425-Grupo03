@@ -15,15 +15,15 @@ using UnityEngine;
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
+    /// <summary>
+    /// Instancia para implementar el patrón Singleton
+    /// </summary>
     public static CheckpointManager Instance { get; private set; }
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    //[SerializeField] private GameObject _player;
-    //[SerializeField] Transform _lastPoint;
 
     #endregion
 
@@ -36,6 +36,9 @@ public class CheckpointManager : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Referencia al último punto guardado
+    /// </summary>
     private Transform _lastPoint;
 
     #endregion
@@ -49,10 +52,9 @@ public class CheckpointManager : MonoBehaviour
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen 
-
+    /// <summary>
+    /// Patrón Singleton, asegura que solo exista una instancia del Manager
+    /// </summary>
     private void Awake()
     {
         
@@ -64,23 +66,6 @@ public class CheckpointManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
     }
     #endregion
 
@@ -98,21 +83,21 @@ public class CheckpointManager : MonoBehaviour
     /// <param name="checkpointTransform"></param>
     public void SetCheckpoint(Transform checkpointTransform)
     {
+        // Asigna la referencia del último punto a este checkpoint
         _lastPoint = checkpointTransform;
     }
 
     /// <summary>
-    /// Método para reaparecer al jugador al checkpoint
+    /// Teletransporta al jugador al último checkpoint guardado
     /// </summary>
     /// <param name="player"></param>
     public void RespawnPlayer(GameObject player)
     {
         if (_lastPoint != null)
         {
+            // Mueve la posición del jugador a la posición del checkpoint
             player.transform.position = _lastPoint.position;
-            //_player.transform.position = _lastPoint.position;
         }
-        //player.transform.position = _lastPoint.position;
     }
     #endregion
 
