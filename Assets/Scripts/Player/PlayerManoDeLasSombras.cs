@@ -22,7 +22,8 @@ public class PlayerManoDeLasSombras : BaseState
     [SerializeField] private float _damage = 10; // Daño inicial de la habilidad.
     [SerializeField] private float _distance = 4; // Distancia máxima que la habilidad puede recorrer.
     [SerializeField] private float _stunDuration = 2; // Tiempo que los enemigos quedarán aturdidos.
-    [SerializeField] private float _speed = 5; // Velocidad con la que la sombra se desplaza.
+    [SerializeField] private float _goSpeed = 5; // Velocidad con la que la sombra se desplaza.
+    [SerializeField] private float _returnSpeed = 15; // Velocidad con la que la sombra se desplaza.
     [SerializeField] private float _animationTime = 1;
     [SerializeField] GameObject _handPrefab;
     #endregion
@@ -62,13 +63,14 @@ public class PlayerManoDeLasSombras : BaseState
     {
         GameObject hand = Instantiate(_handPrefab, transform.position, Quaternion.identity);
         HandBehaviour handBehavior = hand.GetComponent<HandBehaviour>();
-        handBehavior.Initialize(direction, _distance, _speed, _damage);
+        handBehavior.Initialize(direction, _distance, _goSpeed,_returnSpeed, _damage);
     }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
         _startTime = Time.time;
         CreateHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection,transform.position.y));
     }

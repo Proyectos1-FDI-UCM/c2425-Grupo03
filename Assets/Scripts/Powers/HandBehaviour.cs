@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections.Generic;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -32,11 +33,15 @@ public class HandBehaviour : MonoBehaviour
     // Ejemplo: _maxHealthPoints
     private Vector2 _direction;
     private Vector2 _startPosition;
-    private float _speed;
+    private float _goSpeed;
+    private float _returnSpeed;
     private float _damage;
     private float _startTime;
     private float _distance;
+    bool _llegaFin = false;
     Rigidbody2D _rigidbody;
+    private List<Rigidbody2D> _enemiesHit = new List<Rigidbody2D>(); //lista de enemigos afectados
+    private HashSet<HealthManager> _damagedEnemies = new HashSet<HealthManager>(); //lista de los enemigos dañados
     #endregion
 
     // ---- PROPIEDADES ----
@@ -59,6 +64,7 @@ public class HandBehaviour : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _llegaFin = false;
     }
 
     /// <summary>
@@ -67,25 +73,44 @@ public class HandBehaviour : MonoBehaviour
     void Update()
     {
 
-        // Mover la onda
-        _rigidbody.velocity = _direction * _speed;
-
-        // Si la mano alcanza la distancia máxima, destruir la onda
-        if (Vector2.Distance(_startPosition, transform.position) >= _distance)
+        // Si la mano alcanza la distancia máxima, vuelve hacia el posicion del jugador y se destruye la mano
+        if (Vector2.Distance(_startPosition, transform.position) <= _distance && !_llegaFin)
         {
-            Destroy(gameObject);
+            _rigidbody.velocity = _direction * _goSpeed;
+        }
+        else 
+        {
+            _llegaFin = true;
+            _rigidbody.velocity = -_direction * _returnSpeed;
+
+            if (Mathf.Round(_rigidbody.position.x) == _startPosition.x)
+            {
+                Destroy(gameObject);
+            }
+
+            foreach (Rigidbody2D enemy in _enemiesHit)
+            {
+                if (enemy != null)
+                {
+                    float knockbackDistance = Vector2.Distance(_startPosition, enemy.GetComponent<Rigidbody2D>().position);
+
+                    enemy.GetComponent<StateMachine>()
+                            .GetStateByType<KnockbackState>()?.ApplyKnockBack(-knockbackDistance+1f, 0.1f, (int)_direction.x);
+
+
+                    if (!_damagedEnemies.Contains(enemy.GetComponent<HealthManager>())) //si no estan dañado de antes
+                    {
+                        enemy.GetComponent<HealthManager>().RemoveHealth((int)_damage);
+                        _damagedEnemies.Add(enemy.GetComponent<HealthManager>()); // Lo marcamos como dañado
+                    }
+                }
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        HealthManager healthManager = collision.GetComponent<HealthManager>();
-        if (healthManager != null)
-        {
-            healthManager.RemoveHealth((int)_damage);
-        }
-
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             // Si la onda choca con una pared, se desaparece.
             Destroy(gameObject);
@@ -96,7 +121,12 @@ public class HandBehaviour : MonoBehaviour
         if (enemyStateMachine != null)
         {
             enemyStateMachine.ChangeState(enemyStateMachine.GetStateByType<EnemyIdleState>());
-            collision.attachedRigidbody.position = _startPosition + new Vector2 (1,0)* _direction;
+
+            Rigidbody2D enemyRigidbody = collision.attachedRigidbody;
+            if (!_enemiesHit.Contains(enemyRigidbody))
+            {
+                _enemiesHit.Add(enemyRigidbody);
+            }
         }
     }
     #endregion
@@ -108,10 +138,11 @@ public class HandBehaviour : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void Initialize(Vector2 direction, float distance, float speed, float damage)
+    public void Initialize(Vector2 direction, float distance, float goSpeed,float returnSpeed, float damage)
     {
         _direction = direction;
-        _speed = speed;
+        _goSpeed = goSpeed;
+        _returnSpeed = returnSpeed;
         _damage = damage;
         _distance = distance;
         _startPosition = transform.position;
