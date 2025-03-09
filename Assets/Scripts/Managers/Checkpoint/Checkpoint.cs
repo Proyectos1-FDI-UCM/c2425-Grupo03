@@ -20,7 +20,6 @@ public class Checkpoint : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-
     [SerializeField] private Animator _animator;
 
     #endregion
@@ -34,11 +33,8 @@ public class Checkpoint : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    //private Animator _animator;
-
     private bool _isActivated = false;
 
-    //private Animator _animator;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -50,26 +46,6 @@ public class Checkpoint : MonoBehaviour
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -89,24 +65,22 @@ public class Checkpoint : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerStateMachine>() && !_isActivated)
         {
             _isActivated = true;
-            Debug.Log("¡Checkpoint activado!");
-            //CheckPointManager.Instance.RespawnPlayer = transform;
+;
             CheckpointManager.Instance.SetCheckpoint(this.transform);
-            //CheckpointManager.Instance._lastPoint = transform;
 
-            //_animator.SetTrigger("CpAppear");
-            //collision.GetComponent<Animator>().SetTrigger("CpAppear");
             if (_animator != null)
             {
                 _animator.SetTrigger("CpAppear");
             }
-
-            //_animator.SetTrigger("CpAppear");
         }
     }
 
