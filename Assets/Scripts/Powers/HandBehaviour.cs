@@ -84,7 +84,7 @@ public class HandBehaviour : MonoBehaviour
             _llegaFin = true;
             _rigidbody.velocity = -_direction * _returnSpeed;
 
-            if (Mathf.Abs(_rigidbody.position.x - _startPosition.x) < 0.1f)
+            if (Mathf.Abs(_rigidbody.position.x - _startPosition.x) < 0.2f)
             {
                 Destroy(gameObject);
             }
@@ -96,7 +96,7 @@ public class HandBehaviour : MonoBehaviour
                     float knockbackDistance = Vector2.Distance(_startPosition, enemy.GetComponent<Rigidbody2D>().position);
 
                     enemy.GetComponent<StateMachine>()
-                            .GetStateByType<KnockbackState>()?.ApplyKnockBack(-knockbackDistance+1f, 0.1f, (int)_direction.x);
+                            .GetStateByType<KnockbackState>()?.ApplyKnockBack(-knockbackDistance + 0.5f, 0.1f, (int)_direction.x);
 
                     if (!_damagedEnemies.Contains(enemy.GetComponent<HealthManager>())) //si no estan dañado de antes
                     {
