@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuperDash"",
+                    ""type"": ""Button"",
+                    ""id"": ""383fe886-0aae-4799-87b7-aeef60b8f8d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ManoDeLasSombras"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16d9fae3-b8e7-449b-bb58-80b14e1f3154"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -295,6 +315,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_ManoDeLasSombras = m_Player.FindAction("ManoDeLasSombras", throwIfNotFound: true);
+        m_Player_SuperDash = m_Player.FindAction("SuperDash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -361,6 +382,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_ManoDeLasSombras;
+    private readonly InputAction m_Player_SuperDash;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -370,6 +392,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @ManoDeLasSombras => m_Wrapper.m_Player_ManoDeLasSombras;
+        public InputAction @SuperDash => m_Wrapper.m_Player_SuperDash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -394,6 +417,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ManoDeLasSombras.started += instance.OnManoDeLasSombras;
             @ManoDeLasSombras.performed += instance.OnManoDeLasSombras;
             @ManoDeLasSombras.canceled += instance.OnManoDeLasSombras;
+            @SuperDash.started += instance.OnSuperDash;
+            @SuperDash.performed += instance.OnSuperDash;
+            @SuperDash.canceled += instance.OnSuperDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -413,6 +439,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ManoDeLasSombras.started -= instance.OnManoDeLasSombras;
             @ManoDeLasSombras.performed -= instance.OnManoDeLasSombras;
             @ManoDeLasSombras.canceled -= instance.OnManoDeLasSombras;
+            @SuperDash.started -= instance.OnSuperDash;
+            @SuperDash.performed -= instance.OnSuperDash;
+            @SuperDash.canceled -= instance.OnSuperDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -437,5 +466,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnManoDeLasSombras(InputAction.CallbackContext context);
+        void OnSuperDash(InputAction.CallbackContext context);
     }
 }

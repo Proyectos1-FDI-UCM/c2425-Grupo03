@@ -176,6 +176,11 @@ public class PlayerGroundedState : BaseState
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
+        else if (_ctx.PlayerInput.SuperDash.triggered)
+        {
+            PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
+            Ctx.ChangeState(playerSuperDashState);
+        }
     }
     #endregion   
 

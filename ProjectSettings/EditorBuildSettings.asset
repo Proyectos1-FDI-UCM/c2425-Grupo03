@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Testing/PrototipeLevel.unity
+    path: Assets/Scenes/Testing/PrototipeLevel_Adrian.unity
     guid: cc8d7fe05d9e6be4ba998b08ebd954f0
   m_configObjects: {}
