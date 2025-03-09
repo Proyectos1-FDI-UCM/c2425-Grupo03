@@ -60,10 +60,9 @@ public class PlayerManoDeLasSombras : BaseState
 
     private void CreateHand(Vector2 direction)
     {
-        GameObject hand = Instantiate(_handPrefab, transform.position + new Vector3(1*direction.x,0,0), Quaternion.identity);
+        GameObject hand = Instantiate(_handPrefab, transform.position + new Vector3(2*direction.x,0,0), Quaternion.identity);
         HandBehaviour handBehavior = hand.GetComponent<HandBehaviour>();
         handBehavior.Initialize(direction, _distance, _goSpeed,_returnSpeed, _damage);
-        Debug.Log(direction.x);
     }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
