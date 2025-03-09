@@ -21,10 +21,9 @@ public class PlayerManoDeLasSombras : BaseState
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField] private float _damage = 10; // Daño inicial de la habilidad.
     [SerializeField] private float _distance = 4; // Distancia máxima que la habilidad puede recorrer.
-    [SerializeField] private float _stunDuration = 2; // Tiempo que los enemigos quedarán aturdidos.
     [SerializeField] private float _goSpeed = 5; // Velocidad con la que la sombra se desplaza.
     [SerializeField] private float _returnSpeed = 15; // Velocidad con la que la sombra se desplaza.
-    [SerializeField] private float _animationTime = 1;
+    [SerializeField] private float _animationTime = 1; //tiempo que se queda quieto el jugador
     [SerializeField] GameObject _handPrefab;
     #endregion
 

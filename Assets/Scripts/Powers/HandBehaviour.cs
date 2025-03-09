@@ -97,7 +97,6 @@ public class HandBehaviour : MonoBehaviour
                     enemy.GetComponent<StateMachine>()
                             .GetStateByType<KnockbackState>()?.ApplyKnockBack(-knockbackDistance+1f, 0.1f, (int)_direction.x);
 
-
                     if (!_damagedEnemies.Contains(enemy.GetComponent<HealthManager>())) //si no estan dañado de antes
                     {
                         enemy.GetComponent<HealthManager>().RemoveHealth((int)_damage);
