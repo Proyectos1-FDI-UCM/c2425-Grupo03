@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Zhiyi Zhou
+// Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -13,17 +13,15 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class CheckpointManager : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
-    public static CheckpointManager Instance { get; private set; }
-
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    //[SerializeField] private GameObject _player;
-    //[SerializeField] Transform _lastPoint;
+    //[SerializeField] BoxCollider2D trigger;
+    [SerializeField] private Animator _animator;
 
     #endregion
 
@@ -36,8 +34,9 @@ public class CheckpointManager : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    private Transform _lastPoint;
+    //private Animator _animator;
 
+    private bool _isActivated = false;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -52,19 +51,6 @@ public class CheckpointManager : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
-    private void Awake()
-    {
-        
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
@@ -92,27 +78,6 @@ public class CheckpointManager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    /// <summary>
-    /// Método para registrar el último checkpoint
-    /// </summary>
-    /// <param name="checkpointTransform"></param>
-    public void SetCheckpoint(Transform checkpointTransform)
-    {
-        _lastPoint = checkpointTransform;
-    }
-
-    /// <summary>
-    /// Método para reaparecer al jugador al checkpoint
-    /// </summary>
-    /// <param name="player"></param>
-    public void RespawnPlayer(GameObject player)
-    {
-        if (_lastPoint != null)
-        {
-            player.transform.position = _lastPoint.position;
-            //_player.transform.position = _lastPoint.position;
-        }
-    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -122,7 +87,26 @@ public class CheckpointManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerStateMachine>() && !_isActivated)
+        {
+            _isActivated = true;
+            Debug.Log("¡Checkpoint activado!");
+            //CheckPointManager.Instance.RespawnPlayer = transform;
+            CheckpointManager.Instance.SetCheckpoint(this.transform);
+            //CheckpointManager.Instance._lastPoint = transform;
 
-} // class CheckPointManager 
+            //_animator.SetTrigger("CpAppear");
+            //collision.GetComponent<Animator>().SetTrigger("CpAppear");
+            if (_animator != null)
+            {
+                _animator.SetTrigger("CpAppear");
+            }
+        }
+    }
+
+    #endregion   
+
+} // class Checkpoint 
 // namespace
