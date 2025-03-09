@@ -20,7 +20,7 @@ public class Checkpoint : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    //[SerializeField] BoxCollider2D trigger;
+
     [SerializeField] private Animator _animator;
 
     #endregion
@@ -37,6 +37,8 @@ public class Checkpoint : MonoBehaviour
     //private Animator _animator;
 
     private bool _isActivated = false;
+
+    //private Animator _animator;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -103,6 +105,8 @@ public class Checkpoint : MonoBehaviour
             {
                 _animator.SetTrigger("CpAppear");
             }
+
+            //_animator.SetTrigger("CpAppear");
         }
     }
 
