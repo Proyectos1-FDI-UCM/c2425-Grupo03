@@ -74,16 +74,17 @@ public class HandBehaviour : MonoBehaviour
     {
 
         // Si la mano alcanza la distancia máxima, vuelve hacia el posicion del jugador y se destruye la mano
-        if (Vector2.Distance(_startPosition, transform.position) <= _distance && !_llegaFin)
+        if (!_llegaFin)
         {
             _rigidbody.velocity = _direction * _goSpeed;
+            if(Vector2.Distance(_startPosition, transform.position) >= _distance) _llegaFin = true;
         }
         else 
         {
             _llegaFin = true;
             _rigidbody.velocity = -_direction * _returnSpeed;
 
-            if (Mathf.Round(_rigidbody.position.x) == _startPosition.x)
+            if (Mathf.Abs(_rigidbody.position.x - _startPosition.x) < 0.1f)
             {
                 Destroy(gameObject);
             }
@@ -111,8 +112,8 @@ public class HandBehaviour : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            // Si la onda choca con una pared, se desaparece.
-            Destroy(gameObject);
+            // Si la onda choca con una pared, se rebota.
+            _llegaFin = true ;
         }
 
         EnemyStateMachine enemyStateMachine = collision.GetComponent<EnemyStateMachine>();
