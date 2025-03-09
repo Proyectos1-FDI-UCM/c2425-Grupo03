@@ -122,12 +122,6 @@ public class PlayerDeathState : BaseState
 
             //CheckpointManager.Instance.RespawnPlayer(_ctx.gameObject);
 
-            //Transform lastCp = CheckpointManager.Instance._lastPoint;
-            //if (lastCp != null)
-            //{
-            //    _ctx.transform.position = lastCp.position;
-            //}
-
             HealthManager hm = _ctx.GetComponent<HealthManager>();
             hm.SetHealth(hm.MaxHealth);
             _ctx.GetComponent<PlayerHealthBar>()?.SetHealth(hm.MaxHealth);
