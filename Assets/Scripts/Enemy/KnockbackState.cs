@@ -70,7 +70,11 @@ public class KnockbackState : BaseState
         _knockBackDistance = distance;
         _knockBackTime = time;
         _direction = direction;
-        Ctx.ChangeState(this);
+
+        if (Ctx.Rigidbody.gameObject.GetComponent<HealthManager>().Health > 0)
+        {
+            Ctx.ChangeState(this);
+        }
     }
 
     /// <summary>
