@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// El comportamiento del prefan de la habilidad de ManoDeLasSombras
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -31,17 +31,50 @@ public class HandBehaviour : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private Vector2 _direction;
+    /// <summary>
+    /// Direccion que avanza la habilidad
+    /// </summary>
+    private Vector2 _direction; 
+    /// <summary>
+    /// La posicion inicial de la habilidad
+    /// </summary>
     private Vector2 _startPosition;
+    /// <summary>
+    /// la posicion en la que el jugador lanza la habilidad
+    /// </summary>
     private float _goSpeed;
+    /// <summary>
+    /// la velocidad de regreso de la habilidad
+    /// </summary>
     private float _returnSpeed;
+    /// <summary>
+    /// el daño que hace la habilidad
+    /// </summary>
     private float _damage;
+    /// <summary>
+    /// el tiempo en el que se lanza la habilidad
+    /// </summary>
     private float _startTime;
+    /// <summary>
+    /// la distancia que recorre la habilidad
+    /// </summary>
     private float _distance;
+    /// <summary>
+    /// si la habilidad ha llegado a la distancia maxima y ha empezado a retroceder
+    /// </summary>
     bool _llegaFin = false;
+    /// <summary>
+    /// el regidbody de la habilidad 
+    /// </summary>
     Rigidbody2D _rigidbody;
-    private List<Rigidbody2D> _enemiesHit = new List<Rigidbody2D>(); //lista de enemigos afectados
-    private HashSet<HealthManager> _damagedEnemies = new HashSet<HealthManager>(); //lista de los enemigos dañados
+    /// <summary>
+    /// Lista de enemigos afectados por la habilidad
+    /// </summary>
+    private List<Rigidbody2D> _enemiesHit = new List<Rigidbody2D>(); 
+    /// <summary>
+    /// lista de enemigos que ya han sido dañados por la habildad
+    /// </summary>
+    private HashSet<HealthManager> _damagedEnemies = new HashSet<HealthManager>();
     #endregion
 
     // ---- PROPIEDADES ----
@@ -60,6 +93,7 @@ public class HandBehaviour : MonoBehaviour
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
+    /// aisgnar variables
     /// </summary>
     void Start()
     {
@@ -69,31 +103,31 @@ public class HandBehaviour : MonoBehaviour
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// Si la mano alcanza la distancia máxima, vuelve hacia el posicion del jugador y se destruye la mano
     /// </summary>
     void Update()
     {
 
-        // Si la mano alcanza la distancia máxima, vuelve hacia el posicion del jugador y se destruye la mano
-        if (!_llegaFin)
+       
+        if (!_llegaFin) //no ha llegado a la distancia maxima
         {
             _rigidbody.velocity = _direction * _goSpeed;
-            if(Vector2.Distance(_startPosition, transform.position) >= _distance) _llegaFin = true;
+            if(Vector2.Distance(_startPosition, transform.position) >= _distance) _llegaFin = true; 
         }
-        else 
+        else //si que ha llegado a la distancia maxima
         {
-            _llegaFin = true;
             _rigidbody.velocity = -_direction * _returnSpeed;
 
-            if (Mathf.Abs(_rigidbody.position.x - _startPosition.x) < 0.2f)
+            if (Mathf.Abs(_rigidbody.position.x - _startPosition.x) < 0.2f) //se destruye cuando llega al jugador
             {
                 Destroy(gameObject);
             }
 
-            foreach (Rigidbody2D enemy in _enemiesHit)
+            foreach (Rigidbody2D enemy in _enemiesHit) //todos los enemigos afectados 
             {
                 if (enemy != null)
                 {
-                    float knockbackDistance = Vector2.Distance(_startPosition, enemy.GetComponent<Rigidbody2D>().position);
+                    float knockbackDistance = Vector2.Distance(_startPosition, enemy.GetComponent<Rigidbody2D>().position); //distancia que hay entre el jugador y el enemigo
 
                     enemy.GetComponent<StateMachine>()
                             .GetStateByType<KnockbackState>()?.ApplyKnockBack(-knockbackDistance + 1f, 0.1f, (int)_direction.x);
@@ -122,6 +156,7 @@ public class HandBehaviour : MonoBehaviour
         {
             enemyStateMachine.ChangeState(enemyStateMachine.GetStateByType<EnemyIdleState>());
 
+            //añade el eneigo colisionado a la lista de enemigos afectados
             Rigidbody2D enemyRigidbody = collision.attachedRigidbody;
             if (!_enemiesHit.Contains(enemyRigidbody))
             {
@@ -138,6 +173,14 @@ public class HandBehaviour : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+    /// <summary>
+    /// inicializar los parametros para que sean editables desde el editor del script PlayerManoDeLasSombras en el prefab del player
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <param name="distance"></param>
+    /// <param name="goSpeed"></param>
+    /// <param name="returnSpeed"></param>
+    /// <param name="damage"></param>
     public void Initialize(Vector2 direction, float distance, float goSpeed,float returnSpeed, float damage)
     {
         _direction = direction;

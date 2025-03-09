@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// El estado en el que el Jugador esta tirando la habilidad ManoDeLasSombras
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -13,17 +13,35 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class PlayerManoDeLasSombras : BaseState
+public class PlayerManoDeLasSombrasState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [SerializeField] private float _damage = 10; // Daño inicial de la habilidad.
-    [SerializeField] private float _distance = 4; // Distancia máxima que la habilidad puede recorrer.
-    [SerializeField] private float _goSpeed = 5; // Velocidad con la que la sombra se desplaza.
-    [SerializeField] private float _returnSpeed = 15; // Velocidad con la que la sombra se desplaza.
-    [SerializeField] private float _animationTime = 1; //tiempo que se queda quieto el jugador
+    /// <summary>
+    /// // Daño de la habilidad.
+    /// </summary>
+    [SerializeField] private float _damage = 10;
+    /// <summary>
+    /// Distancia máxima que la habilidad puede recorrer.
+    /// </summary>
+    [SerializeField] private float _distance = 4;
+    /// <summary>
+    /// Velocidad con la que la sombra avanza .
+    /// </summary>
+    [SerializeField] private float _goSpeed = 5;
+    /// <summary>
+    /// Velocidad con la que la sombra retrocede
+    /// </summary>
+    [SerializeField] private float _returnSpeed = 15;
+    /// <summary>
+    /// tiempo que se queda quieto el jugador al lanzar la habilidad
+    /// </summary>
+    [SerializeField] private float _animationTime = 1; 
+    /// <summary>
+    /// el prefab de la habilidad
+    /// </summary>
     [SerializeField] GameObject _handPrefab;
     #endregion
 
@@ -35,6 +53,9 @@ public class PlayerManoDeLasSombras : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    /// <summary>
+    /// el tiempo en el que se lanza la habilidad
+    /// </summary>
     float _startTime;
 
     #endregion
@@ -58,6 +79,10 @@ public class PlayerManoDeLasSombras : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// metodo que instancia la habilidad delante del jugador.
+    /// </summary>
+    /// <param name="direction"></param>
     private void CreateHand(Vector2 direction)
     {
         GameObject hand = Instantiate(_handPrefab, transform.position + new Vector3(2*direction.x,0,0), Quaternion.identity);
@@ -66,6 +91,7 @@ public class PlayerManoDeLasSombras : BaseState
     }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Llama al metodo para instanciar la bala y pone la velocidad del jugador a 0
     /// </summary>
     public override void EnterState()
     {

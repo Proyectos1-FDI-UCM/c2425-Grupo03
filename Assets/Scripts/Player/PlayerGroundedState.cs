@@ -173,7 +173,7 @@ public class PlayerGroundedState : BaseState
         }
         else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed())
         {
-            PlayerManoDeLasSombras playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombras>();
+            PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
     }
