@@ -213,7 +213,7 @@ public class PlayerAttackState : BaseState
         foreach (RaycastHit2D enemy in enemyInArea)
         {
             //Código que aplica knockback al enemigo golpeado (Puesto para testear)
-            enemy.collider.GetComponent<StateMachine>()
+            enemy.collider.GetComponent<StateMachine>()?
                 .GetStateByType<KnockbackState>()?.ApplyKnockBack(3f, 0.1f, (int)_ctx.LookingDirection);
 
             enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
