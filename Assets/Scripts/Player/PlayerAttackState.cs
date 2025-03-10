@@ -24,15 +24,22 @@ public class PlayerAttackState : BaseState
     /// <summary>
     /// El radio de ataque del jugador
     /// </summary>
-    [SerializeField, Min(0)] float _attackRadius;
+    [SerializeField, Min(0)] private float _attackRadius;
     /// <summary>
     /// El tiempo de espera entre dos ataques
     /// </summary>
-    [SerializeField] float _attackSpeed;
+    [SerializeField] private float _attackSpeed;
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
-    [SerializeField] float _damage;
+    [SerializeField] private float _damage;
+
+    /// <summary>
+    /// El porcentaje que se añade a las habilidades
+    /// </summary>
+    [SerializeField] private float _abilityPercentageToAdd;
+
+
     [Header("Propiedad del combo")]
     /// <summary>
     /// El tiempo de gracia para encadenar combo
@@ -77,6 +84,8 @@ public class PlayerAttackState : BaseState
     /// </summary>
     PlayerStateMachine _ctx;
 
+    private PlayerChargeScript _chargeScript;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -99,6 +108,7 @@ public class PlayerAttackState : BaseState
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
         _animator = GetCTX<PlayerStateMachine>().Animator;
         _ctx = GetCTX<PlayerStateMachine>();
+        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
     }
     #endregion
 
@@ -167,7 +177,6 @@ public class PlayerAttackState : BaseState
     {
         //Poner la velocidad del rigidbody a cero
         _rb.velocity = Vector3.zero;
-
     }
 
     /// <summary>
@@ -213,6 +222,8 @@ public class PlayerAttackState : BaseState
                 .GetStateByType<KnockbackState>()?.ApplyKnockBack(3f, 0.1f, new Vector2((int)_ctx.LookingDirection,0));
 
             enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
+
+            _chargeScript.AddCharge(10);
         }
     }
 

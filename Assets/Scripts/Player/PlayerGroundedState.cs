@@ -176,7 +176,7 @@ public class PlayerGroundedState : BaseState
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
-        else if (_ctx.PlayerInput.SuperDash.triggered)
+        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerChargeScript>().abilities[0].isCharged)
         {
             PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
             Ctx.ChangeState(playerSuperDashState);

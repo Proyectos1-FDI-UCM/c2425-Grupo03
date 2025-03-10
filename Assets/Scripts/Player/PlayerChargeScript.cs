@@ -5,7 +5,6 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -19,7 +18,7 @@ public class PlayerChargeScript : MonoBehaviour
     /// <summary>
     /// El porcentaje del daño que se va a quitar de la barra de carga.
     /// </summary>
-    [SerializeField, Range(0f, 1f)] private float _removedChargePercentage;
+    [SerializeField] private float _removedChargePercentage;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -31,12 +30,16 @@ public class PlayerChargeScript : MonoBehaviour
     /// <summary>
     /// El valor máximo de la carga.
     /// </summary>
-    private int _MAX_CHARGE = 100;
+    private int _MAX_CHARGE = 200;
+    /// <summary>
+    /// El valor minimo de la carga.
+    /// </summary>
+    private int _MIN_CHARGE = 0;    
     /// <summary>
     /// Una estructura que define la habilidad.
     /// </summary>
     public struct Ability {
-        public int currentCharge;
+        public float currentCharge;
         public bool isCharged;
     }
     private static Ability abilityOne;
@@ -72,27 +75,44 @@ public class PlayerChargeScript : MonoBehaviour
     /// Añade carga a la barra.
     /// </summary>
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
-    public void AddCharge(int chargePoints) {
-        for (int i = 0; i < abilities.Length; i++) {
-            Ability currAbility = abilities[i];
-            if (!currAbility.isCharged) currAbility.currentCharge += chargePoints;
-            if (!(currAbility.currentCharge >= _MAX_CHARGE)) {
-                currAbility.currentCharge = _MAX_CHARGE;
-                currAbility.isCharged = true;
+    public void AddCharge(int chargePoints) 
+    {
+        for (int i = 0; i < abilities.Length; i++) 
+        {
+            if (!abilities[i].isCharged) abilities[i].currentCharge += chargePoints;
+
+            if ((abilities[i].currentCharge >= _MAX_CHARGE))
+            {
+                abilities[i].currentCharge = _MAX_CHARGE;
+                abilities[i].isCharged = true;
             }
         }
+        
     }
     /// <summary>
     /// Quita carga de la barra.
     /// </summary>
     /// <param name="removedHealth">Los puntos de vida que se han quitado al jugador.</param>
-    public void RemoveCharge(float removedHealth) {
-        int chargePoints = (int) (_removedChargePercentage / 100 * removedHealth);
+    public void RemoveCharge(float removedHealth)
+    {
+        float chargePoints = (_removedChargePercentage / 100 * removedHealth);
+        Debug.Log(chargePoints);
         for (int i = 0; i < abilities.Length; i++)
         {
             Ability currAbility = abilities[i];
-            if (!currAbility.isCharged) currAbility.currentCharge -= chargePoints;
+            if (!currAbility.isCharged)
+            {
+                currAbility.currentCharge -= chargePoints;
+            }
+
+            if(currAbility.currentCharge <= _MIN_CHARGE)
+            {
+                currAbility.currentCharge = _MIN_CHARGE;
+            }
+
+            abilities[i] = currAbility;
         }
+        Debug.Log(abilities[0].currentCharge);
     }
     /// <summary>
     /// Método  que resetea la carga de la barra a 0.

@@ -70,6 +70,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     private int _lookingDirection;
 
+
     #endregion
 
     // ---- PROPIEDADES ----

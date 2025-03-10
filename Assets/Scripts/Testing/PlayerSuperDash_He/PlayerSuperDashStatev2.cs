@@ -45,6 +45,8 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     [SerializeField, Min(0)] private float _timeOfDash;
 
+    [SerializeField] private int _abilityIndex;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -102,6 +104,10 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     private RaycastHit2D[] _enemyInArea;
 
+
+    private PlayerChargeScript _chargeScript;
+
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -115,6 +121,7 @@ public class PlayerSuperDashState : BaseState
     private void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
+        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
     }
     #endregion
 
@@ -127,11 +134,15 @@ public class PlayerSuperDashState : BaseState
     // Ejemplo: GetPlayerController
 
 
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        //No se puede atacar al jugador mientras hace el dash
+        _ctx.GetComponent<HealthManager>().Inmune = true;
+
         _ctx.Rigidbody.velocity = Vector2.zero;
 
         //Comprobar la validez de los tiempos
@@ -156,7 +167,9 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-
+        //Quitar inmunidad al jugador
+        _ctx.GetComponent<HealthManager>().Inmune = false;
+        _chargeScript.ResetCharge(0);
     }
     #endregion
 

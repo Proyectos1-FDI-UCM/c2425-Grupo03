@@ -112,18 +112,22 @@ public class PlayerManoDeLasSombrasState : BaseState
         foreach (RaycastHit2D hit in hits)
         {
             // Verificar si el objeto impactado es un enemigo
-            EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
+            HealthManager enemy = hit.collider.gameObject.GetComponent<HealthManager>();
 
             if (enemy != null)
             {
                 // Aplicar Knockback           
-                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
+                EnemyStateMachine enemyStateMachine = enemy.gameObject.GetComponent<EnemyStateMachine>();
+
+                if (enemyStateMachine != null)
+                {
+                    enemyStateMachine.GetStateByType<KnockbackState>().ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
+                }
                 
                 // Aplicar daño si tiene un HealthManager
-                HealthManager health = enemy.GetComponent<HealthManager>();
-                if (health != null)
+                if (enemy != null)
                 {
-                    health.RemoveHealth((int)_firstHitDamage); // Primer golpe
+                    enemy.RemoveHealth((int)_firstHitDamage); // Primer golpe
                 }
             }
         }
