@@ -25,6 +25,8 @@ public class CheckpointManager : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [SerializeField] private Transform _initialPoint;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -65,6 +67,14 @@ public class CheckpointManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (_lastPoint == null && _initialPoint != null)
+        {
+            _lastPoint = _initialPoint;
         }
     }
     #endregion
