@@ -39,7 +39,7 @@ public class KnockbackState : BaseState
     /// <summary>
     /// La dirección en la que se aplica le knockback.
     /// </summary>
-    int _direction;
+    Vector2 _direction;
 
     #endregion
 
@@ -65,7 +65,7 @@ public class KnockbackState : BaseState
     /// <param name="distance"> La distancia que recorrida durante el knockback.</param>
     /// <param name="time"> El timepo que tarda el estado de knockback.</param>
     /// <param name="direction"> La dirección en la que se aplica el knockback.</param>
-    public void ApplyKnockBack(float distance, float time, int direction)
+    public void ApplyKnockBack(float distance, float time, Vector2 direction)
     {
         _knockBackDistance = distance;
         _knockBackTime = time;
@@ -82,7 +82,7 @@ public class KnockbackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction * Vector2.right;
+        Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction;
         _knockBackEndTime = Time.time + _knockBackTime;
     }
     
