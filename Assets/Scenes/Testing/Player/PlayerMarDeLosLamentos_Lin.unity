@@ -1904,14 +1904,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _firstHitDamage: 1
-  _secondHitDamage: 2
+  _firstHitDamage: 3
+  _secondHitDamage: 6
   _skillRange: 8
   _animationTime: 0.5
   _drawRaycast: 1
-  _attractDistance: 4
+  _attractDistance: 3
   _pushDistance: 6
   _startSkillPosition: 1
+  _liftingHeight: 1
 --- !u!1001 &327884897
 PrefabInstance:
   m_ObjectHideFlags: 0

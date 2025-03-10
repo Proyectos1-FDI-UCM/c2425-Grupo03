@@ -24,19 +24,19 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// // Daño de la habilidad.
     /// </summary>
-    [SerializeField] private float _firstHitDamage = 10;
+    [SerializeField] private float _firstHitDamage = 10f;
     /// <summary>
     /// // Daño de la habilidad.
     /// </summary>
-    [SerializeField] private float _secondHitDamage = 10;
+    [SerializeField] private float _secondHitDamage = 10f;
     /// <summary>
     /// Distancia máxima que la habilidad puede recorrer.
     /// </summary>
-    [SerializeField] private float _skillRange = 4;
+    [SerializeField] private float _skillRange = 4f;
     /// <summary>
     /// tiempo que se queda quieto el jugador al lanzar la habilidad
     /// </summary>
-    [SerializeField] private float _animationTime = 1;
+    [SerializeField] private float _animationTime = 1f;
     /// <summary>
     /// dibujar el rango de ataque
     /// </summary>
@@ -44,19 +44,19 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// el rango que les atrae el primer hit
     /// </summary>
-    [SerializeField] private float _attractDistance = 2;
+    [SerializeField] private float _attractDistance = 2f;
     /// <summary>
     /// el rango que les empuja el segundo hit
     /// </summary>
-    [SerializeField] private float _pushDistance = 4;
+    [SerializeField] private float _pushDistance = 4f;
     /// <summary>
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
-    [SerializeField] private float _startSkillPosition = 1;
+    [SerializeField] private float _startSkillPosition = 1f;
     /// <summary>
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
-    [SerializeField] private float _liftingHeight = 1;
+    [SerializeField] private float _liftingHeight = 1f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -101,13 +101,13 @@ public class PlayerManoDeLasSombrasState : BaseState
     private void CastShadowHand(Vector2 direction)
     {
         // Posición de inicio del Raycast (en el jugador)
-        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0);
+        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f);
 
         // Realizar el Raycast
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange,LayerMask.GetMask("Enemy"));
 
         // Dibujar el Raycast en la escena para depuración
-        if (_drawRaycast)Debug.DrawRay(startPosition, direction * _skillRange, Color.red, 0.5f);
+        if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.red, 0.5f);
 
         foreach (RaycastHit2D hit in hits)
         {
@@ -117,14 +117,9 @@ public class PlayerManoDeLasSombrasState : BaseState
             if (enemy != null)
             {
 
-                // Aplicar Knockback
-                Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
-                if (enemyRb != null)
-                {
-                    //float knockbackDistance = Vector2.Distance(startPosition, enemyRb.position);
-                    enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
-                }
-
+                // Aplicar Knockback           
+                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
+                
                 // Aplicar daño si tiene un HealthManager
                 HealthManager health = enemy.GetComponent<HealthManager>();
                 if (health != null)
