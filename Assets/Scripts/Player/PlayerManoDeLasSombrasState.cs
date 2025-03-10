@@ -72,6 +72,10 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     float _startTime;
 
+    private PlayerChargeScript _chargeScript;
+
+    private PlayerStateMachine _ctx;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -82,6 +86,11 @@ public class PlayerManoDeLasSombrasState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    private void Start()
+    {
+        _ctx = GetCTX<PlayerStateMachine>();
+        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+    }
 
     #endregion
 
@@ -97,7 +106,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// metodo que instancia la habilidad delante del jugador.
     /// </summary>
     /// <param name="direction"></param>
-    
+
     private void CastShadowHand(Vector2 direction)
     {
         // Posición de inicio del Raycast (en el jugador)
@@ -182,7 +191,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _chargeScript.ResetCharge(1);
     }
     #endregion
     
