@@ -25,6 +25,7 @@ public class CheckpointManager : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [Header("Initial SpawnPoint")]
     [SerializeField] private Transform _initialPoint;
 
     #endregion
@@ -70,10 +71,15 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before 
+    /// any of the Update methods are called the first time.
+    /// </summary>
     private void Start()
     {
         if (_lastPoint == null && _initialPoint != null)
         {
+            //Cuando no hay checkpoint activado
             _lastPoint = _initialPoint;
         }
     }
