@@ -82,7 +82,7 @@ public class KnockbackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction;
+        Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
         _knockBackEndTime = Time.time + _knockBackTime;
     }
     
