@@ -104,7 +104,7 @@ public class PlayerManoDeLasSombrasState : BaseState
         Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f);
 
         // Realizar el Raycast
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange,LayerMask.GetMask("Enemy"));
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, 1 << 10);
 
         // Dibujar el Raycast en la escena para depuración
         if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.red, 0.5f);
@@ -112,11 +112,10 @@ public class PlayerManoDeLasSombrasState : BaseState
         foreach (RaycastHit2D hit in hits)
         {
             // Verificar si el objeto impactado es un enemigo
-            EnemyStateMachine enemy = hit.collider.GetComponent<EnemyStateMachine>();
+            EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
 
             if (enemy != null)
             {
-
                 // Aplicar Knockback           
                 enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
                 
