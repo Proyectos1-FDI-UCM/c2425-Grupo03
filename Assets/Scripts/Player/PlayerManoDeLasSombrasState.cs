@@ -44,19 +44,19 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// el rango que les atrae el primer hit
     /// </summary>
-    [SerializeField] private float _attractDistance = 2f;
+    [SerializeField] private float _attractDistance = 2;
     /// <summary>
     /// el rango que les empuja el segundo hit
     /// </summary>
-    [SerializeField] private float _pushDistance = 4f;
+    [SerializeField] private float _pushDistance = 4;
     /// <summary>
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
-    [SerializeField] private float _startSkillPosition = 1f;
+    [SerializeField] private float _startSkillPosition = 1;
     /// <summary>
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
-    [SerializeField] private float _liftingHeight = 1f;
+    [SerializeField] private float _liftingHeight = 1;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -145,7 +145,7 @@ public class PlayerManoDeLasSombrasState : BaseState
 
         foreach (RaycastHit2D hit in hits)
         {
-            EnemyStateMachine enemy = hit.collider.GetComponent<EnemyStateMachine>();
+            EnemyStateMachine enemy = hit.collider == null ? null: hit.collider.GetComponent<EnemyStateMachine>();
 
             if (enemy != null)
             {
