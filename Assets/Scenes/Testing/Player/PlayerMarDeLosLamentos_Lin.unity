@@ -1904,12 +1904,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _damage: 5
-  _distance: 8
-  _goSpeed: 10
-  _returnSpeed: 15
-  _animationTime: 1.5
-  _handPrefab: {fileID: 3477275574126190004, guid: b307fb200196bcc4186ab5eaa1f679c2, type: 3}
+  _firstHitDamage: 1
+  _secondHitDamage: 2
+  _skillRange: 8
+  _animationTime: 0.5
+  _drawRaycast: 1
+  _attractDistance: 4
+  _pushDistance: 6
+  _startSkillPosition: 1
 --- !u!1001 &327884897
 PrefabInstance:
   m_ObjectHideFlags: 0

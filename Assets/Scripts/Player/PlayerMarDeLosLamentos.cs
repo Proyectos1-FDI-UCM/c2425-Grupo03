@@ -64,8 +64,8 @@ public class PlayerMarDeLosLamentos : BaseState
     private void CreateWave(Vector2 direction)
     {
         GameObject wave = Instantiate(_wavePrefab, transform.position, Quaternion.identity);
-        WaveBehavior waveBehavior = wave.GetComponent<WaveBehavior>();
-        waveBehavior.Initialize(direction, _effectDistance, _waveSpeed, _skillDuration, _skillDamage);
+       /* WaveBehavior waveBehavior = wave.GetComponent<WaveBehavior>();
+        waveBehavior.Initialize(direction, _effectDistance, _waveSpeed, _skillDuration, _skillDamage);*/
     }
     #endregion
 

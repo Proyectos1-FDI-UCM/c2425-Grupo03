@@ -210,7 +210,7 @@ public class PlayerAttackState : BaseState
         {
             //Código que aplica knockback al enemigo golpeado (Puesto para testear)
             enemy.collider.GetComponent<StateMachine>()?
-                .GetStateByType<KnockbackState>()?.ApplyKnockBack(3f, 0.1f, (int)_ctx.LookingDirection);
+                .GetStateByType<KnockbackState>()?.ApplyKnockBack(3f, 0.1f, new Vector2((int)_ctx.LookingDirection,0));
 
             enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
         }
