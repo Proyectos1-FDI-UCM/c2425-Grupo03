@@ -103,7 +103,7 @@ public class KnockbackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        
+        Ctx.Rigidbody.velocity *= 0.8f * Time.deltaTime;
     }
 
     /// <summary>
