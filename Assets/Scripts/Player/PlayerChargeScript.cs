@@ -58,7 +58,7 @@ public class PlayerChargeScript : MonoBehaviour
     {
         abilities[0] = abilityOne;
         abilities[1] = abilityTwo;
-        // GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
+        GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
         for (int i = 0; i < abilities.Length; i++) {
             abilities[i].currentCharge = 0;
             abilities[i].isCharged = false;
@@ -72,24 +72,27 @@ public class PlayerChargeScript : MonoBehaviour
     /// Añade carga a la barra.
     /// </summary>
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
-    /// <param name="abilityNr">El número de la habilidad.</param>
-    public void AddCharge(int chargePoints, int abilityNr) {
-        Ability currAbility = abilities[abilityNr];
-        if (!currAbility.isCharged) currAbility.currentCharge += chargePoints;
-        if (!(currAbility.currentCharge >= _MAX_CHARGE)) {
-            currAbility.currentCharge = _MAX_CHARGE;
-            currAbility.isCharged = true;
+    public void AddCharge(int chargePoints) {
+        for (int i = 0; i < abilities.Length; i++) {
+            Ability currAbility = abilities[i];
+            if (!currAbility.isCharged) currAbility.currentCharge += chargePoints;
+            if (!(currAbility.currentCharge >= _MAX_CHARGE)) {
+                currAbility.currentCharge = _MAX_CHARGE;
+                currAbility.isCharged = true;
+            }
         }
     }
     /// <summary>
     /// Quita carga de la barra.
     /// </summary>
     /// <param name="removedHealth">Los puntos de vida que se han quitado al jugador.</param>
-    /// <param name="abilityNr">El número de la habilidad.</param>
-    public void RemoveCharge(float removedHealth, int abilityNr) {
+    public void RemoveCharge(float removedHealth) {
         int chargePoints = (int) (_removedChargePercentage / 100 * removedHealth);
-        Ability currAbility = abilities[abilityNr];
-        if (!currAbility.isCharged) currAbility.currentCharge -= chargePoints;
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            Ability currAbility = abilities[i];
+            if (!currAbility.isCharged) currAbility.currentCharge -= chargePoints;
+        }
     }
     /// <summary>
     /// Método  que resetea la carga de la barra a 0.
@@ -109,7 +112,6 @@ public class PlayerChargeScript : MonoBehaviour
     public bool GetCharge(int abilityNr) {
         return abilities[abilityNr].isCharged;
     }
-
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
