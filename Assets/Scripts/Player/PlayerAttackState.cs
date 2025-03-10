@@ -42,10 +42,6 @@ public class PlayerAttackState : BaseState
     /// El daño extra añadido al ataque si encadenas el combo
     /// </summary>
     [SerializeField,Min(0)] int _comboExtraDamage;
-
-    [SerializeField, Min(0)] private float _chargeTime = 1.5f;
-  
-
     #endregion
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)

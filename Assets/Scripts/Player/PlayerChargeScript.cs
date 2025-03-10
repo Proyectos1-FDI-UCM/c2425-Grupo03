@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using JetBrains.Annotations;
 using UnityEngine;
 
 /// <summary>
@@ -15,30 +16,36 @@ public class PlayerChargeScript : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    /// <summary>
+    /// El porcentaje del daño que se va a quitar de la barra de carga.
+    /// </summary>
     [SerializeField, Range(0f, 1f)] private float _removedChargePercentage;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     /// <summary>
-    /// El valor actual de la carga.
+    /// El numero de habilidades que tiene el jugador.
     /// </summary>
-    private float _currentCharge = 0;
+    private static int _abilityNr = 2;
     /// <summary>
     /// El valor máximo de la carga.
     /// </summary>
-    private int _maxCharge = 100;
-
+    private int _MAX_CHARGE = 100;
+    /// <summary>
+    /// Una estructura que define la habilidad.
+    /// </summary>
+    public struct Ability {
+        public int currentCharge;
+        public bool isCharged;
+    }
+    private static Ability abilityOne;
+    private static Ability abilityTwo;
+    public Ability[] abilities = new Ability[_abilityNr];
     #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    public float CurrentCharge { get; private set; } = 0;
-    public bool IsCharged { get; private set; } = false;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -49,45 +56,64 @@ public class PlayerChargeScript : MonoBehaviour
     /// </summary>
     void Start()
     {
-        GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
+        abilities[0] = abilityOne;
+        abilities[1] = abilityTwo;
+        // GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
+        for (int i = 0; i < abilities.Length; i++) {
+            abilities[i].currentCharge = 0;
+            abilities[i].isCharged = false;
+        }
     }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-    public void AddCharge(int chargePoints) {
-        if (!IsCharged) CurrentCharge += chargePoints;
-        if (CurrentCharge >= _maxCharge) {
-            CurrentCharge = _maxCharge;
-            IsCharged = true;
+    /// <summary>
+    /// Añade carga a la barra.
+    /// </summary>
+    /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
+    /// <param name="abilityNr">El número de la habilidad.</param>
+    public void AddCharge(int chargePoints, int abilityNr) {
+        Ability currAbility = abilities[abilityNr];
+        if (!currAbility.isCharged) currAbility.currentCharge += chargePoints;
+        if (!(currAbility.currentCharge >= _MAX_CHARGE)) {
+            currAbility.currentCharge = _MAX_CHARGE;
+            currAbility.isCharged = true;
         }
     }
-
-    public void RemoveCharge(float removedHealth) {
-        float chargePoints = _removedChargePercentage / 100 * removedHealth;
-        if (!IsCharged) CurrentCharge -= chargePoints;
+    /// <summary>
+    /// Quita carga de la barra.
+    /// </summary>
+    /// <param name="removedHealth">Los puntos de vida que se han quitado al jugador.</param>
+    /// <param name="abilityNr">El número de la habilidad.</param>
+    public void RemoveCharge(float removedHealth, int abilityNr) {
+        int chargePoints = (int) (_removedChargePercentage / 100 * removedHealth);
+        Ability currAbility = abilities[abilityNr];
+        if (!currAbility.isCharged) currAbility.currentCharge -= chargePoints;
+    }
+    /// <summary>
+    /// Método  que resetea la carga de la barra a 0.
+    /// </summary>
+    /// <param name="abilityNr">El número de la habilidad.</param>
+    public void ResetCharge(int abilityNr)
+    {
+        abilities[abilityNr].currentCharge = 0;
+        abilities[abilityNr].isCharged = false;
     }
 
-    public void ResetCharge()
-    {
-        CurrentCharge = 0;
+    /// <summary>
+    /// Devuelve true o false dependiendo de si la habilidad está cargada o no.
+    /// </summary>
+    /// <param name="abilityNr">El número de la habilidad.</param>
+    /// <returns>True si la habilidad está cargada, false en caso contrario.</returns>
+    public bool GetCharge(int abilityNr) {
+        return abilities[abilityNr].isCharged;
     }
 
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
     #endregion
 
 } // class PlayerChargeScript 
