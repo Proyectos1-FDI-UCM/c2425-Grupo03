@@ -171,7 +171,7 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(attackState);
             }
         }
-        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed())
+        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerChargeScript>().abilities[1].isCharged)
         {
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
