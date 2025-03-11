@@ -8,6 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -110,13 +111,13 @@ public class PlayerManoDeLasSombrasState : BaseState
     private void CastShadowHand(Vector2 direction)
     {
         // Posición de inicio del Raycast (en el jugador)
-        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f);
+        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f); 
 
         // Realizar el Raycast
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, 1 << 10);
 
         // Dibujar el Raycast en la escena para depuración
-        if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.red, 0.5f);
+        if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.green, 0.5f);
 
         foreach (RaycastHit2D hit in hits)
         {
@@ -130,7 +131,12 @@ public class PlayerManoDeLasSombrasState : BaseState
 
                 if (enemyStateMachine != null)
                 {
-                    enemyStateMachine.GetStateByType<KnockbackState>().ApplyKnockBack(-_attractDistance + 1f, 0.1f, direction);
+
+                    // Si el enemigo puede sobrepasar startPosition, limitamos la atracción
+                    float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
+
+                    enemyStateMachine.GetStateByType<KnockbackState>()
+                        .ApplyKnockBack(-maxKnockback, 0.1f, direction);
                 }
                 
                 // Aplicar daño si tiene un HealthManager
@@ -160,6 +166,7 @@ public class PlayerManoDeLasSombrasState : BaseState
                 if (enemyRb != null)
                 {
                     // Aplicar Knockback en la dirección contraria
+
                     enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -direction + new Vector2 (0,-_liftingHeight));
                 }
 

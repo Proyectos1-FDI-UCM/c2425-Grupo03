@@ -32,6 +32,8 @@ public class PlayerChargedAttackState : BaseState
     /// tiempo que necesita para cargar el ataque
     /// </summary>
     [SerializeField] private float _chargingTime = 2.0f;
+
+    [SerializeField] bool _drawRange = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -104,7 +106,7 @@ public class PlayerChargedAttackState : BaseState
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, _chargedAttackRadius);
+       if (_drawRange) Gizmos.DrawWireSphere(transform.position, _chargedAttackRadius);
     }
     #endregion
 

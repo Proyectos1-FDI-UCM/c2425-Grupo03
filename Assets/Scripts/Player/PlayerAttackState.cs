@@ -49,6 +49,10 @@ public class PlayerAttackState : BaseState
     /// El daño extra añadido al ataque si encadenas el combo
     /// </summary>
     [SerializeField,Min(0)] int _comboExtraDamage;
+    /// <summary>
+    /// Dibujar rango del ataque
+    /// </summary>
+    [SerializeField] bool _drawRange = false;
     #endregion
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -97,7 +101,6 @@ public class PlayerAttackState : BaseState
     /// El tiempo en el que se podrá volver a hacer un ataque
     /// </summary>
     public float NextAttackTime { get; private set; }
-
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -264,7 +267,7 @@ public class PlayerAttackState : BaseState
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + (_direction * new Vector3(_attackRadius,0)),_attackRadius);
+        if(_drawRange)Gizmos.DrawWireSphere(transform.position + (_direction * new Vector3(_attackRadius,0)),_attackRadius);
     }
 
     #endregion   
