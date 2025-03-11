@@ -1939,9 +1939,8 @@ MonoBehaviour:
   _pushDistance: 6
   _startSkillPosition: 0
   _liftingHeight: 1
-  _waitTimeForSecondHit: 0.51
-  _attractEnemyTime: 0.5
   _waitTimeForFirstHit: 0.5
+  _attractEnemyTime: 0.5
 --- !u!114 &322091738
 MonoBehaviour:
   m_ObjectHideFlags: 0
