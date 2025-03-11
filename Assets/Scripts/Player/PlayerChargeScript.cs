@@ -18,6 +18,29 @@ public class PlayerChargeScript : MonoBehaviour
     /// <summary>
     /// El porcentaje del daño que se va a quitar de la barra de carga.
     /// </summary>
+
+    
+    [Header("Mano de la sombra")]
+    /// <summary>
+    /// El valor máximo de la carga de Mano de La Sombra
+    /// Y la carga actual de la Mano de la Sombra
+    /// </summary>
+    [SerializeField] private int _maxChargeManoDeLaSombra;
+    private float _currentChargeManoDeLaSombra;
+
+    [Header("Super Dash")]
+    /// <summary>
+    /// El valor máximo de la carga de Super Dash
+    /// Y la carga actual de la Super Dash
+    /// </summary>
+    [SerializeField] private int _maxChargeSuperDash;
+    private float _currentChargeSuperDash;
+
+    /// <summary>
+    /// El porcentaje de carga que le quita al jugador de las habilidades
+    /// en funcion del daño del enemigo
+    /// </summary>
+    /// 
     [SerializeField] private float _removedChargePercentage;
     #endregion
     
@@ -27,10 +50,7 @@ public class PlayerChargeScript : MonoBehaviour
     /// El numero de habilidades que tiene el jugador.
     /// </summary>
     private static int _abilityNr = 2;
-    /// <summary>
-    /// El valor máximo de la carga.
-    /// </summary>
-    private int _MAX_CHARGE = 200;
+
     /// <summary>
     /// El valor minimo de la carga.
     /// </summary>
@@ -41,6 +61,7 @@ public class PlayerChargeScript : MonoBehaviour
     public struct Ability {
         public float currentCharge;
         public bool isCharged;
+        public float maxCharge;
     }
     private static Ability abilityOne;
     private static Ability abilityTwo;
@@ -66,6 +87,15 @@ public class PlayerChargeScript : MonoBehaviour
             abilities[i].currentCharge = 0;
             abilities[i].isCharged = false;
         }
+
+        abilities[0].maxCharge = _maxChargeSuperDash;
+        abilities[1].maxCharge = _maxChargeManoDeLaSombra;
+    }
+
+    private void Update()
+    {
+        _currentChargeManoDeLaSombra = abilities[1].currentCharge;
+        _currentChargeSuperDash = abilities[0].currentCharge;
     }
     #endregion
 
@@ -81,9 +111,9 @@ public class PlayerChargeScript : MonoBehaviour
         {
             if (!abilities[i].isCharged) abilities[i].currentCharge += chargePoints;
 
-            if ((abilities[i].currentCharge >= _MAX_CHARGE))
+            if ((abilities[i].currentCharge >= abilities[i].maxCharge))
             {
-                abilities[i].currentCharge = _MAX_CHARGE;
+                abilities[i].currentCharge = abilities[i].maxCharge;
                 abilities[i].isCharged = true;
             }
         }

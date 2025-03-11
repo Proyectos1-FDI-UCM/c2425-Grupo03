@@ -98,13 +98,14 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     private bool _tpDone;
 
-
     /// <summary>
     /// Todos los enemigos que estan el el area de dash, se puede hacer sin raycast
     /// </summary>
     private RaycastHit2D[] _enemyInArea;
 
-
+    /// <summary>
+    /// El script de la carga de las habilidades
+    /// </summary>
     private PlayerChargeScript _chargeScript;
 
 
@@ -169,7 +170,7 @@ public class PlayerSuperDashState : BaseState
     {
         //Quitar inmunidad al jugador
         _ctx.GetComponent<HealthManager>().Inmune = false;
-        _chargeScript.ResetCharge(0);
+        _chargeScript.ResetCharge(_abilityIndex);
     }
     #endregion
 
