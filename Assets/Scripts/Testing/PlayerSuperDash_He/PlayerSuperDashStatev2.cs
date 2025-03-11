@@ -212,8 +212,6 @@ public class PlayerSuperDashState : BaseState
     {
         RaycastHit2D wall = Physics2D.Raycast(_ctx.transform.position, new Vector2(_lookingDirection, 0), _dashDistance, 1 << 3);
 
-        Debug.Log(wall.collider);
-
         if (wall)
         {
             _endPosition.x = wall.point.x;
