@@ -170,7 +170,7 @@ public class PlayerSuperDashState : BaseState
     {
         //Quitar inmunidad al jugador
         _ctx.GetComponent<HealthManager>().Inmune = false;
-        _chargeScript.ResetCharge(_abilityIndex);
+        _chargeScript.ResetCharge(0);
     }
     #endregion
 
@@ -209,6 +209,9 @@ public class PlayerSuperDashState : BaseState
         }
     }
 
+    /// <summary>
+    /// Ver si hay pared dentro de la distancia del dash
+    /// </summary>
     private void CheckWall()
     {
         RaycastHit2D wall = Physics2D.Raycast(_ctx.transform.position, new Vector2(_lookingDirection, 0), _dashDistance, 1 << 3);
@@ -223,25 +226,31 @@ public class PlayerSuperDashState : BaseState
         }
     }
 
+    /// <summary>
+    /// Hacer el dash
+    /// </summary>
     private void Dash()
     {
         _ctx.transform.position = _endPosition;
         _tpDone = true;
 
+        //Si tras hacer el dash no hay nada debajo del jugador(Falling State) termina el estado
         RaycastHit2D floor = Physics2D.Raycast(_ctx.transform.position, new Vector2(0, -1), -1.2f , 1 << 0);
-
+        
         if(floor.collider == null)
         {
             Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
     }
 
+    //Ver todos los enemigos que estan en el raycast
     private RaycastHit2D[] GetEnemyInDash()
     {
         RaycastHit2D[] enemyInArea = Physics2D.RaycastAll(_ctx.transform.position, new Vector2(_lookingDirection, 0), _dashDistance, 1 << 10);
         return enemyInArea;
     }
 
+    //Hacer daño a todos los enemigos que estan en el raycast
     private void Damage(RaycastHit2D[] enemyInArea)
     {
         foreach (RaycastHit2D enemy in enemyInArea)
@@ -251,6 +260,11 @@ public class PlayerSuperDashState : BaseState
         _damageDone = true;
     }
 
+    /// <summary>
+    /// Inicializar los tiempos y comprobar su validez
+    /// </summary>
+    /// <param name="damageTime"></param>
+    /// <param name="tpTime"></param>
     private void Initialize(float damageTime, float tpTime)
     {
         _finishTime = Time.time + _actionTime;
