@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// He Deng
+// Santiago Salto Molodojen
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,7 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// El estado de muerte del enemigo, espera un tiempo hasta que se "muera"
+/// El estado de aparicion del enemigo, espera un tiempo hasta que aparezca
 /// </summary>
 public class EnemyAppearState : BaseState
 {
@@ -36,7 +36,7 @@ public class EnemyAppearState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Fin de tiempo de espera
+    /// Tiempo de aparicion junto al tiempo de juego
     /// </summary>
     private float _appearTime;
 
@@ -85,7 +85,7 @@ public class EnemyAppearState : BaseState
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
 
-        //Calcular el tiempo de la muerte
+        //Calcular el tiempo de aparicion
         _appearTime = Time.time + _waitTime;
 
         _animator.SetBool("IsAppearing", true);
@@ -121,7 +121,7 @@ public class EnemyAppearState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        //Tras el tiempo de espera el enemigo "muere"
+        //Tras el tiempo de espera el enemigo termina de aparecer y empieza el idle
         if (Time.time > _appearTime)
         {
             Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
