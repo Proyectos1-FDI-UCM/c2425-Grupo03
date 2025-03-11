@@ -96,7 +96,7 @@ public class EnemyAppearState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("IsAppearing", false);
     }
     #endregion
     
@@ -112,12 +112,7 @@ public class EnemyAppearState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //Tras el tiempo de espera el enemigo "muere"
-        if(Time.time > _appearTime)
-        {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
-            _animator.SetBool("IsAppearing", false);
-        }
+        
     }
 
     /// <summary>
@@ -126,7 +121,11 @@ public class EnemyAppearState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        //Tras el tiempo de espera el enemigo "muere"
+        if (Time.time > _appearTime)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
+        }
     }
 
     #endregion   
