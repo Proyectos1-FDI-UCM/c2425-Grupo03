@@ -37,7 +37,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// tiempo que se queda quieto el jugador al lanzar la habilidad
     /// </summary>
-    [SerializeField] private float _animationTime = 1f;
+    [SerializeField] private float _cantMovePlayerTime = 1f;
     /// <summary>
     /// dibujar el rango de ataque
     /// </summary>
@@ -58,6 +58,15 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
     [SerializeField] private float _liftingHeight = 1f;
+    /// <summary>
+    /// el tiempo que hay entre pulsar el boton y el primer hit
+    /// </summary>
+    [SerializeField] private float _waitTimeForFirstHit = 0.5f;
+    /// <summary>
+    /// el tiempo que tarda en traer a los enemigos
+    /// </summary>
+    [SerializeField] private float _attractEnemyTime = 0.3f;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -72,9 +81,13 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// el tiempo en el que se lanza la habilidad
     /// </summary>
     float _startTime;
-
+    /// <summary>
+    /// coge referencia
+    /// </summary>
     private PlayerChargeScript _chargeScript;
-
+    /// <summary>
+    /// coge referencia del ctx
+    /// </summary>
     private PlayerStateMachine _ctx;
 
     #endregion
@@ -87,6 +100,10 @@ public class PlayerManoDeLasSombrasState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+
+    /// <summary>
+    /// coge referencias
+    /// </summary>
     private void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
@@ -108,8 +125,11 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     /// <param name="direction"></param>
 
-    private void CastShadowHand(Vector2 direction)
+    private IEnumerator CastShadowHand(Vector2 direction)
     {
+        // Esperar x segundos antes del primer golpe
+        yield return new WaitForSeconds(_waitTimeForFirstHit);
+
         // Posición de inicio del Raycast (en el jugador)
         Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f); 
 
@@ -136,7 +156,7 @@ public class PlayerManoDeLasSombrasState : BaseState
                     float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
                     enemyStateMachine.GetStateByType<KnockbackState>()
-                        .ApplyKnockBack(-maxKnockback, 0.1f, direction);
+                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
                 }
                 
                 // Aplicar daño si tiene un HealthManager
@@ -151,10 +171,17 @@ public class PlayerManoDeLasSombrasState : BaseState
             StartCoroutine(ApplySecondHit(hits, direction));
         }
     }
+
+    /// <summary>
+    /// Metodo que realiza el segundo ataque
+    /// </summary>
+    /// <param name="hits"></param>
+    /// <param name="direction"></param>
+    /// <returns></returns>
     private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction)
     {
-        // Esperar 0.5 segundos antes del segundo golpe
-        yield return new WaitForSeconds(0.5f);
+        // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
+        yield return new WaitForSeconds(_attractEnemyTime+0.05f);
 
         foreach (RaycastHit2D hit in hits)
         {
@@ -190,7 +217,7 @@ public class PlayerManoDeLasSombrasState : BaseState
         _startTime = Time.time;
 
         // Lanza el Raycast en la dirección en la que el jugador está mirando
-        CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0));
+        StartCoroutine(CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0)));
     }
     
     /// <summary>
@@ -219,11 +246,11 @@ public class PlayerManoDeLasSombrasState : BaseState
 
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
-    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// Cambia el estado de jugador si ha acabado el _cantMovePlayerTime
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (Time.time - _startTime > _animationTime)
+        if (Time.time - _startTime > _cantMovePlayerTime)
         {
             Ctx.ChangeState(GetCTX<PlayerStateMachine>().GetStateByType<PlayerGroundedState>());
         }

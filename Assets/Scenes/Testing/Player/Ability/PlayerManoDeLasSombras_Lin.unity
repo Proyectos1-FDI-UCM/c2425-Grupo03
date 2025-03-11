@@ -873,11 +873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877353031839403574, guid: e5d42105447194f508d3f39f9fa3e495, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -300
+      value: -300.04
       objectReference: {fileID: 0}
     - target: {fileID: 1877353031839403574, guid: e5d42105447194f508d3f39f9fa3e495, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25
+      value: -24.98
       objectReference: {fileID: 0}
     - target: {fileID: 1877353031839403574, guid: e5d42105447194f508d3f39f9fa3e495, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1264,6 +1264,14 @@ PrefabInstance:
     - target: {fileID: 468561577577776617, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _jumpBufferTime
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 470757805071825687, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      propertyPath: _drawRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580149230629257244, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      propertyPath: _drawRange
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 580149230629257244, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _chargingTime
@@ -1925,12 +1933,15 @@ MonoBehaviour:
   _firstHitDamage: 3
   _secondHitDamage: 6
   _skillRange: 20
-  _animationTime: 0.5
+  _cantMovePlayerTime: 1
   _drawRaycast: 1
   _attractDistance: 20
   _pushDistance: 6
   _startSkillPosition: 0
   _liftingHeight: 1
+  _waitTimeForSecondHit: 0.51
+  _attractEnemyTime: 0.5
+  _waitTimeForFirstHit: 0.5
 --- !u!114 &322091738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5531,8 +5542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxChargeManoDeLaSombra: 0
-  _maxChargeSuperDash: 0
+  _maxChargeManoDeLaSombra: 30
+  _maxChargeSuperDash: 30
   _removedChargePercentage: 10
 --- !u!1001 &821957043
 PrefabInstance:
