@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4886483801494157451}
   - component: {fileID: -4233722579977323440}
   - component: {fileID: 2869404970991857936}
+  - component: {fileID: 1494383266299005258}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -253,6 +254,9 @@ MonoBehaviour:
   - {fileID: 1132800426723031295}
   - {fileID: 4128716076676134296}
   - {fileID: 580149230629257244}
+  - {fileID: 3758149782358557980}
+  - {fileID: 3132457056714941732}
+  - {fileID: 6420658977189967374}
 --- !u!114 &4886483801494157451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
+  _maxHealth: 50
   _initialHealth: 250
   _onDeath:
     m_PersistentCalls:
@@ -300,6 +304,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthSlider: {fileID: 0}
   HealthManager: {fileID: 4886483801494157451}
+--- !u!114 &1494383266299005258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450874108255313576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxChargeManoDeLaSombra: 30
+  _maxChargeSuperDash: 30
+  _removedChargePercentage: 10
 --- !u!1 &6040842299447432149
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +359,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6769812726288091611}
+  - component: {fileID: 6420658977189967374}
+  - component: {fileID: 3132457056714941732}
   - component: {fileID: 580149230629257244}
   - component: {fileID: 886796386253165598}
   - component: {fileID: 468561577577776617}
@@ -348,10 +369,11 @@ GameObject:
   - component: {fileID: 470757805071825687}
   - component: {fileID: 1132800426723031295}
   - component: {fileID: 4128716076676134296}
+  - component: {fileID: 3758149782358557980}
   m_Layer: 6
   m_Name: PlayerMovement
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -370,6 +392,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6415833642186472685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6420658977189967374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124716735178180898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621d7a02237229d45b002cd0a32b09d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _dashDistance: 5
+  _damage: 5
+  _actionTime: 1
+  _timeOfDamage: 1
+  _timeOfDash: 1
+  _abilityIndex: 1
+--- !u!114 &3132457056714941732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124716735178180898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb791819382801458cde6b8c74ee011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _firstHitDamage: 3
+  _secondHitDamage: 6
+  _skillRange: 20
+  _cantMovePlayerTime: 1
+  _drawRaycast: 1
+  _attractDistance: 20
+  _pushDistance: 6
+  _startSkillPosition: 0
+  _liftingHeight: 1
+  _waitTimeForFirstHit: 0.5
+  _attractEnemyTime: 0.5
 --- !u!114 &580149230629257244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +453,8 @@ MonoBehaviour:
   _name: 
   _chargedAttackRadius: 2
   _chargedDamage: 20
-  _chargingTime: 2
+  _chargingTime: 1
+  _drawRange: 1
 --- !u!114 &886796386253165598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _jumpBufferTime: 0.3
+  _jumpBufferTime: 0.1
 --- !u!114 &5339572929156172976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _maxCoyoteTime: 0.2
+  _maxCoyoteTime: 0.075
   _hitDistance: 1.2
   _debugRayCast: 0
   _maxSpeed: -20
@@ -452,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _maxHeight: 4
+  _maxHeight: 5
 --- !u!114 &470757805071825687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,9 +538,10 @@ MonoBehaviour:
   _attackRadius: 1.5
   _attackSpeed: 0.1
   _damage: 5
+  _abilityPercentageToAdd: 0
   _comboDuration: 1
   _comboExtraDamage: 5
-  _chargeTime: 1.5
+  _drawRange: 1
 --- !u!114 &1132800426723031295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,3 +571,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 0
   _name: 
+--- !u!114 &3758149782358557980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9124716735178180898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1927edcc855124f4483eeb93526918f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _waitTime: 2
