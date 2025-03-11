@@ -34,6 +34,10 @@ public class PlayerChargedAttackState : BaseState
     [SerializeField] private float _chargingTime = 2.0f;
 
     [SerializeField] bool _drawRange = false;
+    /// <summary>
+    /// El porcentaje que se añade a las habilidades
+    /// </summary>
+    [SerializeField] private float _abilityChargePercentage;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -97,6 +101,8 @@ public class PlayerChargedAttackState : BaseState
         foreach (RaycastHit2D enemy in enemyInArea)
         {
             enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
+
+            GetComponentInParent<PlayerChargeScript>().AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
         }
     }
     /// <summary>

@@ -54,7 +54,7 @@ public class PlayerChargeScript : MonoBehaviour
     /// <summary>
     /// El valor minimo de la carga.
     /// </summary>
-    private int _MIN_CHARGE = 0;    
+    private int _MIN_CHARGE = 0;
     /// <summary>
     /// Una estructura que define la habilidad.
     /// </summary>
@@ -105,7 +105,7 @@ public class PlayerChargeScript : MonoBehaviour
     /// Añade carga a la barra.
     /// </summary>
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
-    public void AddCharge(int chargePoints) 
+    public void AddCharge(float chargePoints) 
     {
         for (int i = 0; i < abilities.Length; i++) 
         {

@@ -33,11 +33,10 @@ public class PlayerAttackState : BaseState
     /// El daño del ataque basico
     /// </summary>
     [SerializeField] private float _damage;
-
     /// <summary>
     /// El porcentaje que se añade a las habilidades
     /// </summary>
-    [SerializeField] private float _abilityPercentageToAdd;
+    [SerializeField] private float _abilityChargePercentage;
 
 
     [Header("Propiedad del combo")]
@@ -224,7 +223,7 @@ public class PlayerAttackState : BaseState
             enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
 
             //Añadir carga a las habilidades
-            _chargeScript.AddCharge(10);
+            _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
         }
     }
 
