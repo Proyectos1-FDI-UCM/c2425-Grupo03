@@ -84,6 +84,7 @@ public class KnockbackState : BaseState
     {
         Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
         _knockBackEndTime = Time.time + _knockBackTime;
+        Debug.Log(_direction.normalized);
     }
     
     /// <summary>
@@ -103,7 +104,11 @@ public class KnockbackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        Ctx.Rigidbody.velocity = Ctx.Rigidbody.velocity - new Vector2(1,1) * 100f * Time.deltaTime;
+        if(Ctx.Rigidbody.velocity.x > 0 && Ctx.Rigidbody.velocity.y > 0)
+        {
+            Ctx.Rigidbody.velocity = Ctx.Rigidbody.velocity - new Vector2(1, 1) * 100f * Time.deltaTime;
+        }
+        
     }
 
     /// <summary>

@@ -142,7 +142,6 @@ public class PlayerChargeScript : MonoBehaviour
 
             abilities[i] = currAbility;
         }
-        Debug.Log(abilities[0].currentCharge);
     }
     /// <summary>
     /// Método  que resetea la carga de la barra a 0.
