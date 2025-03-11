@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Gestor de Oleadas- gestiona el inicio y cambios de oleadas de enemigos
+// Santiago Salto Molodojen
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -11,8 +11,7 @@ using UnityEngine.InputSystem.HID;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Gestiona las oleadas de enemigos y activa la puerta para seguir el nivel
 /// </summary>
 public class WaveController : MonoBehaviour
 {
@@ -32,6 +31,11 @@ public class WaveController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+
+    int _numWave;
+
+    bool _endWaves;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -49,70 +53,46 @@ public class WaveController : MonoBehaviour
 
     private void Awake()
     {
-        // Desactiva todos los hijos al inicio
-        foreach (Transform child in transform)
+        
+        foreach (Transform child in transform) // Desactiva todos los hijos al inicio
         {
             child.gameObject.SetActive(false);
         }
 
-        _door.gameObject.SetActive(false);
+        foreach (Transform child in transform) // elimina aquellos emptys que no tengan enemigos dentro
+        {
+            if (child.childCount == 0) 
+            {
+                Destroy(child.gameObject); 
+            }
+        }
 
+        _numWave = 0; //especificamos que la oleada activada es la primera
 
-    }
+        _door.gameObject.SetActive(false); //la puerta no esta cerrada
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
 
     }
 
     void Update()
     {
-        // Si hay un hijo activo, revisamos si tiene hijos dentro
-        foreach (Transform child in transform)
+      if (!_endWaves)
         {
-            if (child.gameObject.activeSelf)
+            if (transform.GetChild(_numWave).childCount == 0) // Si no tiene hijos
             {
-                if (child.childCount == 0) // Si no tiene hijos
-                {
-                    Destroy(child.gameObject); // Lo eliminamos
-                    ActivateNext(); // Activamos el siguiente
-               
-                }
+                Destroy(transform.GetChild(_numWave).gameObject); // Lo eliminamos La oleada actual
+                ActivateNext(); // Activamos el siguiente oleada
             }
         }
-
-        if (transform.childCount == 0)
-        {
-            _door.gameObject.SetActive(false);
-            
-        }
     }
-
-    void ActivateNext()
-    {
-        // Activa el siguiente empty disponible
-        foreach (Transform child in transform)
-        {
-            if (!child.gameObject.activeSelf)
-            {
-                child.gameObject.SetActive(true);
-         
-            }
-            
-        }
-    }
-
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
     {
-        // Activa solo el primero
-        if (transform.childCount > 0)
+        
+        if (transform.childCount > 0) // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(_numWave).gameObject.SetActive(true);
             _door.gameObject.SetActive(true);
+            _endWaves = false;
         }
     }
     #endregion
@@ -133,6 +113,20 @@ public class WaveController : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+    void ActivateNext()
+    {
+        if (transform.childCount > 1) // si existen más hijos a parte del actual activar el siguiente
+        {
+            _numWave++;
+            transform.GetChild(_numWave).gameObject.SetActive(true);
+            _numWave = 0;
+        }
+        else  // si no hay mas oleadas activar puerta y terminar oleada
+        {
+            _door.gameObject.SetActive(false);
+            _endWaves = true;
+        }
+    }
 
     #endregion
 
