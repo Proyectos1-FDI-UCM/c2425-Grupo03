@@ -19,6 +19,10 @@ public class WaveController : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
+    /// <summary>
+    /// Puerta que se habre después de las oleadas
+    /// </summary>
     [SerializeField] GameObject _door;
     #endregion
 
@@ -31,9 +35,14 @@ public class WaveController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-
+    /// <summary>
+    /// Numero de la oleada activa
+    /// </summary>
     int _numWave;
 
+    /// <summary>
+    /// Comprobar si estan activas las oleadas
+    /// </summary>
     bool _endWaves;
 
     #endregion
@@ -71,7 +80,6 @@ public class WaveController : MonoBehaviour
 
         _door.gameObject.SetActive(false); //la puerta no esta cerrada
 
-
     }
 
     void Update()
@@ -81,7 +89,7 @@ public class WaveController : MonoBehaviour
             if (transform.GetChild(_numWave).childCount == 0) // Si no tiene hijos
             {
                 Destroy(transform.GetChild(_numWave).gameObject); // Lo eliminamos La oleada actual
-                ActivateNext(); // Activamos el siguiente oleada
+                NextWave(); // Activamos el siguiente oleada
             }
         }
     }
@@ -113,7 +121,11 @@ public class WaveController : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    void ActivateNext()
+
+    /// <summary>
+    /// Activación de la siguiente oleada
+    /// </summary>
+    void NextWave()
     {
         if (transform.childCount > 1) // si existen más hijos a parte del actual activar el siguiente
         {
