@@ -76,9 +76,7 @@ public class WaveController : MonoBehaviour
         }
 
         _numWave = 0; //especificamos que la oleada activada es la primera
-
         _door.gameObject.SetActive(false); //la puerta no esta cerrada
-
     }
 
     void Update()
@@ -93,8 +91,7 @@ public class WaveController : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
-    {
-        
+    {  
         if (transform.childCount > 0) // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
         {
             transform.GetChild(_numWave).gameObject.SetActive(true);

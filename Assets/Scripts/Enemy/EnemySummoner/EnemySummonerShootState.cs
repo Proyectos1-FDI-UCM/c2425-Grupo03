@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// El enemigo  hace el disparo y vuelve a attack state
+// Santiago Salto Molodojen
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,8 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado del enemigo donde hace el disparo
 /// </summary>
 public class EnemySummonerShootState : BaseState
 {
@@ -28,15 +27,17 @@ public class EnemySummonerShootState : BaseState
     /// El daño del disparo.
     /// </summary>
     [SerializeField] int _damage;
-    /// <summary>
-    /// Proyectil del enemigo.
-    /// </summary>
-    [SerializeField] MagicBullet _magicBullet;
 
     /// <summary>
     /// Valor de tiempo para hacer disparo
     /// </summary>
     [SerializeField][Min(0)] float _waitTimeShoot;
+
+    [Header("Proyectile")]
+    /// <summary>
+    /// Proyectil del enemigo.
+    /// </summary>
+    [SerializeField] MagicBullet _magicBullet;
 
     /// <summary>
     /// Punto de invocación de Bala

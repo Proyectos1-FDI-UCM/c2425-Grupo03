@@ -138,8 +138,6 @@ public class EnemySummonerInvokeState : BaseState
             _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
             _animator.SetBool("IsInvoking", false);
         }
-
-
     }
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
@@ -147,7 +145,7 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        //_ctx.ChangeState(_ctx.GetStateByType<EnemyInvocadorAttackState>());
+
     }
 
     #endregion   

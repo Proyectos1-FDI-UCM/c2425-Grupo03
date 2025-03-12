@@ -128,9 +128,9 @@ public class EnemySummonerAttackState : BaseState
 
         _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
-
-        if (Time.time > _cooldownTime )
-          {
+        
+        if (Time.time > _cooldownTime) //si ha pasado el cooldown, aleatoriamente invocar o disparar
+        {
               _randomNr = UnityEngine.Random.Range(1, 11);
 
               if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
@@ -141,8 +141,7 @@ public class EnemySummonerAttackState : BaseState
               {
                 Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>()); 
               }
-              
-          }
+        }
     }
 
     /// <summary>
@@ -150,22 +149,9 @@ public class EnemySummonerAttackState : BaseState
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
     protected override void CheckSwitchState()
-    {
-        /*if ( _attackfinished)
+    {   
+         if (!_ctx.IsPlayerInAttackRange) //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyInvocadorIdleState>());
-            _animator.SetBool("IsAttack", false);
-        }
-        
-        if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude > _attackRadius)
-        {
-            //Si el jugador está fuera del rango de ataque, persigue al jugador
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
-        }*/
-        
-         if (!_ctx.IsPlayerInAttackRange )
-         {
-            //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
             Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
             _animator.SetBool("IsIdle", false);
          }

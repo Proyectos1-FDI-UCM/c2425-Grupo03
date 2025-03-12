@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// El enemigo muere
+// Santiago Salto Molodojen
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,8 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de muerte del Invocador
 /// </summary>
 public class EnemySummonerDeathState : BaseState
 {
@@ -24,6 +23,9 @@ public class EnemySummonerDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+    /// <summary>
+    /// Coge los objetos relacionados con el invocador para eliminarlos
+    /// </summary>
     [SerializeField] GameObject _prefabEntero;
 
     #endregion
@@ -118,8 +120,7 @@ public class EnemySummonerDeathState : BaseState
         if (_ctx == null) return;
         if (Time.time > _deadTime)
         {
-            Destroy(_prefabEntero);
-            
+            Destroy(_prefabEntero);   
         }
     }
 
