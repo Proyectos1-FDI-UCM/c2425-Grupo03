@@ -192,12 +192,9 @@ public class PlayerManoDeLasSombrasState : BaseState
 
         foreach (RaycastHit2D hit in hits)
         {
-
             // Si colisiona con un muro, deja de atraer a los enemigos
-
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
-                Debug.Log("HitWall");
                 break;
             }
 
@@ -209,7 +206,6 @@ public class PlayerManoDeLasSombrasState : BaseState
                 if (enemyRb != null)
                 {
                     // Aplicar Knockback en la dirección contraria
-
                     enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -direction + new Vector2 (0,-_liftingHeight));
                 }
 
