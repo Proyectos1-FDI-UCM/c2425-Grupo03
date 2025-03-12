@@ -130,50 +130,58 @@ public class PlayerManoDeLasSombrasState : BaseState
         // Esperar x segundos antes del primer golpe
         yield return new WaitForSeconds(_waitTimeForFirstHit);
 
-        // Posición de inicio del Raycast (en el jugador)
+        // Posición de inicio del Raycast 
         Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f); 
 
         // Realizar el Raycast
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, LayerMask.GetMask("Enemy")| LayerMask.GetMask("Wall"));
 
-        // Dibujar el Raycast en la escena para depuración
+        // Dibujar el Raycast 
         if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.green, 0.5f);
 
-        foreach (RaycastHit2D hit in hits)
+        bool wallHit = false; // Bandera para detectar si hemos golpeado una pared
+        int affectedEnemys = 0; // Índice manual para recorrer hits[]
+
+        while (affectedEnemys < hits.Length && !wallHit)
         {
-            
-            // Si colisiona con un muro, deja de atraer a los enemigos
+            RaycastHit2D hit = hits[affectedEnemys];
+
+            // Si colisiona con un muro, activamos la bandera para ignorar enemigos después de la pared
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
-                break;
+                wallHit = true;
             }
 
-            // Verificar si el objeto impactado es un enemigo
-            EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
-
-            if (enemy != null)
+            // Comprobar si ya golpeamos una pared
+            if (!wallHit)
             {
-                // Aplicar Knockback           
-                // Si el enemigo puede sobrepasar startPosition, limitamos la atracción
+                // Comprobar si el objeto impactado es un enemigo
+                EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
 
-                float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
-
-                enemy.GetStateByType<KnockbackState>()
-                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
-                
-                // Aplicar daño si tiene un HealthManager
-                HealthManager enemyHealth = hit.collider.gameObject.GetComponent<HealthManager>();
-                if (enemyHealth != null)
+                if (enemy != null)
                 {
-                    enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
-                }
-            }
+                    // Aplicar Knockback           
+                    // Comprobar si el enemigo puede sobrepasar startPosition, limitamos la atracción
+                    float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
+                    enemy.GetStateByType<KnockbackState>()
+                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
+
+                    // Aplicar daño si tiene un HealthManager
+                    HealthManager enemyHealth = hit.collider.gameObject.GetComponent<HealthManager>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
+                    }
+                }
+                affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
+            }
         }
-        if (hits.Length > 0)
+        if (affectedEnemys > 0)
         {
-            StartCoroutine(ApplySecondHit(hits, direction));
+            StartCoroutine(ApplySecondHit(hits, direction, affectedEnemys));
         }
+        Debug.Log(affectedEnemys);
     }
 
     /// <summary>
@@ -182,29 +190,19 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <param name="hits"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
-    private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction)
+    private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction, int affectedEnemys)
     {
         // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
         yield return new WaitForSeconds(_attractEnemyTime+0.1f);
 
-        foreach (RaycastHit2D hit in hits)
+        for (int i = 0; i < affectedEnemys; affectedEnemys++) 
         {
-            // Si colisiona con un muro, deja de atraer a los enemigos
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-            {
-                break;
-            }
-
-            EnemyStateMachine enemy = hit.collider == null ? null: hit.collider.GetComponent<EnemyStateMachine>();
+            EnemyStateMachine enemy = hits[i].collider == null ? null: hits[i].collider.GetComponent<EnemyStateMachine>();
 
             if (enemy != null)
             {
-                Rigidbody2D enemyRb = enemy.GetComponent<Rigidbody2D>();
-                if (enemyRb != null)
-                {
-                    // Aplicar Knockback en la dirección contraria
-                    enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -direction + new Vector2 (0,-_liftingHeight));
-                }
+                // Aplicar Knockback en la dirección contraria
+                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -direction + new Vector2 (0,-_liftingHeight));
 
                 // Aplicar daño si tiene un HealthManager
                 HealthManager health = enemy.GetComponent<HealthManager>();
