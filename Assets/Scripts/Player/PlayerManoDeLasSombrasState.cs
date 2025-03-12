@@ -181,7 +181,6 @@ public class PlayerManoDeLasSombrasState : BaseState
         {
             StartCoroutine(ApplySecondHit(hits, direction, affectedEnemys));
         }
-        Debug.Log(affectedEnemys);
     }
 
     /// <summary>
