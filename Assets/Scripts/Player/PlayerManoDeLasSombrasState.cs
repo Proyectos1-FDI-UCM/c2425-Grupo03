@@ -37,7 +37,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// tiempo que se queda quieto el jugador al lanzar la habilidad
     /// </summary>
-    [SerializeField] private float _cantMovePlayerTime = 1f;
+    [SerializeField][Tooltip("Tiempo en el que el jugador se queda inmovilizado al tirar la habilidad")] private float _cantMovePlayerTime = 1f;
     /// <summary>
     /// dibujar el rango de ataque
     /// </summary>
@@ -45,27 +45,27 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// el rango que les atrae el primer hit
     /// </summary>
-    [SerializeField] private float _attractDistance = 2f;
+    [SerializeField][Tooltip("La distancia que atraes a los enemigos")] private float _attractDistance = 2f;
     /// <summary>
     /// el rango que les empuja el segundo hit
     /// </summary>
-    [SerializeField] private float _pushDistance = 4f;
+    [SerializeField][Tooltip("La distancia que empujas a los enemigos")] private float _pushDistance = 4f;
     /// <summary>
     /// la distancia entre el punto de comienzo de la habilidad y el jugador
     /// </summary>
-    [SerializeField] private float _startSkillPosition = 1f;
+    [SerializeField][Tooltip("la distancia entre el punto de comienzo de la habilidad y el jugador")] private float _startSkillPosition = 1f;
     /// <summary>
-    /// la distancia entre el punto de comienzo de la habilidad y el jugador
+    /// lo que elevas a los enemigos
     /// </summary>
-    [SerializeField] private float _liftingHeight = 1f;
+    [SerializeField][Tooltip("Altura que elevas a los enemigos")] private float _liftingHeight = 1f;
     /// <summary>
     /// el tiempo que hay entre pulsar el boton y el primer hit
     /// </summary>
-    [SerializeField] private float _waitTimeForFirstHit = 0.5f;
+    [SerializeField][Tooltip("tiempo entre pulsar el boton y el primer hit")] private float _waitTimeForFirstHit = 0.5f;
     /// <summary>
     /// el tiempo que tarda en traer a los enemigos
     /// </summary>
-    [SerializeField] private float _attractEnemyTime = 0.3f;
+    [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
 
     #endregion
 
@@ -177,7 +177,7 @@ public class PlayerManoDeLasSombrasState : BaseState
                 affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
             }
         }
-        if (affectedEnemys > 0)
+        if (affectedEnemys > 0) // Si hay mas de un enemigo afectado, les aplicamos el segundo hit
         {
             StartCoroutine(ApplySecondHit(hits, direction, affectedEnemys));
         }
