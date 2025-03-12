@@ -21,7 +21,7 @@ public class WaveController : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     /// <summary>
-    /// Puerta que se habre después de las oleadas
+    /// Puerta que se abre después de las oleadas
     /// </summary>
     [SerializeField] GameObject _door;
     #endregion
@@ -62,7 +62,6 @@ public class WaveController : MonoBehaviour
 
     private void Awake()
     {
-        
         foreach (Transform child in transform) // Desactiva todos los hijos al inicio
         {
             child.gameObject.SetActive(false);
