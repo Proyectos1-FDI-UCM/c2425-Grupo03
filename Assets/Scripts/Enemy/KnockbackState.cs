@@ -84,7 +84,6 @@ public class KnockbackState : BaseState
     {
         Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
         _knockBackEndTime = Time.time + _knockBackTime;
-        Debug.Log(_direction.normalized);
     }
     
     /// <summary>

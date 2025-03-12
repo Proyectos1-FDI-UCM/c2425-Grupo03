@@ -126,7 +126,6 @@ public class PlayerChargeScript : MonoBehaviour
     public void RemoveCharge(float removedHealth)
     {
         float chargePoints = (_removedChargePercentage / 100 * removedHealth);
-        Debug.Log(chargePoints);
         for (int i = 0; i < abilities.Length; i++)
         {
             Ability currAbility = abilities[i];
