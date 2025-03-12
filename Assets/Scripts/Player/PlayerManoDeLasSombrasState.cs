@@ -194,7 +194,7 @@ public class PlayerManoDeLasSombrasState : BaseState
         // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
         yield return new WaitForSeconds(_attractEnemyTime+0.1f);
 
-        for (int i = 0; i < affectedEnemys; affectedEnemys++) 
+        for (int i = 0; i < affectedEnemys; i++) 
         {
             EnemyStateMachine enemy = hits[i].collider == null ? null: hits[i].collider.GetComponent<EnemyStateMachine>();
 
