@@ -143,10 +143,8 @@ public class PlayerManoDeLasSombrasState : BaseState
         {
             
             // Si colisiona con un muro, deja de atraer a los enemigos
-
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
-                Debug.Log("HitWall");
                 break;
             }
 
@@ -155,7 +153,6 @@ public class PlayerManoDeLasSombrasState : BaseState
 
             if (enemy != null)
             {
-
                 // Aplicar Knockback           
                 // Si el enemigo puede sobrepasar startPosition, limitamos la atracción
 

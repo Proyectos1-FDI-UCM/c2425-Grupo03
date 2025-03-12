@@ -1271,7 +1271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 470757805071825687, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _abilityChargePercentage
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 580149230629257244, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _drawRange
@@ -1283,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 580149230629257244, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _abilityChargePercentage
-      value: 30
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1214668236577535999, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: _states.Array.size
