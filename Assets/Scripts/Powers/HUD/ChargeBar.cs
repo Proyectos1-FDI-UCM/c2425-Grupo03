@@ -22,7 +22,8 @@ public class ChargeBar : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField]
     private float _maxcharge = 100f;
-    [SerializeField] private Slider _ChargeBar;
+    [SerializeField] 
+    private SpriteRenderer render;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -59,6 +60,8 @@ public class ChargeBar : MonoBehaviour
     /// </summary>
     void Update()
     {
+        _charge += Time.deltaTime;
+        Debug.Log(_charge);
         UpdateChargeBar();
     }
     #endregion
@@ -84,12 +87,15 @@ public class ChargeBar : MonoBehaviour
     // mayúscula, incluida la primera letra)
     private void UpdateChargeBar()
     {
+        Color color = render.color;
         // Controlamos el Slider como un porcentaje (0-1)
         if (_charge > _maxcharge)
         {
             _charge = _maxcharge;
         }
-        _ChargeBar.value = _charge / _maxcharge;
+        color.r = _charge / _maxcharge;
+        color.g = color.r;
+        color.b = color.r;
 
     }
     #endregion   
