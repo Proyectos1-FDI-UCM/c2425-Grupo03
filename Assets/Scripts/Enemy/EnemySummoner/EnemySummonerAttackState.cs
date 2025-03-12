@@ -20,9 +20,10 @@ public class EnemySummonerAttackState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-   [SerializeField] float _waitTimeShoot;
 
-    [SerializeField] float _invokingTime;
+    /// <summary>
+    /// variable para
+    /// </summary>
     [SerializeField] int _abilityCooldown;
     [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
 
@@ -35,12 +36,6 @@ public class EnemySummonerAttackState : BaseState
     // privados se nombren en formato _camelCase
 
     /// <summary>
-    /// La dirección donde mira el enemigo, no es necesario para realizar el ataque, solo sirve para 
-    /// ver el rango de ataque del enemigo
-    /// </summary>
-    private int _direction;
-
-    /// <summary>
     /// El animator del enemigo
     /// </summary>
     private Animator _animator;
@@ -51,39 +46,14 @@ public class EnemySummonerAttackState : BaseState
     private EnemySummonerStateMachine _ctx;
 
     /// <summary>
-    /// El tiempo cuando el enemigo pueda volver a hacer una accion.
-    /// </summary>
-    private float _lastAttackTime;
-
-    /// <summary>
-    /// El Transform del spawnpoint actual.
-    /// </summary>
-    private Transform _spawnpointTransform;
-    /// <summary>
     /// Un número aleatorio que determina si el enemigo dispara o invoca otro enemigo.
     /// </summary>
     private float _randomNr;
 
     /// <summary>
-    /// Tiempo de espera para disparar más tiempo del momento del juego
-    /// </summary>
-    private float _shootTime;
-
-    /// <summary>
-    /// Tiempo de espera para invocar más tiempo del momento del juego
-    /// </summary>
-    private float _invokeTime;
-
-    /// <summary>
     /// Tiempo de espera para invocar más tiempo del momento del juego
     /// </summary>
     private float _cooldownTime;
-
-    /// <summary>
-    /// Booleana para ver si ha terminado de atacar
-    /// </summary>
-    /// 
-    private bool _attackFinished;
 
     #endregion
 
@@ -95,10 +65,7 @@ public class EnemySummonerAttackState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Start()
-    {
-        
-    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Si el jugador sale del trigger pone el range a false.
@@ -130,9 +97,6 @@ public class EnemySummonerAttackState : BaseState
 
         
         _cooldownTime = Time.time + _abilityCooldown;
-
-
-
     }
     
     /// <summary>
@@ -171,57 +135,14 @@ public class EnemySummonerAttackState : BaseState
 
               if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
               {
-                  Debug.Log("Invoking!");
-                  
                 Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerInvokeState>());
-
-            }
+              }
               else
               {
-                Debug.Log("SHOOTing!");
-                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>());
-                
-                  
+                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>()); 
               }
               
           }
-
-        /* if (Time.time > _lastAttackTime + _invokeCooldown && !_attackFinished) {
-             _randomNr = UnityEngine.Random.Range(1, 11);
-            _invokeTime = Time.time + _invokingTime;
-            _shootTime = Time.time + _waitTimeShoot;
-
-
-             if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
-             {
-
-                 Debug.Log("Invoking!");
-                 _animator.SetBool("IsAttack", false);
-                 _animator.SetBool("IsInvoking", true);
-
-                 if (Time.time > _invokeTime )
-                 {
-                     Invoke();
-                     _lastAttackTime = Time.time;
-                     _animator.SetBool("IsInvoking", false);
-                     _animator.SetBool("IsAttack", true);
-                 }
-
-
-             }
-             else
-             {
-
-                 if (Time.time > _shootTime)
-                 {
-                     Shoot();
-                     _attackFinished = true;
-                     _lastAttackTime = Time.time;
-                 }
-
-             }
-             
-          }*/
     }
 
     /// <summary>
@@ -243,11 +164,11 @@ public class EnemySummonerAttackState : BaseState
         }*/
         
          if (!_ctx.IsPlayerInAttackRange )
-        {
+         {
             //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
             Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
             _animator.SetBool("IsIdle", false);
-        }
+         }
     }
 
     #endregion   
