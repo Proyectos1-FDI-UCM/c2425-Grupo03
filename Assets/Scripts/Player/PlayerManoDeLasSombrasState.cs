@@ -134,37 +134,44 @@ public class PlayerManoDeLasSombrasState : BaseState
         Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f); 
 
         // Realizar el Raycast
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, 1 << 10);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, LayerMask.GetMask("Enemy")| LayerMask.GetMask("Wall"));
 
         // Dibujar el Raycast en la escena para depuración
         if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.green, 0.5f);
 
         foreach (RaycastHit2D hit in hits)
         {
+            
+            // Si colisiona con un muro, deja de atraer a los enemigos
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                Debug.Log("HitWall");
+                break;
+            }
+
             // Verificar si el objeto impactado es un enemigo
-            HealthManager enemy = hit.collider.gameObject.GetComponent<HealthManager>();
+            EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
 
             if (enemy != null)
             {
+
                 // Aplicar Knockback           
-                EnemyStateMachine enemyStateMachine = enemy.gameObject.GetComponent<EnemyStateMachine>();
+                // Si el enemigo puede sobrepasar startPosition, limitamos la atracción
 
-                if (enemyStateMachine != null)
-                {
+                float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
-                    // Si el enemigo puede sobrepasar startPosition, limitamos la atracción
-                    float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
-
-                    enemyStateMachine.GetStateByType<KnockbackState>()
+                enemy.GetStateByType<KnockbackState>()
                         .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
-                }
                 
                 // Aplicar daño si tiene un HealthManager
-                if (enemy != null)
+                HealthManager enemyHealth = hit.collider.gameObject.GetComponent<HealthManager>();
+                if (enemyHealth != null)
                 {
-                    enemy.RemoveHealth((int)_firstHitDamage); // Primer golpe
+                    enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
                 }
             }
+
         }
         if (hits.Length > 0)
         {
@@ -181,10 +188,19 @@ public class PlayerManoDeLasSombrasState : BaseState
     private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction)
     {
         // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
-        yield return new WaitForSeconds(_attractEnemyTime+0.05f);
+        yield return new WaitForSeconds(_attractEnemyTime+0.1f);
 
         foreach (RaycastHit2D hit in hits)
         {
+
+            // Si colisiona con un muro, deja de atraer a los enemigos
+
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                Debug.Log("HitWall");
+                break;
+            }
+
             EnemyStateMachine enemy = hit.collider == null ? null: hit.collider.GetComponent<EnemyStateMachine>();
 
             if (enemy != null)
