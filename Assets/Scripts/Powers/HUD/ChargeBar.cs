@@ -22,8 +22,8 @@ public class ChargeBar : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField]
     private float _maxcharge = 100f;
-    [SerializeField] 
-    private SpriteRenderer render;
+    [SerializeField]
+    private Image render;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -58,10 +58,12 @@ public class ChargeBar : MonoBehaviour
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
+    void Start()
+    {
+        render = GetComponent<Image>();
+    }
     void Update()
     {
-        _charge += Time.deltaTime;
-        Debug.Log(_charge);
         UpdateChargeBar();
     }
     #endregion
@@ -95,7 +97,8 @@ public class ChargeBar : MonoBehaviour
         }
         color.r = _charge / _maxcharge;
         color.g = color.r;
-        color.b = color.r;
+        color.b = color.g;
+        render.color = color;
 
     }
     #endregion   
