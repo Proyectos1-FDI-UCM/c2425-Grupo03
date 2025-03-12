@@ -126,7 +126,7 @@ public class EnemySummonerInvokeState : BaseState
         {
             _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
-            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation, transform.parent.parent);
+            Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation, transform.parent.parent.parent);
             if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
             {
                 _spawnpointIndex = 1;
