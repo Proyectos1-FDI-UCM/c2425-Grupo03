@@ -67,10 +67,16 @@ public class HealthManager : MonoBehaviour
     public UnityEvent _onDeath;
 
     /// <summary>
-    /// Evento para cuando la entidad reciba daño
+    /// Evento para cuando la entidad reciba daño.
     /// </summary>
     [HideInInspector]
     public UnityEvent<float> _onDamaged;
+
+    /// <summary>
+    /// Evento para cuando la entidad reciba vida.
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent<float> _onHealed;
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -112,10 +118,12 @@ public class HealthManager : MonoBehaviour
         if(_health + addedHealth > _maxHealth)
         {
             _health = _maxHealth;
+            _onHealed.Invoke(addedHealth);
         }
         else
         {
             _health = _health + addedHealth;
+            _onHealed.Invoke(addedHealth);
         }
         if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
         {
