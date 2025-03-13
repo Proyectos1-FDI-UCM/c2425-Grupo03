@@ -143,6 +143,7 @@ public class PlayerGroundedState : BaseState
         if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, para a jumpState
         {
             Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
+            _jumpBuffer = 0;
 
         }
         else if (_jumpBuffer < 0)
