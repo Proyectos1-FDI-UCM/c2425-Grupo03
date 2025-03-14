@@ -22,11 +22,11 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// La primera habilidad del jugador.
     /// </summary>
-    [SerializeField] private Image _abilityOne;
+    [SerializeField] private Image _abilityOneImg;
     /// <summary>
     /// La segunda habilidad del jugador.
     /// </summary>
-    [SerializeField] private Image _abilityTwo;
+    [SerializeField] private Image _abilityTwoImg;
 
     #endregion
     
@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
     /// La vida máxima del jugador.
     /// </summary>
     private float _maxHealth;
+    private float _currentChargeOne;
+    private float _currentChargeTwo;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -79,8 +81,18 @@ public class UIManager : MonoBehaviour
         // Health Settings
         _currentHealth = _healthManager.Health;
         _maxHealth = _healthManager.MaxHealth;
+        // Va a actualizar la bara de vida cuando el jugador recibe o se le quita vida. 
         _healthManager._onDamaged.AddListener(UpdateHealthBar);
         _healthManager._onHealed.AddListener(UpdateHealthBar);
+
+        // Coge las cargas iniciales de las habilidades
+        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
+        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
+    }
+
+    void Update()
+    {
+        UpdateAbilityCharge();
     }
     #endregion
 
@@ -88,7 +100,7 @@ public class UIManager : MonoBehaviour
     #region Métodos públicos
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     private void UpdateHealthBar(float modifiedHealth)
@@ -106,6 +118,20 @@ public class UIManager : MonoBehaviour
             //El slider value = 1, es decir, barra llena si _currentHealth == _maxHealth.
             _healthSlider.value = _currentHealth / _maxHealth;
         }
+    }
+
+    private void UpdateAbilityCharge() {
+        // Actualizamos los valores de las cargas
+        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
+        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
+        
+        // Calculamos el porcentaje de carga
+        float chargePercentageOne = _currentChargeOne / _playerCharge.abilities[0].maxCharge;
+        float chargePercentageTwo = _currentChargeTwo / _playerCharge.abilities[1].maxCharge;
+        
+        // Cambiamos el color de las imagenes
+        _abilityOneImg.color = new Color(chargePercentageOne, chargePercentageOne, chargePercentageOne, 1f);
+        _abilityTwoImg.color = new Color(chargePercentageTwo, chargePercentageTwo, chargePercentageTwo, 1f);
     }
     #endregion   
 
