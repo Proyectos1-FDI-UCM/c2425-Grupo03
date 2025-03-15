@@ -6,7 +6,15 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
+using System.Numerics;
+
+// using System.Numerics;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
+using UnityEngine.Scripting.APIUpdating;
 // Añadir aquí el resto de directivas using
 
 
@@ -27,23 +35,22 @@ public class CameraManager : MonoBehaviour
     /// <summary>
     /// velocidad de la Cámara
     /// </summary>
-    [SerializeField][Min(0)] float _velocityCamera;
+    [SerializeField][Min(0)] float _cameraVelocity;
     /// <summary>
     /// Margen de la Cámara respecto al objetivo
     /// </summary>
-    [SerializeField] Vector3 _displacementCamera; //dista de la camara (posicion del jugador)
-    
-
+    [SerializeField] private Vector3 _cameraDisplacement; //dista de la camara (posicion del jugador)
+    [SerializeField] private float _maxDisplacement;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    // Documentar cada atributo que aparece aquí.
-    // El convenio de nombres de Unity recomienda que los atributos
-    // privados se nombren en formato _camelCase (comienza con _, 
-    // primera palabra en minúsculas y el resto con la 
-    // primera letra en mayúsculas)
-    // Ejemplo: _maxHealthPoints
+    /// <summary>
+    /// Dirección de movimiento de la cámara.
+    /// </summary>
+    private Vector3 _moveDir; 
+    private PlayerInputActions.PlayerActions _playerInput;
+    private Vector3 _finalPos;
     
     #endregion
 
@@ -56,22 +63,29 @@ public class CameraManager : MonoBehaviour
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen   
+    void Awake() {
+        _playerInput = new PlayerInputActions().Player;
+        _playerInput.Enable();
+    }
+
+    void Update()
+    {
+        // Lee el input del jugador.
+        _moveDir = _playerInput.MoveCamera.ReadValue<Vector2>();
+
+        if (_moveDir != new Vector3(0, 0, 0)) // Si se detecta input diferente a 0
+        {
+            _finalPos = _playerPosition.position + _moveDir * _maxDisplacement; // Calcula la posición final (posición del jugador + el input * el desplazamiento máximo posible)
+            Move(_finalPos); // mueve la cámara
+        }
+    }
 
     void FixedUpdate()
     {
-        if (_playerPosition != null)
+        if (_playerPosition != null && _moveDir == new Vector3(0, 0, 0)) // si no se detecta input para mover la cámara
         {
-            //Objetivo final de la camara (Jugador)
-            Vector3 positionFinal = _playerPosition.position + _displacementCamera;
-
-            //Hacer que el movimiento se vea gradual
-            Vector3 smoothedMovement = Vector3.Lerp(transform.position, positionFinal, _velocityCamera);
-
-            //Mover la Cámara
-            transform.position = smoothedMovement;
+            _finalPos = _playerPosition.position + _cameraDisplacement; 
+            Move(_finalPos); // la cámara sigue al jugador
         }
     }
 
@@ -90,10 +104,16 @@ public class CameraManager : MonoBehaviour
     
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
+    /// <summary>
+    /// Método para mover la cámara a la posición indicada.
+    /// </summary>
+    /// <param name="movePos">La posición a la que mover la cámara.</param>
+    private void Move(Vector3 movePos) {
+        //Hacer que el movimiento se vea gradual
+        Vector3 smoothedMovement = Vector3.Lerp(transform.position, movePos, _cameraVelocity);
+        //Mover la Cámara
+        transform.position = smoothedMovement;
+    }
 
     #endregion   
 
