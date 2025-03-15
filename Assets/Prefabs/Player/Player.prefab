@@ -41,6 +41,7 @@ Transform:
   m_Children:
   - {fileID: 6769812726288091611}
   - {fileID: 1335494224044937815}
+  - {fileID: 769416092846633222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7253384615781502723
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _states:
   - {fileID: 468561577577776617}
-  - {fileID: 5339572929156172976}
+  - {fileID: 1878743245120483010}
   - {fileID: 7922959446255207737}
   - {fileID: 886796386253165598}
   - {fileID: 470757805071825687}
@@ -275,6 +276,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onHealed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &-4233722579977323440
@@ -350,6 +354,92 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6415833642186472685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6934603295301053230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 769416092846633222}
+  - component: {fileID: 2876048266150505504}
+  - component: {fileID: 1878743245120483010}
+  m_Layer: 6
+  m_Name: PlayerFalling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &769416092846633222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934603295301053230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6415833642186472685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2876048266150505504
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934603295301053230}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 3967
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  serializedVersion: 2
+  m_Radius: 0.45
+--- !u!114 &1878743245120483010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934603295301053230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7acf354e5e654244a77a4996c5f87b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: 
+  _maxCoyoteTime: 0.075
+  _hitDistance: 1.2
+  _debugRayCast: 0
+  _maxSpeed: -20
 --- !u!1 &9124716735178180898
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,14 +454,13 @@ GameObject:
   - component: {fileID: 580149230629257244}
   - component: {fileID: 886796386253165598}
   - component: {fileID: 468561577577776617}
-  - component: {fileID: 5339572929156172976}
   - component: {fileID: 7922959446255207737}
   - component: {fileID: 470757805071825687}
   - component: {fileID: 1132800426723031295}
   - component: {fileID: 4128716076676134296}
   - component: {fileID: 3758149782358557980}
   m_Layer: 6
-  m_Name: PlayerMovement
+  m_Name: PlayerStates
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -455,6 +544,7 @@ MonoBehaviour:
   _chargedDamage: 20
   _chargingTime: 1
   _drawRange: 1
+  _abilityChargePercentage: 0
 --- !u!114 &886796386253165598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,24 +578,6 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _jumpBufferTime: 0.1
---- !u!114 &5339572929156172976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9124716735178180898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7acf354e5e654244a77a4996c5f87b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isRootState: 1
-  _name: 
-  _maxCoyoteTime: 0.075
-  _hitDistance: 1.2
-  _debugRayCast: 0
-  _maxSpeed: -20
 --- !u!114 &7922959446255207737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +610,7 @@ MonoBehaviour:
   _attackRadius: 1.5
   _attackSpeed: 0.1
   _damage: 5
-  _abilityPercentageToAdd: 0
+  _abilityChargePercentage: 0
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1
