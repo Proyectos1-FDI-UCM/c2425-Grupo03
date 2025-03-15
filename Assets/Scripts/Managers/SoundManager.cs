@@ -104,7 +104,7 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.Play();
         float clipLengh = audioSource.clip.length;
-        Destroy(audioSource, clipLengh);
+        Destroy(audioSource.gameObject, clipLengh);
     }
 
     /// <summary>
@@ -121,7 +121,7 @@ public class SoundManager : MonoBehaviour
         audioSource.volume = volume;
         audioSource.Play();
         float clipLengh = audioSource.clip.length;
-        Destroy(audioSource, clipLengh);
+        Destroy(audioSource.gameObject, clipLengh);
     }
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
