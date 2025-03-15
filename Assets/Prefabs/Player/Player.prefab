@@ -277,6 +277,9 @@ MonoBehaviour:
   _onDamaged:
     m_PersistentCalls:
       m_Calls: []
+  _onHealed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-4233722579977323440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +374,7 @@ GameObject:
   - component: {fileID: 4128716076676134296}
   - component: {fileID: 3758149782358557980}
   m_Layer: 6
-  m_Name: PlayerMovement
+  m_Name: PlayerStates
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -455,6 +458,7 @@ MonoBehaviour:
   _chargedDamage: 20
   _chargingTime: 1
   _drawRange: 1
+  _abilityChargePercentage: 0
 --- !u!114 &886796386253165598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +542,7 @@ MonoBehaviour:
   _attackRadius: 1.5
   _attackSpeed: 0.1
   _damage: 5
-  _abilityPercentageToAdd: 0
+  _abilityChargePercentage: 0
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1
