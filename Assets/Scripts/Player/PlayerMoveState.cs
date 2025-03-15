@@ -74,7 +74,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        GetComponent<PlayerAttackState>().ResetAttackCombo();
+        _attackState.ResetAttackCombo();
     }
     
     /// <summary>
@@ -82,7 +82,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        GetCTX<PlayerStateMachine>().Rigidbody.velocity *= Vector2.up;
+        _rb.velocity *= Vector2.up;
     }
     #endregion
 

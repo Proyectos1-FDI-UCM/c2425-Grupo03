@@ -46,6 +46,7 @@ public class PlayerSuperDashState : BaseState
     [SerializeField, Min(0)] private float _timeOfDash;
 
     [SerializeField] private int _abilityIndex;
+    [SerializeField] private float _abilityChargePercentage;
 
     #endregion
 
@@ -107,7 +108,6 @@ public class PlayerSuperDashState : BaseState
     /// El script de la carga de las habilidades
     /// </summary>
     private PlayerChargeScript _chargeScript;
-
 
     #endregion
 
@@ -171,6 +171,7 @@ public class PlayerSuperDashState : BaseState
         //Quitar inmunidad al jugador
         _ctx.GetComponent<HealthManager>().Inmune = false;
         _chargeScript.ResetCharge(0);
+        _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
     }
     #endregion
 

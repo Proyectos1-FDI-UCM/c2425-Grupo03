@@ -66,6 +66,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// el tiempo que tarda en traer a los enemigos
     /// </summary>
     [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
+    [SerializeField] private float _abilityChargePercentage;
 
     #endregion
 
@@ -232,6 +233,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     public override void ExitState()
     {
         _chargeScript.ResetCharge(1);
+        _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
     }
     #endregion
     
