@@ -437,8 +437,6 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _maxCoyoteTime: 0.075
-  _hitDistance: 1.2
-  _debugRayCast: 0
   _maxSpeed: -20
 --- !u!1 &9124716735178180898
 GameObject:
@@ -501,6 +499,7 @@ MonoBehaviour:
   _timeOfDamage: 1
   _timeOfDash: 1
   _abilityIndex: 1
+  _abilityChargePercentage: 0
 --- !u!114 &3132457056714941732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +525,7 @@ MonoBehaviour:
   _liftingHeight: 1
   _waitTimeForFirstHit: 0.5
   _attractEnemyTime: 0.5
+  _abilityChargePercentage: 0
 --- !u!114 &580149230629257244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +611,8 @@ MonoBehaviour:
   _attackSpeed: 0.1
   _damage: 5
   _abilityChargePercentage: 0
+  _attackSFX: {fileID: 8300000, guid: de65162e492135a4491c48161b7a147f, type: 3}
+  _hitEnemy: {fileID: 8300000, guid: e76e9972d2130de43a4977fc7c91a235, type: 3}
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1

@@ -37,6 +37,8 @@ public class PlayerAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
+    [SerializeField] AudioClip _attackSFX;
+    [SerializeField] AudioClip _hitEnemy;
 
 
     [Header("Propiedad del combo")]
@@ -208,6 +210,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
+        SoundManager.Instance.PlaySFX(_attackSFX, transform, 100);
         int extraDamage = 0;
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
@@ -221,9 +224,12 @@ public class PlayerAttackState : BaseState
         {
             //Daño al enemigo
             enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
-
             //Añadir carga a las habilidades
             _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+        }
+        if (enemyInArea.Length >0)
+        {
+            SoundManager.Instance.PlaySFX(_hitEnemy, transform, 100);
         }
     }
 
