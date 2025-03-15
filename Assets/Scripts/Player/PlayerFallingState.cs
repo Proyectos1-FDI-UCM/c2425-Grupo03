@@ -20,10 +20,6 @@ public class PlayerFallingState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField][Min(0)] float _maxCoyoteTime;  //tiempo en el que el jugador puede saltar aunque este en el aire despues de caer de una plataforma
-    [SerializeField] RaycastHit2D _hitLeft; //raycast izquierdo del jugador para detectar si esta en el suelo
-    [SerializeField] RaycastHit2D _hitRight;//raycast derecho del jugador para detectar si esta en el suelo
-    [SerializeField] float _hitDistance;//longitud de ambos ray
-    [SerializeField] bool _debugRayCast; //determina si pintar los ray en el editor
     [SerializeField] float _maxSpeed; //velocidad maxima del jugador para caer
     #endregion
 
@@ -39,6 +35,7 @@ public class PlayerFallingState : BaseState
     PlayerStateMachine _ctx;//el contexto para acceder a parametros globales del playerstatemachine
     float _coyoteTime; //parametro para saber si el jugador ha caido de una plataforma y si puede seguir saltando
     float _moveDir;//para detectar si el jugador esta en movimiento
+    bool _isGrounded; // para detectar si el jugador está en el suelo.
 
     #endregion
 
@@ -60,6 +57,16 @@ public class PlayerFallingState : BaseState
         _rigidbody = _ctx.Rigidbody;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // El trigger debe solo tocar la layer del suelo.
+        _isGrounded = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // El trigger debe solo tocar la layer del suelo.
+        _isGrounded = false;
+    }
 
     #endregion
 
@@ -124,16 +131,6 @@ public class PlayerFallingState : BaseState
         }
         else if (_coyoteTime < 0) _coyoteTime = 0;
 
-        //Definimos los dos Raycast
-        _hitLeft = Physics2D.Raycast(new Vector2(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
-        _hitRight = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y), Vector2.down, _hitDistance, LayerMask.GetMask("Ground"));
-
-
-        if (_debugRayCast) //pinta el raycast si debugRayCast es true
-        {
-            Debug.DrawRay(new Vector2(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y), Vector2.down * _hitDistance, Color.red);
-            Debug.DrawRay(new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y), Vector2.down * _hitDistance, Color.red);
-        }
         
     }
     protected override void FixedUpdateState()
@@ -149,7 +146,7 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_hitLeft.collider != null || _hitRight.collider != null) //detecta si esta colisionando con el suelo para pasar al estado Grounded
+        if (_isGrounded) //detecta si esta colisionando con el suelo para pasar al estado Grounded
         {
             Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
