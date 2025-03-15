@@ -22,8 +22,11 @@ public class MainMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [SerializeField] private GameObject _playArrow;
+    [SerializeField] private GameObject _exitArrow;
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -40,14 +43,14 @@ public class MainMenuController : MonoBehaviour
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
@@ -76,9 +79,35 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlayButtom()
     {
-        SceneManager.LoadScene("Player Check Point");
+        SceneManager.LoadScene("PlayerCheckPoint");
     }
 
+    public void OnExitButton()
+    {
+        Debug.Log("Salir de la aplicación");
+        Application.Quit();
+        Debug.Log("Salir de la aplicación");
+    }
+
+    public void OnSelectPlay()
+    {
+        _playArrow.SetActive(true);
+    }
+
+    public void OnDeselectPlay()
+    {
+        _playArrow.SetActive(false);
+    }
+
+    public void OnSelectExit()
+    {
+        _exitArrow.SetActive(true);
+    }
+
+    public void OnDeselectExit()
+    {
+        _exitArrow.SetActive(false);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -88,11 +117,7 @@ public class MainMenuController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    public void OnExitButton()
-    {
-        Application.Quit();
-        Debug.Log("Salir de la aplicación");
-    }
+
 
     #endregion   
 
