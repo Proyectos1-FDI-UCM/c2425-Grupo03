@@ -155,7 +155,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1336008034}
-  - {fileID: 410811524}
   m_Father: {fileID: 523489468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -405,16 +404,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410811523}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 205830036}
+  m_Father: {fileID: 523489468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -159.00003, y: 0.000015258789}
+  m_AnchoredPosition: {x: 91, y: -160}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410811525
@@ -552,6 +551,8 @@ RectTransform:
   m_Children:
   - {fileID: 1519248751}
   - {fileID: 205830036}
+  - {fileID: 1413675298}
+  - {fileID: 410811524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -571,8 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5771d42c96651f442b92750da34a7547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playArrow: {fileID: 1519248750}
-  _exitArrow: {fileID: 205830035}
+  _playArrow: {fileID: 1413675297}
+  _exitArrow: {fileID: 410811523}
 --- !u!1 &1336008033
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,16 +680,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413675297}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1519248751}
+  m_Father: {fileID: 523489468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -159.00003, y: -0}
+  m_AnchoredPosition: {x: 91, y: -90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413675299
@@ -854,7 +855,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2111368526}
-  - {fileID: 1413675298}
   m_Father: {fileID: 523489468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -975,7 +975,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 523489469}
           m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-          m_MethodName: OnDeselectPlay
+          m_MethodName: OnSelectPlay
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
