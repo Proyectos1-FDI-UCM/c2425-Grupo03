@@ -19,9 +19,12 @@ public class SoundManager : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    #endregion
+    /// <summary>
+    /// AudioSource temporal que se instancia en la escena
+    /// </summary>
     [SerializeField] AudioSource _audioSourceObject;
+    #endregion
+
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -31,9 +34,12 @@ public class SoundManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
-    #endregion
+    /// <summary>
+    /// Patron singleton
+    /// </summary>
     public static SoundManager Instance;
+    #endregion
+
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -66,6 +72,9 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// singleton
+    /// </summary>
     void Awake()
     {
         if (Instance == null)
@@ -82,6 +91,12 @@ public class SoundManager : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
+    /// <summary>
+    /// Crea un audioSouce temporal en la escena para producir el sonido y despues se autodestruye
+    /// </summary>
+    /// <param name="audioClip"></param> audioClip que quieres reproducir
+    /// <param name="spawnPosition"></param> Posicion donde se reproduce el audio
+    /// <param name="volume"></param> volumen del audio
     public void PlaySFX(AudioClip audioClip, Transform spawnPosition, float volume)
     {
         AudioSource audioSource = Instantiate(_audioSourceObject, spawnPosition.position, Quaternion.identity);
@@ -92,6 +107,12 @@ public class SoundManager : MonoBehaviour
         Destroy(audioSource, clipLengh);
     }
 
+    /// <summary>
+    ///     /// Crea un audioSouce temporal en la escena para producir un sonido random entre el array de audio dados y despues se autodestruye
+    /// </summary>
+    /// <param name="audioClip"></param> array de audioClip que quieres reproducir de manera random
+    /// <param name="spawnPosition"></param> Posicion donde se reproduce el audio
+    /// <param name="volume"></param> volumen del audio
     public void PlayRandomSFX(AudioClip[] audioClip, Transform spawnPosition, float volume)
     {
         int random = Random.Range(0, audioClip.Length);
