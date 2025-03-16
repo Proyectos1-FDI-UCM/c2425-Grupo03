@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Menu_Zhiyi/MainMenu_Zhiyi.unity
     guid: 09d43e79412ab234783fa2705d956911
+  - enabled: 1
+    path: Assets/Scenes/Testing/CameraMovement.unity
+    guid: cfa79d13320062c498049cf8c255f045
   m_configObjects: {}

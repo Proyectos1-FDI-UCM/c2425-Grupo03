@@ -82,7 +82,7 @@ public class PlayerDeathState : BaseState
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsDead", true);
+        _animator.SetBool("IsFalling", true);
     }
 
     /// <summary>

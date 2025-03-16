@@ -66,9 +66,10 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Debug.Log("Pressed key");
+      
         if (Input.GetKeyDown(KeyCode.P))
         {
+            Debug.Log("Pressed key");
             if (!_paused)
             { 
                 PauseGame(); 
