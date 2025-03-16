@@ -2861,7 +2861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 217623067378982945, guid: 3fe70e58e9e954342b8b1d60c550adc7, type: 3}
       propertyPath: _maxDisplacement
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 217623067378982945, guid: 3fe70e58e9e954342b8b1d60c550adc7, type: 3}
       propertyPath: _cameraDisplacement.x

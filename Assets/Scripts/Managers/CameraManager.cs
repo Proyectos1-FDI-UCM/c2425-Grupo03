@@ -72,19 +72,14 @@ public class CameraManager : MonoBehaviour
     {
         // Lee el input del jugador.
         _moveDir = _playerInput.MoveCamera.ReadValue<Vector2>();
-
-        if (_moveDir != new Vector3(0, 0, 0)) // Si se detecta input diferente a 0
-        {
-            _finalPos = _playerPosition.position + _moveDir * _maxDisplacement; // Calcula la posición final (posición del jugador + el input * el desplazamiento máximo posible)
-            Move(_finalPos); // mueve la cámara
-        }
+       
     }
 
     void FixedUpdate()
     {
-        if (_playerPosition != null && _moveDir == new Vector3(0, 0, 0)) // si no se detecta input para mover la cámara
+        if (_playerPosition != null) 
         {
-            _finalPos = _playerPosition.position + _cameraDisplacement; 
+             _finalPos = _playerPosition.position + _moveDir * _maxDisplacement + _cameraDisplacement; // Calcula la posición final (posición del jugador + el input * el desplazamiento máximo posible)
             Move(_finalPos); // la cámara sigue al jugador
         }
     }
