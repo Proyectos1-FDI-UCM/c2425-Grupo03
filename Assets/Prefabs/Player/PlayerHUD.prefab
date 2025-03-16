@@ -580,8 +580,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 0}
-  _abilityOne: {fileID: 6332846164872864794}
-  _abilityTwo: {fileID: 3984108475236575682}
+  _abilityOneImg: {fileID: 6332846164872864794}
+  _abilityTwoImg: {fileID: 3984108475236575682}
 --- !u!1 &8373016083490128595
 GameObject:
   m_ObjectHideFlags: 0
