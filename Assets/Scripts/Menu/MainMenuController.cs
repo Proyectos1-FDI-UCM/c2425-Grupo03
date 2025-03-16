@@ -79,7 +79,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnPlayButtom()
     {
-        SceneManager.LoadScene("PlayerCheckPoint");
+        SceneManager.LoadScene("LevelTest_Zhiyi");
     }
 
     public void OnExitButton()

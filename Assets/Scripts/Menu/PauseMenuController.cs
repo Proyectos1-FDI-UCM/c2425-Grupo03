@@ -70,9 +70,13 @@ public class PauseMenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (!_paused)
-            { PauseGame(); }
+            { 
+                PauseGame(); 
+            }
             else
-            { ContinueGame(); }
+            { 
+                ContinueGame(); 
+            }
         }
     }
     #endregion
