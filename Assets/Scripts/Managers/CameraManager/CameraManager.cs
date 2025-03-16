@@ -5,23 +5,14 @@
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
-
-using System;
-using System.Numerics;
-
-// using System.Numerics;
+/*
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Vector3 = UnityEngine.Vector3;
-using Vector2 = UnityEngine.Vector2;
-using UnityEngine.Scripting.APIUpdating;
-// Añadir aquí el resto de directivas using
 
 
 /// <summary>
 /// Componente responsable de la gestión de la cámara del juego
 /// </summary>
-public class CameraManager : MonoBehaviour
+public class CameraManagerObs : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -114,3 +105,4 @@ public class CameraManager : MonoBehaviour
 
 } // class CameraManager 
 // namespace
+*/
