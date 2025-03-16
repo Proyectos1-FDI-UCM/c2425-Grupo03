@@ -87,7 +87,11 @@ public class PauseMenuController : MonoBehaviour
 
     public void PauseGame()
     {
-        _uiPauseMenu.SetActive(true);
+        //_uiPauseMenu.SetActive(true);
+        if (_uiPauseMenu != null)
+        {
+            _uiPauseMenu.SetActive(true);
+        }
 
         Time.timeScale = 0f;
         _paused = true;
@@ -95,7 +99,10 @@ public class PauseMenuController : MonoBehaviour
 
     public void ContinueGame()
     {
-        _uiPauseMenu.SetActive(false);
+        if (_uiPauseMenu != null)
+        { 
+            _uiPauseMenu.SetActive(false);
+        }
 
         Time.timeScale = 1f;
         _paused = false;

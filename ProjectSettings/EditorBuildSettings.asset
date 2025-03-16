@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Player/PlayerCheckPoint.unity
     guid: 8578d086b81fbba4383cf095527a3630
+  - enabled: 1
+    path: Assets/Scenes/Testing/Menu_Zhiyi/MainMenu_Zhiyi.unity
+    guid: 09d43e79412ab234783fa2705d956911
   m_configObjects: {}
