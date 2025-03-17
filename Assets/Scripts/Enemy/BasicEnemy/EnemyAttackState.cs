@@ -183,7 +183,7 @@ public class EnemyAttackState : BaseState
         {
             HM.RemoveHealth(_damage);
         }
-        SoundManager.Instance.PlaySFX(_attackSound, transform, 1);
+        SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
     }
     /*
     private void OnDrawGizmos()

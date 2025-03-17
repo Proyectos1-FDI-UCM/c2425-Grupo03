@@ -680,7 +680,11 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _waitTime: 2
-  _playerDeath: []
+  _playerDeath:
+  - {fileID: 8300000, guid: 220a5dd8a649bd8408ccf5ca50e0e421, type: 3}
+  - {fileID: 8300000, guid: dddd7a03f9500ea4885dfba09921b0c3, type: 3}
+  - {fileID: 8300000, guid: 4e9856121c08ddd409c9b6b129f87142, type: 3}
+  - {fileID: 8300000, guid: 7e78645ffdb6de74495da5fdd646d17c, type: 3}
 --- !u!82 &3080920044508600344
 AudioSource:
   m_ObjectHideFlags: 0
