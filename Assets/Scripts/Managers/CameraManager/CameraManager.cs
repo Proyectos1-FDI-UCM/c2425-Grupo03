@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -165,7 +166,29 @@ public class CameraManager : MonoBehaviour
         if(_cameraInstructions.Count == 0) cameraInstruction.SetUp();
     }
 
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        StartCoroutine(ShakeCameraAsync(duration, magnitude));
+    }
+
     #endregion
+
+    private IEnumerator ShakeCameraAsync(float duration, float magnitude)
+    {
+        Vector3 originalPosition = transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.position = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = originalPosition;
+    }
     
 
 } // class Camera 
