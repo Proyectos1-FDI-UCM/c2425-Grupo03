@@ -38,7 +38,6 @@ public class PlayerChargedAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
-    [SerializeField] AudioClip _hitSound;
     [SerializeField] private AudioClip _airHit;
     #endregion
 
@@ -139,10 +138,6 @@ public class PlayerChargedAttackState : BaseState
             enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
 
             GetComponentInParent<PlayerChargeScript>().AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
-        }
-        if (enemyInArea.Length > 0)
-        {
-            SoundManager.Instance.PlaySFX(_hitSound, transform, 1);
         }
     }
     /// <summary>

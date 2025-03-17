@@ -379,10 +379,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _initialHealth: 150
+  _playerDamaged: []
+  _enemyDamaged: {fileID: 8300000, guid: 08a49fadf270249488ff5d000bde870c, type: 3}
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
   _onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onHealed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!95 &411743475415990822
@@ -595,8 +600,8 @@ MonoBehaviour:
   _name: 
   _attackSpeed: 0
   _damage: 0
-  _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _waitTimeShoot: 1
+  _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _bulletPosition: {fileID: 393862591464892332}
 --- !u!114 &1808163096419442921
 MonoBehaviour:
@@ -643,8 +648,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTimeShoot: 1
-  _invokingTime: 1
   _abilityCooldown: 1
   _invokeProbabilty: 0.37
 --- !u!114 &4894896949926512459

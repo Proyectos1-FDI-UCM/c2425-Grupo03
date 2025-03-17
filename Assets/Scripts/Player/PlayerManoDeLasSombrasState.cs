@@ -67,6 +67,8 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
     [SerializeField] private float _abilityChargePercentage;
+    [SerializeField] AudioClip _attracSound;
+    [SerializeField] AudioClip _pushSound; 
 
     #endregion
 
@@ -128,6 +130,7 @@ public class PlayerManoDeLasSombrasState : BaseState
 
     private IEnumerator CastShadowHand(Vector2 direction)
     {
+        SoundManager.Instance.PlaySFX(_attracSound, transform, 0.2f); 
         // Esperar x segundos antes del primer golpe
         yield return new WaitForSeconds(_waitTimeForFirstHit);
 
@@ -194,7 +197,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     {
         // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
         yield return new WaitForSeconds(_attractEnemyTime+0.1f);
-
+        SoundManager.Instance.PlaySFX(_pushSound, transform, 0.8f);
         for (int i = 0; i < affectedEnemys; i++) 
         {
             EnemyStateMachine enemy = hits[i].collider == null ? null: hits[i].collider.GetComponent<EnemyStateMachine>();

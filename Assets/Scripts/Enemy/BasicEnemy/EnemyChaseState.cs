@@ -43,6 +43,7 @@ public class EnemyChaseState : BaseState
     /// El animator del enemigo
     /// </summary>
     private Animator _animator;
+    AudioSource _audioSource;
 
     #endregion
 
@@ -64,11 +65,13 @@ public class EnemyChaseState : BaseState
         _animator = _ctx.GetComponent<Animator>();
         //Coge la referencia al rigidbody por comodidad
         _rb = _ctx.Rigidbody;
+        _audioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Si el jugador sale del trigger pone el range a false.
         _ctx.IsPlayerInChaseRange = false;
+        _audioSource.Stop();
     }
     #endregion
 
@@ -87,6 +90,7 @@ public class EnemyChaseState : BaseState
     {
         _animator.SetBool("IsAttack", false);
         _animator.SetBool("IsChasing", true);
+        _audioSource.Play();
     }
     
     /// <summary>
@@ -97,6 +101,7 @@ public class EnemyChaseState : BaseState
         //Al salir del estado de chase, el enemigo nunca se debería mover
         _rb.velocity = Vector3.zero;
         _animator.SetBool("IsChasing", false);
+        _audioSource.Stop();
     }
     #endregion
     

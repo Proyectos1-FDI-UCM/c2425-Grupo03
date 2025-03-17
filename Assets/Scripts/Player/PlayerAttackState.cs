@@ -41,7 +41,6 @@ public class PlayerAttackState : BaseState
     [SerializeField] AudioClip _airHit2;
     [SerializeField] AudioClip _airHit3;
     [SerializeField] AudioClip _airHit4;
-    [SerializeField] AudioClip _bloodHit1;
 
 
     [Header("Propiedad del combo")]
@@ -247,7 +246,6 @@ public class PlayerAttackState : BaseState
         if (enemyInArea.Length >0)
         {
             CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
-            SoundManager.Instance.PlaySFX(_bloodHit1, transform, 1);
         }
     }
 
