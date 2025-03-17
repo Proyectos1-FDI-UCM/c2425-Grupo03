@@ -35,6 +35,7 @@ public class PlayerGroundedState : BaseState
     PlayerStateMachine _ctx; //el contexto para acceder a parametros globales del playerstatemachine
     float _jumpBuffer; //tiempo en el que el jugador puede saltar sin llegar al suelo
     float _moveDir; //para detectar si el jugador esta en movimiento
+    AudioSource _audioSource;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -55,6 +56,7 @@ public class PlayerGroundedState : BaseState
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
+        _audioSource = GetComponent<AudioSource>();
     }
     /// <summary>
     /// Metodo que actualiza todo el rato
@@ -98,6 +100,7 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        _audioSource.Stop();
         _ctx.Animator.SetBool("IsIdle", false);
         _ctx.Animator.SetBool("IsRunning", false);
     }
@@ -125,12 +128,17 @@ public class PlayerGroundedState : BaseState
             _ctx.Animator.SetBool("IsIdle", false);
             PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
             attackState.ResetAttackCombo();
+            if (!_audioSource.isPlaying)
+            {
+                _audioSource.Play();
+            }
 
         }
         else
         {
             _ctx.Animator.SetBool("IsIdle", true);
             _ctx.Animator.SetBool("IsRunning", false);
+            _audioSource.Stop();
         }
     }
 

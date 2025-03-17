@@ -42,6 +42,7 @@ public class PlayerMoveState : BaseState
     /// El estado de ataque del jugador.
     /// </summary>
     PlayerAttackState _attackState;
+    AudioSource _audioSource;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -57,6 +58,7 @@ public class PlayerMoveState : BaseState
         _rb = GetCTX<PlayerStateMachine>().Rigidbody;
         _sprite = GetCTX<PlayerStateMachine>().SpriteRenderer;
         _attackState = Ctx.GetStateByType<PlayerAttackState>();
+        _audioSource = GetComponent<AudioSource>();
     }
     #endregion
 

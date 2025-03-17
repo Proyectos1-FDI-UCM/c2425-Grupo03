@@ -246,6 +246,7 @@ public class PlayerAttackState : BaseState
         }
         if (enemyInArea.Length >0)
         {
+            CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
             SoundManager.Instance.PlaySFX(_bloodHit1, transform, 1);
         }
     }

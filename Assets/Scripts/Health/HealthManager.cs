@@ -30,6 +30,9 @@ public class HealthManager : MonoBehaviour
     /// La vida inicial que tiene la entidad
     /// </summary>
     [SerializeField] private int _initialHealth;
+
+    [SerializeField] AudioClip []_playerDamaged;
+
     #endregion
 
 
@@ -152,6 +155,7 @@ public class HealthManager : MonoBehaviour
             }
             if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
             {
+                SoundManager.Instance.PlayRandomSFX(_playerDamaged, transform, 0.8f);
                 gameObject.GetComponent<PlayerHealthBar>().DecreaseHealth(removedHealth);
             }
             _onDamaged.Invoke(removedHealth);

@@ -1309,6 +1309,10 @@ PrefabInstance:
       propertyPath: _healthSlider
       value: 
       objectReference: {fileID: 1901496037}
+    - target: {fileID: 2876048266150505504, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4450874108255313576, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_Name
       value: Player (1)
@@ -8877,6 +8881,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3353161169907070091, guid: 3fe70e58e9e954342b8b1d60c550adc7, type: 3}
+      propertyPath: _playerPosition
+      value: 
+      objectReference: {fileID: 681448984}
     - target: {fileID: 4817941734545061394, guid: 3fe70e58e9e954342b8b1d60c550adc7, type: 3}
       propertyPath: m_Name
       value: Main Camera
