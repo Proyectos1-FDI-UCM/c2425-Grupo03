@@ -24,7 +24,7 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] GameObject _playArrow;
     [SerializeField] GameObject _exitArrow;
-    //[SerializeField] GameObject _firstButton;
+    [SerializeField] GameObject _firstButton;
 
     #endregion
 
@@ -58,7 +58,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //EventSystem.current.SetSelectedGameObject(_firstButton);
+        EventSystem.current.SetSelectedGameObject(_firstButton);
     }
 
     /// <summary>
@@ -85,7 +85,6 @@ public class MainMenuController : MonoBehaviour
 
     public void OnExitButton()
     {
-        Debug.Log("Salir de la aplicación");
         Application.Quit();
         Debug.Log("Salir de la aplicación");
     }
