@@ -2447,6 +2447,8 @@ MonoBehaviour:
   _nextZoomWait: 12
   _followTime: 1
   _nextZoomFollow: 7
+  _shakeDuration: 1
+  _shakeStrength: 2
 --- !u!4 &409288414
 Transform:
   m_ObjectHideFlags: 0

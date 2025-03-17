@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -156,6 +157,10 @@ public class CameraManager : MonoBehaviour
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
+    /// <summary>
+    /// Pone una nueva instrucción a la cola de instrucciones de la cámara.
+    /// </summary>
+    /// <param name="cameraInstruction">La instrucción a ejecutar por la cámara.</param>
     public void EnqueueInstruction(CameraInstruction cameraInstruction)
     {
         // pone la instrucción a la cola
@@ -165,8 +170,46 @@ public class CameraManager : MonoBehaviour
         if(_cameraInstructions.Count == 0) cameraInstruction.SetUp();
     }
 
+    /// <summary>
+    /// Hace vibrar la cámara un cierto tiempo.
+    /// </summary>
+    /// <param name="duration">Durante cuanto tiempo vibra la cámara en segundos.</param>
+    /// <param name="magnitude">Cuanto se puede desplazar la cámara en cualquier dirección.</param>
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        // Llama a la corrutina que hace el shake de la cámara
+        // Si es necesario se puede cancelar la corrutina de shake desde aquí antes de llamara otra
+        StartCoroutine(ShakeCameraAsync(duration, magnitude));
+    }
+
     #endregion
-    
+
+    // ---- MÉTODOS PRIVADOS ----
+    #region Métodos privados
+    private IEnumerator ShakeCameraAsync(float duration, float magnitude)
+    {
+        // Coge la posición original
+        Vector3 originalPosition = transform.position;
+        // Para guardar el tiempo desde el comienzo
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            // Calcula valores aleatorios de offset para mover la cámara
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            // Aplica el offset a la posición original
+            transform.position = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            // Guarda el tiempo pasado
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        // Coloca la cámara en la posición original
+        transform.position = originalPosition;
+    }
+    #endregion
+
 
 } // class Camera 
 // namespace

@@ -31,6 +31,10 @@ public class CameraTesting : MonoBehaviour
     [SerializeField] float _followTime;
     [SerializeField] float _nextZoomFollow;
 
+    [Header("Shake attributes")]
+    [SerializeField] float _shakeDuration;
+    [SerializeField] float _shakeStrength;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -93,6 +97,11 @@ public class CameraTesting : MonoBehaviour
     {
         CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(_followTime, _nextZoomFollow));
 
+    }
+    [ContextMenu("Shake Camera")]
+    public void CameraShake()
+    {
+        CameraManager.Instance.ShakeCamera(_shakeDuration, _shakeStrength);
     }
 
     #endregion
