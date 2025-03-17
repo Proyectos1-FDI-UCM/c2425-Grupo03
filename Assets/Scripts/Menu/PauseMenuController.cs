@@ -24,8 +24,19 @@ public class PauseMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    /// <summary>
+    /// Referencia al ui del menu de pausa
+    /// </summary>
     [SerializeField] GameObject _uiPauseMenu;
+
+    /// <summary>
+    /// Deshabilitar los movimientos del jugador
+    /// </summary>
     [SerializeField] PlayerStateMachine _player;
+
+    /// <summary>
+    /// Referencia al primer boton que se selecciona al abrir el menu
+    /// </summary>
     [SerializeField] GameObject _firstButton;
 
     #endregion
@@ -39,6 +50,9 @@ public class PauseMenuController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Indica si el juego esta pausado o no
+    /// </summary>
     private bool _paused = false;
 
     #endregion
@@ -94,26 +108,36 @@ public class PauseMenuController : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Metodo que pausa el juego activando el menú de pausa
+    /// </summary>
     public void PauseGame()
     {
         //_uiPauseMenu.SetActive(true);
+        // Activa el menú de pausa
         if (_uiPauseMenu != null)
         {
             _uiPauseMenu.SetActive(true);
         }
 
+        // Desactiva el control del jugador
         if (_player != null)
         {
             _player.enabled = false;
         }
 
+        // Detiene el tiempo del juego
         Time.timeScale = 0f;
         _paused = true;
 
+        // Selecciona el primer boton del menu de pausa 
         EventSystem.current.SetSelectedGameObject(_firstButton);
 
     }
 
+    /// <summary>
+    ///  Metodo que reanuda el juego desactivando el menu de pausa
+    /// </summary>
     public void ContinueGame()
     {
         if (_uiPauseMenu != null)
@@ -130,6 +154,9 @@ public class PauseMenuController : MonoBehaviour
         _paused = false;
     }
 
+    /// <summary>
+    /// Metodo que vuelve al menu principal
+    /// </summary>
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;
