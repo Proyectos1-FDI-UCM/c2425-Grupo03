@@ -20,6 +20,7 @@ public class PlayerJumpState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField] float _maxHeight;
+    [SerializeField] AudioClip _jumpSound;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -80,6 +81,7 @@ public class PlayerJumpState : BaseState
             SetSubState(Ctx.GetStateByType<PlayerIdleState>());
         }
         _ctx.Animator.SetBool("IsJumping", true);
+        SoundManager.Instance.PlaySFX(_jumpSound, transform, 1);
     }
 
     /// <summary>

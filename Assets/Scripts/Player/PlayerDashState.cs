@@ -41,7 +41,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     [Tooltip("Trigger deactivated while dashing.")]
     [SerializeField] BoxCollider2D _playerHitTrigger; //Preferiblemente debería estar en el contexto
-
+    [SerializeField] AudioClip _dashSound;
 
     #endregion
 
@@ -107,6 +107,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        SoundManager.Instance.PlaySFX(_dashSound, transform, 1);
         //Acelera al jugador para hacer el dash, calcula la velocidad haciendo. -> v = d / t
         _dashSpeed = _distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration;
         _rb.velocity = new Vector2(_dashSpeed, 0);

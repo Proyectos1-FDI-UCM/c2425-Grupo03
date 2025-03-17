@@ -438,6 +438,7 @@ MonoBehaviour:
   _name: 
   _maxCoyoteTime: 0.075
   _maxSpeed: -20
+  _landSound: {fileID: 8300000, guid: 47eef395ad9da3e4590ac5d3a19826c7, type: 3}
 --- !u!1 &9124716735178180898
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +564,7 @@ MonoBehaviour:
   _duration: 0.2
   _rechargeTime: 0.5
   _playerHitTrigger: {fileID: 6312170735057447645}
+  _dashSound: {fileID: 8300000, guid: 35fc657bbbc861d4a8d8e6abaf3f9366, type: 3}
 --- !u!114 &468561577577776617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +595,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _maxHeight: 5
+  _jumpSound: {fileID: 8300000, guid: 8e10b4edb3b335b42a9dca5b3ec092ba, type: 3}
 --- !u!114 &470757805071825687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,8 +614,11 @@ MonoBehaviour:
   _attackSpeed: 0.1
   _damage: 5
   _abilityChargePercentage: 0
-  _attackSFX: {fileID: 8300000, guid: de65162e492135a4491c48161b7a147f, type: 3}
-  _hitEnemy: {fileID: 8300000, guid: e76e9972d2130de43a4977fc7c91a235, type: 3}
+  _airHit1: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
+  _airHit2: {fileID: 8300000, guid: 48c961f5acc5f574f9a35154227d2988, type: 3}
+  _airHit3: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
+  _airHit4: {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
+  _bloodHit1: {fileID: 8300000, guid: 08a49fadf270249488ff5d000bde870c, type: 3}
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1

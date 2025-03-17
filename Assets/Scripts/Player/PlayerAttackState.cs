@@ -37,8 +37,11 @@ public class PlayerAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
-    [SerializeField] AudioClip _attackSFX;
-    [SerializeField] AudioClip _hitEnemy;
+    [SerializeField] AudioClip _airHit1;
+    [SerializeField] AudioClip _airHit2;
+    [SerializeField] AudioClip _airHit3;
+    [SerializeField] AudioClip _airHit4;
+    [SerializeField] AudioClip _bloodHit1;
 
 
     [Header("Propiedad del combo")]
@@ -210,7 +213,21 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
-        SoundManager.Instance.PlaySFX(_attackSFX, transform, 100);
+        switch (_combo)
+        {
+            case 0: 
+                SoundManager.Instance.PlaySFX(_airHit1,transform,1);
+                break;
+            case 1:
+                SoundManager.Instance.PlaySFX(_airHit2, transform, 1);
+                break;
+            case 2:
+                SoundManager.Instance.PlaySFX(_airHit3, transform, 1);
+                break;
+            case 3:
+                SoundManager.Instance.PlaySFX(_airHit4, transform, 1);
+                break;
+        }
         int extraDamage = 0;
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
@@ -229,7 +246,7 @@ public class PlayerAttackState : BaseState
         }
         if (enemyInArea.Length >0)
         {
-            SoundManager.Instance.PlaySFX(_hitEnemy, transform, 100);
+            SoundManager.Instance.PlaySFX(_bloodHit1, transform, 1);
         }
     }
 

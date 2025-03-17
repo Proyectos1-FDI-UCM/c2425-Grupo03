@@ -21,6 +21,7 @@ public class PlayerFallingState : BaseState
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField][Min(0)] float _maxCoyoteTime;  //tiempo en el que el jugador puede saltar aunque este en el aire despues de caer de una plataforma
     [SerializeField] float _maxSpeed; //velocidad maxima del jugador para caer
+    [SerializeField] AudioClip _landSound;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -61,6 +62,7 @@ public class PlayerFallingState : BaseState
     {
         // El trigger debe solo tocar la layer del suelo.
         _isGrounded = true;
+
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -93,7 +95,6 @@ public class PlayerFallingState : BaseState
         {
             SetSubState(Ctx.GetStateByType<PlayerIdleState>());
         }
-
         _ctx.Animator.SetBool("IsFalling", true);
 
     }
