@@ -8,6 +8,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+
 // Añadir aquí el resto de directivas using
 
 
@@ -23,6 +25,8 @@ public class PauseMenuController : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     [SerializeField] GameObject _uiPauseMenu;
+    [SerializeField] PlayerStateMachine _player;
+    [SerializeField] GameObject _firstButton;
 
     #endregion
 
@@ -67,7 +71,7 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
       
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Pressed key");
             if (!_paused)
@@ -98,8 +102,16 @@ public class PauseMenuController : MonoBehaviour
             _uiPauseMenu.SetActive(true);
         }
 
+        if (_player != null)
+        {
+            _player.enabled = false;
+        }
+
         Time.timeScale = 0f;
         _paused = true;
+
+        EventSystem.current.SetSelectedGameObject(_firstButton);
+
     }
 
     public void ContinueGame()
@@ -107,6 +119,11 @@ public class PauseMenuController : MonoBehaviour
         if (_uiPauseMenu != null)
         { 
             _uiPauseMenu.SetActive(false);
+        }
+
+        if (_player != null)
+        {
+            _player.enabled = true;
         }
 
         Time.timeScale = 1f;

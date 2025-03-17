@@ -22,8 +22,9 @@ public class MainMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    [SerializeField] private GameObject _playArrow;
-    [SerializeField] private GameObject _exitArrow;
+    [SerializeField] GameObject _playArrow;
+    [SerializeField] GameObject _exitArrow;
+    //[SerializeField] GameObject _firstButton;
 
     #endregion
 
@@ -57,7 +58,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        //EventSystem.current.SetSelectedGameObject(_firstButton);
     }
 
     /// <summary>
