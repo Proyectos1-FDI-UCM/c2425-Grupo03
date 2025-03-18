@@ -42,7 +42,7 @@ public class VoidDamageTest : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.GetComponent<HealthManager>().RemoveHealth(int.MaxValue);
+        collision.gameObject.GetComponent<HealthManager>()?.RemoveHealth(int.MaxValue);
     }
     #endregion
 
