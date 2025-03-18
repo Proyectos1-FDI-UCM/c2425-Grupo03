@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713924c484010564db11d1be70017369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialPoint: {fileID: 0}
+  _respawnSound: {fileID: 8300000, guid: 4e53784d95e040745ba7f218c3433c27, type: 3}
+  _takeCheckPoint: {fileID: 8300000, guid: fc2dfdde5e041874a8175df285530f2c, type: 3}

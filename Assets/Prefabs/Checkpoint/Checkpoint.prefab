@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c93dfabbdb0bd419d6968ac2e1c55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 8589097374448434029}
+  _takeCheckPoint: {fileID: 8300000, guid: fc2dfdde5e041874a8175df285530f2c, type: 3}

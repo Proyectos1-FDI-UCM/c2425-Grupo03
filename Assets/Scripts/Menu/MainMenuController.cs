@@ -37,6 +37,18 @@ public class MainMenuController : MonoBehaviour
     ///  Referencia al primer boton que se selecciona al abrir el menu
     /// </summary>
     [SerializeField] GameObject _firstButton;
+    /// <summary>
+    /// Sonido que se reproduce al cambiar de boton
+    /// </summary>
+    [SerializeField] AudioClip _changeBotton;
+    /// <summary>
+    /// sonido de click boton
+    /// </summary>
+    [SerializeField] AudioClip _clickBotton;
+    /// <summary>
+    /// el tiempo que se espera al hacer click en un boton
+    /// </summary>
+    [SerializeField] float _waitTime = 1f;
 
     #endregion
 
@@ -51,6 +63,14 @@ public class MainMenuController : MonoBehaviour
 
     private PlayerInputActions _playerInput;
 
+    /// <summary>
+    /// tiempo en el que has dado a click
+    /// </summary>
+    float _clickTime;
+    /// <summary>
+    /// si ir a la escena play
+    /// </summary>
+    bool _goPlay = false;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -72,6 +92,8 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        _clickTime = 0f;
+        _goPlay = false;
         _playerInput = new PlayerInputActions();
         _playerInput.Player.Disable();
 
@@ -83,9 +105,21 @@ public class MainMenuController : MonoBehaviour
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// Comprueba si has dado a algun boton y si ha pasado el tiempo de espera
     /// </summary>
     void Update()
     {
+        if (_clickTime != 0 && Time.time - _clickTime > _waitTime)
+        {
+            if (_goPlay)
+            {
+                SceneManager.LoadScene("LevelTest_Zhiyi");
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
         
     }
     #endregion
@@ -103,7 +137,9 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void OnPlayButtom()
     {
-        SceneManager.LoadScene("LevelTest_Zhiyi");
+        _clickTime = Time.time;
+        _goPlay = true;
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
     }
 
     /// <summary>
@@ -112,7 +148,8 @@ public class MainMenuController : MonoBehaviour
     public void OnExitButton()
     {
         //Cierra la aplicacion (solo en la build)
-        Application.Quit();
+        _clickTime = Time.time;
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         Debug.Log("Salir de la aplicación");
     }
 
@@ -121,6 +158,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void OnSelectPlay()
     {
+        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
         _playArrow.SetActive(true);
     }
 
@@ -137,6 +175,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void OnSelectExit()
     {
+        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
         _exitArrow.SetActive(true);
     }
 

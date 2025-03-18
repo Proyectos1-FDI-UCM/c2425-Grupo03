@@ -39,6 +39,15 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject _firstButton;
 
+    /// <summary>
+    /// Sonido que se reproduce al cambiar de boton
+    /// </summary>
+    [SerializeField] AudioClip _changeBotton;
+    /// <summary>
+    /// sonido de click boton
+    /// </summary>
+    [SerializeField] AudioClip _clickBotton;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -92,6 +101,7 @@ public class PauseMenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Pressed key");
+            SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
             if (!_paused)
             { 
                 PauseGame(); 
@@ -142,6 +152,14 @@ public class PauseMenuController : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(_firstButton);
 
     }
+    /// <summary>
+    /// Reproduce el sonido _changeBotton
+    /// </summary>
+
+    public void PlayChangeBottonSFX()
+    {
+        SoundManager.Instance.PlaySFX(_changeBotton,transform,0.2f);
+    }
 
     /// <summary>
     ///  Metodo que reanuda el juego desactivando el menu de pausa
@@ -157,6 +175,7 @@ public class PauseMenuController : MonoBehaviour
         {
             _player.enabled = true;
         }
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         _playerInput = new PlayerInputActions();
         _playerInput.UI.Disable();
         Time.timeScale = 1f;
@@ -170,7 +189,7 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 1f;
         _paused = false;
-
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         SceneManager.LoadScene("MainMenu_Zhiyi");
     }
     #endregion

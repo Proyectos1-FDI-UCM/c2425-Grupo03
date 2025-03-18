@@ -27,6 +27,14 @@ public class CheckpointManager : MonoBehaviour
 
     [Header("Initial SpawnPoint")]
     [SerializeField] private Transform _initialPoint;
+    /// <summary>
+    /// El sonido del jugador al respawnear en el checkpoint
+    /// </summary>
+    [SerializeField] AudioClip _respawnSound;
+    /// <summary>
+    /// Sonido al activar checkpoint
+    /// </summary>
+    [SerializeField] AudioClip _takeCheckPoint;
 
     #endregion
 
@@ -99,6 +107,7 @@ public class CheckpointManager : MonoBehaviour
     /// <param name="checkpointTransform"></param>
     public void SetCheckpoint(Transform checkpointTransform)
     {
+        SoundManager.Instance.PlaySFX(_takeCheckPoint, transform, 0.1f);
         // Asigna la referencia del último punto a este checkpoint
         _lastPoint = checkpointTransform;
     }
@@ -111,6 +120,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (_lastPoint != null)
         {
+            SoundManager.Instance.PlaySFX(_respawnSound, transform, 0.1f);
             // Mueve la posición del jugador a la posición del checkpoint
             player.transform.position = _lastPoint.position;
         }

@@ -8,7 +8,6 @@
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
-
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
@@ -19,6 +18,7 @@ public class Checkpoint : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
 
     #endregion
 
