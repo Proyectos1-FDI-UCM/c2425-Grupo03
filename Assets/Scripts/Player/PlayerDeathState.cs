@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Transactions;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -21,6 +22,8 @@ public class PlayerDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+
+    [SerializeField] AudioClip[] _playerDeath;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -83,6 +86,7 @@ public class PlayerDeathState : BaseState
         _deadTime = Time.time + _waitTime;
 
         _animator.SetBool("IsFalling", true);
+        SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.7f);
     }
 
     /// <summary>

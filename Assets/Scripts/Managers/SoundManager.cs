@@ -94,9 +94,9 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Crea un audioSouce temporal en la escena para producir el sonido y despues se autodestruye
     /// </summary>
-    /// <param name="audioClip"></param> audioClip que quieres reproducir
-    /// <param name="spawnPosition"></param> Posicion donde se reproduce el audio
-    /// <param name="volume"></param> volumen del audio
+    /// <param name="audioClip"> audioClip que quieres reproducir</param>
+    /// <param name="spawnPosition"> Posicion donde se reproduce el audio</param>
+    /// <param name="volume"> volumen del audioClip </param>
     public void PlaySFX(AudioClip audioClip, Transform spawnPosition, float volume)
     {
         AudioSource audioSource = Instantiate(_audioSourceObject, spawnPosition.position, Quaternion.identity);
@@ -110,9 +110,9 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     ///     /// Crea un audioSouce temporal en la escena para producir un sonido random entre el array de audio dados y despues se autodestruye
     /// </summary>
-    /// <param name="audioClip"></param> array de audioClip que quieres reproducir de manera random
-    /// <param name="spawnPosition"></param> Posicion donde se reproduce el audio
-    /// <param name="volume"></param> volumen del audio
+    /// <param name="audioClip"> array de audioClip que quieres reproducir de manera random</param>
+    /// <param name="spawnPosition">Posicion donde se reproduce el audio</param> 
+    /// <param name="volume">volumen del audio</param> 
     public void PlayRandomSFX(AudioClip[] audioClip, Transform spawnPosition, float volume)
     {
         int random = Random.Range(0, audioClip.Length);

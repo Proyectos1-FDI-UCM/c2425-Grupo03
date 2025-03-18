@@ -378,6 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 100
   _initialHealth: 150
+  _playerDamaged: []
+  _enemyDamaged: {fileID: 8300000, guid: 08a49fadf270249488ff5d000bde870c, type: 3}
   _onDeath:
     m_PersistentCalls:
       m_Calls: []

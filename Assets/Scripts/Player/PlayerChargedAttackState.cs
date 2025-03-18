@@ -38,6 +38,7 @@ public class PlayerChargedAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
+    [SerializeField] private AudioClip _airHit;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -90,30 +91,7 @@ public class PlayerChargedAttackState : BaseState
         _animator = GetCTX<PlayerStateMachine>().Animator;
 
     }
-    /// <summary>
-    /// Metodo encargado de hacer el ataque cargado en un circulo con el centro en el jugador
-    /// </summary>
-    void ChargedAttack()
-    {
-        Vector2 position = transform.position;
-        RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _chargedAttackRadius, Vector2.zero ,0, 1 << 10);
-
-        foreach (RaycastHit2D enemy in enemyInArea)
-        {
-            enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
-
-            GetComponentInParent<PlayerChargeScript>().AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
-        }
-    }
-    /// <summary>
-    /// Dibuja el rango de ataque cargado
-    /// </summary>
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-       if (_drawRange) Gizmos.DrawWireSphere(transform.position, _chargedAttackRadius);
-    }
+   
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -145,8 +123,34 @@ public class PlayerChargedAttackState : BaseState
         _animator.SetBool("IsChargeAttaking", false);
         _animator.SetBool("IsCharging", false);
     }
+
+    /// <summary>
+    /// Metodo encargado de hacer el ataque cargado en un circulo con el centro en el jugador
+    /// </summary>
+    void ChargedAttack()
+    {
+        SoundManager.Instance.PlaySFX(_airHit, transform, 0.5f);
+        Vector2 position = transform.position;
+        RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _chargedAttackRadius, Vector2.zero, 0, 1 << 10);
+
+        foreach (RaycastHit2D enemy in enemyInArea)
+        {
+            enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
+
+            GetComponentInParent<PlayerChargeScript>().AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
+        }
+    }
+    /// <summary>
+    /// Dibuja el rango de ataque cargado
+    /// </summary>
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        if (_drawRange) Gizmos.DrawWireSphere(transform.position, _chargedAttackRadius);
+    }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí

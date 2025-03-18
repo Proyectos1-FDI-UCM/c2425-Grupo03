@@ -32,6 +32,7 @@ public class EnemyAttackState : BaseState
     /// El daño del ataque basico
     /// </summary>
     [SerializeField] float _damage;
+    [SerializeField] AudioClip _attackSound;
 
     #endregion
 
@@ -182,6 +183,7 @@ public class EnemyAttackState : BaseState
         {
             HM.RemoveHealth(_damage);
         }
+        SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
     }
     /*
     private void OnDrawGizmos()

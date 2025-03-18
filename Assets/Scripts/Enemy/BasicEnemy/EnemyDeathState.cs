@@ -23,6 +23,8 @@ public class EnemyDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+    [SerializeField] AudioClip _enemyDeath;
+    [SerializeField] AudioClip _enemyDropWeapon;
 
     #endregion
     
@@ -90,6 +92,9 @@ public class EnemyDeathState : BaseState
         _deadTime = Time.time + _waitTime;
 
         _animator.SetBool("IsDead", true);
+
+        SoundManager.Instance.PlaySFX(_enemyDeath, transform, 0.2f);
+        SoundManager.Instance.PlaySFX(_enemyDropWeapon, transform, 0.2f);
     }
     
     /// <summary>

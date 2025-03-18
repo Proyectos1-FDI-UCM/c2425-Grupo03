@@ -22,8 +22,20 @@ public class MainMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    [SerializeField] private GameObject _playArrow;
-    [SerializeField] private GameObject _exitArrow;
+    /// <summary>
+    /// Referencia de la flecha del boton Jugar
+    /// </summary>
+    [SerializeField] GameObject _playArrow;
+
+    /// <summary>
+    /// Referencia del boton Salir
+    /// </summary>
+    [SerializeField] GameObject _exitArrow;
+
+    /// <summary>
+    ///  Referencia al primer boton que se selecciona al abrir el menu
+    /// </summary>
+    [SerializeField] GameObject _firstButton;
 
     #endregion
 
@@ -57,7 +69,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        EventSystem.current.SetSelectedGameObject(_firstButton);
     }
 
     /// <summary>
@@ -77,33 +89,51 @@ public class MainMenuController : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Metodo que carga la escena del juego cuando se presiona el botón "Jugar"
+    /// </summary>
     public void OnPlayButtom()
     {
         SceneManager.LoadScene("LevelTest_Zhiyi");
     }
 
+    /// <summary>
+    /// Metodo que cierra la aplicación cuando se presiona el botón "Salir"
+    /// </summary>
     public void OnExitButton()
     {
-        Debug.Log("Salir de la aplicación");
+        //Cierra la aplicacion (solo en la build)
         Application.Quit();
         Debug.Log("Salir de la aplicación");
     }
 
+    /// <summary>
+    /// Activa la flecha del botón "Jugar"
+    /// </summary>
     public void OnSelectPlay()
     {
         _playArrow.SetActive(true);
     }
 
+    /// <summary>
+    /// Desactiva la flecha del botón "Jugar"
+    /// </summary>
     public void OnDeselectPlay()
     {
         _playArrow.SetActive(false);
     }
 
+    /// <summary>
+    /// Activa la flecha del botón "Salir"
+    /// </summary>
     public void OnSelectExit()
     {
         _exitArrow.SetActive(true);
     }
 
+    /// <summary>
+    /// Desactiva la flecha del botón "Salir"
+    /// </summary>
     public void OnDeselectExit()
     {
         _exitArrow.SetActive(false);

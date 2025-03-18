@@ -47,6 +47,7 @@ public class PlayerSuperDashState : BaseState
 
     [SerializeField] private int _abilityIndex;
     [SerializeField] private float _abilityChargePercentage;
+    [SerializeField] AudioClip _SoundEffect;
 
     #endregion
 
@@ -160,7 +161,6 @@ public class PlayerSuperDashState : BaseState
 
         //Comprobar si hay pared en la distancia del dash
         CheckWall();
-
     }
 
     /// <summary>
@@ -172,6 +172,7 @@ public class PlayerSuperDashState : BaseState
         _ctx.GetComponent<HealthManager>().Inmune = false;
         _chargeScript.ResetCharge(0);
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+        SoundManager.Instance.PlaySFX(_SoundEffect, transform, 0.5f);
     }
     #endregion
 
