@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 6408419066844692140}
   - component: {fileID: 4894896949926512459}
   m_Layer: 0
-  m_Name: EnemyIdle
+  m_Name: EnemyStates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
