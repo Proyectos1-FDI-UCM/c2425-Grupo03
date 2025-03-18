@@ -255,9 +255,9 @@ MonoBehaviour:
   - {fileID: 1132800426723031295}
   - {fileID: 4128716076676134296}
   - {fileID: 580149230629257244}
-  - {fileID: 0}
-  - {fileID: 6420658977189967374}
+  - {fileID: 3758149782358557980}
   - {fileID: 3132457056714941732}
+  - {fileID: 6420658977189967374}
 --- !u!114 &4886483801494157451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
   _chargedDamage: 20
   _chargingTime: 1
   _drawRange: 1
-  _abilityChargePercentage: 0
+  _abilityChargePercentage: 1000
   _airHit: {fileID: 8300000, guid: 7499cc93c8d5a3440ac1680e2acad68f, type: 3}
 --- !u!114 &886796386253165598
 MonoBehaviour:
@@ -692,7 +692,7 @@ MonoBehaviour:
   _attackRadius: 1.5
   _attackSpeed: 0.1
   _damage: 5
-  _abilityChargePercentage: 0
+  _abilityChargePercentage: 1000
   _airHit1: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
   _airHit2: {fileID: 8300000, guid: 48c961f5acc5f574f9a35154227d2988, type: 3}
   _airHit3: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
