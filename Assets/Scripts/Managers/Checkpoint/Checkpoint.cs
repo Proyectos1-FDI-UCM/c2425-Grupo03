@@ -20,8 +20,6 @@ public class Checkpoint : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    [SerializeField] private Animator _animator;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -35,6 +33,7 @@ public class Checkpoint : MonoBehaviour
 
     //Para evitar reactivación
     private bool _isActivated = false;
+    private Animator _animator;
 
     #endregion
 
@@ -46,7 +45,10 @@ public class Checkpoint : MonoBehaviour
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-
+    void Start()
+    {
+        _animator = GetComponent<Animator>();   
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----

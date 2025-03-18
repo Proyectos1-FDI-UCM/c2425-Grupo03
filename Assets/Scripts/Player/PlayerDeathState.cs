@@ -85,7 +85,7 @@ public class PlayerDeathState : BaseState
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsFalling", true);
+        _animator.SetBool("IsDead", true);
         SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.7f);
     }
 
