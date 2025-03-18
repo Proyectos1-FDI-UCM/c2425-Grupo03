@@ -19,8 +19,18 @@ public class PlayerFallingState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    [SerializeField][Min(0)] float _maxCoyoteTime;  //tiempo en el que el jugador puede saltar aunque este en el aire despues de caer de una plataforma
-    [SerializeField] float _maxSpeed; //velocidad maxima del jugador para caer
+    /// <summary>
+    /// //tiempo en el que el jugador puede saltar aunque este en el aire despues de caer de una plataforma
+    /// </summary>
+    [SerializeField][Min(0)] float _maxCoyoteTime;
+    /// <summary>
+    /// //velocidad maxima del jugador para caer
+    /// </summary>
+    [SerializeField] float _maxSpeed; 
+
+    /// <summary>
+    /// Sonido que hace el jugador al caer al suelo
+    /// </summary>
     [SerializeField] AudioClip _landSound;
     #endregion
 
@@ -32,11 +42,26 @@ public class PlayerFallingState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Rigidbody2D _rigidbody;//El rigidbody del jugador
-    PlayerStateMachine _ctx;//el contexto para acceder a parametros globales del playerstatemachine
-    float _coyoteTime; //parametro para saber si el jugador ha caido de una plataforma y si puede seguir saltando
-    float _moveDir;//para detectar si el jugador esta en movimiento
-    bool _isGrounded; // para detectar si el jugador está en el suelo.
+    /// <summary>
+    /// //El rigidbody del jugador
+    /// </summary>
+    Rigidbody2D _rigidbody;
+    /// <summary>
+    /// //el contexto para acceder a parametros globales del playerstatemachine
+    /// </summary>
+    PlayerStateMachine _ctx;
+    /// <summary>
+    /// //parametro para saber si el jugador ha caido de una plataforma y si puede seguir saltando
+    /// </summary>
+    float _coyoteTime;
+    /// <summary>
+    /// //para detectar si el jugador esta en movimiento
+    /// </summary>
+    float _moveDir;
+    /// <summary>
+    /// // para detectar si el jugador está en el suelo.
+    /// </summary>
+    bool _isGrounded;
 
     #endregion
 
@@ -50,23 +75,29 @@ public class PlayerFallingState : BaseState
     #region Métodos de MonoBehaviour
     /// <summary>
     /// Metodo llamado al instanciar el script
+    /// Asigna la referencia a _ctx y _rigidbody
     /// </summary>
     private void Start()
     {
-        // Asigna la referencia a _ctx y _rigidbody
+
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
     }
-
+    /// <summary>
+    /// El trigger debe solo tocar la layer del suelo.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // El trigger debe solo tocar la layer del suelo.
         _isGrounded = true;
 
     }
+    /// <summary>
+    ///El trigger debe solo tocar la layer del suelo.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // El trigger debe solo tocar la layer del suelo.
         _isGrounded = false;
     }
 
@@ -82,7 +113,6 @@ public class PlayerFallingState : BaseState
 
 
     /// <summary>
-    /// Metodo llamado cuando al transicionar a este estado.
     /// Determina si el subestado es Move o Idle dependiendo de si esta en movimiento el jugador
     /// </summary>
     public override void EnterState()
@@ -98,16 +128,19 @@ public class PlayerFallingState : BaseState
         _ctx.Animator.SetBool("IsFalling", true);
 
     }
+    /// <summary>
+    /// //resetea el coyote time al maximo fijado desde el editor de unity
+    /// </summary>
     public void ResetCoyoteTime()
     {
-        _coyoteTime = _maxCoyoteTime; //resetea el coyote time al maximo fijado desde el editor de unity
+        _coyoteTime = _maxCoyoteTime; 
     }
     /// <summary>
-    /// Metodo llamado antes de cambiar a otro estado.
+    /// cuando sale del estado falling, pone el coyoteTime a 0
     /// </summary>
     public override void ExitState()
     {
-        _coyoteTime = 0; // cuando sale del estado falling, pone el coyoteTime a 0
+        _coyoteTime = 0;
         _ctx.Animator.SetBool("IsFalling",false);
     }
     #endregion
@@ -121,12 +154,13 @@ public class PlayerFallingState : BaseState
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// _moveDir será 0 si no esta moviendo el jugador y va restando el coyoteTime si no es 0
     /// </summary>
     protected override void UpdateState()
     {
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();//_moveDir será 0 si no esta moviendo el jugador
+        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
 
-        if (_coyoteTime > 0) //va restando el coyoteTime si no es 0
+        if (_coyoteTime > 0) 
         {
             _coyoteTime -= Time.deltaTime;
         }
@@ -134,9 +168,12 @@ public class PlayerFallingState : BaseState
 
         
     }
+    /// <summary>
+    /// Aplica la velocidad al rigidbody si no ha llegado a la velocidad maxima
+    /// </summary>
     protected override void FixedUpdateState()
     {
-        if (_rigidbody.velocity.y < _maxSpeed) //limita la velocidad de caida en maxSpeed
+        if (_rigidbody.velocity.y < _maxSpeed) 
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _maxSpeed);
         }

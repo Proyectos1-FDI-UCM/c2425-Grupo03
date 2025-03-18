@@ -28,6 +28,11 @@ public class EnemySummonerInvokeState : BaseState
 
     [SerializeField][Min (0)] float _waitTimeInvoke;
 
+    /// <summary>
+    /// Sonido del invocador al invocar
+    /// </summary>
+    [SerializeField] AudioClip _invokeSound;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -88,6 +93,8 @@ public class EnemySummonerInvokeState : BaseState
 
         //Coger animator del contexto
         _animator = _ctx.GetComponent<Animator>();
+
+        SoundManager.Instance.PlaySFX(_invokeSound, transform, 0.3f);
 
         //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
         _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?

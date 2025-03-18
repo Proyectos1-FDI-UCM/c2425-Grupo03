@@ -160,7 +160,8 @@ public class HealthManager : MonoBehaviour
                 SoundManager.Instance.PlayRandomSFX(_playerDamaged, transform, 0.8f);
                 gameObject.GetComponent<PlayerHealthBar>().DecreaseHealth(removedHealth);
             }
-            if (gameObject.GetComponent<EnemyStateMachine>())
+
+            if (gameObject.GetComponent<EnemyStateMachine>() || gameObject.GetComponent<EnemySummonerStateMachine>())
             {
                 SoundManager.Instance.PlaySFX(_enemyDamaged, transform, 1);
             }

@@ -424,6 +424,7 @@ MonoBehaviour:
   _name: 
   _enemyToInvoke: {fileID: 4051256077954446262, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
   _waitTimeInvoke: 1
+  _invokeSound: {fileID: 8300000, guid: 5ae7fdcdeaf099a4a945431061987191, type: 3}
 --- !u!114 &9211518800480732035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,6 +444,7 @@ MonoBehaviour:
   _waitTimeShoot: 1
   _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _bulletPosition: {fileID: 393862591464892332}
+  _shotSound: {fileID: 8300000, guid: 709be34393f3efe42ba1e101d5f58e69, type: 3}
 --- !u!114 &1808163096419442921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +476,7 @@ MonoBehaviour:
   _teleportPoint: {fileID: 3977072330819180501}
   _waitTimeTp: 1
   _waitTimePostTp: 1
+  _teleportSound: {fileID: 8300000, guid: e9f4d96686873c545a3443a2e4d2ef72, type: 3}
 --- !u!114 &6408419066844692140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +509,7 @@ MonoBehaviour:
   _name: 
   _waitTime: 1.1
   _prefabEntero: {fileID: 7191960438516511554}
+  _deathSound: {fileID: 8300000, guid: d85084b9053d4bd4b82d4da73ff6559b, type: 3}
 --- !u!1 &5333200817857762787
 GameObject:
   m_ObjectHideFlags: 0

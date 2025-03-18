@@ -27,9 +27,13 @@ public class EnemySummonerDeathState : BaseState
     /// Coge los objetos relacionados con el invocador para eliminarlos
     /// </summary>
     [SerializeField] GameObject _prefabEntero;
+    /// <summary>
+    /// Sonido del invocador al morir
+    /// </summary>
+    [SerializeField] AudioClip _deathSound;
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -81,8 +85,8 @@ public class EnemySummonerDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
 
+        SoundManager.Instance.PlaySFX(_deathSound, transform, 0.3f);
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
 

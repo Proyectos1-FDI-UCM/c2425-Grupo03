@@ -34,6 +34,11 @@ public class EnemyTPState : BaseState
     /// </summary>
     [SerializeField][Min(0)] float _waitTimePostTp;
 
+    /// <summary>
+    /// Sonido del invocador al hacer TP
+    /// </summary>
+    [SerializeField] AudioClip _teleportSound;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -82,6 +87,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        SoundManager.Instance.PlaySFX(_teleportSound,transform,0.3f);
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
         //Coger animator del contexto

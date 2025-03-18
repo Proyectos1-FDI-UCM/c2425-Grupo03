@@ -37,9 +37,22 @@ public class PlayerAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
+
+    /// <summary>
+    /// Sonidos de ataque del combo1;
+    /// </summary>
     [SerializeField] AudioClip _airHit1;
+    /// <summary>
+    /// Sonidos de ataque del combo2;
+    /// </summary>
     [SerializeField] AudioClip _airHit2;
+    /// <summary>
+    /// Sonidos de ataque del combo3;
+    /// </summary>
     [SerializeField] AudioClip _airHit3;
+    /// <summary>
+    /// Sonidos de ataque del combo4;
+    /// </summary>
     [SerializeField] AudioClip _airHit4;
 
 

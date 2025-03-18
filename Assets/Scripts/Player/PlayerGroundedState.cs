@@ -20,6 +20,9 @@ public class PlayerGroundedState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    /// <summary>
+    /// El tiempo de margen que le da al jugador para presionar a la tecla de saltar y efectuar el salto antes de caer al suelo
+    /// </summary>
     [SerializeField][Min(0)] float _jumpBufferTime;
     #endregion
 
@@ -31,11 +34,30 @@ public class PlayerGroundedState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Rigidbody2D _rigidbody; //El rigidbody del jugador
-    PlayerStateMachine _ctx; //el contexto para acceder a parametros globales del playerstatemachine
-    float _jumpBuffer; //tiempo en el que el jugador puede saltar sin llegar al suelo
-    float _moveDir; //para detectar si el jugador esta en movimiento
+    /// <summary>
+    /// //El rigidbody del jugador
+    /// </summary>
+    Rigidbody2D _rigidbody;
+    /// <summary>
+    /// //el contexto para acceder a parametros globales del playerstatemachine
+    /// </summary>
+    PlayerStateMachine _ctx;
+    /// <summary>
+    ///  //tiempo en el que el jugador puede saltar sin llegar al suelo
+    /// </summary>
+    float _jumpBuffer;
+    /// <summary>
+    /// //para detectar si el jugador esta en movimiento
+    /// </summary>
+    float _moveDir; 
+    /// <summary>
+    /// El audioSource que reprocude los pasos
+    /// </summary>
     AudioSource _audioSource;
+
+    /// <summary>
+    /// Si esta en el suelo
+    /// </summary>
     bool _isGrounded;
     #endregion
 
@@ -49,10 +71,11 @@ public class PlayerGroundedState : BaseState
     #region Métodos de MonoBehaviour
     /// <summary>
     /// Metodo llamado al instanciar el script
+    /// // Asigna la referencia a _ctx y _rigidbody
     /// </summary>
     private void Start()
     {
-        // Asigna la referencia a _ctx y _rigidbody
+        
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
@@ -61,24 +84,32 @@ public class PlayerGroundedState : BaseState
     }
     /// <summary>
     /// Metodo que actualiza todo el rato
+    /// // Va restando al tiempo de jumpBuffer segun el tiempo. 
     /// </summary>
     private void Update()
     {
         if ( _jumpBuffer > 0)
         {
-            _jumpBuffer-=Time.deltaTime;// Va restando al tiempo de jumpBuffer segun el tiempo. 
+            _jumpBuffer-=Time.deltaTime;
         }
     }
-
+    /// <summary>
+    /// // El trigger debe solo tocar la layer del suelo.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // El trigger debe solo tocar la layer del suelo.
+        
         _isGrounded = true;
 
     }
+    /// <summary>
+    /// El trigger debe solo tocar la layer del suelo.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // El trigger debe solo tocar la layer del suelo.
+
         _isGrounded = false;
     }
     #endregion

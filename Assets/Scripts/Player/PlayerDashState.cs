@@ -41,6 +41,10 @@ public class PlayerDashState : BaseState
     /// </summary>
     [Tooltip("Trigger deactivated while dashing.")]
     [SerializeField] BoxCollider2D _playerHitTrigger; //Preferiblemente debería estar en el contexto
+
+    /// <summary>
+    /// Sonido para el dash
+    /// </summary>
     [SerializeField] AudioClip _dashSound;
 
     #endregion

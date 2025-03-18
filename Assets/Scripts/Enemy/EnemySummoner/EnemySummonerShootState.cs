@@ -43,6 +43,11 @@ public class EnemySummonerShootState : BaseState
     /// Punto de invocación de Bala
     /// </summary>
     [SerializeField] Transform _bulletPosition;
+
+    /// <summary>
+    /// Sonido del invocador al disparar
+    /// </summary>
+    [SerializeField] AudioClip _shotSound;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -127,6 +132,7 @@ public class EnemySummonerShootState : BaseState
         // activar animator
         _animator.SetBool("IsAttack", true);
 
+
         //determinar puntos de invocación de la bala
         _bulletLeftPos = _bulletPosition.transform.position;
         _bulletRightPos.y = _bulletLeftPos.y;
@@ -154,6 +160,7 @@ public class EnemySummonerShootState : BaseState
             _bulletCurrentPos = _bulletLeftPos;
         }
 
+        SoundManager.Instance.PlaySFX(_shotSound, transform, 0.3f);
 
         Instantiate(_magicBullet, _bulletCurrentPos, transform.rotation).Setup(_ctx.PlayerTransform.position);
 

@@ -38,6 +38,9 @@ public class PlayerChargedAttackState : BaseState
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
+    /// <summary>
+    /// Sonido para el ataque cargado
+    /// </summary>
     [SerializeField] private AudioClip _airHit;
     #endregion
 

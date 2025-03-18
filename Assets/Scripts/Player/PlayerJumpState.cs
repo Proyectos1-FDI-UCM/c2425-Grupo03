@@ -19,7 +19,13 @@ public class PlayerJumpState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    /// <summary>
+    /// Altura maxima que puede saltar el jugador
+    /// </summary>
     [SerializeField] float _maxHeight;
+    /// <summary>
+    /// El sonido de salto del jugador
+    /// </summary>
     [SerializeField] AudioClip _jumpSound;
     #endregion
 
@@ -31,9 +37,18 @@ public class PlayerJumpState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    Rigidbody2D _rigidbody;//El rigidbody del jugador
-    PlayerStateMachine _ctx;//el contexto para acceder a parametros globales del playerstatemachine
-    float _moveDir; //para detectar si el jugador esta en movimiento
+    /// <summary>
+    /// //El rigidbody del jugador
+    /// </summary>
+    Rigidbody2D _rigidbody;
+    /// <summary>
+    /// //el contexto para acceder a parametros globales del playerstatemachine
+    /// </summary>
+    PlayerStateMachine _ctx;
+    /// <summary>
+    ///  //para detectar si el jugador esta en movimiento
+    /// </summary>
+    float _moveDir;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -46,10 +61,11 @@ public class PlayerJumpState : BaseState
     #region Métodos de MonoBehaviour
     /// <summary>
     /// Metodo llamado al instanciar el script
+    ///         // Asigna la referencia a _ctx y _rigidbody
     /// </summary>
     private void Start()
     {
-        // Asigna la referencia a _ctx y _rigidbody
+
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
     }
@@ -67,11 +83,12 @@ public class PlayerJumpState : BaseState
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// Determina si el subestado es Move o Idle dependiendo de si esta en movimiento el jugador
+    /// // le aplica una fuerza hacia arriba para que salte el jugador
     /// </summary>
     public override void EnterState()
     {
       
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale)); // le aplica una fuerza hacia arriba para que salte el jugador
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, Mathf.Sqrt(-2 * _maxHeight * Physics2D.gravity.y * _ctx.GravityScale)); 
         if (_moveDir != 0)//si movimiento no es nulo
         {
             SetSubState(Ctx.GetStateByType<PlayerMoveState>());

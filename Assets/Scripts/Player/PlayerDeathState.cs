@@ -22,7 +22,9 @@ public class PlayerDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
-
+    /// <summary>
+    /// Sonido de muerte del jugador
+    /// </summary>
     [SerializeField] AudioClip[] _playerDeath;
     #endregion
 

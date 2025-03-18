@@ -66,8 +66,17 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// el tiempo que tarda en traer a los enemigos
     /// </summary>
     [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
+    /// <summary>
+    /// Porcentaje de carga que aporta 
+    /// </summary>
     [SerializeField] private float _abilityChargePercentage;
+    /// <summary>
+    /// Sonido que hace cuando atrae a los enemigos
+    /// </summary>
     [SerializeField] AudioClip _attracSound;
+    /// <summary>
+    /// Sonido que hace cuando empuja a los enemigos
+    /// </summary>
     [SerializeField] AudioClip _pushSound; 
 
     #endregion
