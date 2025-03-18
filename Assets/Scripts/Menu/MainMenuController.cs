@@ -137,6 +137,7 @@ public class MainMenuController : MonoBehaviour
     {
         _clickTime = Time.time;
         _goPlay = true;
+        SceneManager.LoadScene("LevelTest_Zhiyi");
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
     }
 
@@ -192,22 +193,6 @@ public class MainMenuController : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
-    //private void Awake()
-    //{
-    //    _playerInput = new PlayerInputActions();
-    //}
-
-    //private void OnEnable()
-    //{
-    //    _playerInput.UI.Enable();
-    //    EventSystem.current.SetSelectedGameObject(_firstButton);
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _playerInput.UI.Disable();
-    //}
 
     #endregion   
 
