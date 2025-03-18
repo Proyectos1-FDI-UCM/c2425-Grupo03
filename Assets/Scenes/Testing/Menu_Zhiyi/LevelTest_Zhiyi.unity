@@ -4409,6 +4409,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _waitTime: 2
+  _playerDeath: []
 --- !u!1001 &655602325
 PrefabInstance:
   m_ObjectHideFlags: 0

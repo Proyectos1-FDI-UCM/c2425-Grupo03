@@ -8,6 +8,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
 
@@ -48,6 +49,8 @@ public class MainMenuController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private PlayerInputActions _playerInput;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -69,6 +72,12 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        _playerInput = new PlayerInputActions();
+        _playerInput.Player.Disable();
+
+        _playerInput = new PlayerInputActions();
+        _playerInput.UI.Enable();
+
         EventSystem.current.SetSelectedGameObject(_firstButton);
     }
 
@@ -147,7 +156,21 @@ public class MainMenuController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    //private void Awake()
+    //{
+    //    _playerInput = new PlayerInputActions();
+    //}
 
+    //private void OnEnable()
+    //{
+    //    _playerInput.UI.Enable();
+    //    EventSystem.current.SetSelectedGameObject(_firstButton);
+    //}
+
+    //private void OnDisable()
+    //{
+    //    _playerInput.UI.Disable();
+    //}
 
     #endregion   
 

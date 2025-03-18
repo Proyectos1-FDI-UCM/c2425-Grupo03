@@ -55,6 +55,8 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     private bool _paused = false;
 
+    private PlayerInputActions _playerInput;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -69,6 +71,8 @@ public class PauseMenuController : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+
+    
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
@@ -125,10 +129,14 @@ public class PauseMenuController : MonoBehaviour
         {
             _player.enabled = false;
         }
+        _playerInput = new PlayerInputActions();
+        _playerInput.UI.Enable();
 
         // Detiene el tiempo del juego
         Time.timeScale = 0f;
         _paused = true;
+
+        //_playerInput = new PlayerInputActions();
 
         // Selecciona el primer boton del menu de pausa 
         EventSystem.current.SetSelectedGameObject(_firstButton);
@@ -149,7 +157,8 @@ public class PauseMenuController : MonoBehaviour
         {
             _player.enabled = true;
         }
-
+        _playerInput = new PlayerInputActions();
+        _playerInput.UI.Disable();
         Time.timeScale = 1f;
         _paused = false;
     }
@@ -173,6 +182,21 @@ public class PauseMenuController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    //private void Awake()
+    //{
+    //    _playerInput = new PlayerInputActions();
+
+    //}
+
+    //private void OnEnable()
+    //{
+    //    _playerInput.UI.Enable(); // Activa los controles de la UI cuando el script está activo.
+    //}
+
+    //private void OnDisable()
+    //{
+    //    _playerInput.UI.Disable(); // Desactiva los controles de la UI al salir del menú.
+    //}
     #endregion
 
 } // class PauseMenuController 
