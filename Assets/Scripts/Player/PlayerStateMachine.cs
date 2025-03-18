@@ -80,6 +80,11 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public PlayerInputActions.PlayerActions PlayerInput { get; private set; }
 
+    /// <summary>
+    /// El AudioSource que tiene el sonido de los pasos del jugador.
+    /// </summary>
+    public AudioSource PlayerAudio { get; private set; }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -105,6 +110,8 @@ public class PlayerStateMachine : StateMachine
         _gravityScale = Rigidbody.gravityScale;
 
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        PlayerAudio = GetComponent<AudioSource>();
 
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();

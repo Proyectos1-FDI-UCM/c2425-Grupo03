@@ -36,6 +36,7 @@ public class PlayerGroundedState : BaseState
     float _jumpBuffer; //tiempo en el que el jugador puede saltar sin llegar al suelo
     float _moveDir; //para detectar si el jugador esta en movimiento
     AudioSource _audioSource;
+    bool _isGrounded;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -56,7 +57,7 @@ public class PlayerGroundedState : BaseState
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
-        _audioSource = GetComponent<AudioSource>();
+        _audioSource = _ctx.PlayerAudio;
     }
     /// <summary>
     /// Metodo que actualiza todo el rato
@@ -67,6 +68,18 @@ public class PlayerGroundedState : BaseState
         {
             _jumpBuffer-=Time.deltaTime;// Va restando al tiempo de jumpBuffer segun el tiempo. 
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // El trigger debe solo tocar la layer del suelo.
+        _isGrounded = true;
+
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // El trigger debe solo tocar la layer del suelo.
+        _isGrounded = false;
     }
     #endregion
 
@@ -158,7 +171,7 @@ public class PlayerGroundedState : BaseState
         {
             _jumpBuffer = 0;
         }
-        else if (_rigidbody.velocity.y < 0) //si esta cayendo el jugador, pasa a Falling
+        else if (!_isGrounded) //si esta cayendo el jugador, pasa a Falling
         {
             PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();
             Ctx.ChangeState(fallingState);
