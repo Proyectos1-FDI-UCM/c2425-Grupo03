@@ -96,8 +96,6 @@ public class MainMenuController : MonoBehaviour
         _goPlay = false;
         _playerInput = new PlayerInputActions();
         _playerInput.Player.Disable();
-
-        _playerInput = new PlayerInputActions();
         _playerInput.UI.Enable();
 
         EventSystem.current.SetSelectedGameObject(_firstButton);
