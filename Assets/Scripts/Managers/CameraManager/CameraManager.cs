@@ -189,8 +189,9 @@ public class CameraManager : MonoBehaviour
     private IEnumerator ShakeCameraAsync(float duration, float magnitude)
     {
         // Coge la posición original
-        Vector3 originalPosition = transform.position;
+        //Vector3 originalPosition = transform.position;
         // Para guardar el tiempo desde el comienzo
+        
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -200,13 +201,13 @@ public class CameraManager : MonoBehaviour
             float y = Random.Range(-1f, 1f) * magnitude;
 
             // Aplica el offset a la posición original
-            transform.position = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            transform.position = new Vector3(_playerPosition.position.x + x, _playerPosition.position.y + y, transform.position.z);
             // Guarda el tiempo pasado
             elapsed += Time.deltaTime;
             yield return null;
         }
         // Coloca la cámara en la posición original
-        transform.position = originalPosition;
+        transform.position = _playerPosition.position;
     }
     #endregion
 
