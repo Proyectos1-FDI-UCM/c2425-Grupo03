@@ -149,6 +149,7 @@ public class PlayerFallingState : BaseState
     {
         if (_isGrounded) //detecta si esta colisionando con el suelo para pasar al estado Grounded
         {
+            SoundManager.Instance.PlaySFX(_landSound, transform, 1);
             Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
         else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.IsPressed()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
