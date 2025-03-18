@@ -288,7 +288,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4995719265609606767}
   - {fileID: 3824176062013514766}
   - {fileID: 393862591464892332}
   m_Father: {fileID: 8403221588277176285}
@@ -383,6 +382,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onHealed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!95 &411743475415990822
@@ -595,8 +597,8 @@ MonoBehaviour:
   _name: 
   _attackSpeed: 0
   _damage: 0
-  _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _waitTimeShoot: 1
+  _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
   _bulletPosition: {fileID: 393862591464892332}
 --- !u!114 &1808163096419442921
 MonoBehaviour:
@@ -643,8 +645,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTimeShoot: 1
-  _invokingTime: 1
   _abilityCooldown: 1
   _invokeProbabilty: 0.37
 --- !u!114 &4894896949926512459
@@ -899,34 +899,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &9105211119949618689
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4995719265609606767}
-  m_Layer: 10
-  m_Name: EnemySprite
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4995719265609606767
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9105211119949618689}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3469114430030775719}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
