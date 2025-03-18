@@ -88,7 +88,7 @@ public class PlayerDeathState : BaseState
         _deadTime = Time.time + _waitTime;
 
         _animator.SetBool("IsDead", true);
-        SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.7f);
+        SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.2f);
     }
 
     /// <summary>
