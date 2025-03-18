@@ -140,6 +140,7 @@ public class PauseMenuController : MonoBehaviour
             _player.enabled = false;
         }
         _playerInput = new PlayerInputActions();
+        _playerInput.Player.Disable();
         _playerInput.UI.Enable();
 
         // Detiene el tiempo del juego
