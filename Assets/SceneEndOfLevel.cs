@@ -66,10 +66,6 @@ public class SceneEndOfLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (true)
-        {
-            
-        }
         SceneManager.LoadScene("MainMenu_Zhiyi");
     }
     #endregion
