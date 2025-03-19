@@ -1,0 +1,340 @@
+fileFormatVersion: 2
+guid: 49c9967bf90c8f041ba3bc425889f565
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 12
+        width: 161
+        height: 163
+      alignment: 9
+      pivot: {x: 0.5166445, y: 0.51903087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c11e4966360ece042877bed3d5b212fc
+      internalID: -1265956848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_1
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 21
+        width: 187
+        height: 165
+      alignment: 9
+      pivot: {x: 0.51022357, y: 0.4860013}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5859103ddddc40d40892c8e176549b64
+      internalID: 1628353563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_2
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 11
+        width: 197
+        height: 166
+      alignment: 9
+      pivot: {x: 0.5507103, y: 0.51539373}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb23896267b9a1044be5083b4723e24d
+      internalID: -1898762694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_3
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 11
+        width: 170
+        height: 156
+      alignment: 9
+      pivot: {x: 0.5054508, y: 0.5937905}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6b6c7e928658b14fa86d0206ea9b8cc
+      internalID: 829726716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_4
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 19
+        width: 154
+        height: 151
+      alignment: 9
+      pivot: {x: 0.64068604, y: 0.6235704}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f739b27871a98842a9f1f4839232d30
+      internalID: -2108855842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_6
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 14
+        width: 167
+        height: 156
+      alignment: 9
+      pivot: {x: 0.5219763, y: 0.5247178}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77e59143478a4f4399ae265de895c42
+      internalID: -155123680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_7
+      rect:
+        serializedVersion: 2
+        x: 2376
+        y: 19
+        width: 187
+        height: 153
+      alignment: 9
+      pivot: {x: 0.48030165, y: 0.48875642}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f46b441a9276924e8449ac00bb26854
+      internalID: -1987642060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_8
+      rect:
+        serializedVersion: 2
+        x: 2710
+        y: 0
+        width: 189
+        height: 165
+      alignment: 9
+      pivot: {x: 0.5568977, y: 0.54296386}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35baf6b76d4250545b1d28b647fb963d
+      internalID: -914944628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_10
+      rect:
+        serializedVersion: 2
+        x: 3139
+        y: 4
+        width: 170
+        height: 157
+      alignment: 9
+      pivot: {x: 0.49444366, y: 0.5858064}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf59f05270c01d4eb3acee4dc60bfd1
+      internalID: -599208650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerRunningAnimation 1_11
+      rect:
+        serializedVersion: 2
+        x: 3342
+        y: 12
+        width: 182
+        height: 149
+      alignment: 9
+      pivot: {x: 0.5296604, y: 0.6257513}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9943b13a4f05fc4daea6939a90b1b94
+      internalID: 1838921469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PlayerRunningAnimation 1_0: -1265956848
+      PlayerRunningAnimation 1_1: 1628353563
+      PlayerRunningAnimation 1_10: -599208650
+      PlayerRunningAnimation 1_11: 1838921469
+      PlayerRunningAnimation 1_12: 2076728370
+      PlayerRunningAnimation 1_13: 1587656122
+      PlayerRunningAnimation 1_14: -902553080
+      PlayerRunningAnimation 1_15: 715568327
+      PlayerRunningAnimation 1_2: -1898762694
+      PlayerRunningAnimation 1_3: 829726716
+      PlayerRunningAnimation 1_4: -2108855842
+      PlayerRunningAnimation 1_5: -2110199114
+      PlayerRunningAnimation 1_6: -155123680
+      PlayerRunningAnimation 1_7: -1987642060
+      PlayerRunningAnimation 1_8: -914944628
+      PlayerRunningAnimation 1_9: -1264176208
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
