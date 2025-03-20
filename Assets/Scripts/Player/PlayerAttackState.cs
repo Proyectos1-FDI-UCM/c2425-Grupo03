@@ -256,10 +256,6 @@ public class PlayerAttackState : BaseState
             //Añadir carga a las habilidades
             _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
         }
-        if (enemyInArea.Length >0)
-        {
-            CameraManager.Instance.ShakeCamera(0.1f, 0.1f);
-        }
     }
 
     /// <summary>
