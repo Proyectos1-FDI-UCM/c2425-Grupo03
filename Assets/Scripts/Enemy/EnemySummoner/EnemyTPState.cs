@@ -87,7 +87,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        SoundManager.Instance.PlaySFX(_teleportSound,transform,0.3f);
+        SoundManager.Instance.PlaySFX(_teleportSound,transform,0.1f);
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
         //Coger animator del contexto

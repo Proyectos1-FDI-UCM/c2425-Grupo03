@@ -137,7 +137,9 @@ public class MainMenuController : MonoBehaviour
     {
         _clickTime = Time.time;
         _goPlay = true;
+
         SceneManager.LoadScene("LevelTest_Zhiyi");
+
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
     }
 

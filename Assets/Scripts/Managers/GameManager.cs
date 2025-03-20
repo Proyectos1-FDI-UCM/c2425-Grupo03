@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    //[SerializeField] Transform _player;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -41,6 +44,10 @@ public class GameManager : MonoBehaviour
     /// Instancia única de la clase (singleton).
     /// </summary>
     private static GameManager _instance;
+
+    private Vector2 _lastCheckpoint;
+
+    List<int> _activatedCheckpoint;
 
     #endregion
 
@@ -96,6 +103,10 @@ public class GameManager : MonoBehaviour
         } // if somos la instancia principal
     }
 
+    protected void Start()
+    {
+        _lastCheckpoint = Vector2.zero;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -151,6 +162,35 @@ public class GameManager : MonoBehaviour
         System.GC.Collect();
     } // ChangeScene
 
+    public void SetCheckpoint(Transform checkpoint)
+    {
+        _lastCheckpoint = checkpoint.position;
+    }
+
+    public Vector2 GetCheckpoint()
+    {
+        return _lastCheckpoint;
+    }
+
+    public bool IsActivated(int _checkPointIndex) 
+    {
+        bool result = false;
+        int i = 0;
+        while (i < _activatedCheckpoint.Count && !result)
+        {
+            if (_activatedCheckpoint[i] == _checkPointIndex)
+            {
+                result = true;
+            }
+            i++;
+        }
+        return result;
+    }
+
+    public void AddCheckpoint (int _checkPointIndex)
+    {
+        _activatedCheckpoint.Add(_checkPointIndex);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

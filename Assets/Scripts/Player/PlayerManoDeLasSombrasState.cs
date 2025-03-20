@@ -67,6 +67,10 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
     /// <summary>
+    /// el tiempo que hay el primer hit y el segundo hit
+    /// </summary>
+    [SerializeField][Tooltip("tiempo entre pulsar el boton y el primer hit")] private float _waitTimeForSecondHit = 0.5f;
+    /// <summary>
     /// Porcentaje de carga que aporta 
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
@@ -179,13 +183,6 @@ public class PlayerManoDeLasSombrasState : BaseState
 
                     enemy.GetStateByType<KnockbackState>()
                         .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
-
-                    // Aplicar daño si tiene un HealthManager
-                    HealthManager enemyHealth = hit.collider.gameObject.GetComponent<HealthManager>();
-                    if (enemyHealth != null)
-                    {
-                        enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
-                    }
                 }
                 affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
             }
@@ -204,9 +201,22 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <returns></returns>
     private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction, int affectedEnemys)
     {
-        // Esperar a que termine de atraer a los enemigos para hacer el segundo golpe
-        yield return new WaitForSeconds(_attractEnemyTime+0.1f);
+        // Esperar a que termine de atraer a los enemigos para hacerles el primer golpe
+        yield return new WaitForSeconds(_attractEnemyTime);
         SoundManager.Instance.PlaySFX(_pushSound, transform, 0.8f);
+
+        // Aplicar daño si tiene un HealthManager
+        for (int i = 0; i < affectedEnemys; i++)
+        {
+            HealthManager enemyHealth = hits[i].collider.gameObject.GetComponent<HealthManager>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
+            }
+        }
+        // Esperar a que termine el primer golpe para hacer el segundo golpe
+
+        yield return new WaitForSeconds(_waitTimeForSecondHit);
         for (int i = 0; i < affectedEnemys; i++) 
         {
             EnemyStateMachine enemy = hits[i].collider == null ? null: hits[i].collider.GetComponent<EnemyStateMachine>();

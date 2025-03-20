@@ -120,7 +120,13 @@ public class PlayerStateMachine : StateMachine
     protected override void OnStart()
     {
         GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+        if (GameManager.Instance.GetCheckpoint()!= Vector2.zero)
+        {
+            transform.position = GameManager.Instance.GetCheckpoint();
+        }
     }
+
+
 
     #endregion
 
