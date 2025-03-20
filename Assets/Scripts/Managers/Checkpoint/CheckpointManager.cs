@@ -51,7 +51,7 @@ public class CheckpointManager : MonoBehaviour
     /// <summary>
     /// Referencia al último punto guardado
     /// </summary>
-    private Transform _lastPoint;
+
 
     #endregion
 
@@ -87,11 +87,15 @@ public class CheckpointManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        if (_lastPoint == null && _initialPoint != null)
+        if (GameManager.Instance.GetCheckpoint() == null && _initialPoint != null)
         {
-            //Cuando no hay checkpoint activado
-            _lastPoint = _initialPoint;
+            GameManager.Instance.SetCheckpoint(_initialPoint);
         }
+        else if (GameManager.Instance.GetCheckpoint() != null)
+        {
+
+        }
+
     }
     #endregion
 
@@ -110,8 +114,9 @@ public class CheckpointManager : MonoBehaviour
     public void SetCheckpoint(Transform checkpointTransform)
     {
         SoundManager.Instance.PlaySFX(_takeCheckPoint, transform, 0.1f);
+
+        GameManager.Instance.SetCheckpoint(checkpointTransform);
         // Asigna la referencia del último punto a este checkpoint
-        _lastPoint = checkpointTransform;
     }
 
     /// <summary>
@@ -120,11 +125,13 @@ public class CheckpointManager : MonoBehaviour
     /// <param name="player"></param>
     public void RespawnPlayer(GameObject player)
     {
-        if (_lastPoint != null)
+        //Transform lastCheckpoint = GameManager.Instance.GetCheckpoint();
+
+        if (GameManager.Instance.GetCheckpoint() != null)
         {
             SoundManager.Instance.PlaySFX(_respawnSound, transform, 0.1f);
             // Mueve la posición del jugador a la posición del checkpoint
-            player.transform.position = _lastPoint.position;
+            player.transform.position = GameManager.Instance.GetCheckpoint();
         }
     }
     #endregion

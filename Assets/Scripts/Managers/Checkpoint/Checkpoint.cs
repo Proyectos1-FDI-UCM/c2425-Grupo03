@@ -19,6 +19,7 @@ public class Checkpoint : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [SerializeField] int _checkPointIndex;
 
     #endregion
 
@@ -47,7 +48,12 @@ public class Checkpoint : MonoBehaviour
     #region Métodos de MonoBehaviour
     void Start()
     {
-        _animator = GetComponent<Animator>();   
+        _animator = GetComponent<Animator>(); 
+        if (GameManager.Instance.IsActivated(_checkPointIndex))
+        {
+            _isActivated = true;
+            _animator.SetTrigger("CpAppear");
+        }
     }
     #endregion
 
@@ -80,6 +86,7 @@ public class Checkpoint : MonoBehaviour
 
             //Notificar al CheckpointManager que este es el último checkpoint
             CheckpointManager.Instance.SetCheckpoint(this.transform);
+            GameManager.Instance.AddCheckpoint(_checkPointIndex);
 
             if (_animator != null)
             {
