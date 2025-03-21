@@ -19,8 +19,11 @@ using UnityEngine;
 // Obliga que tenga el componente HealthManager
 [RequireComponent(typeof(HealthManager))]
 [SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
+
 public class EnemyStateMachine : StateMachine
 {
+
+
     /// <summary>
     /// <para>
     /// Codifica las dos formas en las que puede mirar el enemigo.
@@ -36,7 +39,7 @@ public class EnemyStateMachine : StateMachine
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-
+    [SerializeField] AudioClip _enemyDamaged;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -98,8 +101,12 @@ public class EnemyStateMachine : StateMachine
     protected override void OnStart()
     {
         GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+        GetComponent<HealthManager>()._onDamaged.AddListener(EnemyDamagedSFX);
     }
-
+    public void EnemyDamagedSFX(float damageAmount)
+    {
+        SoundManager.Instance.PlaySFX(_enemyDamaged, transform, 1);
+    }
     /// <summary>
     /// Forzar el cambio de estado a muerte
     /// </summary>

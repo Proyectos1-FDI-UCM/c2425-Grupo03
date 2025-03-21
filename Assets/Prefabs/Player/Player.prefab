@@ -258,6 +258,15 @@ MonoBehaviour:
   - {fileID: 3758149782358557980}
   - {fileID: 3132457056714941732}
   - {fileID: 6420658977189967374}
+  _playerDamaged:
+  - {fileID: 8300000, guid: 814db4b6ee1117b47a00bcfd57689dce, type: 3}
+  - {fileID: 8300000, guid: 792c5ab06876de74d919d5f6106809cc, type: 3}
+  - {fileID: 8300000, guid: 39b84d46a5646c44bae12905cc43d763, type: 3}
+  - {fileID: 8300000, guid: e2bcf4872b995aa4bae0e27a5fba23a4, type: 3}
+  - {fileID: 8300000, guid: a769549413964a44c9c65d863d100b79, type: 3}
+  - {fileID: 8300000, guid: ef5ce5f64e2d6fe44887a7eb5c2a0e73, type: 3}
+  - {fileID: 8300000, guid: bdfa7c6b450df674796a6debb060e2b0, type: 3}
+  - {fileID: 8300000, guid: 4b7d657d41949a8459a6b6469c509457, type: 3}
 --- !u!114 &4886483801494157451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,16 +281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 50
   _initialHealth: 250
-  _playerDamaged:
-  - {fileID: 8300000, guid: 814db4b6ee1117b47a00bcfd57689dce, type: 3}
-  - {fileID: 8300000, guid: 792c5ab06876de74d919d5f6106809cc, type: 3}
-  - {fileID: 8300000, guid: 39b84d46a5646c44bae12905cc43d763, type: 3}
-  - {fileID: 8300000, guid: e2bcf4872b995aa4bae0e27a5fba23a4, type: 3}
-  - {fileID: 8300000, guid: a769549413964a44c9c65d863d100b79, type: 3}
-  - {fileID: 8300000, guid: ef5ce5f64e2d6fe44887a7eb5c2a0e73, type: 3}
-  - {fileID: 8300000, guid: bdfa7c6b450df674796a6debb060e2b0, type: 3}
-  - {fileID: 8300000, guid: 4b7d657d41949a8459a6b6469c509457, type: 3}
-  _enemyDamaged: {fileID: 0}
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -617,6 +616,7 @@ MonoBehaviour:
   _liftingHeight: 1
   _waitTimeForFirstHit: 0.5
   _attractEnemyTime: 0.5
+  _waitTimeForSecondHit: 0.5
   _abilityChargePercentage: 0
   _attracSound: {fileID: 8300000, guid: d95d3dc0c96017244bba601776b04e7e, type: 3}
   _pushSound: {fileID: 8300000, guid: e6e7e9cb7e9fe894a8389bbc43db3fb9, type: 3}

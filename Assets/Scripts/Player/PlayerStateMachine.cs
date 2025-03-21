@@ -38,7 +38,7 @@ public class PlayerStateMachine : StateMachine
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
-
+    [SerializeField] AudioClip[] _playerDamaged;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -96,6 +96,11 @@ public class PlayerStateMachine : StateMachine
     {
         ChangeState(gameObject.GetComponentInChildren<PlayerDeathState>());
     }
+
+    public void PlayerDamagedSFX(float damage)
+    {
+        SoundManager.Instance.PlayRandomSFX(_playerDamaged, transform, 0.8f);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -120,6 +125,7 @@ public class PlayerStateMachine : StateMachine
     protected override void OnStart()
     {
         GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+        GetComponent<HealthManager>()._onDamaged.AddListener(PlayerDamagedSFX);
         if (GameManager.Instance.GetCheckpoint()!= Vector2.zero)
         {
             transform.position = GameManager.Instance.GetCheckpoint();
