@@ -141,6 +141,7 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("LevelTest_Zhiyi");
 
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+
     }
 
     /// <summary>
