@@ -89,7 +89,10 @@ public class PlayerFallingState : BaseState
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _isGrounded = true;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            _isGrounded = true;
+        }
 
     }
     /// <summary>
@@ -98,7 +101,10 @@ public class PlayerFallingState : BaseState
     /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _isGrounded = false;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            _isGrounded = false;
+        }
     }
 
     #endregion
