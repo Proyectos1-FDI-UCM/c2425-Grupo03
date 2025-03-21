@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b55cf1b909cc89e448e2fb54bc8b536a
+guid: a3fdb24b98805ef47a64d1b2ba39e4bc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerIdleAnimation_0
+      name: PlayerDashingAnimation_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 63
-        height: 181
+        x: 0
+        y: 6
+        width: 231
+        height: 110
       alignment: 9
-      pivot: {x: 0.47080848, y: 0.49491972}
+      pivot: {x: 0.66006875, y: 0.45228773}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efb9b1b84c0577e45a4ea1eab3ae362a
-      internalID: 316183080
+      spriteID: 11ba3de585f87c0429850c99852d65e8
+      internalID: -1740948497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_1
+      name: PlayerDashingAnimation_1
       rect:
         serializedVersion: 2
-        x: 472
+        x: 263
         y: 0
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 244
+        height: 113
+      alignment: 9
+      pivot: {x: 0.6762284, y: 0.49308038}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b23529739aa210b4a834784d1cc51291
-      internalID: -702313931
+      spriteID: 88b7f90b7cd37934d9f1392c5cfd5968
+      internalID: 581467555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_2
+      name: PlayerDashingAnimation_2
       rect:
         serializedVersion: 2
-        x: 944
-        y: 0
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 541
+        y: 2
+        width: 245
+        height: 116
+      alignment: 9
+      pivot: {x: 0.67534506, y: 0.46408674}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd12c76b242ba824cbf4b50987838755
-      internalID: -1293528391
+      spriteID: e97ff7b9d344472408ec83df19ace5ff
+      internalID: -1072573726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_4
+      name: PlayerDashingAnimation_3
       rect:
         serializedVersion: 2
-        x: 1411
-        y: 3
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 821
+        y: 4
+        width: 241
+        height: 115
+      alignment: 9
+      pivot: {x: 0.67454004, y: 0.44073078}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01c5356c297efea469f66a7c74738420
-      internalID: 1172054299
+      spriteID: bc54db9cd4ef11c46ae034dddd4f8551
+      internalID: -1811798575
       vertices: []
       indices: 
       edges: []
@@ -191,11 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerIdleAnimation_0: 316183080
-      PlayerIdleAnimation_1: -702313931
-      PlayerIdleAnimation_2: -1293528391
-      PlayerIdleAnimation_3: -1012281588
-      PlayerIdleAnimation_4: 1172054299
+      PlayerDashingAnimation_0: -1740948497
+      PlayerDashingAnimation_1: 581467555
+      PlayerDashingAnimation_2: -1072573726
+      PlayerDashingAnimation_3: -1811798575
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
