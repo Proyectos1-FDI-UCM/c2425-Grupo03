@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -19,6 +19,9 @@ public class Checkpoint : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    /// <summary>
+    /// Índice del checkpoint para identificar si ya ha sido activado
+    /// </summary>
     [SerializeField] int _checkPointIndex;
 
     #endregion
@@ -32,8 +35,14 @@ public class Checkpoint : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    //Para evitar reactivación
+    /// <summary>
+    /// Para evitar reactivación
+    /// </summary>
     private bool _isActivated = false;
+
+    /// <summary>
+    /// Referencia al componente Animator
+    /// </summary>
     private Animator _animator;
 
     #endregion
@@ -49,6 +58,8 @@ public class Checkpoint : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>(); 
+
+        //Verifica si el checkpoint fue activado
         if (GameManager.Instance.IsActivated(_checkPointIndex))
         {
             _isActivated = true;
@@ -86,6 +97,8 @@ public class Checkpoint : MonoBehaviour
 
             //Notificar al CheckpointManager que este es el último checkpoint
             CheckpointManager.Instance.SetCheckpoint(this.transform);
+
+            // Guarda el checkpoint en el GameManager
             GameManager.Instance.AddCheckpoint(_checkPointIndex);
 
             if (_animator != null)

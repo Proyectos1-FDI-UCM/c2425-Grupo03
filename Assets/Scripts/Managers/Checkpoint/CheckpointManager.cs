@@ -89,7 +89,7 @@ public class CheckpointManager : MonoBehaviour
     {
         if (GameManager.Instance.GetCheckpoint() == null && _initialPoint != null)
         {
-
+            // Si no hay checkpoint guardado, establece el punto inicial como checkpoint
             GameManager.Instance.SetCheckpoint(_initialPoint);
         }
     }
@@ -109,8 +109,10 @@ public class CheckpointManager : MonoBehaviour
     /// <param name="checkpointTransform"></param>
     public void SetCheckpoint(Transform checkpointTransform)
     {
+        // Reproduce un sonido al activar el checkpoint
         SoundManager.Instance.PlaySFX(_takeCheckPoint, transform, 0.1f);
 
+        // Guarda el nuevo checkpoint en el GameManager
         GameManager.Instance.SetCheckpoint(checkpointTransform);
         // Asigna la referencia del último punto a este checkpoint
     }

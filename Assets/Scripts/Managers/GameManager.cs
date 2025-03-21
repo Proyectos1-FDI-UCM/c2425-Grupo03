@@ -45,8 +45,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private static GameManager _instance;
 
+    /// <summary>
+    /// Guarda la posición del último checkpoint activado
+    /// </summary>
     private Vector2 _lastCheckpoint;
 
+    /// <summary>
+    /// Lista de checkpoints activados
+    /// </summary>
     List<int> _activatedCheckpoint = new List<int>();
 
     #endregion
@@ -105,6 +111,7 @@ public class GameManager : MonoBehaviour
 
     protected void Start()
     {
+        //Inicializa el último checkpoint en(0, 0)
         _lastCheckpoint = Vector2.zero;
     }
     #endregion
@@ -162,20 +169,36 @@ public class GameManager : MonoBehaviour
         System.GC.Collect();
     } // ChangeScene
 
+    /// <summary>
+    /// Metodo que establece la posición del último checkpoint activado
+    /// </summary>
+    /// <param name="checkpoint"></param>
     public void SetCheckpoint(Transform checkpoint)
     {
+        // Guarda la posición del nuevo checkpoint
         _lastCheckpoint = checkpoint.position;
     }
 
+    /// <summary>
+    /// Metodo que devuelve la posición del último checkpoint guardado
+    /// </summary>
+    /// <returns></returns>
     public Vector2 GetCheckpoint()
     {
         return _lastCheckpoint;
     }
 
+    /// <summary>
+    /// Metodo que verifica si un checkpoint ya ha sido activado previamente
+    /// </summary>
+    /// <param name="_checkPointIndex"></param>
+    /// <returns></returns>
     public bool IsActivated(int _checkPointIndex) 
     {
         bool result = false;
         int i = 0;
+
+        // Busca en la lista
         while (i < _activatedCheckpoint.Count && !result)
         {
             if (_activatedCheckpoint[i] == _checkPointIndex)
@@ -187,8 +210,13 @@ public class GameManager : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Metodo que agrega un checkpoint activado a la lista de checkpoints guardados
+    /// </summary>
+    /// <param name="_checkPointIndex"></param>
     public void AddCheckpoint (int _checkPointIndex)
     {
+        // Agrega el checkpoint a la lista
         _activatedCheckpoint.Add(_checkPointIndex);
     }
     #endregion

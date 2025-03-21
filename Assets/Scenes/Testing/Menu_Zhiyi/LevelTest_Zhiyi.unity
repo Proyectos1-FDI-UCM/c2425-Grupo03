@@ -11080,7 +11080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744434592269541712, guid: 59f8223ea20eaae459e2f72f849c5df8, type: 3}
       propertyPath: m_Name
-      value: Checkpoint2
+      value: Checkpoint1
       objectReference: {fileID: 0}
     - target: {fileID: 8744434592269541712, guid: 59f8223ea20eaae459e2f72f849c5df8, type: 3}
       propertyPath: m_Layer
@@ -14839,7 +14839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744434592269541712, guid: 59f8223ea20eaae459e2f72f849c5df8, type: 3}
       propertyPath: m_Name
-      value: Checkpoint 1
+      value: Checkpoint0
       objectReference: {fileID: 0}
     - target: {fileID: 8744434592269541712, guid: 59f8223ea20eaae459e2f72f849c5df8, type: 3}
       propertyPath: m_Layer
