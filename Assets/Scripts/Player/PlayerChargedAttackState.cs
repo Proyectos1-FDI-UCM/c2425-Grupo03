@@ -170,6 +170,7 @@ public class PlayerChargedAttackState : BaseState
         if (Time.time - _startChargingTime >= _chargingTime && !_attacked)
         {
             _animator.SetBool("IsChargeAttaking", true);
+            _animator.SetBool("IsCharging", false);
             ChargedAttack();
             _attacked = true;
         }
@@ -178,11 +179,11 @@ public class PlayerChargedAttackState : BaseState
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
-    /// Si ya has atacado (+0.5f para que se acabe la animacion), pasa al groundedstate 
+    /// Si ya has atacado (+1f para que se acabe la animacion), pasa al groundedstate 
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if ((Time.time - _startChargingTime >= _chargingTime + 0.5f) || _ctx.PlayerInput.Attack.WasReleasedThisFrame())
+        if ((Time.time - _startChargingTime >= _chargingTime + 1f) || _ctx.PlayerInput.Attack.WasReleasedThisFrame())
         {
             Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
