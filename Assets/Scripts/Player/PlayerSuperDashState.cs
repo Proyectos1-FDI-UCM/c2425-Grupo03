@@ -110,6 +110,11 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     private PlayerChargeScript _chargeScript;
 
+    /// <summary>
+    /// El rango donde el daño es efectivo
+    /// </summary>
+    private float _damageDistance;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -156,11 +161,12 @@ public class PlayerSuperDashState : BaseState
         //Inicializar la posicion a hacer el tp
         _endPosition = new Vector2(_ctx.transform.position.x, _ctx.transform.position.y);
 
+        //Comprobar si hay pared en la distancia del dash
+        CheckWall();
+
         //Ver los enemigos que esta en el area del dash
         _enemyInArea = GetEnemyInDash();
 
-        //Comprobar si hay pared en la distancia del dash
-        CheckWall();
     }
 
     /// <summary>
@@ -220,11 +226,13 @@ public class PlayerSuperDashState : BaseState
 
         if (wall)
         {
-            _endPosition.x = wall.point.x;
+            _endPosition.x = wall.point.x + (0.5f * -_lookingDirection);
+            _damageDistance = wall.distance;
         }
         else
         {
             _endPosition.x += _dashDistance * _lookingDirection;
+            _damageDistance = _dashDistance;
         }
     }
 
@@ -248,7 +256,7 @@ public class PlayerSuperDashState : BaseState
     //Ver todos los enemigos que estan en el raycast
     private RaycastHit2D[] GetEnemyInDash()
     {
-        RaycastHit2D[] enemyInArea = Physics2D.RaycastAll(_ctx.transform.position, new Vector2(_lookingDirection, 0), _dashDistance, 1 << 10);
+        RaycastHit2D[] enemyInArea = Physics2D.RaycastAll(_ctx.transform.position, new Vector2(_lookingDirection, 0), _damageDistance, 1 << 10);
         return enemyInArea;
     }
 
