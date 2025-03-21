@@ -89,13 +89,9 @@ public class CheckpointManager : MonoBehaviour
     {
         if (GameManager.Instance.GetCheckpoint() == null && _initialPoint != null)
         {
+
             GameManager.Instance.SetCheckpoint(_initialPoint);
         }
-        else if (GameManager.Instance.GetCheckpoint() != null)
-        {
-
-        }
-
     }
     #endregion
 

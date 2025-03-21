@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     private Vector2 _lastCheckpoint;
 
-    List<int> _activatedCheckpoint;
+    List<int> _activatedCheckpoint = new List<int>();
 
     #endregion
 
