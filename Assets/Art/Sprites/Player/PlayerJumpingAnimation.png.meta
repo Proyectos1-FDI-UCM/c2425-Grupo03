@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,9 +70,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,43 +97,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerJumpingAnimation_1
+      name: PlayerJumpingAnimation_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 4
-        width: 135
-        height: 142
+        y: 0
+        width: 86
+        height: 250
       alignment: 9
-      pivot: {x: 0.50688493, y: 0.66037023}
+      pivot: {x: 0.5605198, y: 0.46252617}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d61ca1eabb2a24c449710801892db1cd
-      internalID: -1281185122
+      spriteID: 87e092bc8abcacc46af655516e6a29eb
+      internalID: 2021966776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerJumpingAnimation_2
+      name: PlayerJumpingAnimation_1
       rect:
         serializedVersion: 2
-        x: 320
-        y: 8
-        width: 56
-        height: 232
+        x: 191
+        y: 5
+        width: 90
+        height: 239
       alignment: 9
-      pivot: {x: 0.5536221, y: 0.44976905}
+      pivot: {x: 0.53469795, y: 0.4804007}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c79dde637f86654439b834a4438b5aea
-      internalID: -564024248
+      spriteID: 5e81e18efdcf77846afea3d09b7fbf25
+      internalID: -1681889799
       vertices: []
       indices: 
       edges: []
@@ -142,19 +142,19 @@ TextureImporter:
       name: PlayerJumpingAnimation_3
       rect:
         serializedVersion: 2
-        x: 598
-        y: 39
-        width: 90
-        height: 186
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 390
+        y: 26
+        width: 95
+        height: 207
+      alignment: 9
+      pivot: {x: 0.53835034, y: 0.44216996}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbace8ec187e50444b307968c5c78152
-      internalID: 1847338688
+      spriteID: d2e728caba5bd0f418222dfbb394a72d
+      internalID: 2006005892
       vertices: []
       indices: 
       edges: []
@@ -163,19 +163,19 @@ TextureImporter:
       name: PlayerJumpingAnimation_4
       rect:
         serializedVersion: 2
-        x: 907
-        y: 37
-        width: 116
-        height: 189
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 603
+        y: 57
+        width: 90
+        height: 186
+      alignment: 9
+      pivot: {x: 0.49421725, y: 0.40765858}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c398db7d035ea1c40a2634f7ec9deb08
-      internalID: 2067764594
+      spriteID: b821aa2a29bec3443b73ab172c6c863c
+      internalID: 356634880
       vertices: []
       indices: 
       edges: []
@@ -184,40 +184,19 @@ TextureImporter:
       name: PlayerJumpingAnimation_5
       rect:
         serializedVersion: 2
-        x: 1223
-        y: 21
+        x: 912
+        y: 55
         width: 116
-        height: 187
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 189
+      alignment: 9
+      pivot: {x: 0.48653963, y: 0.44492385}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d24b253546972b4cb1500e66ecbbd86
-      internalID: 646792964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerJumpingAnimation_6
-      rect:
-        serializedVersion: 2
-        x: 1526
-        y: 0
-        width: 120
-        height: 219
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50419f3166dd40f4bad54aa1ee57bddb
-      internalID: 720822526
+      spriteID: fbb7607cb689b664b92b24c711d4ae9f
+      internalID: 1633441814
       vertices: []
       indices: 
       edges: []
@@ -226,19 +205,61 @@ TextureImporter:
       name: PlayerJumpingAnimation_7
       rect:
         serializedVersion: 2
-        x: 1786
-        y: 2
-        width: 119
-        height: 218
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1531
+        y: 18
+        width: 120
+        height: 219
+      alignment: 9
+      pivot: {x: 0.48265177, y: 0.42394957}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b929fa083199abe448bcf44f8c48805e
-      internalID: -1730299984
+      spriteID: 4a77e52f88c967d46a7abc26f14c3807
+      internalID: -1130535139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerJumpingAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 20
+        width: 119
+        height: 218
+      alignment: 9
+      pivot: {x: 0.47813198, y: 0.42837566}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9cfbf549bb9d184e8b4b2354b5bc606
+      internalID: 1427789741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerJumpingAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 39
+        width: 116
+        height: 193
+      alignment: 9
+      pivot: {x: 0.48653963, y: 0.4406718}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 990f242fee274fb459b63d8e95574086
+      internalID: 1374047787
       vertices: []
       indices: 
       edges: []
@@ -254,14 +275,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerJumpingAnimation_0: 1924617036
-      PlayerJumpingAnimation_1: -1281185122
-      PlayerJumpingAnimation_2: -564024248
-      PlayerJumpingAnimation_3: 1847338688
-      PlayerJumpingAnimation_4: 2067764594
-      PlayerJumpingAnimation_5: 646792964
-      PlayerJumpingAnimation_6: 720822526
-      PlayerJumpingAnimation_7: -1730299984
+      PlayerJumpingAnimation_0: 2021966776
+      PlayerJumpingAnimation_1: -1681889799
+      PlayerJumpingAnimation_2: 139147335
+      PlayerJumpingAnimation_3: 2006005892
+      PlayerJumpingAnimation_4: 356634880
+      PlayerJumpingAnimation_5: 1633441814
+      PlayerJumpingAnimation_6: 1374047787
+      PlayerJumpingAnimation_7: -1130535139
+      PlayerJumpingAnimation_8: 1427789741
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
