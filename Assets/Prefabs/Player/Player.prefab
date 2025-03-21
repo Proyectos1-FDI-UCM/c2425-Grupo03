@@ -690,7 +690,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _attackRadius: 1.5
-  _attackSpeed: 0.1
+  _attackSpeed: 0.4
   _damage: 5
   _abilityChargePercentage: 1000
   _airHit1: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}

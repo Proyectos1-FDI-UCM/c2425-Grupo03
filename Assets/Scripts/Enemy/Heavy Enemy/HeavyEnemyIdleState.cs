@@ -21,7 +21,7 @@ public class HeavyEnemyIdleState : BaseState
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,6 +31,10 @@ public class HeavyEnemyIdleState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Contexto del estado.
+    /// </summary>
+    HeavyEnemyStateMachine _ctx;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -38,10 +42,10 @@ public class HeavyEnemyIdleState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,7 +56,21 @@ public class HeavyEnemyIdleState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+    private void Start()
+    {
+        _ctx = GetCTX<HeavyEnemyStateMachine>();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerStateMachine>() != null)
+        {
+            //Si el jugador está en el trigger lo indica al contexto.
+            _ctx.IsPlayerInChaseRange = true;
+            //Añade la posición del jugador al contexto.
+            _ctx.PlayerTransform = collision.transform;
+        }
+    }
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -91,7 +109,11 @@ public class HeavyEnemyIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        // Si el jugador está en distancia de rango cambia al estado de rango
+        if (_ctx.IsPlayerInChaseRange)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
+        }
     }
 
     #endregion   
