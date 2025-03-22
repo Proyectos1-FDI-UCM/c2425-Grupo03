@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -45,7 +46,7 @@ public class HeavyEnemyChasingState : BaseState
     /// Referencia del rigidbody del enemigo.
     /// </summary>
     Rigidbody2D _rb;
-
+    HeavyEnemyStateMachine.EnemyLookingDirection _enemyLookingDirection;
 
     #endregion
 
@@ -112,7 +113,6 @@ public class HeavyEnemyChasingState : BaseState
         _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
             HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
         //Si todavía hay plataforma se mueve, sino se detiene
         if (CheckGround())
@@ -127,8 +127,7 @@ public class HeavyEnemyChasingState : BaseState
     private bool CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f * (float)_ctx.LookingDirection, gameObject.transform.position.y),
-            Vector2.down, 1.2f, LayerMask.GetMask("Ground"));
-
+            Vector2.down, 5f, LayerMask.GetMask("Ground"));
         return hit.collider != null;
     }
     /// <summary>
@@ -137,7 +136,11 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (!_ctx.IsPlayerInChaseRange)
+        if (_ctx.SpriteRenderer.flipX != (_ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left))
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyFlipState>());
+        }
+        else if (!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());

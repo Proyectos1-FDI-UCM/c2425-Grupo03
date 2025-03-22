@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -19,9 +20,9 @@ public class HeavyEnemyFlipState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    [SerializeField] float _flipTime = 1f;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -31,6 +32,9 @@ public class HeavyEnemyFlipState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    HeavyEnemyStateMachine _ctx;
+    bool _completed = false;
+    Rigidbody2D _rb;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -38,10 +42,14 @@ public class HeavyEnemyFlipState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+    private void Start()
+    {
+        _ctx = GetCTX<HeavyEnemyStateMachine>();
+        _rb = _ctx.GetComponent<Rigidbody2D>();
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -52,13 +60,15 @@ public class HeavyEnemyFlipState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
-        
+        //Debug.Log("fLIP");
+        _rb.velocity = Vector2.zero;
+        StartCoroutine(Flip());
     }
     
     /// <summary>
@@ -66,7 +76,14 @@ public class HeavyEnemyFlipState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _completed = false;
+    }
+
+    IEnumerator Flip()
+    {
+        yield return new WaitForSeconds(_flipTime);
+        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+        _completed = true;
     }
     #endregion
     
@@ -91,7 +108,10 @@ public class HeavyEnemyFlipState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+        if (_completed)
+        {
+            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());
+        }
     }
 
     #endregion   
