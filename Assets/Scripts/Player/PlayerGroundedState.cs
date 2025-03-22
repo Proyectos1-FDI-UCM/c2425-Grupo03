@@ -198,7 +198,7 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, para a jumpState
+        if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, pasa a jumpState
         {
             Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
             _jumpBuffer = 0;
@@ -230,12 +230,12 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(attackState);
             }
         }
-        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerChargeScript>().abilities[1].isCharged)
+        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerChargeScript>().abilities[1].isCharged  && !Ctx.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
         {
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
-        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerChargeScript>().abilities[0].isCharged)
+        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerChargeScript>().abilities[0].isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
         {
             PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
             Ctx.ChangeState(playerSuperDashState);

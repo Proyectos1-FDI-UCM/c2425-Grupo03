@@ -19,7 +19,12 @@ public class PlayerSuperDashState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    [Header("Lock/Unlock State")]
+    /// <summary>
+    /// Determina si está bloqueado o desbloqueado.
+    /// </summary>
+    [SerializeField] private bool _isLocked = false;
+    [Header("Ability Properties")]
     /// <summary>
     /// La distancia del dash
     /// </summary>
@@ -119,8 +124,10 @@ public class PlayerSuperDashState : BaseState
 
     // ---- PROPIEDADES ----
     #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
+    /// <summary>
+    /// Propiedad que determina si el estado está bloqueado o no.
+    /// </summary>
+    public bool IsLocked { get => _isLocked; set => _isLocked = value; }
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -129,19 +136,12 @@ public class PlayerSuperDashState : BaseState
     {
         _ctx = GetCTX<PlayerStateMachine>();
         _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+        _isLocked = false;
     }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-
-
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>

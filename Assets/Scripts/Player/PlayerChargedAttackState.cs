@@ -18,8 +18,12 @@ public class PlayerChargedAttackState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    [Header("Lock/Unlock State")]
+    /// <summary>
+    /// Determina si está bloqueado o desbloqueado.
+    /// </summary>
+    [SerializeField] private bool _isLocked = false;
+    [Header("Charge Attack Properties")]
     /// <summary>
     /// Radio de alcance del ataque cargado
     /// </summary>
@@ -42,6 +46,7 @@ public class PlayerChargedAttackState : BaseState
     /// Sonido para el ataque cargado
     /// </summary>
     [SerializeField] private AudioClip _airHit;
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -76,10 +81,11 @@ public class PlayerChargedAttackState : BaseState
     #endregion
 
     // ---- PROPIEDADES ----
-
     #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
+    /// <summary>
+    /// Propiedad que determina si el estado está bloqueado o no.
+    /// </summary>
+    public bool IsLocked { get => _isLocked; set => _isLocked = value; }
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -92,20 +98,13 @@ public class PlayerChargedAttackState : BaseState
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = _ctx.Rigidbody;
         _animator = GetCTX<PlayerStateMachine>().Animator;
-
+        _isLocked = false;
     }
    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// Pone al startchargingtime el timepo que entra en el estado

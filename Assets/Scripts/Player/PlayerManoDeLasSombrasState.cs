@@ -20,8 +20,12 @@ public class PlayerManoDeLasSombrasState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    [Header("Lock/Unlock State")]
+    /// <summary>
+    /// Determina si está bloqueado o desbloqueado.
+    /// </summary>
+    [SerializeField] private bool _isLocked = false;
+    [Header("Ability Properties")]
     /// <summary>
     /// // Daño de la habilidad.
     /// </summary>
@@ -110,8 +114,10 @@ public class PlayerManoDeLasSombrasState : BaseState
 
     // ---- PROPIEDADES ----
     #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
+    /// <summary>
+    /// Propiedad que determina si el estado está bloqueado o no.
+    /// </summary>
+    public bool IsLocked { get => _isLocked; set => _isLocked = value; }
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -124,18 +130,50 @@ public class PlayerManoDeLasSombrasState : BaseState
     {
         _ctx = GetCTX<PlayerStateMachine>();
         _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+        _isLocked = false;
     }
 
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
+    /// <summary>
+    /// Metodo llamado cuando al transicionar a este estado.
+    /// Llama al metodo para instanciar la bala y pone la velocidad del jugador a 0
+    /// </summary>
+    public override void EnterState()
+    {
+        GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
+        _startTime = Time.time;
+
+        // Lanza el Raycast en la dirección en la que el jugador está mirando
+        StartCoroutine(CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0)));
+    }
+    
+    /// <summary>
+    /// Metodo llamado antes de cambiar a otro estado.
+    /// </summary>
+    public override void ExitState()
+    {
+        _chargeScript.ResetCharge(1);
+        _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
+    }
+    #endregion
+    
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
+    // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// </summary>
+    protected override void UpdateState()
+    {
+        
+    }
     /// <summary>
     /// metodo que instancia la habilidad delante del jugador.
     /// </summary>
@@ -234,44 +272,6 @@ public class PlayerManoDeLasSombrasState : BaseState
                 }
             }
         }
-    }
-
-    /// <summary>
-    /// Metodo llamado cuando al transicionar a este estado.
-    /// Llama al metodo para instanciar la bala y pone la velocidad del jugador a 0
-    /// </summary>
-    public override void EnterState()
-    {
-        GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
-        _startTime = Time.time;
-
-        // Lanza el Raycast en la dirección en la que el jugador está mirando
-        StartCoroutine(CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0)));
-    }
-    
-    /// <summary>
-    /// Metodo llamado antes de cambiar a otro estado.
-    /// </summary>
-    public override void ExitState()
-    {
-        _chargeScript.ResetCharge(1);
-        _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
-    }
-    #endregion
-    
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
-    /// <summary>
-    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
-    /// </summary>
-    protected override void UpdateState()
-    {
-        
     }
 
     /// <summary>
