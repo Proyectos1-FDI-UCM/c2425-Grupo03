@@ -122,7 +122,7 @@ public class PlayerChargedAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsChargeAttaking", false);
+        _animator.SetBool("IsChargeAttacking", false);
         _animator.SetBool("IsCharging", false);
     }
 
@@ -168,7 +168,7 @@ public class PlayerChargedAttackState : BaseState
     {
         if (Time.time - _startChargingTime >= _chargingTime && !_attacked)
         {
-            _animator.SetBool("IsChargeAttaking", true);
+            _animator.SetBool("IsChargeAttacking", true);
             _animator.SetBool("IsCharging", false);
             ChargedAttack();
             _attacked = true;

@@ -165,7 +165,7 @@ public class PlayerAttackState : BaseState
 
         //Atacar en la dirección donde mira el jugador
         
-        _animator.SetInteger("AttackIndex", _combo);
+        _animator.SetFloat("AttackIndex", _combo);
 
       
         //La animación
@@ -177,7 +177,7 @@ public class PlayerAttackState : BaseState
     public override void ExitState()
     {
         Attack(_direction);
-        _animator.SetInteger("AttackIndex", 0);
+        _animator.SetFloat("AttackIndex", 0);
 
     }
     #endregion

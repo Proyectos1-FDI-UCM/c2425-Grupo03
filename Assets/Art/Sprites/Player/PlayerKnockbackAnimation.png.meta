@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b55cf1b909cc89e448e2fb54bc8b536a
+guid: f9609da9726553d4c95d197eb6fae628
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerIdleAnimation_0
+      name: PlayerKnockbackAnimation_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 63
-        height: 181
+        x: 0
+        y: 0
+        width: 91
+        height: 172
       alignment: 9
-      pivot: {x: 0.47080848, y: 0.49491972}
+      pivot: {x: 0.49456897, y: 0.4756813}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efb9b1b84c0577e45a4ea1eab3ae362a
-      internalID: 316183080
+      spriteID: 2069f63829c72f249993e569a5e42ba7
+      internalID: 2055010151
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_1
+      name: PlayerKnockbackAnimation_1
       rect:
         serializedVersion: 2
-        x: 472
-        y: 0
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 190
+        y: 9
+        width: 124
+        height: 160
+      alignment: 9
+      pivot: {x: 0.4858962, y: 0.45769733}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b23529739aa210b4a834784d1cc51291
-      internalID: -702313931
+      spriteID: b63aee39f81c0104286e28ac4bd087c9
+      internalID: -1071572146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_2
+      name: PlayerKnockbackAnimation_2
       rect:
         serializedVersion: 2
-        x: 944
-        y: 0
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 388
+        y: 11
+        width: 84
+        height: 167
+      alignment: 9
+      pivot: {x: 0.48823294, y: 0.5325534}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd12c76b242ba824cbf4b50987838755
-      internalID: -1293528391
+      spriteID: a734ff67c016ff04d8f84db224643907
+      internalID: -1252271763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleAnimation_4
+      name: PlayerKnockbackAnimation_3
       rect:
         serializedVersion: 2
-        x: 1411
-        y: 3
-        width: 66
-        height: 183
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 579
+        y: 17
+        width: 153
+        height: 160
+      alignment: 9
+      pivot: {x: 0.43862695, y: 0.5207159}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01c5356c297efea469f66a7c74738420
-      internalID: 1172054299
+      spriteID: 769927537dfd2284484ad366d0e4c2d5
+      internalID: 1123505301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerKnockbackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 22
+        width: 101
+        height: 177
+      alignment: 9
+      pivot: {x: 0.68105084, y: 0.4780348}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11a4bf1b6ce5c654dbe5013bc89fe458
+      internalID: -1223697418
       vertices: []
       indices: 
       edges: []
@@ -191,11 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerIdleAnimation_0: 316183080
-      PlayerIdleAnimation_1: -702313931
-      PlayerIdleAnimation_2: -1293528391
-      PlayerIdleAnimation_3: -1012281588
-      PlayerIdleAnimation_4: 1172054299
+      PlayerKnockbackAnimation_0: 2055010151
+      PlayerKnockbackAnimation_1: -1071572146
+      PlayerKnockbackAnimation_2: -1252271763
+      PlayerKnockbackAnimation_3: 1123505301
+      PlayerKnockbackAnimation_4: -1223697418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

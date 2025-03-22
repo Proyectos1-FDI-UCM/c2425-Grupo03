@@ -96,7 +96,7 @@ public class PlayerDeathState : BaseState
     /// </summary>
     public override void ExitState()
     {
-
+        _animator.SetBool("IsDead", false);
     }
     #endregion
 
