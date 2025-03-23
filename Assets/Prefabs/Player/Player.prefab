@@ -586,7 +586,7 @@ MonoBehaviour:
   _isLocked: 0
   _dashDistance: 5
   _damage: 5
-  _actionTime: 1
+  _actionTime: 0.2
   _timeOfDamage: 1
   _timeOfDash: 1
   _abilityIndex: 1

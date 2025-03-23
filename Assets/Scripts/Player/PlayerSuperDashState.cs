@@ -152,6 +152,8 @@ public class PlayerSuperDashState : BaseState
 
         _ctx.Rigidbody.velocity = Vector2.zero;
 
+        Ctx.Animator.SetTrigger("SuperDash");
+
         //Comprobar la validez de los tiempos
         Initialize(_timeOfDamage, _timeOfDash);
 
