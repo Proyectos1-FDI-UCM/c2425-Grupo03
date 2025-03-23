@@ -93,6 +93,7 @@ public class HeavyEnemyAttackState : BaseState
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Empieza el ataque
     /// </summary>
     public override void EnterState()
     {
@@ -133,6 +134,11 @@ public class HeavyEnemyAttackState : BaseState
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
         }
     }
+    /// <summary>
+    /// Metodo donde ataca
+    /// </summary>
+    /// <param name="direction">la dirección que ataca</param>
+    /// <returns></returns>
     private IEnumerator Attack(int direction)
     {
         yield return new WaitForSeconds(_attackTime);
@@ -154,6 +160,9 @@ public class HeavyEnemyAttackState : BaseState
 
         _attackFinished = true;
     }
+    /// <summary>
+    /// dibuja el rango de ataque en el editor si esta el juego en ejecución.
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;

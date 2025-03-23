@@ -45,8 +45,14 @@ public class HeavyEnemyChasingState : BaseState
     /// <summary>
     /// Referencia del rigidbody del enemigo.
     /// </summary>
-    Rigidbody2D _rb;
+    Rigidbody2D _rb; 
+    /// <summary>
+    /// Referencia a la direccion que mira el enemigo
+    /// </summary>
     HeavyEnemyStateMachine.EnemyLookingDirection _enemyLookingDirection;
+    /// <summary>
+    /// si debe girar o no de direccion
+    /// </summary>
     bool _shouldFlip = false;
 
     #endregion
@@ -111,10 +117,12 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        //calcula la direccion que debe de mirar
         HeavyEnemyStateMachine.EnemyLookingDirection newDirection =
         (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
         HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
+        //si no coincide con su direccion actual, debe de girarse
         _shouldFlip = newDirection != _ctx.LookingDirection;
        
         //Si todavía hay plataforma se mueve, sino se detiene
@@ -127,6 +135,10 @@ public class HeavyEnemyChasingState : BaseState
             _rb.velocity = Vector3.zero;
         }
     }
+    /// <summary>
+    /// compruebna si esta en el suelo
+    /// </summary>
+    /// <returns></returns>
     private bool CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f * (float)_ctx.LookingDirection, gameObject.transform.position.y),

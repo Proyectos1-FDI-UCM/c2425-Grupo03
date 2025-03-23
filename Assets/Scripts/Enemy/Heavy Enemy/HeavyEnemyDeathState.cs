@@ -35,7 +35,7 @@ public class HeavyEnemyDeathState : BaseState
     /// </summary>
     private float _deadTime;
     /// <summary>
-    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// Referencia del tipo HeavyEnemyStateMachine del contexto.
     /// </summary>
     private HeavyEnemyStateMachine _ctx;
 
@@ -66,10 +66,10 @@ public class HeavyEnemyDeathState : BaseState
     }
     public void DeathState()
     {
-        ChangeState(gameObject.GetComponentInChildren<EnemyDeathState>());
     }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// coge referencias y calcula el tiempo de muerte
     /// </summary>
     public override void EnterState()
     {
@@ -101,6 +101,7 @@ public class HeavyEnemyDeathState : BaseState
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// Si ha pasado el tiempo de espera, se destruye el enemigo
     /// </summary>
     protected override void UpdateState()
     {

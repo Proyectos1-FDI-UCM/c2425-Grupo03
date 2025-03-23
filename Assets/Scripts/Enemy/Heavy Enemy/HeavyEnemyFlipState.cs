@@ -31,9 +31,17 @@ public class HeavyEnemyFlipState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// referencia al contexto
+    /// </summary>
     HeavyEnemyStateMachine _ctx;
+    /// <summary>
+    /// si ha terminado de girar
+    /// </summary>
     bool _completed = false;
+    /// <summary>
+    /// referencia al rigidbody del enemigo
+    /// </summary>
     Rigidbody2D _rb;
     #endregion
 
@@ -45,6 +53,9 @@ public class HeavyEnemyFlipState : BaseState
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    /// <summary>
+    /// Coge referencias
+    /// </summary>
     private void Start()
     {
         _ctx = GetCTX<HeavyEnemyStateMachine>();
@@ -63,6 +74,7 @@ public class HeavyEnemyFlipState : BaseState
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
+    /// Pone la velocidad del enemigo a cero y empieza a girar
     /// </summary>
     public override void EnterState()
     {
@@ -79,13 +91,19 @@ public class HeavyEnemyFlipState : BaseState
         _completed = false;
     }
 
+    /// <summary>
+    /// metodo donde el enemigo empieza a girar
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Flip()
     {
-        yield return new WaitForSeconds(_flipTime);
+        yield return new WaitForSeconds(_flipTime); // espera al flip time
 
+        //gira de direccion
         _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
         HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
+        //rota el sprite
         _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
         _completed = true;
     }
@@ -112,6 +130,7 @@ public class HeavyEnemyFlipState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
+        //pasa a idle al terminar
         if (_completed)
         {
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());

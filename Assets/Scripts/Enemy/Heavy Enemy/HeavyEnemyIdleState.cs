@@ -56,10 +56,18 @@ public class HeavyEnemyIdleState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Coge referencia 
+    /// </summary>
     private void Start()
     {
         _ctx = GetCTX<HeavyEnemyStateMachine>();
     }
+
+    /// <summary>
+    /// Comprueba si ha dertectado a un jugador
+    /// </summary>
+    /// <param name="collision"></param>trigger de deteccion 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerStateMachine>() != null)

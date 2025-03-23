@@ -82,24 +82,32 @@ public class HeavyEnemyStateMachine : StateMachine
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
+
+    /// <summary>
+    /// Compruebna si el jugador esta en su espalda
+    /// </summary>
+    /// <returns></returns>
     public bool CanTakeDamage()
     {
         bool canTakeDamage = false;
 
+        /* 
+         if (PlayerTransform != null)
+         {
+             PlayerStateMachine player = PlayerTransform.GetComponent<PlayerStateMachine>();
+             canTakeDamage = (short)LookingDirection == (short)player.LookingDirection;
+         }
+        */
+
         if (PlayerTransform != null)
         {
-            PlayerStateMachine player = PlayerTransform.GetComponent<PlayerStateMachine>();
-            canTakeDamage = (short)LookingDirection == (short)player.LookingDirection;
+            Vector2 directionToPlayer = (PlayerTransform.position - transform.position).normalized;
+            Vector2 enemyLookingDirection = new Vector2((short)LookingDirection, 0);
+            float dotProduct = Vector2.Dot(enemyLookingDirection, directionToPlayer); //si apuntan a direcciones contrarias, canTakeDamage es true
+            canTakeDamage = dotProduct < 0;
         }
-        return canTakeDamage;
-
-        /*
-        Vector2 directionToPlayer = (PlayerTransform.position - transform.position).normalized;
-        Vector2 enemyForward = new Vector2((short)LookingDirection, 0);
-        float dotProduct = Vector2.Dot(enemyForward, directionToPlayer);
-        canTakeDamage = dotProduct < 0;
         return canTakeDamage; 
-        */
+        
     }
     #endregion
 
