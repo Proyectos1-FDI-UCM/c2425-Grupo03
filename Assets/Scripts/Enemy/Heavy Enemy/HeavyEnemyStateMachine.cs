@@ -86,9 +86,11 @@ public class HeavyEnemyStateMachine : StateMachine
     {
         bool canTakeDamage = false;
 
-        PlayerStateMachine player = PlayerTransform.GetComponent<PlayerStateMachine>();
-
-        canTakeDamage = (short)LookingDirection == (short)player.LookingDirection;
+        if (PlayerTransform != null)
+        {
+            PlayerStateMachine player = PlayerTransform.GetComponent<PlayerStateMachine>();
+            canTakeDamage = (short)LookingDirection == (short)player.LookingDirection;
+        }
         return canTakeDamage;
 
         /*
@@ -124,7 +126,7 @@ public class HeavyEnemyStateMachine : StateMachine
     /// </summary>
     public void DeathState()
     {
-        ChangeState(gameObject.GetComponentInChildren<EnemyDeathState>());
+        ChangeState(gameObject.GetComponentInChildren<HeavyEnemyDeathState>());
     }
 
     #endregion

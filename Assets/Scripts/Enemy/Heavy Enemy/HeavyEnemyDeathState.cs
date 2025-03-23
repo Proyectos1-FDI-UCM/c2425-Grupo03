@@ -5,9 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -15,30 +13,13 @@ using UnityEngine.UIElements;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class HeavyEnemyAttackState : BaseState
+public class HeavyEnemyDeathState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    [Header("Propiedad del ataque")]
-    /// <summary>
-    /// La anchura de ataque del enemigo
-    /// </summary>
-    [SerializeField, Min(0)] float _attackWidth = 2f;
-    /// <summary>
-    /// La altura de ataque del enemigo
-    /// </summary>
-    [SerializeField, Min(0)] float _attackHeight =1f;
-    /// <summary>
-    /// El tiempo cuando el enemigo pueda volver a atacar
-    /// </summary>
-    [SerializeField, Min(0)] float _attackTime = 1f;
-    /// <summary>
-    /// El daño del ataque basico
-    /// </summary>
-    [SerializeField] float _damage;
+    [SerializeField, Min(0)] private float _waitTime;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -49,17 +30,14 @@ public class HeavyEnemyAttackState : BaseState
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    /// <summary>
+    /// Fin de tiempo de espera
+    /// </summary>
+    private float _deadTime;
     /// <summary>
     /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
     private HeavyEnemyStateMachine _ctx;
-
-    /// <summary>
-    /// Booleana para ver si ha terminado de atacar
-    /// </summary>
-    /// 
-    private bool _attackFinished;
 
     #endregion
 
@@ -81,30 +59,36 @@ public class HeavyEnemyAttackState : BaseState
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
     private void Start()
     {
-        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<HeavyEnemyStateMachine>();
-
-        //Informar al contexto el rango de ataque del enemigo
-        _ctx.AttackDistance = _attackWidth;
-
+       
     }
-
+    public void DeathState()
+    {
+        ChangeState(gameObject.GetComponentInChildren<EnemyDeathState>());
+    }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
-        StartCoroutine(Attack((int)_ctx.LookingDirection));
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<HeavyEnemyStateMachine>();
+
+        _ctx.gameObject.layer = 0;
+
+        //Calcular el tiempo de la muerte
+        _deadTime = Time.time + _waitTime;
+
     }
-    
+
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
     {
-        _attackFinished = false;
+        
     }
     #endregion
     
@@ -120,6 +104,10 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        if (Time.time > _deadTime)
+        {
+            Destroy(_ctx.gameObject);
+        }
     }
 
     /// <summary>
@@ -128,45 +116,10 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_attackFinished)
-        {
-            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
-        }
+        
     }
-    private IEnumerator Attack(int direction)
-    {
-        yield return new WaitForSeconds(_attackTime);
-        //El rango de ataque del enemigo
 
-        Vector2 attackBoxSize = new Vector2(_attackWidth, _attackHeight);
-        Vector2 attackPosition = (Vector2)transform.position + new Vector2((_attackWidth / 2) * direction, 0);
-
-        //Un ducktyping para ver si el raycat que hace en la direccion donde mira el enemigo tiene un HealthManager en la capa del jugador
-        //Si hay devuelve el HealthManager del jugador
-        HealthManager HM = Physics2D.BoxCast(attackPosition, attackBoxSize, 0f, Vector2.zero, 0f, 1 << 6)
-            .collider?.GetComponent<HealthManager>();
-
-        //Si consigue el HealthManager del jugador entonces hace daño al jugador, sino no hace anda.
-        if (HM != null)
-        {
-            HM.RemoveHealth(_damage);
-        }
-
-        _attackFinished = true;
-    }
-    private void OnDrawGizmosSelected()
-    {
-        if (!Application.isPlaying) return;
-
-        Gizmos.color = Color.red; 
-
-        // Calcular la posición del ataque en función de la dirección
-        Vector2 position = (Vector2)transform.position + new Vector2((_attackWidth / 2) * (int)_ctx.LookingDirection, 0);
-
-        // Dibujar un cuadro en la posición del ataque
-        Gizmos.DrawWireCube(position, new Vector2(_attackWidth, _attackHeight));
-    }
     #endregion   
 
-} // class HeavyEnemyAttackState 
+} // class HeavyEnemyDeathState 
 // namespace
