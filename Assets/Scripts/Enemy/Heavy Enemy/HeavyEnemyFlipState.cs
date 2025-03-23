@@ -82,6 +82,10 @@ public class HeavyEnemyFlipState : BaseState
     IEnumerator Flip()
     {
         yield return new WaitForSeconds(_flipTime);
+
+        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+        HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+
         _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
         _completed = true;
     }

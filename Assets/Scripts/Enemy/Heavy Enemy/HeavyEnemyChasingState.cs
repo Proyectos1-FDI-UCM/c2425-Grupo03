@@ -47,6 +47,7 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     Rigidbody2D _rb;
     HeavyEnemyStateMachine.EnemyLookingDirection _enemyLookingDirection;
+    bool _shouldFlip = false;
 
     #endregion
 
@@ -93,6 +94,7 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        _shouldFlip = false;
         _rb.velocity = Vector3.zero;
     }
     #endregion
@@ -109,11 +111,12 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+        HeavyEnemyStateMachine.EnemyLookingDirection newDirection =
+        (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+        HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
-
+        _shouldFlip = newDirection != _ctx.LookingDirection;
+       
         //Si todavía hay plataforma se mueve, sino se detiene
         if (CheckGround())
         {
@@ -136,7 +139,7 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_ctx.SpriteRenderer.flipX != (_ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left))
+        if (_shouldFlip)
         {
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyFlipState>());
         }

@@ -82,7 +82,23 @@ public class HeavyEnemyStateMachine : StateMachine
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
+    public bool CanTakeDamage()
+    {
+        bool canTakeDamage = false;
 
+        PlayerStateMachine player = PlayerTransform.GetComponent<PlayerStateMachine>();
+
+        canTakeDamage = (short)LookingDirection == (short)player.LookingDirection;
+        return canTakeDamage;
+
+        /*
+        Vector2 directionToPlayer = (PlayerTransform.position - transform.position).normalized;
+        Vector2 enemyForward = new Vector2((short)LookingDirection, 0);
+        float dotProduct = Vector2.Dot(enemyForward, directionToPlayer);
+        canTakeDamage = dotProduct < 0;
+        return canTakeDamage; 
+        */
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -96,6 +112,11 @@ public class HeavyEnemyStateMachine : StateMachine
     protected override void OnStart()
     {
         GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+    }
+
+    protected override void OnUpdate()
+    {
+        GetComponent<HealthManager>().Inmune = !CanTakeDamage();
     }
 
     /// <summary>
