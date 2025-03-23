@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     List<int> _activatedCheckpoint = new List<int>();
 
+    private PlayerStateMachine _player;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -218,6 +219,16 @@ public class GameManager : MonoBehaviour
     {
         // Agrega el checkpoint a la lista
         _activatedCheckpoint.Add(_checkPointIndex);
+    }
+
+    public void SetPlayer(PlayerStateMachine player)
+    {
+        _player = player;
+    }
+
+    public PlayerStateMachine GetPlayer()
+    {
+        return _player;
     }
     #endregion
 

@@ -20,11 +20,11 @@ public class CombatArea : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+
+    /// <summary>
+    /// La puerta a eliminar 
+    /// </summary>
     [SerializeField] private GameObject _door;
-
-    [SerializeField] private HealthManager[] _enemy;
-
-    private int _enemyCount = 0;
 
     #endregion
 
@@ -57,14 +57,6 @@ public class CombatArea : MonoBehaviour
     /// any of the Update methods are called the first time.
     /// </summary>
     /// 
-    private void Awake()
-    {
-        //for(int i = 0; i < transform.childCount; i++)
-        //{
-        //    _enemy[i] = GetComponentInChildren<HealthManager>(); 
-        //}
-        _enemyCount = FindObjectsByType(typeof(HealthManager),FindObjectsSortMode.None).Length;    
-    }
     void Start()
     {
 
@@ -75,14 +67,10 @@ public class CombatArea : MonoBehaviour
     /// </summary>
     void Update()
     {
-        Debug.Log(_enemy.Length);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!GetComponentInChildren<HealthManager>())
+        //Si ya no hay enemigos "abre" la puerta
+        if (transform.childCount == 0)
         {
-            Destroy(_door.gameObject);
+            Destroy(_door);
         }
     }
     #endregion

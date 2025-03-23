@@ -98,6 +98,7 @@ public class WaveController : MonoBehaviour
             _door.gameObject.SetActive(true);
             _endWaves = false;
         }
+        CameraManager.Instance.SetCamera(transform,6);
     }
     #endregion
 
@@ -133,6 +134,8 @@ public class WaveController : MonoBehaviour
         {
             _door.gameObject.SetActive(false);
             _endWaves = true;
+            CameraManager.Instance.SetCamera(GameManager.Instance.GetPlayer().transform);
+            Destroy(gameObject);
         }
     }
 

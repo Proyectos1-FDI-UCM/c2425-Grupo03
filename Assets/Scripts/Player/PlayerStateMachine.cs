@@ -121,6 +121,8 @@ public class PlayerStateMachine : StateMachine
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();
 
+        GameManager.Instance.SetPlayer(this);
+
     }
     protected override void OnStart()
     {

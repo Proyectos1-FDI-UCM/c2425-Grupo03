@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 
@@ -104,6 +105,8 @@ public class CameraManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
 
     /// <summary>
@@ -182,6 +185,12 @@ public class CameraManager : MonoBehaviour
         StartCoroutine(ShakeCameraAsync(duration, magnitude));
     }
 
+    public void SetCamera(Transform position, int size = 10)
+    {
+        _playerPosition = position;
+        _camera.orthographicSize = size;
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -209,6 +218,8 @@ public class CameraManager : MonoBehaviour
         // Coloca la cámara en la posición original
         transform.position = _playerPosition.position;
     }
+
+
     #endregion
 
 
