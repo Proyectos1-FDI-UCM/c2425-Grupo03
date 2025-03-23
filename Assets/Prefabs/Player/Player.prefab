@@ -616,9 +616,9 @@ MonoBehaviour:
   _pushDistance: 6
   _startSkillPosition: 0
   _liftingHeight: 1
-  _waitTimeForFirstHit: 0.5
-  _attractEnemyTime: 0.5
-  _waitTimeForSecondHit: 0.5
+  _waitTimeForFirstHit: 0.1
+  _attractEnemyTime: 0.6
+  _waitTimeForSecondHit: 0.4
   _abilityChargePercentage: 0
   _attracSound: {fileID: 8300000, guid: d95d3dc0c96017244bba601776b04e7e, type: 3}
   _pushSound: {fileID: 8300000, guid: e6e7e9cb7e9fe894a8389bbc43db3fb9, type: 3}

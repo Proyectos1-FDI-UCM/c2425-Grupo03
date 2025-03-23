@@ -146,6 +146,8 @@ public class PlayerManoDeLasSombrasState : BaseState
         GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
         _startTime = Time.time;
 
+        Ctx.Animator.SetTrigger("ManoSombras");
+
         // Lanza el Raycast en la dirección en la que el jugador está mirando
         StartCoroutine(CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0)));
     }
