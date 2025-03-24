@@ -99,7 +99,7 @@ public class CameraManager : MonoBehaviour
             _playerInput.Enable();
 
             //Pone la instrucción de seguir al jugador por defecto
-            EnqueueInstruction(new CameraFollowPlayer(1, 7));
+            EnqueueInstruction(new CameraFollowPlayer(0.1f, _camera.orthographicSize));
         }
         else
         {
@@ -131,15 +131,14 @@ public class CameraManager : MonoBehaviour
                 // Avisa de que ha comenzado la instrucción
                 _cameraInstructions.Peek().SetUp();
             }
-
-            /* PARA TESTEAR
-            string str = "Camera Queue: ";
+            /*
+            string str = $"Camera Queue ({instructionEnded}): ";
             foreach(CameraInstruction instruction in _cameraInstructions)
             {
-                str += instruction.ToString() + ", ";
+                str += $"{instruction.ToString()}, ";
             }
-            Debug.Log(str);
-            */
+            Debug.Log(str);*/
+            
         }
 
         // Lee el input del jugador.
