@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 1214668236577535999}
   - component: {fileID: 4886483801494157451}
   - component: {fileID: -4233722579977323440}
-  - component: {fileID: 2869404970991857936}
   - component: {fileID: 1494383266299005258}
   - component: {fileID: 5441531688453424118}
   m_Layer: 6
@@ -303,20 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
---- !u!114 &2869404970991857936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450874108255313576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0a838968deec942ba3cf938e093537, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthSlider: {fileID: 0}
-  HealthManager: {fileID: 4886483801494157451}
 --- !u!114 &1494383266299005258
 MonoBehaviour:
   m_ObjectHideFlags: 0
