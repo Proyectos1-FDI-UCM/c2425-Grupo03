@@ -98,7 +98,7 @@ public class WaveController : MonoBehaviour
             _door.gameObject.SetActive(true);
             _endWaves = false;
         }
-        print("hola");
+
         CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, 6));
     }
     #endregion
