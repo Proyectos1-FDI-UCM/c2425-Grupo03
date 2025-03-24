@@ -29,6 +29,11 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject _uiPauseMenu;
 
+
+    [SerializeField] GameObject _continueRhombus;
+
+    [SerializeField] GameObject _mainMenuRhombus;
+
     /// <summary>
     /// Deshabilitar los movimientos del jugador
     /// </summary>
@@ -193,6 +198,39 @@ public class PauseMenuController : MonoBehaviour
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         SceneManager.LoadScene("MainMenu_Zhiyi");
     }
+
+    public void OnSelectContinue()
+    {
+        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        _continueRhombus.SetActive(true);
+    }
+
+    /// <summary>
+    /// Desactiva la flecha del botón "Jugar"
+    /// </summary>
+    public void OnDeselectContinue()
+    {
+        _continueRhombus.SetActive(false);
+    }
+
+    /// <summary>
+    /// Activa la flecha del botón "Salir"
+    /// </summary>
+    public void OnSelectMainMenu()
+    {
+        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        _mainMenuRhombus.SetActive(true);
+    }
+
+    /// <summary>
+    /// Desactiva la flecha del botón "Salir"
+    /// </summary>
+    public void OnDeselectMainMenu()
+    {
+        _mainMenuRhombus.SetActive(false);
+    }
+
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
