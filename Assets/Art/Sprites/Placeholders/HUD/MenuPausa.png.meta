@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 49b9a342b7a19fd41ab3f0a2b3fe559b
+guid: b4754bac84bc3164f80e4215a0518430
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,7 +95,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: MenuPausa_0
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 1080
+        width: 1085
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 171}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cbaec987eb4a3c498f88c73e03d23a6
+      internalID: 1072981480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuPausa_1
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 758
+        width: 1096
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e95c22b829cbb24c814b8371b290be0
+      internalID: -1739888620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -106,7 +148,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MenuPausa_0: 1072981480
+      MenuPausa_1: -1739888620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
