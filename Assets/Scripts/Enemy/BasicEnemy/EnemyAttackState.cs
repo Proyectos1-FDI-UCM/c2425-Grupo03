@@ -179,7 +179,7 @@ public class EnemyAttackState : BaseState
         RaycastHit2D playerInRange = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6);
 
         //Si en el área de ataque se encuentra el jugador, entonces le hace daño
-        if(playerInRange.collider != null)
+        if(playerInRange.collider != null && playerInRange.collider.GetComponent<PlayerStateMachine>() != null)
         {
             player = playerInRange.collider.gameObject.GetComponent<HealthManager>();
             player.RemoveHealth(_damage);

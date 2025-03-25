@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -20,6 +20,11 @@ public class SceneEndOfLevel : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
+    /// <summary>
+    /// El nombre de la escena a cambiar
+    /// </summary>
+    [SerializeField] private string _sceneToGo;
 
     #endregion
     
@@ -66,7 +71,7 @@ public class SceneEndOfLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene("MainMenu_Zhiyi");
+        SceneManager.LoadScene(_sceneToGo);
     }
     #endregion
 

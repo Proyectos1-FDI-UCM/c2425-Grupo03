@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5937330566334603433
+--- !u!1 &9183699875986978095
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5902642371972266224}
-  - component: {fileID: 5051971540883300635}
-  - component: {fileID: 1692337028853325160}
-  m_Layer: 14
-  m_Name: Void
+  - component: {fileID: 1598864602063998077}
+  - component: {fileID: 1017680637214323204}
+  - component: {fileID: 6890774364016743979}
+  m_Layer: 12
+  m_Name: EndOfLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5902642371972266224
+--- !u!4 &1598864602063998077
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937330566334603433}
+  m_GameObject: {fileID: 9183699875986978095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -360.98514, y: 19.849422, z: 0.8505001}
+  m_LocalPosition: {x: -179.5, y: 35.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &5051971540883300635
+--- !u!61 &1017680637214323204
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937330566334603433}
+  m_GameObject: {fileID: 9183699875986978095}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -62,7 +62,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -76,17 +76,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 5}
   m_EdgeRadius: 0
---- !u!114 &1692337028853325160
+--- !u!114 &6890774364016743979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937330566334603433}
+  m_GameObject: {fileID: 9183699875986978095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ab56a163b7d0f44aca9ae3f30f2cb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c7eba3f45257f94b89423a2ecfd5332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneToGo: MainMenu_Zhiyi
