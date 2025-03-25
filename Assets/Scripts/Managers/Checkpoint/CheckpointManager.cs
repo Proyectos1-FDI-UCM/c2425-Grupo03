@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Archivo que maneja los checkpoints
 // Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Componente que maneja el menu principal
 // Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

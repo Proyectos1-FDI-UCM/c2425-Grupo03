@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Archivo que maneja el menu de pausa durante el juego
 // Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -29,9 +29,14 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject _uiPauseMenu;
 
-
+    /// <summary>
+    /// Referencia a los rombos para indicar la seleccion de boton
+    /// </summary>
     [SerializeField] GameObject _continueRhombus;
 
+    /// <summary>
+    /// Referencia a los rombos para indicar la seleccion de boton
+    /// </summary>
     [SerializeField] GameObject _mainMenuRhombus;
 
     /// <summary>
@@ -205,6 +210,7 @@ public class PauseMenuController : MonoBehaviour
         _continueRhombus.SetActive(true);
     }
 
+
     /// <summary>
     /// Desactiva la flecha del botón "Jugar"
     /// </summary>
@@ -212,6 +218,7 @@ public class PauseMenuController : MonoBehaviour
     {
         _continueRhombus.SetActive(false);
     }
+
 
     /// <summary>
     /// Activa la flecha del botón "Salir"
@@ -221,6 +228,7 @@ public class PauseMenuController : MonoBehaviour
         SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
         _mainMenuRhombus.SetActive(true);
     }
+
 
     /// <summary>
     /// Desactiva la flecha del botón "Salir"
