@@ -172,17 +172,19 @@ public class EnemyAttackState : BaseState
         //El rango de ataque del enemigo
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
 
+        //El posible HealthManager del jugador
+        HealthManager player;
 
-        //Un ducktyping para ver si el raycat que hace en la direccion donde mira el enemigo tiene un HealthManager en la capa del jugador
-        //Si hay devuelve el HealthManager del jugador
-        HealthManager HM = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6)
-            .collider?.GetComponent<HealthManager>();
+        //Mirar en el área del ataque
+        RaycastHit2D playerInRange = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6);
 
-        //Si consigue el HealthManager del jugador entonces hace daño al jugador, sino no hace anda.
-        if (HM != null)
+        //Si en el área de ataque se encuentra el jugador, entonces le hace daño
+        if(playerInRange.collider != null)
         {
-            HM.RemoveHealth(_damage);
+            player = playerInRange.collider.gameObject.GetComponent<HealthManager>();
+            player.RemoveHealth(_damage);
         }
+
         SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
     }
     /*
