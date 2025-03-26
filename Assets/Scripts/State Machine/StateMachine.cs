@@ -29,11 +29,6 @@ public class StateMachine : MonoBehaviour
 
     #endregion
 
-    // ---- ATRIBUTOS PRIVADOS ----
-    #region Atributos Privados (private fields)
-
-
-    #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -85,8 +80,10 @@ public class StateMachine : MonoBehaviour
     private void Start()
     {
         CurrState = GetStateByIndex(0);
-        CurrState.EnterState();
-
+        if (CurrState != null)
+        {
+            CurrState.EnterState();
+        }
         OnStart();
     }
 
@@ -96,7 +93,7 @@ public class StateMachine : MonoBehaviour
     private void Update()
     {
         // Actualiza el estado actual
-        CurrState.UpdateStates();
+        CurrState?.UpdateStates();
 
         // Notifica del update a la máquina de estados hija
         OnUpdate();
@@ -110,7 +107,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        CurrState.FixedUpdateStates();
+        CurrState?.FixedUpdateStates();
     }
 
     /// <summary>
@@ -118,7 +115,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CurrState.ExecuteTriggerEnter(collision);
+        CurrState?.ExecuteTriggerEnter(collision);
     }
 
     /// <summary>
@@ -126,7 +123,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
-        CurrState.ExecuteTriggerExit(collision);
+        CurrState?.ExecuteTriggerExit(collision);
     }
 
     /// <summary>
@@ -134,7 +131,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CurrState.ExecuteTriggerStay(collision);
+        CurrState?.ExecuteTriggerStay(collision);
     }
 
     /// <summary>
@@ -142,7 +139,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CurrState.ExecuteCollisionEnter(collision);
+        CurrState?.ExecuteCollisionEnter(collision);
     }
 
     /// <summary>
@@ -150,7 +147,7 @@ public class StateMachine : MonoBehaviour
     /// </summary>
     private void OnCollisionExit2D(Collision2D collision)
     {
-        CurrState.ExecuteCollisionExit(collision);
+        CurrState?.ExecuteCollisionExit(collision);
     }
     #endregion
 
@@ -225,7 +222,7 @@ public class StateMachine : MonoBehaviour
         }
         else
         {
-            CurrState.SetSubState(nextState);
+            CurrState?.SetSubState(nextState);
         }
     }
 
@@ -258,7 +255,7 @@ public class StateMachine : MonoBehaviour
     {
         if(CurrState != NextState && NextState != null)
         {
-            CurrState.ExitState();
+            CurrState?.ExitState();
             NextState.EnterState();
 
             CurrState = NextState;

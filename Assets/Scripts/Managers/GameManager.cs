@@ -22,24 +22,9 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-
-    #region Atributos del Inspector (serialized fields)
-
-    // Documentar cada atributo que aparece aquí.
-    // El convenio de nombres de Unity recomienda que los atributos
-    // públicos y de inspector se nombren en formato PascalCase
-    // (palabras con primera letra mayúscula, incluida la primera letra)
-    // Ejemplo: MaxHealthPoints
-
-    //[SerializeField] Transform _player;
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
-
     #region Atributos Privados (private fields)
-
     /// <summary>
     /// Instancia única de la clase (singleton).
     /// </summary>
@@ -54,9 +39,8 @@ public class GameManager : MonoBehaviour
     /// Lista de checkpoints activados
     /// </summary>
     List<int> _activatedCheckpoint = new List<int>();
-
-    private PlayerStateMachine _player;
     #endregion
+
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
 
@@ -219,16 +203,6 @@ public class GameManager : MonoBehaviour
     {
         // Agrega el checkpoint a la lista
         _activatedCheckpoint.Add(_checkPointIndex);
-    }
-
-    public void SetPlayer(PlayerStateMachine player)
-    {
-        _player = player;
-    }
-
-    public PlayerStateMachine GetPlayer()
-    {
-        return _player;
     }
     #endregion
 

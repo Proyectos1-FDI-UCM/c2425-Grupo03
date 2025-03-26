@@ -8,7 +8,6 @@
 // IMPORTANTE: No uses los métodos del MonoBehaviour: Awake(), Start(), Update, etc. (NINGUNO)
 
 using UnityEngine;
-using UnityEngine.Rendering;
 // Añadir aquí el resto de directivas using
 
 
@@ -120,14 +119,15 @@ public class PlayerStateMachine : StateMachine
 
         PlayerInput = new PlayerInputActions().Player;
         PlayerInput.Enable();
-
-        GameManager.Instance.SetPlayer(this);
-
     }
     protected override void OnStart()
     {
-        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
-        GetComponent<HealthManager>()._onDamaged.AddListener(PlayerDamagedSFX);
+        HealthManager healthManager = GetComponent<HealthManager>();
+        if (healthManager != null)
+        {
+            healthManager._onDeath.AddListener(DeathState);
+            healthManager._onDamaged.AddListener(PlayerDamagedSFX);
+        }
         if (GameManager.Instance.GetCheckpoint()!= Vector2.zero)
         {
             transform.position = GameManager.Instance.GetCheckpoint();

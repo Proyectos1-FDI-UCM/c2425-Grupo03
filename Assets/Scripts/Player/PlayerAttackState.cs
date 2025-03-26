@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de ataque del jugador
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -91,14 +91,6 @@ public class PlayerAttackState : BaseState
     /// La dirección donde mira el jugador
     /// </summary>
     private int _direction;
-    /// <summary>
-    /// El rigidbody del player
-    /// </summary>
-    private Rigidbody2D _rb;
-    /// <summary>
-    /// El rigidbody del player
-    /// </summary>
-    private Animator _animator;
     /// <summary>
     /// El contexto del playerstatemachine
     /// </summary>
@@ -235,7 +227,7 @@ public class PlayerAttackState : BaseState
             foreach (RaycastHit2D enemy in enemyInArea)
             {
                 //Daño al enemigo
-                enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
+                enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
                 //Añadir carga a las habilidades
                 _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
             }

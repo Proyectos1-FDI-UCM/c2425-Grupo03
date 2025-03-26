@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Clase que se encarga de la lógica de los checkpoints
 // Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -9,8 +9,7 @@ using UnityEngine;
 // Añadir aquí el resto de directivas using
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Clase que se encarga de la lógica de los checkpoints
 /// </summary>
 public class Checkpoint : MonoBehaviour
 {
@@ -47,11 +46,6 @@ public class Checkpoint : MonoBehaviour
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -63,20 +57,11 @@ public class Checkpoint : MonoBehaviour
         if (GameManager.Instance.IsActivated(_checkPointIndex))
         {
             _isActivated = true;
-            _animator.SetTrigger("CpAppear");
+            _animator?.SetTrigger("CpAppear");
         }
     }
     #endregion
 
-    // ---- MÉTODOS PÚBLICOS ----
-    #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-    #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
@@ -91,7 +76,7 @@ public class Checkpoint : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerStateMachine>() && !_isActivated)
+        if (collision.gameObject.GetComponent<PlayerStateMachine>() != null && !_isActivated)
         {
             _isActivated = true;
 

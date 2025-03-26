@@ -8,7 +8,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
 
@@ -23,6 +22,11 @@ public class MainMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    /// <summary>
+    /// El nombre de la escena principal
+    /// </summary>
+    [SerializeField]
+    string _playSceneName;
     /// <summary>
     /// Referencia de la flecha del boton Jugar
     /// </summary>
@@ -61,6 +65,9 @@ public class MainMenuController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// El input del jugador
+    /// </summary>
     private PlayerInputActions _playerInput;
 
     /// <summary>
@@ -73,11 +80,6 @@ public class MainMenuController : MonoBehaviour
     bool _goPlay = false;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -111,7 +113,7 @@ public class MainMenuController : MonoBehaviour
         {
             if (_goPlay)
             {
-                SceneManager.LoadScene("LevelTest_Zhiyi");
+                SceneManager.LoadScene(_playSceneName);
             }
             else
             {
@@ -138,7 +140,7 @@ public class MainMenuController : MonoBehaviour
         _clickTime = Time.time;
         _goPlay = true;
 
-        SceneManager.LoadScene("LevelTest_Zhiyi");
+        SceneManager.LoadScene(_playSceneName);
 
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
 
@@ -152,7 +154,6 @@ public class MainMenuController : MonoBehaviour
         //Cierra la aplicacion (solo en la build)
         _clickTime = Time.time;
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        Debug.Log("Salir de la aplicación");
     }
 
     /// <summary>
@@ -189,15 +190,7 @@ public class MainMenuController : MonoBehaviour
         _exitArrow.SetActive(false);
     }
     #endregion
-
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
-    #endregion   
+ 
 
 } // class MainMenuController 
 // namespace

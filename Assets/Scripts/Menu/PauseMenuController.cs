@@ -7,7 +7,6 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 // Añadir aquí el resto de directivas using
@@ -23,6 +22,12 @@ public class PauseMenuController : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
+    ///<summary>
+    /// El nombre de la escena principal
+    ///</summary>
+    [SerializeField]
+    string _mainMenuSceneName;
 
     /// <summary>
     /// Referencia al ui del menu de pausa
@@ -74,15 +79,13 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     private bool _paused = false;
 
+    /// <summary>
+    /// El input del jugador
+    /// </summary>
     private PlayerInputActions _playerInput;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -108,9 +111,8 @@ public class PauseMenuController : MonoBehaviour
     void Update()
     {
       
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_playerInput.Player.Menu.WasPerformedThisFrame())
         {
-            Debug.Log("Pressed key");
             SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
             if (!_paused)
             { 
@@ -187,7 +189,7 @@ public class PauseMenuController : MonoBehaviour
             _player.enabled = true;
         }
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        _playerInput = new PlayerInputActions();
+        _playerInput.Player.Enable();
         _playerInput.UI.Disable();
         Time.timeScale = 1f;
         _paused = false;
@@ -201,7 +203,7 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
         _paused = false;
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        SceneManager.LoadScene("MainMenu_Zhiyi");
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     public void OnSelectContinue()
@@ -241,29 +243,6 @@ public class PauseMenuController : MonoBehaviour
 
     #endregion
 
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
-    //private void Awake()
-    //{
-    //    _playerInput = new PlayerInputActions();
-
-    //}
-
-    //private void OnEnable()
-    //{
-    //    _playerInput.UI.Enable(); // Activa los controles de la UI cuando el script está activo.
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _playerInput.UI.Disable(); // Desactiva los controles de la UI al salir del menú.
-    //}
-    #endregion
 
 } // class PauseMenuController 
 // namespace
