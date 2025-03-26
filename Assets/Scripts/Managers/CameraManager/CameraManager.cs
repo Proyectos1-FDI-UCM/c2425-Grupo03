@@ -7,7 +7,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 
@@ -183,13 +182,6 @@ public class CameraManager : MonoBehaviour
         // Si es necesario se puede cancelar la corrutina de shake desde aquí antes de llamara otra
         StartCoroutine(ShakeCameraAsync(duration, magnitude));
     }
-
-    public void SetCamera(Transform position, int size = 10)
-    {
-        _playerPosition = position;
-        _camera.orthographicSize = size;
-    }
-
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----

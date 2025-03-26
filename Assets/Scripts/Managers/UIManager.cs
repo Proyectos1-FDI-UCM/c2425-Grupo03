@@ -52,13 +52,16 @@ public class UIManager : MonoBehaviour
     /// La vida máxima del jugador.
     /// </summary>
     private float _maxHealth;
+    /// <summary>
+    /// Carga de la habilidad 1
+    /// </summary>
     private float _currentChargeOne;
+    /// <summary>
+    /// Carga de la habilidad 2
+    /// </summary>
     private float _currentChargeTwo;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -81,6 +84,7 @@ public class UIManager : MonoBehaviour
         // Health Settings
         _currentHealth = _healthManager.Health;
         _maxHealth = _healthManager.MaxHealth;
+
         // Va a actualizar la bara de vida cuando el jugador recibe o se le quita vida. 
         _healthManager._onDamaged.AddListener(UpdateHealthBar);
         _healthManager._onHealed.AddListener(UpdateHealthBar);
@@ -103,6 +107,10 @@ public class UIManager : MonoBehaviour
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
+    /// <summary>
+    /// Actualiza la barra de carga de vida con la nueva vida
+    /// </summary>
+    /// <param name="modifiedHealth">Nueva vida del jugador</param>
     private void UpdateHealthBar(float modifiedHealth)
     {
         // Actualizamos el valor de la vida actual
@@ -120,6 +128,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Actualiza la carga de las habilidades
+    /// </summary>
     private void UpdateAbilityCharge() {
         // Actualizamos los valores de las cargas
         _currentChargeOne = _playerCharge.abilities[0].currentCharge;

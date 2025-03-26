@@ -26,16 +26,14 @@ public abstract class BaseState : MonoBehaviour
     [SerializeReference] 
     bool _isRootState = false;
 
+    /// <summary>
+    /// El nombre del estado.
+    /// </summary>
     [SerializeReference]
     string _name;
 
     #endregion
 
-    // ---- ATRIBUTOS PRIVADOS ----
-    #region Atributos Privados (private fields)
-    
-
-    #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -74,9 +72,6 @@ public abstract class BaseState : MonoBehaviour
 
     #endregion
 
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -154,7 +149,10 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerEnter(Collider2D other)
     {
         TriggerEnter(other);
-        if (CurrSubState != null) CurrSubState.ExecuteTriggerEnter(other);
+        if (CurrSubState != null)
+        {
+            CurrSubState.ExecuteTriggerEnter(other);
+        }
     }
     /// <summary>
     /// Metodo llamado al salir de un trigger.
@@ -162,7 +160,10 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerExit(Collider2D other)
     {
         TriggerExit(other);
-        if (CurrSubState != null) CurrSubState.ExecuteTriggerExit(other);
+        if (CurrSubState != null) 
+        { 
+            CurrSubState.ExecuteTriggerExit(other); 
+        }
     }
     /// <summary>
     /// Metodo llamado al estar en un trigger.
@@ -170,7 +171,10 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteTriggerStay(Collider2D other)
     {
         TriggerStay(other);
-        if (CurrSubState != null) CurrSubState.ExecuteTriggerStay(other);
+        if (CurrSubState != null) 
+        {
+            CurrSubState.ExecuteTriggerStay(other); 
+        }
     }
     /// <summary>
     /// Metodo llamado al dejar de tocar un collider.
@@ -178,7 +182,10 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteCollisionEnter(Collision2D collision)
     {
         CollisionEnter(collision);
-        if (CurrSubState != null) CurrSubState.ExecuteCollisionEnter(collision);
+        if (CurrSubState != null) 
+        { 
+            CurrSubState.ExecuteCollisionEnter(collision); 
+        }
     }
     /// <summary>
     /// Metodo llamado al dejar de tocar un collider.
@@ -186,7 +193,10 @@ public abstract class BaseState : MonoBehaviour
     public void ExecuteCollisionExit(Collision2D collision)
     {
         CollisionExit(collision);
-        if (CurrSubState != null) CurrSubState.ExecuteCollisionExit(collision);
+        if (CurrSubState != null)
+        { 
+            CurrSubState.ExecuteCollisionExit(collision); 
+        }
     }
 
     /// <summary>

@@ -49,6 +49,9 @@ public abstract class CameraInstruction
         _actionLength = actionLength;
         _nextZoom = nextZoom;
     }
+    /// <summary>
+    /// Establece los valores iniciales de la instrucción
+    /// </summary>
     public void SetUp()
     {
         _endTime = Time.time + _actionLength;

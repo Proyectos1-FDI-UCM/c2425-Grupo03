@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Script que maneja la vida de cualquier entidad
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -11,8 +11,7 @@ using UnityEngine.Events;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Script con la lógica de tener vida.
 /// </summary>
 public class HealthManager : MonoBehaviour
 {
@@ -43,25 +42,33 @@ public class HealthManager : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
-    #endregion
     /// <summary>
     /// La vida que tiene la entidad
     /// </summary>
     private float _health = 0f;
+    #endregion
+
 
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
-    #endregion
     /// <summary>
     /// Propiedad para la vida
     /// </summary>
     public float Health { get { return _health; } private set { _health = value; } }
+    /// <summary>
+    /// Vida máxima de la entidad
+    /// </summary>
     public int MaxHealth { get { return _maxHealth; } private set { _maxHealth = value; } }
+    /// <summary>
+    /// Booleana que determina si se le puede hacer daño al enemigo.
+    /// </summary>
     public bool Inmune { get; set; } = false;
+    #endregion
 
+    // ---- ATRIBUTOS PUBLICOS ----
+    #region Atributos Públicos
     /// <summary>
     /// Evento para cuando la vida de la entidad es 0
     /// </summary>
@@ -79,6 +86,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent<float> _onHealed;
+    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -95,10 +103,10 @@ public class HealthManager : MonoBehaviour
     {
         //Dar una vida inicial a la entidad
         SetHealth(_initialHealth);
-        if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
+        if (gameObject.TryGetComponent<PlayerHealthBar>(out PlayerHealthBar component))
         {
-            gameObject.GetComponent<PlayerHealthBar>().SetMaxHealth(_maxHealth);
-            gameObject.GetComponent<PlayerHealthBar>().SetHealth(_health);
+            component.SetMaxHealth(_maxHealth);
+            component.SetHealth(_health);
         }
     }
     #endregion
@@ -111,27 +119,6 @@ public class HealthManager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
     
-    /// <summary>
-    /// Añadir vida a la entidad
-    /// </summary>
-    /// <param name="addedHealth"></param>
-    public void AddHealth(float addedHealth)
-    {
-        if(_health + addedHealth > _maxHealth)
-        {
-            _health = _maxHealth;
-            _onHealed.Invoke(addedHealth);
-        }
-        else
-        {
-            _health = _health + addedHealth;
-            _onHealed.Invoke(addedHealth);
-        }
-        if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
-        {
-            gameObject.GetComponent<PlayerHealthBar>().IncreaseHealth(addedHealth);
-        }
-    }
 
     /// <summary>
     /// Quitar vida a la entidad
@@ -152,9 +139,9 @@ public class HealthManager : MonoBehaviour
             {
                 _health = _health - removedHealth;
             }
-            if (gameObject.TryGetComponent(typeof(PlayerHealthBar), out Component component))
+            if (gameObject.TryGetComponent<PlayerHealthBar>(out PlayerHealthBar component))
             {
-                gameObject.GetComponent<PlayerHealthBar>().DecreaseHealth(removedHealth);
+                component.DecreaseHealth(removedHealth);
             }
             _onDamaged.Invoke(removedHealth);
         }
@@ -184,24 +171,6 @@ public class HealthManager : MonoBehaviour
 
     #endregion
 
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-
-    /// <summary>
-    /// Comprobar si la entidad esta muerto, si esta realiza todos los metodos subscriptos a el
-    /// </summary>
-    private void IsEntityDead()
-    {
-        if(_health <= 0 && gameObject.GetComponent<EnemyStateMachine>())
-        {
-            _onDeath.Invoke();
-        }
-    }
-    #endregion
 
 } // class Health 
 // namespace

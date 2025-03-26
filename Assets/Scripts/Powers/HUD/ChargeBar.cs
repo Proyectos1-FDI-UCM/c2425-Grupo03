@@ -1,6 +1,6 @@
 //---------------------------------------------------------
 // Breve descripción del contenido del archivo
-// Creador del Script: 
+// Alejandro o Alexa???? 
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -11,8 +11,7 @@ using UnityEngine.UI;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Script para la barra de carga
 /// </summary>
 public class ChargeBar : MonoBehaviour
 {
@@ -24,16 +23,6 @@ public class ChargeBar : MonoBehaviour
     private float _maxcharge = 100f;
     [SerializeField]
     private Image render;
-    #endregion
-
-    // ---- ATRIBUTOS PRIVADOS ----
-    #region Atributos Privados (private fields)
-    // Documentar cada atributo que aparece aquí.
-    // El convenio de nombres de Unity recomienda que los atributos
-    // privados se nombren en formato _camelCase (comienza con _, 
-    // primera palabra en minúsculas y el resto con la 
-    // primera letra en mayúsculas)
-    // Ejemplo: _maxHealthPoints
     #endregion
 
     // ---- PROPIEDADES ----
