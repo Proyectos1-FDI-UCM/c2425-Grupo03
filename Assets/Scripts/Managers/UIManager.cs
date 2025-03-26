@@ -22,11 +22,11 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// La primera habilidad del jugador.
     /// </summary>
-    [SerializeField] private Image _abilityOneImg;
+    [SerializeField] private Slider _abilityOneSlider;
     /// <summary>
     /// La segunda habilidad del jugador.
     /// </summary>
-    [SerializeField] private Image _abilityTwoImg;
+    [SerializeField] private Slider _abilityTwoSlider;
 
     #endregion
     
@@ -129,9 +129,9 @@ public class UIManager : MonoBehaviour
         float chargePercentageOne = _currentChargeOne / _playerCharge.abilities[0].maxCharge;
         float chargePercentageTwo = _currentChargeTwo / _playerCharge.abilities[1].maxCharge;
         
-        // Cambiamos el color de las imagenes
-        _abilityOneImg.color = new Color(chargePercentageOne, chargePercentageOne, chargePercentageOne, 1f);
-        _abilityTwoImg.color = new Color(chargePercentageTwo, chargePercentageTwo, chargePercentageTwo, 1f);
+        // Cambiamos la carga
+        _abilityOneSlider.value = chargePercentageOne;
+        _abilityTwoSlider.value = chargePercentageTwo;
     }
     #endregion   
 
