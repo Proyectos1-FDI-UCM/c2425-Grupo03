@@ -25,38 +25,34 @@ public class PlayerAttackState : BaseState
     /// El radio de ataque del jugador
     /// </summary>
     [SerializeField, Min(0)] private float _attackRadius;
+
     /// <summary>
     /// El tiempo de espera entre dos ataques
     /// </summary>
     [SerializeField] private float _attackSpeed;
+
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
     [SerializeField] private float _damage;
+
     /// <summary>
     /// El porcentaje que se añade a las habilidades
     /// </summary>
     [SerializeField] private float _abilityChargePercentage;
 
     /// <summary>
-    /// Sonidos de ataque del combo1;
+    /// El array de sonido del ataque
     /// </summary>
-    [SerializeField] AudioClip _airHit1;
-    /// <summary>
-    /// Sonidos de ataque del combo2;
-    /// </summary>
-    [SerializeField] AudioClip _airHit2;
-    /// <summary>
-    /// Sonidos de ataque del combo3;
-    /// </summary>
-    [SerializeField] AudioClip _airHit3;
-    /// <summary>
-    /// Sonidos de ataque del combo4;
-    /// </summary>
-    [SerializeField] AudioClip _airHit4;
+    [SerializeField] private AudioClip[] _airHitList;
 
 
     [Header("Propiedad del combo")]
+
+    /// <summary>
+    /// El numero maximo de combo, cuando llega a este numero el siguiente ataque resetea el combo
+    /// </summary>
+    [SerializeField] private int _maxCombo;
     /// <summary>
     /// El tiempo de gracia para encadenar combo
     /// </summary>
@@ -83,6 +79,10 @@ public class PlayerAttackState : BaseState
     /// El índice del combo en el que esta el jugador
     /// </summary>
     private int _combo;
+    ///// <summary>
+    ///// El numero maximo de combo interno para hacer el calculo de combo
+    ///// </summary>
+    //private int _internMaxCombo;
     /// <summary>
     /// El tiempo cuando termina el tiempo de gracia
     /// </summary>
@@ -103,7 +103,9 @@ public class PlayerAttackState : BaseState
     /// El contexto del playerstatemachine
     /// </summary>
     PlayerStateMachine _ctx;
-
+    /// <summary>
+    /// El script que controla las habilidades
+    /// </summary>
     private PlayerChargeScript _chargeScript;
 
     #endregion
@@ -124,10 +126,8 @@ public class PlayerAttackState : BaseState
     private void Start()
     {
         //Coger el rigidbody del contexto
-        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
-        _animator = GetCTX<PlayerStateMachine>().Animator;
         _ctx = GetCTX<PlayerStateMachine>();
-        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+        _chargeScript = _ctx?.GetComponent<PlayerChargeScript>();
     }
     #endregion
 
@@ -154,7 +154,7 @@ public class PlayerAttackState : BaseState
     public override void EnterState()
     {
         //Coger la dirección donde mira el jugador del contexto
-        _direction = (int)GetCTX<PlayerStateMachine>().LookingDirection;
+        _direction = (int)GetCTX<PlayerStateMachine>()?.LookingDirection;
 
 
         //Calcular el tiempo para realizar el siguiente ataque
@@ -163,12 +163,8 @@ public class PlayerAttackState : BaseState
         //Actualizar combo
         UpdateCombo();
 
-        //Atacar en la dirección donde mira el jugador
-        
-        _animator.SetFloat("AttackIndex", _combo);
-
-      
-        //La animación
+        //La animacion
+        Ctx.Animator.SetFloat("AttackIndex", _combo);
     }
     
     /// <summary>
@@ -177,8 +173,7 @@ public class PlayerAttackState : BaseState
     public override void ExitState()
     {
         Attack(_direction);
-        _animator.SetFloat("AttackIndex", 0);
-
+        Ctx.Animator.SetFloat("AttackIndex", 0);
     }
     #endregion
     
@@ -195,7 +190,7 @@ public class PlayerAttackState : BaseState
     protected override void UpdateState()
     {
         //Poner la velocidad del rigidbody a cero
-        _rb.velocity = Vector3.zero;
+        Ctx.Rigidbody.velocity = Vector3.zero;
     }
 
     /// <summary>
@@ -225,21 +220,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
-        switch (_combo)
-        {
-            case 0: 
-                SoundManager.Instance.PlaySFX(_airHit1,transform,1);
-                break;
-            case 1:
-                SoundManager.Instance.PlaySFX(_airHit2, transform, 1);
-                break;
-            case 2:
-                SoundManager.Instance.PlaySFX(_airHit3, transform, 1);
-                break;
-            case 3:
-                SoundManager.Instance.PlaySFX(_airHit4, transform, 1);
-                break;
-        }
+        SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
         int extraDamage = 0;
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
@@ -249,13 +230,17 @@ public class PlayerAttackState : BaseState
             extraDamage += _comboExtraDamage; 
         }
 
-        foreach (RaycastHit2D enemy in enemyInArea)
+        if(enemyInArea != null)
         {
-            //Daño al enemigo
-            enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
-            //Añadir carga a las habilidades
-            _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+            foreach (RaycastHit2D enemy in enemyInArea)
+            {
+                //Daño al enemigo
+                enemy.collider.GetComponent<HealthManager>().RemoveHealth((int)_damage + extraDamage);
+                //Añadir carga a las habilidades
+                _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+            }
         }
+        
     }
 
     /// <summary>
@@ -271,21 +256,10 @@ public class PlayerAttackState : BaseState
         //Actualizar el tiempo de gracia
         _endOfCombo = Time.time + _comboDuration;
 
-        //Actualizar el combo
-        if (_combo == 0)
-        {
-            _combo = 1;
-        }
+        //Calcular el combo
+        _combo = (_combo + 1) % (_maxCombo + 1);
 
-        else if (_combo == 1)
-        {
-            _combo = 2;
-        }
-        else if (_combo == 2)
-        {
-            _combo = 3;
-        }
-        else
+        if (_combo == 0)
         {
             _combo = 1;
         }
