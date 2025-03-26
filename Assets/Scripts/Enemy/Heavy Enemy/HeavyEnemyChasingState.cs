@@ -1,18 +1,16 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de chase del enemigo pesado
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de chase del enemigo pesado
 /// </summary>
 public class HeavyEnemyChasingState : BaseState
 {
@@ -38,7 +36,7 @@ public class HeavyEnemyChasingState : BaseState
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// Referencia del tipo HeavyEnemyStatemachine del contexto.
     /// </summary>
     HeavyEnemyStateMachine _ctx;
 
@@ -57,11 +55,6 @@ public class HeavyEnemyChasingState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -70,13 +63,16 @@ public class HeavyEnemyChasingState : BaseState
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<HeavyEnemyStateMachine>();
         //Coge la referencia al rigidbody por comodidad
-        _rb = _ctx.Rigidbody;
+        _rb = _ctx?.Rigidbody;
     }
     #endregion
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Si el jugador sale del trigger pone el range a false.
-        _ctx.IsPlayerInChaseRange = false;
+        if (_ctx != null)
+        {
+            //Si el jugador sale del trigger pone el range a false.
+            _ctx.IsPlayerInChaseRange = false;
+        }
     }
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -101,7 +97,10 @@ public class HeavyEnemyChasingState : BaseState
     public override void ExitState()
     {
         _shouldFlip = false;
-        _rb.velocity = Vector3.zero;
+        if (_rb != null)
+        {
+            _rb.velocity = Vector3.zero;
+        }
     }
     #endregion
     
@@ -117,28 +116,31 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //calcula la direccion que debe de mirar
-        HeavyEnemyStateMachine.EnemyLookingDirection newDirection =
-        (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-        HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+        if (_ctx != null && _rb != null)
+        {
+            //calcula la direccion que debe de mirar
+            HeavyEnemyStateMachine.EnemyLookingDirection newDirection =
+            (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
-        //si no coincide con su direccion actual, debe de girarse
-        _shouldFlip = newDirection != _ctx.LookingDirection;
-       
-        //Si todavía hay plataforma se mueve, sino se detiene
-        if (CheckGround())
-        {
-            _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
-        }
-        else
-        {
-            _rb.velocity = Vector3.zero;
+            //si no coincide con su direccion actual, debe de girarse
+            _shouldFlip = newDirection != _ctx.LookingDirection;
+
+            //Si todavía hay plataforma se mueve, sino se detiene
+            if (CheckGround())
+            {
+                _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+            }
+            else
+            {
+                _rb.velocity = Vector3.zero;
+            }
         }
     }
     /// <summary>
-    /// compruebna si esta en el suelo
+    /// Comprueba si esta en el suelo
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Devuelve true si está tocando el suelo, false si no</returns>
     private bool CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f * (float)_ctx.LookingDirection, gameObject.transform.position.y),

@@ -13,11 +13,6 @@ using UnityEngine;
 /// </summary>
 public class KnockbackState : BaseState
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-    
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -43,18 +38,6 @@ public class KnockbackState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    private void Start()
-    {
-    }
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -71,8 +54,12 @@ public class KnockbackState : BaseState
         _knockBackTime = time;
         _direction = direction;
 
-        if (Ctx.Rigidbody.gameObject.GetComponent<HealthManager>().Health > 0)
+        // Cogemos el HealthManager a partir del gameObject con el RigidBody (sabemos que ahí se encuentra el HealthManager)
+        HealthManager hm = Ctx.Rigidbody.gameObject.GetComponent<HealthManager>();
+        // Este if nos protege de que el enemigo pueda volver a la vida si ha muerto y le intentan hacer knockback
+        if (Ctx != null && hm != null && hm.Health > 0)
         {
+            // Para aplicar el knockback forzamos el cambio al estado de knockback
             Ctx.ChangeState(this);
         }
     }
@@ -82,7 +69,13 @@ public class KnockbackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
+        if (Ctx != null)
+        {
+            // Aplicamos una velocidad en función de la distancia, tiempo y dirección dados
+            Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
+        }
+
+        // Calculamos cuando debería terminar el estado de knockback
         _knockBackEndTime = Time.time + _knockBackTime;
     }
     
@@ -91,7 +84,11 @@ public class KnockbackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        Ctx.Rigidbody.velocity = Vector2.zero;
+        if (Ctx != null)
+        {
+            // Terminamos con cualquier velocidad al salir del estado de knockback
+            Ctx.Rigidbody.velocity = Vector2.zero;
+        }
     }
     #endregion
     
@@ -103,7 +100,9 @@ public class KnockbackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        if(Ctx.Rigidbody.velocity.x > 0 && Ctx.Rigidbody.velocity.y > 0)
+        // Mientras que la velocidad sea positiva, resto un poco de la velocidad para que se sienta más natural.
+        // (he puesto un número random porque no importa mucho).
+        if(Ctx != null && Ctx.Rigidbody.velocity.x > 0 && Ctx.Rigidbody.velocity.y > 0)
         {
             Ctx.Rigidbody.velocity = Ctx.Rigidbody.velocity - new Vector2(1, 1) * 100f * Time.deltaTime;
         }
@@ -118,7 +117,8 @@ public class KnockbackState : BaseState
     {
         if (Time.time > _knockBackEndTime)
         {
-            Ctx.ChangeState(Ctx.GetStateByName("FallingState"));
+            // Cambiamos al estado de caer siempre porqué el se encarga de ver si realmente está cayendo o si está en el suelo.
+            Ctx?.ChangeState(Ctx.GetStateByName("FallingState"));
         }
     }
 

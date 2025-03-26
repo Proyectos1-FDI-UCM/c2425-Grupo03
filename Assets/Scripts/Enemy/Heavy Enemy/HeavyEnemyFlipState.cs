@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Estado de giro del enemigo pesado
+// Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -11,8 +11,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de giro del enemigo pesado
 /// </summary>
 public class HeavyEnemyFlipState : BaseState
 {
@@ -45,11 +44,6 @@ public class HeavyEnemyFlipState : BaseState
     Rigidbody2D _rb;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -59,7 +53,7 @@ public class HeavyEnemyFlipState : BaseState
     private void Start()
     {
         _ctx = GetCTX<HeavyEnemyStateMachine>();
-        _rb = _ctx.GetComponent<Rigidbody2D>();
+        _rb = _ctx?.GetComponent<Rigidbody2D>();
     }
     #endregion
 
@@ -79,7 +73,12 @@ public class HeavyEnemyFlipState : BaseState
     public override void EnterState()
     {
         //Debug.Log("fLIP");
-        _rb.velocity = Vector2.zero;
+        //Para el movimiento del jugador
+        if (_rb != null)
+        {
+            _rb.velocity = Vector2.zero;
+        }
+        //Comienza a hacer el flip
         StartCoroutine(Flip());
     }
     
@@ -99,12 +98,15 @@ public class HeavyEnemyFlipState : BaseState
     {
         yield return new WaitForSeconds(_flipTime); // espera al flip time
 
-        //gira de direccion
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-        HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+        if (_ctx != null)
+        {
+            //gira de direccion
+            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+            HeavyEnemyStateMachine.EnemyLookingDirection.Right : HeavyEnemyStateMachine.EnemyLookingDirection.Left;
 
-        //rota el sprite
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+            //rota el sprite
+            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == HeavyEnemyStateMachine.EnemyLookingDirection.Left;
+        }
         _completed = true;
     }
     #endregion
@@ -133,7 +135,7 @@ public class HeavyEnemyFlipState : BaseState
         //pasa a idle al terminar
         if (_completed)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());
         }
     }
 

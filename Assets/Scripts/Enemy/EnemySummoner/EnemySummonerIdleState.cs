@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// El estado inactivo del enemigo invocador.
+// Zhiyi Zhou
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,17 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Contiene la lógica y métodos necesarios para realizar el estado inactivo del esqueleto invocador.
 /// </summary>
 public class EnemySummonerIdleState : BaseState
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -31,17 +24,18 @@ public class EnemySummonerIdleState : BaseState
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// La máquina de estados para usar la información común.
+    /// </summary>
     private EnemySummonerStateMachine _ctx;
+
+    /// <summary>
+    /// El animator del esqueleto.
+    /// </summary>
     private Animator _animator;
-    private Rigidbody2D _rb;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -51,19 +45,20 @@ public class EnemySummonerIdleState : BaseState
         _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
 
-
-        _rb = _ctx.Rigidbody;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Si el jugador está en el trigger lo indica al contexto.
-        _ctx.IsPlayerInAttackRange = true;
+        if (_ctx != null)
+        {
+            //Si el esqueleto está en el trigger lo indica al contexto.
+            _ctx.IsPlayerInAttackRange = true;
 
-        //Añade la posición del jugador al ctx.
-        _ctx.PlayerTransform = collision.transform;
+            //Añade la posición del esqueleto al ctx.
+            _ctx.PlayerTransform = collision.transform;
+        }
     }
 
     #endregion
@@ -82,7 +77,6 @@ public class EnemySummonerIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-       
         _animator?.SetBool("IsIdle", true);
     }
     
@@ -91,7 +85,7 @@ public class EnemySummonerIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
+        _animator?.SetBool("IsIdle", false);
     }
     #endregion
     
@@ -117,9 +111,9 @@ public class EnemySummonerIdleState : BaseState
     protected override void CheckSwitchState()
     {
         // Si el jugador está en el rango de ataque cambia al estado de ataque.
-        if (_ctx.IsPlayerInAttackRange)
+        if (_ctx != null && _ctx.IsPlayerInAttackRange)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerAttackState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<EnemySummonerAttackState>());
         }
     }
 

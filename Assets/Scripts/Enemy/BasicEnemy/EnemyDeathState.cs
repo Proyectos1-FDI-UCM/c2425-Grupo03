@@ -23,7 +23,15 @@ public class EnemyDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+
+    /// <summary>
+    /// Sonido para la muerte del enemigo
+    /// </summary>
     [SerializeField] AudioClip _enemyDeath;
+
+    /// <summary>
+    /// Sonido de tirar el arma del enemigo
+    /// </summary>
     [SerializeField] AudioClip _enemyDropWeapon;
 
     #endregion
@@ -55,17 +63,6 @@ public class EnemyDeathState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
-
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
@@ -83,16 +80,21 @@ public class EnemyDeathState : BaseState
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
 
-        _ctx.gameObject.layer = 0;
+        if (_ctx != null)
+        {
+            // Pone el objeto en la capa default para que no pueda ser golpeado
+            _ctx.gameObject.layer = 0;
 
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+            //Coger animator del contexto
+            _animator = _ctx.GetComponent<Animator>();
+            // Comienza la animación de muerte
+            _animator?.SetBool("IsDead", true);
+        }
 
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsDead", true);
-
+        // Reproduce los sonidos al morir
         SoundManager.Instance.PlaySFX(_enemyDeath, transform, 0.2f);
         SoundManager.Instance.PlaySFX(_enemyDropWeapon, transform, 0.2f);
     }

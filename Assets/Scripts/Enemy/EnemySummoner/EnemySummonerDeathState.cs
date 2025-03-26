@@ -49,7 +49,7 @@ public class EnemySummonerDeathState : BaseState
     private float _deadTime;
 
     /// <summary>
-    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// Referencia del tipo EnemySummonerStatemachine del contexto.
     /// </summary>
     private EnemySummonerStateMachine _ctx;
 
@@ -57,17 +57,6 @@ public class EnemySummonerDeathState : BaseState
     /// El animator del enemigo
     /// </summary>
     private Animator _animator;
-
-    #endregion
-
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
 
     #endregion
 
@@ -96,6 +85,7 @@ public class EnemySummonerDeathState : BaseState
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
+        //Establece la animación de morir
         _animator.SetBool("IsDead", true);
     }
     
@@ -121,7 +111,6 @@ public class EnemySummonerDeathState : BaseState
     protected override void UpdateState()
     {
         //Tras el tiempo de espera el enemigo "muere"
-        if (_ctx == null) return;
         if (Time.time > _deadTime)
         {
             Destroy(_prefabEntero);   

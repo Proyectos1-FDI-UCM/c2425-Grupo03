@@ -6,7 +6,6 @@
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 // Añadir aquí el resto de directivas using
 
 
@@ -47,11 +46,6 @@ public class WaveController : MonoBehaviour
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -62,12 +56,14 @@ public class WaveController : MonoBehaviour
 
     private void Awake()
     {
-        foreach (Transform child in transform) // Desactiva todos los hijos al inicio
+        // Desactiva todos los hijos al inicio
+        foreach (Transform child in transform) 
         {
             child.gameObject.SetActive(false);
         }
 
-        foreach (Transform child in transform) // elimina aquellos emptys que no tengan enemigos dentro
+        // elimina aquellos emptys que no tengan enemigos dentro
+        foreach (Transform child in transform) 
         {
             if (child.childCount == 0) 
             {
@@ -75,43 +71,43 @@ public class WaveController : MonoBehaviour
             }
         }
 
-        _numWave = 0; //especificamos que la oleada activada es la primera
-        _door.gameObject.SetActive(false); //la puerta no esta cerrada
+        //especificamos que la oleada activada es la primera
+        _numWave = 0;
+
+        //la puerta no esta cerrada
+        _door.gameObject.SetActive(false); 
     }
 
     void Update()
     {
-      if (!_endWaves)
+        if (!_endWaves)
         {
-            if (transform.GetChild(_numWave).childCount == 0) // Si no tiene hijos
+            // Si no tiene hijos
+            if (transform.GetChild(_numWave).childCount == 0) 
             {
-                Destroy(transform.GetChild(_numWave).gameObject); // Lo eliminamos La oleada actual
-                NextWave(); // Activamos el siguiente oleada
+                // Lo eliminamos La oleada actual
+                Destroy(transform.GetChild(_numWave).gameObject);
+
+                // Activamos el siguiente oleada
+                NextWave(); 
             }
         }
     }
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
-    {  
-        if (transform.childCount > 0) // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
+    {
+        // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
+        if (transform.childCount > 0) 
         {
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _door.gameObject.SetActive(true);
             _endWaves = false;
         }
 
+        // Cambia la cámara al centro del área de combate (el objeto vacío con este script)
         CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, 6));
     }
     #endregion
 
-    // ---- MÉTODOS PÚBLICOS ----
-    #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-    #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
@@ -125,13 +121,15 @@ public class WaveController : MonoBehaviour
     /// </summary>
     void NextWave()
     {
-        if (transform.childCount > 1) // si existen más hijos a parte del actual activar el siguiente
+        // si existen más hijos a parte del actual activar el siguiente
+        if (transform.childCount > 1)
         {
             _numWave++;
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _numWave = 0;
         }
-        else  // si no hay mas oleadas activar puerta y terminar oleada
+        // si no hay mas oleadas activar puerta, colocar la cámara en el jugador y terminar oleada
+        else
         {
             _door.gameObject.SetActive(false);
             _endWaves = true;

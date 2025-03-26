@@ -1,67 +1,50 @@
 //---------------------------------------------------------
-// Este es otro de los scripts que se encuentra en el prefab de dummy, y se
-// encarga de mostrar el daño que ha recibido el dummy mediante el texto que
-// se encuentra encima suya.
+// Este script permite que una entidad muestre el daño que le causan al ser golpeada.
 // Creador del Script: Alejandro Menéndez Fierro
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using TMPro;
 using UnityEngine;
+
+/// <summary>
+/// Este script se encarga de mirar la vida de la entidad y mostrar la vida quitada si le han dañado.
+/// </summary>
+[RequireComponent(typeof(HealthManager))]
 public class HarmIndicatorManager : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
-    // Aquí se encuentra el atributo "DamageText"a
-    // 
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// El prefab del texto donde se mostrará el daño.
+    /// </summary>
     [SerializeField]
-    private Canvas DamageText; // Aquí se asigna el texto encima del dummy
+    private Canvas DamageText; 
 
     #endregion
 
-    // ---- ATRIBUTOS PRIVADOS ----
-
-
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<HealthManager>()._onDamaged.AddListener(AskForHealth);
+        // Busca el componente HealthManager entre los componentes del objeto.
+        GetComponent<HealthManager>()?._onDamaged.AddListener(AskForHealth);
     }
 
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
-    ///<summary>
-    /// Este es el método principal del script. Gracias a él, el texto de daño
-    /// causado encima del dummy cambiará cuando se le llame desde el script
-    /// "HarmManager"
-    ///</summary>
-    public void UpdateDamageText(int damage)
-    {
-        /// Cambia el texto al nuevo valor de daño actual
-        /// después de la suma en el método "DamageDummy"
-        //DamageText.text = $"{damage}";
-    }
-
+    #region Métodos Públicos
     public void AskForHealth(float damage)
     {
+        // Instancia el texto con el número que va a representar el daño.
         Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform);
-        text.GetComponent<DamageNumberScript>().SetText(damage.ToString());
+
+        // Establece el número que debe representar el texto.
+        text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString());
     }
-
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    // No hay métodos privados en el script.
-    #region Métodos Privados o Protegidos
-
     #endregion
 
 } // class HarmIndicatorManager 

@@ -15,12 +15,6 @@ using UnityEngine;
 [RequireComponent (typeof(BoxCollider2D))]
 public class EnemyIdleState : BaseState
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -37,12 +31,6 @@ public class EnemyIdleState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     private void Start()
@@ -50,16 +38,20 @@ public class EnemyIdleState : BaseState
         //Coge una referencia al contexto para evitar el upcasting y por comodidad
         _ctx = GetCTX<EnemyStateMachine>();
 
-        _animator = _ctx.Animator;
+        // Coge una referencia al animator
+        _animator = _ctx?.Animator;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerStateMachine>() != null)
         {
-            //Si el jugador está en el trigger lo indica al contexto.
-            _ctx.IsPlayerInChaseRange = true;
-            //Añade la posición del jugador al contexto.
-            _ctx.PlayerTransform = collision.transform;
+            if (_ctx != null)
+            {
+                //Si el jugador está en el trigger lo indica al contexto.
+                _ctx.IsPlayerInChaseRange = true;
+                //Añade la posición del jugador al contexto.
+                _ctx.PlayerTransform = collision.transform;
+            }
         }
     }
     
@@ -87,7 +79,7 @@ public class EnemyIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
+        _animator?.SetBool("IsIdle", false);
     }
     #endregion
     
@@ -112,10 +104,13 @@ public class EnemyIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        // Si el jugador está en distancia de rango cambia al estado de rango
-        if (_ctx.IsPlayerInChaseRange)
+        if (_ctx != null)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            // Si el jugador está en distancia de rango cambia al estado de rango
+            if (_ctx.IsPlayerInChaseRange)
+            {
+                Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            }
         }
     }
 

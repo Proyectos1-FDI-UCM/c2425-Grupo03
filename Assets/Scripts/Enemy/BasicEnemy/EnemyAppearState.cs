@@ -52,17 +52,6 @@ public class EnemyAppearState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
-
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
@@ -77,18 +66,18 @@ public class EnemyAppearState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
-
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
+
+        //Ponemos la animación correspondiente a aparecer
+        _animator?.SetBool("IsAppearing", true);
 
         //Calcular el tiempo de aparicion
         _appearTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsAppearing", true);
     }
     
     /// <summary>
@@ -96,7 +85,8 @@ public class EnemyAppearState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsAppearing", false);
+        //Quitamos la animación correspondiente a aparecer
+        _animator?.SetBool("IsAppearing", false);
     }
     #endregion
     

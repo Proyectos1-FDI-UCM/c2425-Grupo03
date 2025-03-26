@@ -1,12 +1,11 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Script con el estado de ataque del enemigo básico
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
-using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -32,6 +31,9 @@ public class EnemyAttackState : BaseState
     /// El daño del ataque basico
     /// </summary>
     [SerializeField] float _damage;
+    /// <summary>
+    /// Sonido de ataque.
+    /// </summary>
     [SerializeField] AudioClip _attackSound;
 
     #endregion
@@ -74,11 +76,6 @@ public class EnemyAttackState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -87,11 +84,14 @@ public class EnemyAttackState : BaseState
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
 
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        if (_ctx != null)
+        {
+            //Coger animator del contexto
+            _animator = _ctx.GetComponent<Animator>();
 
-        //Informar al contexto el rango de ataque del enemigo
-        _ctx.AttackDistance = _attackRadius;
+            //Informar al contexto el rango de ataque del enemigo
+            _ctx.AttackDistance = _attackRadius;
+        }
     }
     #endregion
 
@@ -115,7 +115,7 @@ public class EnemyAttackState : BaseState
         _attackFinished = false;
 
         //Empezar la animacion
-        _animator.SetBool("IsAttack", true);
+        _animator?.SetBool("IsAttack", true);
 
         //Calcular el tiempo del siguiente ataque
         _nextAttackTime = Time.time + _attackSpeed;
@@ -126,7 +126,7 @@ public class EnemyAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsAttack", false);
+        _animator?.SetBool("IsAttack", false);
     }
     #endregion
 
@@ -160,7 +160,7 @@ public class EnemyAttackState : BaseState
         {
             Attack(_lookingDirection);
 
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
     }
 
@@ -182,9 +182,10 @@ public class EnemyAttackState : BaseState
         if(playerInRange.collider != null && playerInRange.collider.GetComponent<PlayerStateMachine>() != null)
         {
             player = playerInRange.collider.gameObject.GetComponent<HealthManager>();
-            player.RemoveHealth(_damage);
+            player?.RemoveHealth(_damage);
         }
 
+        //Reproduce le sonido de ataque
         SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
     }
     /*

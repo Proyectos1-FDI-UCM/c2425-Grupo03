@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de ataque del enemigo pesado
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -7,13 +7,11 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de ataque del enemigo pesado
 /// </summary>
 public class HeavyEnemyAttackState : BaseState
 {
@@ -26,15 +24,15 @@ public class HeavyEnemyAttackState : BaseState
     /// <summary>
     /// La anchura de ataque del enemigo
     /// </summary>
-    [SerializeField, Min(0)] float _attackWidth = 2f;
+    [SerializeField, Min(0)] float _attackWidth;
     /// <summary>
     /// La altura de ataque del enemigo
     /// </summary>
-    [SerializeField, Min(0)] float _attackHeight =1f;
+    [SerializeField, Min(0)] float _attackHeight;
     /// <summary>
     /// El tiempo cuando el enemigo pueda volver a atacar
     /// </summary>
-    [SerializeField, Min(0)] float _attackTime = 1f;
+    [SerializeField, Min(0)] float _attackTime;
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
@@ -58,21 +56,10 @@ public class HeavyEnemyAttackState : BaseState
     /// <summary>
     /// Booleana para ver si ha terminado de atacar
     /// </summary>
-    /// 
     private bool _attackFinished;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -131,26 +118,27 @@ public class HeavyEnemyAttackState : BaseState
     {
         if (_attackFinished)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
         }
     }
     /// <summary>
-    /// Metodo donde ataca
+    /// Corutina que se encarga de realizar el ataque del enemigo pesado
     /// </summary>
     /// <param name="direction">la dirección que ataca</param>
     /// <returns></returns>
     private IEnumerator Attack(int direction)
     {
+        //Espera el tiempo de la animación de ataque para hacer el daño.
         yield return new WaitForSeconds(_attackTime);
+        
         //El rango de ataque del enemigo
-
         Vector2 attackBoxSize = new Vector2(_attackWidth, _attackHeight);
         Vector2 attackPosition = (Vector2)transform.position + new Vector2((_attackWidth / 2) * direction, 0);
 
         //Un ducktyping para ver si el raycat que hace en la direccion donde mira el enemigo tiene un HealthManager en la capa del jugador
         //Si hay devuelve el HealthManager del jugador
-        HealthManager HM = Physics2D.BoxCast(attackPosition, attackBoxSize, 0f, Vector2.zero, 0f, 1 << 6)
-            .collider?.GetComponent<HealthManager>();
+        Collider2D col2D = Physics2D.BoxCast(attackPosition, attackBoxSize, 0f, Vector2.zero, 0f, 1 << 6).collider;
+        HealthManager HM = col2D?.GetComponent<HealthManager>();
 
         //Si consigue el HealthManager del jugador entonces hace daño al jugador, sino no hace anda.
         if (HM != null)

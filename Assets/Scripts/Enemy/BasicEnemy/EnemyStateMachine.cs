@@ -12,13 +12,17 @@ using UnityEngine;
 
 
 /// <summary>
-/// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
+/// Máquina de estados del enemigo donde se contiene el contexto de todos los estados.
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]// Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+
+// Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
+[RequireComponent(typeof(Rigidbody2D))]
 
 // Obliga que tenga el componente HealthManager
 [RequireComponent(typeof(HealthManager))]
-[SelectionBase] // Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
+
+// Hace que cuando selecciones el objeto desde el editor se seleccione el que tenga este componente automáticamente
+[SelectionBase] 
 
 public class EnemyStateMachine : StateMachine
 {
@@ -39,13 +43,13 @@ public class EnemyStateMachine : StateMachine
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    [SerializeField] AudioClip _enemyDamaged;
+    /// <summary>
+    /// El sonido reproducido al ser golpeado
+    /// </summary>
+    [SerializeField] 
+    AudioClip _enemyDamaged;
     #endregion
 
-    // ---- ATRIBUTOS PRIVADOS ----
-    #region Atributos Privados (private fields)
-
-    #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -81,28 +85,37 @@ public class EnemyStateMachine : StateMachine
     /// </summary>
     public float AttackDistance { get; set; }
     
-
     #endregion
 
-    // ---- MÉTODOS PÚBLICOS ----
-    #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-
-    #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
 
+    /// <summary>
+    /// Este metodo se llama en el Awake
+    /// </summary>
     protected override void OnAwake()
     {
+        // Coge el sprite renderer (para invertirlo al girarse)
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected override void OnStart()
     {
-        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
-        GetComponent<HealthManager>()._onDamaged.AddListener(EnemyDamagedSFX);
+        HealthManager hm = GetComponent<HealthManager>();
+        if (hm != null)
+        {
+            // Subscribe unos métodos a la muerte y al daño para que se llamen
+            hm._onDeath.AddListener(DeathState);
+            hm._onDamaged.AddListener(EnemyDamagedSFX);
+        }
     }
+
+    /// <summary>
+    /// Reproduce un sonido de daño.
+    /// (Usado para subscribirse al evento de daño)
+    /// </summary>
+    /// <param name="damageAmount">No sirve para nada, son los argumentos obligatorios del evento.</param>
     public void EnemyDamagedSFX(float damageAmount)
     {
         SoundManager.Instance.PlaySFX(_enemyDamaged, transform, 1);

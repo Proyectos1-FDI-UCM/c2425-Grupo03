@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de idle del enemigo pesado
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -10,17 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de idle del enemigo pesado
 /// </summary>
 public class HeavyEnemyIdleState : BaseState
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -37,16 +30,6 @@ public class HeavyEnemyIdleState : BaseState
     HeavyEnemyStateMachine _ctx;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -70,7 +53,7 @@ public class HeavyEnemyIdleState : BaseState
     /// <param name="collision"></param>trigger de deteccion 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerStateMachine>() != null)
+        if (_ctx != null && collision.GetComponent<PlayerStateMachine>() != null)
         {
             //Si el jugador está en el trigger lo indica al contexto.
             _ctx.IsPlayerInChaseRange = true;
@@ -118,9 +101,9 @@ public class HeavyEnemyIdleState : BaseState
     protected override void CheckSwitchState()
     {
         // Si el jugador está en distancia de rango cambia al estado de rango
-        if (_ctx.IsPlayerInChaseRange)
+        if (_ctx != null && _ctx.IsPlayerInChaseRange)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<HeavyEnemyChasingState>());
         }
     }
 

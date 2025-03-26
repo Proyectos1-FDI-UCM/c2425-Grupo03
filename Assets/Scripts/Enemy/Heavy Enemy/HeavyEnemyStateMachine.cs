@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// La máquina de estado del enemigo pesado
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -10,7 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
+/// Máquina de estados del enemigo pesado donde se contiene el contexto de todos los estados.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]// Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
 
@@ -32,16 +32,6 @@ public class HeavyEnemyStateMachine : StateMachine
         Left = -1,
     }
 
-
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-
-    #endregion
-
-    // ---- ATRIBUTOS PRIVADOS ----
-    #region Atributos Privados (private fields)
-
-    #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -77,6 +67,14 @@ public class HeavyEnemyStateMachine : StateMachine
     public float AttackDistance { get; set; }
 
 
+    #endregion
+
+    // ---- MÉTODOS PÚBLICOS ----
+    #region Métodos públicos
+    /// <summary>
+    /// El health manager del enemigo pesado
+    /// </summary>
+    private HealthManager _healthManager;
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -121,12 +119,16 @@ public class HeavyEnemyStateMachine : StateMachine
 
     protected override void OnStart()
     {
-        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
+        _healthManager = GetComponent<HealthManager>();
+        _healthManager?._onDeath.AddListener(DeathState);
     }
 
     protected override void OnUpdate()
     {
-        GetComponent<HealthManager>().Inmune = !CanTakeDamage();
+        if (_healthManager != null)
+        {
+            _healthManager.Inmune = !CanTakeDamage();    
+        }
     }
 
     /// <summary>

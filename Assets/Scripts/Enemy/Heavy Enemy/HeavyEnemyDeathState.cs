@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de muerte del enemigo pesado
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -10,8 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado de muerte del enemigo pesado
 /// </summary>
 public class HeavyEnemyDeathState : BaseState
 {
@@ -19,6 +18,10 @@ public class HeavyEnemyDeathState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
+    /// <summary>
+    /// Tiempo de espera hasta morir
+    /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
     #endregion
 
@@ -41,16 +44,6 @@ public class HeavyEnemyDeathState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -60,13 +53,6 @@ public class HeavyEnemyDeathState : BaseState
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    private void Start()
-    {
-       
-    }
-    public void DeathState()
-    {
-    }
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// coge referencias y calcula el tiempo de muerte
@@ -76,6 +62,7 @@ public class HeavyEnemyDeathState : BaseState
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<HeavyEnemyStateMachine>();
 
+        //Pone el objeto en la capa 0 para que no le puedan volver a golpear
         _ctx.gameObject.layer = 0;
 
         //Calcular el tiempo de la muerte
@@ -105,6 +92,7 @@ public class HeavyEnemyDeathState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        // Destruye el objeto una vez pasado el tiempo de espera
         if (Time.time > _deadTime)
         {
             Destroy(_ctx.gameObject);

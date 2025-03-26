@@ -5,14 +5,12 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
-using System.Runtime.CompilerServices;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Clase con la lógica de la mécanica de teletransporte del enemigo invocador
 /// </summary>
 public class EnemyTPState : BaseState
 {
@@ -21,7 +19,9 @@ public class EnemyTPState : BaseState
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
-    // Punto al que se teletransporta
+    /// <summary>
+    /// Punto al que se teletransporta
+    /// </summary>
     [SerializeField] Transform _teleportPoint;
 
     /// <summary>
@@ -45,10 +45,15 @@ public class EnemyTPState : BaseState
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
 
+    /// <summary>
+    /// La máquina de estados del enemigo invocador
+    /// </summary>
     private EnemySummonerStateMachine _ctx;
+
+    /// <summary>
+    /// El animator del enemigo invocador
+    /// </summary>
     private Animator _animator;
-    private Collider2D _collider;
-    private HealthManager _healthManager;
 
     /// <summary>
     /// Tiempo de espera para teletransportarse más tiempo del momento del juego
@@ -62,16 +67,6 @@ public class EnemyTPState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -87,7 +82,7 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        SoundManager.Instance.PlaySFX(_teleportSound,transform,0.1f);
+        
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
         //Coger animator del contexto
@@ -101,8 +96,10 @@ public class EnemyTPState : BaseState
 
         _tpDone = false;
 
-        _animator.SetBool("IsDisappearing", true);
+        _animator?.SetBool("IsDisappearing", true);
 
+        //Reproduce le sonido de teletransporte
+        SoundManager.Instance.PlaySFX(_teleportSound, transform, 0.1f);
     }
     
     /// <summary>
@@ -110,9 +107,15 @@ public class EnemyTPState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _ctx.GetComponent<HealthManager>().Inmune = false;
-        _animator.SetBool("IsDisappearing", false);
-        _animator.SetBool("IsAppearing", false);
+        HealthManager hm = _ctx?.GetComponent<HealthManager>();
+
+        if(_ctx != null)
+        {
+            hm.Inmune = false;
+        }
+        
+        _animator?.SetBool("IsDisappearing", false);
+        _animator?.SetBool("IsAppearing", false);
 
     }
     #endregion
@@ -129,24 +132,22 @@ public class EnemyTPState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-
-
         //Hacer Tp
-        if (Time.time > _tpTime && !_tpDone)
+        if (_ctx != null && Time.time > _tpTime && !_tpDone)
         {
             //Mover al enemigo a la posición de _teleportPoint
             _ctx.transform.position = _teleportPoint.position;
-            _animator.SetBool("IsDisappearing", false);
-            _animator.SetBool("IsAppearing", true);
+            _animator?.SetBool("IsDisappearing", false);
+            _animator?.SetBool("IsAppearing", true);
             _tpDone = true;
         }
         //Después de hacer Tp
         if (Time.time > _tpTime + _waitTimePostTp && _tpDone)
         { 
-            _animator.SetBool("IsAppearing", false);
+            _animator?.SetBool("IsAppearing", false);
 
             //Cambiar al estado Idle
-            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
         }
     }
 

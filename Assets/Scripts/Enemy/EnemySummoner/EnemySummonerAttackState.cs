@@ -22,9 +22,11 @@ public class EnemySummonerAttackState : BaseState
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     /// <summary>
-    /// variable para
+    /// Tiempo entre habilidades
     /// </summary>
-    [SerializeField] int _abilityCooldown;
+    [SerializeField] 
+    int _abilityCooldown;
+
     [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
 
     #endregion
@@ -57,19 +59,17 @@ public class EnemySummonerAttackState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Si el jugador sale del trigger pone el range a false.
-        _ctx.IsPlayerInAttackRange = false;
+        if (_ctx != null)
+        {
+            //Si el jugador sale del trigger pone el range a false.
+            _ctx.IsPlayerInAttackRange = false;
+        }
     }
     #endregion
 
@@ -91,11 +91,12 @@ public class EnemySummonerAttackState : BaseState
         _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
 
-        _animator.SetBool("IsIdle", true);
+        // Pone la animación de idle
+        _animator?.SetBool("IsIdle", true);
 
-        
+        // Establece el tiempo de cooldown
         _cooldownTime = Time.time + _abilityCooldown;
     }
     
@@ -104,7 +105,7 @@ public class EnemySummonerAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsIdle", false);
+        _animator?.SetBool("IsIdle", false);
     }
 
 
@@ -122,24 +123,26 @@ public class EnemySummonerAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
+        if (_ctx != null)
+        {
+            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
 
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
-
-        
-        if (Time.time > _cooldownTime) //si ha pasado el cooldown, aleatoriamente invocar o disparar
+            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
+        }
+        //si ha pasado el cooldown, aleatoriamente invocar o disparar
+        if (Time.time > _cooldownTime) 
         {
               _randomNr = UnityEngine.Random.Range(1, 11);
 
               if (_randomNr <= Mathf.Round(_invokeProbabilty * 10f))
               {
-                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerInvokeState>());
+                Ctx?.ChangeState(Ctx.GetStateByType<EnemySummonerInvokeState>());
               }
               else
               {
-                Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>()); 
+                Ctx?.ChangeState(Ctx.GetStateByType<EnemySummonerShootState>()); 
               }
         }
     }
@@ -149,12 +152,16 @@ public class EnemySummonerAttackState : BaseState
     /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
     /// </summary>
     protected override void CheckSwitchState()
-    {   
-         if (!_ctx.IsPlayerInAttackRange) //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
+    {
+        if (_ctx != null)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
-            _animator.SetBool("IsIdle", false);
-         }
+            //Si el jugador está fuera del rango de ataque y no esta en el rango del Chase, pasa a idle
+            if (!_ctx.IsPlayerInAttackRange) 
+            {
+                Ctx?.ChangeState(Ctx.GetStateByType<EnemySummonerIdleState>());
+                _animator?.SetBool("IsIdle", false);
+            }
+        }
     }
 
     #endregion   

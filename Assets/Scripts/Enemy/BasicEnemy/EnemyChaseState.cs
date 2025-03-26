@@ -43,35 +43,44 @@ public class EnemyChaseState : BaseState
     /// El animator del enemigo
     /// </summary>
     private Animator _animator;
+
+    /// <summary>
+    /// El audio source con el sonido que reproduce el enemigo al andar.
+    /// </summary>
     AudioSource _audioSource;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
 
     private void Start()
     {
-        
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemyStateMachine>();
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
-        //Coge la referencia al rigidbody por comodidad
-        _rb = _ctx.Rigidbody;
+
+        if (_ctx != null)
+        {
+            //Coger animator del contexto
+            _animator = _ctx.GetComponent<Animator>();
+
+            //Coge la referencia al rigidbody por comodidad
+            _rb = _ctx.Rigidbody;
+        }
+
+        //Coge la referencia al audio source para reproducir sonido de andar.
         _audioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Si el jugador sale del trigger pone el range a false.
-        _ctx.IsPlayerInChaseRange = false;
-        _audioSource.Stop();
+        if (_ctx != null)
+        {
+            //Si el jugador sale del trigger pone el range a false.
+            _ctx.IsPlayerInChaseRange = false;
+        }
+        // Para de reproducir el sonido de andar
+        _audioSource?.Stop();
     }
     #endregion
 
@@ -88,9 +97,11 @@ public class EnemyChaseState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator.SetBool("IsAttack", false);
-        _animator.SetBool("IsChasing", true);
-        _audioSource.Play();
+        _animator?.SetBool("IsAttack", false);
+        _animator?.SetBool("IsChasing", true);
+
+        // Reproduce sonido de andar
+        _audioSource?.Play();
     }
     
     /// <summary>
@@ -98,10 +109,17 @@ public class EnemyChaseState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        //Al salir del estado de chase, el enemigo nunca se debería mover
-        _rb.velocity = Vector3.zero;
-        _animator.SetBool("IsChasing", false);
-        _audioSource.Stop();
+        if (_rb != null)
+        {
+            //Al salir del estado de chase, el enemigo nunca se debería mover
+            _rb.velocity = Vector3.zero;
+        }
+
+        // Pone la animación de andar
+        _animator?.SetBool("IsChasing", false);
+
+        // Para el sonido de andar
+        _audioSource?.Stop();
     }
     #endregion
     
@@ -117,20 +135,27 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
-
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyStateMachine.EnemyLookingDirection.Left;
-
-        //Si todavía hay plataforma se mueve, sino se detiene
-        if (CheckGround())
+        if (_ctx != null)
         {
-            _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+                EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
+
+            // Invierte el sprite en función de la dirección en la que mira el jugador
+            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyStateMachine.EnemyLookingDirection.Left;
         }
-        else
+
+        if (_rb != null)
         {
-            _rb.velocity = Vector3.zero;
+            //Si todavía hay plataforma se mueve, sino se detiene
+            if (CheckGround())
+            {
+                _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+            }
+            else
+            {
+                _rb.velocity = Vector3.zero;
+            }
         }
     }
 
@@ -156,7 +181,7 @@ public class EnemyChaseState : BaseState
         if (!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
-            _animator.SetBool("IsChasing", false);
+            _animator?.SetBool("IsChasing", false);
             Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
         else if((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance)

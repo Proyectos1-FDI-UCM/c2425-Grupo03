@@ -95,19 +95,8 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     private Vector3 _bulletCurrentPos;
 
-
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-  
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -127,11 +116,10 @@ public class EnemySummonerShootState : BaseState
         _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
    
         // activar animator
-        _animator.SetBool("IsAttack", true);
-
+        _animator?.SetBool("IsAttack", true);
 
         //determinar puntos de invocación de la bala
         _bulletLeftPos = _bulletPosition.transform.position;
@@ -150,6 +138,8 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     public void Shoot()
     {
+        // NO HACE FALTA COMPROBAR SI _CTX ES NULL PQ YA SE HA COMPROBADO DONDE SE LLAMA
+
         //determinar el punto actual de la posicion para la bala 
         if (_ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
         {
@@ -160,11 +150,11 @@ public class EnemySummonerShootState : BaseState
             _bulletCurrentPos = _bulletLeftPos;
         }
 
+        // Reproducir el sonido de disparo
         SoundManager.Instance.PlaySFX(_shotSound, transform, 0.3f);
 
+        // Instancia la bala
         Instantiate(_magicBullet, _bulletCurrentPos, transform.rotation).Setup(_ctx.PlayerTransform.position);
-
-        
     }
     
     /// <summary>
@@ -172,7 +162,8 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsAttack", false);
+        // Termina la animación de disparo
+        _animator?.SetBool("IsAttack", false);
     }
     #endregion
     
@@ -189,21 +180,30 @@ public class EnemySummonerShootState : BaseState
    
     protected override void UpdateState()
     {
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
-
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
-
-        //Disparar después del tiempo de recarga
-        if (Time.time > _shootTime && !_attackFinished)
+        if (_ctx != null)
         {
+            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
 
-            Shoot();
-            _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
-            _animator.SetBool("IsAttack", false);
-            _attackFinished = true;
+            //Se gira el sprite en función de la posición del jugador
+            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
+            //Disparar después del tiempo de recarga
+            if (Time.time > _shootTime && !_attackFinished)
+            {
+                Shoot();
+
+                // Cambia de estado al de ataque
+                _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
+
+                // Termina la animación de disparo
+                _animator?.SetBool("IsAttack", false);
+
+                // Termina el ataque
+                _attackFinished = true;
+
+            }
         }
     }
 

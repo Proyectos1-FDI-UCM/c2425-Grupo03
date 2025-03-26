@@ -12,7 +12,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Máquina de estados del jugador donde se contiene el contexto de todos los estados.
+/// Máquina de estados del enemigo invocador donde se contiene el contexto de todos los estados.
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]// Obliga que el GameObject que contenga a este componente tenga un Rigibody2D
 
@@ -35,6 +35,9 @@ public class EnemySummonerStateMachine : StateMachine
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Sonido reproducido al dañar al enemigo
+    /// </summary>
     [SerializeField] AudioClip _enemyDamaged;
     #endregion
 
@@ -82,21 +85,15 @@ public class EnemySummonerStateMachine : StateMachine
     /// </summary>
     public bool IsPlayerInAttackRange { get; set; }
 
-    /// <summary>
-    /// El rango de ataque del enemigo
-    /// </summary>
-    public float AttackDistance { get; set; }
-
-    /// <summary>
-    /// La vida del enemigo
-    /// </summary>
-    public float Health { get; set; }
-
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
+    /// <summary>
+    /// Reproduce el sonido de ser dañado del enemigo.
+    /// </summary>
+    /// <param name="damageAmount">No se usa este parámetro.</param>
     public void EnemyDamagedSFX(float damageAmount)
     {
         SoundManager.Instance.PlaySFX(_enemyDamaged, transform, 1);
@@ -105,19 +102,31 @@ public class EnemySummonerStateMachine : StateMachine
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
-
+    /// <summary>
+    /// Método llamado en el awake
+    /// </summary>
     protected override void OnAwake()
     {
+        // Coge el sprite renderer
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        // Coge todos los spawn points para invocar
         _allSpawnpoints = transform.parent.GetChild(1);
         Spawnpoints = _allSpawnpoints.GetComponentsInChildren<Transform>();
     }
-
+    /// <summary>
+    /// Método llamado en el start
+    /// </summary>
     protected override void OnStart()
     {
-        GetComponent<HealthManager>()._onDeath.AddListener(DeathState);
-        GetComponent<HealthManager>()._onDamaged.AddListener(TPState);
-        GetComponent<HealthManager>()._onDamaged.AddListener(EnemyDamagedSFX);
+        HealthManager hm = GetComponent<HealthManager>();
+        if (hm != null)
+        {
+            //Se subscribe a los eventos de muerte y daño para ejecutar los métodos
+            hm._onDeath.AddListener(DeathState);
+            hm._onDamaged.AddListener(TPState);
+            hm._onDamaged.AddListener(EnemyDamagedSFX);
+        }
     }
 
     /// <summary>
@@ -128,10 +137,18 @@ public class EnemySummonerStateMachine : StateMachine
         ChangeState(gameObject.GetComponentInChildren<EnemySummonerDeathState>());
     }
 
+    /// <summary>
+    /// Si es el primer golpe recibido, cambia al estado de TP
+    /// </summary>
+    /// <param name="removedHealth"></param>
     public void TPState(float removedHealth)
     {
-        if (_isFirstHit && GetComponent<HealthManager>().Health > 0) {
+        if (_isFirstHit && GetComponent<HealthManager>()?.Health > 0) 
+        {
+            //Si es el primer golpe y todavía está vivo se teletransporta
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
+
+            // Los siguientes golpes ya no serán los primeros
             _isFirstHit = false;
         }
     }

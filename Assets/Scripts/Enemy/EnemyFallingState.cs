@@ -14,34 +14,34 @@ using UnityEngine;
 /// </summary>
 public class EnemyFallingState : BaseState
 {
-    // ---- ATRIBUTOS DEL INSPECTOR ----
-    #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
-    #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Booleana que determina si el enemigo toca el suelo o no.
+    /// </summary>
     bool _isGrounded;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _isGrounded = true;
+        // Detecta si el enemigo ha entrado en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
+        if (collision.gameObject.layer == 1 << 7)
+        {
+            _isGrounded = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        _isGrounded = false;
+        // Detecta si el enemigo ha dejado de estar en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
+        if (other.gameObject.layer == 1 << 7)
+        {
+            _isGrounded = false;
+        }
     }
     #endregion
 
@@ -59,7 +59,7 @@ public class EnemyFallingState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        //Cambia la animación a caer
+        // Cambia a la animación a caer (WIP)
     }
     
     /// <summary>
@@ -67,6 +67,7 @@ public class EnemyFallingState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        // Quita la animación de caer (WIP)
     }
     #endregion
     
@@ -95,6 +96,7 @@ public class EnemyFallingState : BaseState
         // Cuando el enemigo vuelva a tocar el suelo vuelve a estar inactivo
         if (_isGrounded)
         {
+            // Cambiamos al estado cuyo nombre sea IdleState
             Ctx.ChangeState(Ctx.GetStateByName("IdleState"));
         }
     }

@@ -10,8 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Estado con la lógica necesaria para hacer la mecánica de invocación
 /// </summary>
 public class EnemySummonerInvokeState : BaseState
 {
@@ -19,13 +18,16 @@ public class EnemySummonerInvokeState : BaseState
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+
+    /// <summary>
+    /// El enemigo invocado.
+    /// </summary>
     [Header("Invoke Properties")]
     [SerializeField] EnemyStateMachine _enemyToInvoke;
 
     /// <summary>
     /// Valor de tiempo para hacer invocacion
     /// </summary>
-
     [SerializeField][Min (0)] float _waitTimeInvoke;
 
     /// <summary>
@@ -63,16 +65,6 @@ public class EnemySummonerInvokeState : BaseState
     private float _invokeTime;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -92,19 +84,26 @@ public class EnemySummonerInvokeState : BaseState
         _ctx = GetCTX<EnemySummonerStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
 
+        //Reproduce el sonido de invocar
         SoundManager.Instance.PlaySFX(_invokeSound, transform, 0.1f);
 
-        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-        _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-            EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
+        if (_ctx != null)
+        {
+            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
+                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
 
-        _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
+            //Invierte el sprite en función de hacia donde mira el enemigo
+            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
 
+            //Comienza la animación de invocar
+            _animator.SetBool("IsInvoking", true);
+        }
+
+        //Calcula el tiempo que tarda en invocar
         _invokeTime = Time.time + _waitTimeInvoke;
-        _animator.SetBool("IsInvoking", true);
-
     }
     
     /// <summary>
@@ -112,7 +111,8 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsInvoking", false);
+        //Termina la animación de invocar
+        _animator?.SetBool("IsInvoking", false);
     }
     #endregion
     
@@ -128,22 +128,23 @@ public class EnemySummonerInvokeState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-
-        if (Time.time > _invokeTime )
+        // Si se termina la animación de invocar ...
+        if (_ctx != null && Time.time > _invokeTime )
         {
+            //Coge siguiente transform en el que invocar
             _spawnpointTransform = _ctx.Spawnpoints[_spawnpointIndex];
 
+            //Invoca el enemigo
             Instantiate(_enemyToInvoke, new Vector2(_spawnpointTransform.position.x, _spawnpointTransform.position.y - 1), _spawnpointTransform.rotation, transform.parent.parent.parent);
-            if (_spawnpointIndex >= _ctx.Spawnpoints.Length - 1)
-            {
-                _spawnpointIndex = 1;
-            }
-            else
-            {
-                _spawnpointIndex++;
-            }
-            _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
-            _animator.SetBool("IsInvoking", false);
+
+            //Pasa al siguiente punto de invocación
+            _spawnpointIndex = (_spawnpointIndex + 1) % (_ctx.Spawnpoints.Length - 1);
+
+            //Cambia al estado de ataque
+            _ctx?.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
+
+            //Termina la animación de invocar
+            _animator?.SetBool("IsInvoking", false);
         }
     }
     /// <summary>
