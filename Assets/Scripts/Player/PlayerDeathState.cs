@@ -53,17 +53,6 @@ public class PlayerDeathState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    #endregion
-
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
@@ -82,12 +71,12 @@ public class PlayerDeathState : BaseState
         _ctx = GetCTX<PlayerStateMachine>();
 
         //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        _animator = _ctx?.GetComponent<Animator>();
 
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
-        _animator.SetBool("IsDead", true);
+        _animator?.SetBool("IsDead", true);
         SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.2f);
     }
 
@@ -96,7 +85,7 @@ public class PlayerDeathState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsDead", false);
+        _animator?.SetBool("IsDead", false);
     }
     #endregion
 
@@ -113,13 +102,13 @@ public class PlayerDeathState : BaseState
     protected override void CheckSwitchState()
     {
         //Tras el tiempo de espera el jugador reaparece.
-        if (Time.time > _deadTime)
+        if (_ctx != null && Time.time > _deadTime)
         {
             CheckpointManager.Instance.RespawnPlayer(_ctx.gameObject);
 
             HealthManager hm = _ctx.GetComponent<HealthManager>();
-            hm.SetHealth(hm.MaxHealth);
-            _ctx.GetComponent<PlayerHealthBar>()?.SetHealth(hm.MaxHealth);
+            hm?.SetHealth(hm.MaxHealth);
+
             _ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
         }
     }

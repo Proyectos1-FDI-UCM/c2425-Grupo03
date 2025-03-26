@@ -61,11 +61,6 @@ public class PlayerGroundedState : BaseState
     bool _isGrounded;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -77,9 +72,11 @@ public class PlayerGroundedState : BaseState
     {
         
         _ctx = GetCTX<PlayerStateMachine>();
+        //Coge el rigidbody del jugador
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
+        //Coge le audio source para hacer sonar los pasos
         _audioSource = _ctx.PlayerAudio;
     }
     /// <summary>
@@ -150,9 +147,9 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _audioSource.Stop();
-        _ctx.Animator.SetBool("IsIdle", false);
-        _ctx.Animator.SetBool("IsRunning", false);
+        _audioSource?.Stop();
+        Ctx.Animator?.SetBool("IsIdle", false);
+        Ctx.Animator?.SetBool("IsRunning", false);
     }
     #endregion
 
@@ -171,13 +168,14 @@ public class PlayerGroundedState : BaseState
 
     protected override void UpdateState()
     {
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>(); //_moveDir será 0 si no esta moviendo el jugador
-        if (_ctx.PlayerInput.Move.ReadValue<float>() != 0 )
+        //_moveDir será 0 si no esta moviendo el jugador
+        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>(); 
+        if (_ctx != null && _ctx.PlayerInput.Move.ReadValue<float>() != 0 )
         {
-            _ctx.Animator.SetBool("IsRunning", true);
-            _ctx.Animator.SetBool("IsIdle", false);
-            PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
-            attackState.ResetAttackCombo();
+            Ctx.Animator.SetBool("IsRunning", true);
+            Ctx.Animator.SetBool("IsIdle", false);
+            PlayerAttackState attackState = Ctx.GetStateByType<PlayerAttackState>();
+            attackState?.ResetAttackCombo();
             if (!_audioSource.isPlaying)
             {
                 _audioSource.Play();
@@ -186,9 +184,9 @@ public class PlayerGroundedState : BaseState
         }
         else
         {
-            _ctx.Animator.SetBool("IsIdle", true);
-            _ctx.Animator.SetBool("IsRunning", false);
-            _audioSource.Stop();
+            Ctx.Animator.SetBool("IsIdle", true);
+            Ctx.Animator.SetBool("IsRunning", false);
+            _audioSource?.Stop();
         }
     }
 
@@ -198,7 +196,10 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_jumpBuffer > 0) //si jumpBuffer es mayor que 0, pasa a jumpState
+        if (_ctx == null) return;
+
+        //si jumpBuffer es mayor que 0, pasa a jumpState
+        if (_jumpBuffer > 0) 
         {
             Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
             _jumpBuffer = 0;
@@ -208,13 +209,15 @@ public class PlayerGroundedState : BaseState
         {
             _jumpBuffer = 0;
         }
-        else if (!_isGrounded) //si esta cayendo el jugador, pasa a Falling
+        //si esta cayendo el jugador, pasa a Falling
+        else if (!_isGrounded) 
         {
             PlayerFallingState fallingState = Ctx.GetStateByType<PlayerFallingState>();
             Ctx.ChangeState(fallingState);
             fallingState.ResetCoyoteTime();
         }
-        else if (_ctx.PlayerInput.Dash.IsPressed()) //detecta si presionas al Dash
+        //detecta si presionas al Dash
+        else if (_ctx.PlayerInput.Dash.IsPressed()) 
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if (Time.time > dashState.NextAvailableDashTime)

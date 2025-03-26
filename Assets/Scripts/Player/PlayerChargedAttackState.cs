@@ -96,8 +96,8 @@ public class PlayerChargedAttackState : BaseState
     void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
-        _rigidbody = _ctx.Rigidbody;
-        _animator = GetCTX<PlayerStateMachine>().Animator;
+        _rigidbody = Ctx?.Rigidbody;
+        _animator = Ctx?.Animator;
         _isLocked = false;
     }
    
@@ -113,7 +113,7 @@ public class PlayerChargedAttackState : BaseState
     {
         _attacked = false;
         _startChargingTime = Time.time;
-        _animator.SetBool("IsCharging", true);
+        _animator?.SetBool("IsCharging", true);
     }
     
     /// <summary>
@@ -122,8 +122,8 @@ public class PlayerChargedAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("IsChargeAttacking", false);
-        _animator.SetBool("IsCharging", false);
+        _animator?.SetBool("IsChargeAttacking", false);
+        _animator?.SetBool("IsCharging", false);
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ public class PlayerChargedAttackState : BaseState
         {
             enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
 
-            GetComponentInParent<PlayerChargeScript>().AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
+            GetComponentInParent<PlayerChargeScript>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
         }
     }
     /// <summary>
@@ -168,8 +168,8 @@ public class PlayerChargedAttackState : BaseState
     {
         if (Time.time - _startChargingTime >= _chargingTime && !_attacked)
         {
-            _animator.SetBool("IsChargeAttacking", true);
-            _animator.SetBool("IsCharging", false);
+            _animator?.SetBool("IsChargeAttacking", true);
+            _animator?.SetBool("IsCharging", false);
             ChargedAttack();
             _attacked = true;
         }
@@ -184,7 +184,7 @@ public class PlayerChargedAttackState : BaseState
     {
         if ((Time.time - _startChargingTime >= _chargingTime + 1f) || _ctx.PlayerInput.Attack.WasReleasedThisFrame())
         {
-            Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
+            Ctx?.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }
     }
     #endregion   

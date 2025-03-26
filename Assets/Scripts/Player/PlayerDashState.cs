@@ -95,7 +95,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     void Start()
     {
-        _rb = GetCTX<PlayerStateMachine>().Rigidbody;
+        _rb = Ctx?.Rigidbody;
     }
     #endregion
 
@@ -113,7 +113,7 @@ public class PlayerDashState : BaseState
     {
         SoundManager.Instance.PlaySFX(_dashSound, transform, 1);
         //Acelera al jugador para hacer el dash, calcula la velocidad haciendo. -> v = d / t
-        _dashSpeed = _distance * (short)GetCTX<PlayerStateMachine>().LookingDirection / _duration;
+        _dashSpeed = _distance * (short)GetCTX<PlayerStateMachine>()?.LookingDirection / _duration;
         _rb.velocity = new Vector2(_dashSpeed, 0);
         
         //Quita la gravedad para que no caiga si dasheas en el aire.
@@ -132,7 +132,7 @@ public class PlayerDashState : BaseState
         CheckDashLimit();
 
         //Comienza la animación del dash
-        GetCTX<PlayerStateMachine>().Animator.SetBool("IsDashing", true);
+        Ctx?.Animator.SetBool("IsDashing", true);
     }
     
     /// <summary>
@@ -153,7 +153,7 @@ public class PlayerDashState : BaseState
         _finishDashingPositionX = 0;
 
         //Termina la animación del dash
-        GetCTX<PlayerStateMachine>().Animator.SetBool("IsDashing", false);
+        Ctx?.Animator.SetBool("IsDashing", false);
     }
     #endregion
 
@@ -184,7 +184,7 @@ public class PlayerDashState : BaseState
     {
         if (_finishDashingTime <= 0 || (_finishDashingPositionX != 0 && Mathf.Abs(_rb.transform.position.x - _finishDashingPositionX) < 1))
         {
-            Ctx.ChangeState(Ctx.GetStateByType<PlayerFallingState>());
+            Ctx?.ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
     }
 

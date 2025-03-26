@@ -26,6 +26,9 @@ public class PlayerChargeScript : MonoBehaviour
     /// Y la carga actual de la Mano de la Sombra
     /// </summary>
     [SerializeField] private int _maxChargeManoDeLaSombra;
+    /// <summary>
+    /// Carga de la Mano de la Sombra
+    /// </summary>
     private float _currentChargeManoDeLaSombra;
 
     [Header("Super Dash")]
@@ -34,6 +37,9 @@ public class PlayerChargeScript : MonoBehaviour
     /// Y la carga actual de la Super Dash
     /// </summary>
     [SerializeField] private int _maxChargeSuperDash;
+    /// <summary>
+    /// Carga del Super Dash
+    /// </summary>
     private float _currentChargeSuperDash;
 
     /// <summary>
@@ -162,9 +168,6 @@ public class PlayerChargeScript : MonoBehaviour
     }
     #endregion
 
-    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
-    #region Métodos Privados o Protegidos
-    #endregion
 
 } // class PlayerChargeScript 
 // namespace

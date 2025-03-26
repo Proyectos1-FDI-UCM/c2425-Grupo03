@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// El estado de caer del jugador
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -10,8 +10,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// El estado de caer del jugador
 /// </summary>
 public class PlayerFallingState : BaseState
 {
@@ -65,11 +64,6 @@ public class PlayerFallingState : BaseState
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
@@ -81,7 +75,7 @@ public class PlayerFallingState : BaseState
     {
 
         _ctx = GetCTX<PlayerStateMachine>();
-        _rigidbody = _ctx.Rigidbody;
+        _rigidbody = Ctx?.Rigidbody;
     }
     /// <summary>
     /// El trigger debe solo tocar la layer del suelo.
@@ -131,7 +125,7 @@ public class PlayerFallingState : BaseState
         {
             SetSubState(Ctx.GetStateByType<PlayerIdleState>());
         }
-        _ctx.Animator.SetBool("IsFalling", true);
+        Ctx?.Animator.SetBool("IsFalling", true);
 
     }
     /// <summary>
@@ -147,7 +141,7 @@ public class PlayerFallingState : BaseState
     public override void ExitState()
     {
         _coyoteTime = 0;
-        _ctx.Animator.SetBool("IsFalling",false);
+        Ctx?.Animator.SetBool("IsFalling",false);
     }
     #endregion
 
@@ -164,7 +158,7 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
+        _moveDir = _ctx.PlayerInput.Move.ReadValue<float>();
 
         if (_coyoteTime > 0) 
         {
@@ -190,21 +184,24 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_isGrounded) //detecta si esta colisionando con el suelo para pasar al estado Grounded
+        if (Ctx != null)
         {
-            SoundManager.Instance.PlaySFX(_landSound, transform, 1);
-            Ctx.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
-        }
-        else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.IsPressed()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
-        {
-            Ctx.ChangeState(_ctx.GetStateByType<PlayerJumpState>());
-        }
-        else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador ha presionado al dash
-        {
-            PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
-            if (Time.time > dashState.NextAvailableDashTime)
+            if (_isGrounded) //detecta si esta colisionando con el suelo para pasar al estado Grounded
             {
-                Ctx.ChangeState(dashState);
+                SoundManager.Instance.PlaySFX(_landSound, transform, 1);
+                Ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
+            }
+            else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.WasPressedThisFrame()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
+            {
+                Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
+            }
+            else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador ha presionado al dash
+            {
+                PlayerDashState dashState = Ctx.GetStateByType<PlayerDashState>();
+                if (Time.time > dashState.NextAvailableDashTime)
+                {
+                    Ctx.ChangeState(dashState);
+                }
             }
         }
     }

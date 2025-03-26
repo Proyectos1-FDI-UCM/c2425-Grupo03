@@ -103,11 +103,6 @@ public class HealthManager : MonoBehaviour
     {
         //Dar una vida inicial a la entidad
         SetHealth(_initialHealth);
-        if (gameObject.TryGetComponent<PlayerHealthBar>(out PlayerHealthBar component))
-        {
-            component.SetMaxHealth(_maxHealth);
-            component.SetHealth(_health);
-        }
     }
     #endregion
 
@@ -138,10 +133,6 @@ public class HealthManager : MonoBehaviour
             else
             {
                 _health = _health - removedHealth;
-            }
-            if (gameObject.TryGetComponent<PlayerHealthBar>(out PlayerHealthBar component))
-            {
-                component.DecreaseHealth(removedHealth);
             }
             _onDamaged.Invoke(removedHealth);
         }
