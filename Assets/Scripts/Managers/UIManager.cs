@@ -88,13 +88,16 @@ public class UIManager : MonoBehaviour
         // Va a actualizar la bara de vida cuando el jugador recibe o se le quita vida. 
         _healthManager._onDamaged.AddListener(UpdateHealthBar);
         _healthManager._onHealed.AddListener(UpdateHealthBar);
+        _healthManager._onDeath.AddListener(ResetHealthBar);
 
         // Coge las cargas iniciales de las habilidades
         _currentChargeOne = _playerCharge.SuperDash.currentCharge;
         _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
-    }
-    void Update()
-    {
+
+        // Subscribe el método para actualizar la carga de las habilidades al evento correspondiente.
+        _playerCharge._onChargeChange.AddListener(UpdateAbilityCharge);
+
+        // Valores iniciales de las barras.
         UpdateAbilityCharge();
     }
     #endregion
@@ -125,6 +128,10 @@ public class UIManager : MonoBehaviour
             //El slider value = 1, es decir, barra llena si _currentHealth == _maxHealth.
             _healthSlider.value = _currentHealth / _maxHealth;
         }
+    }
+
+    private void ResetHealthBar() {
+        _healthSlider.value = 1;
     }
 
     /// <summary>
