@@ -104,37 +104,29 @@ public class PauseMenuController : MonoBehaviour
         _playerInput.Player.Menu.performed += PausePress;
         _playerInput.UI.Cancel.performed += UnpausePress;
     }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
+    
+    /// <summary>
+    /// Método que se llama cuando se pausa el juego.
+    /// </summary>
+    /// <param name="context"></param>
     public void PausePress(InputAction.CallbackContext context) {
-        Debug.Log("Esc pressed!");
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        if (!_paused)
+        if (!_paused) // si no está pausado, pausa el juego
         {
             PauseGame(); 
         }
     }
-
+    /// <summary>
+    /// Método llamado para salir del menú de pausa.
+    /// </summary>
+    /// <param name="context"></param>
     public void UnpausePress(InputAction.CallbackContext context) {
-        Debug.Log("Cancel pressed!");
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        if (_paused)
+        if (_paused) // si está pausado, vuelve al juego
         {
             ContinueGame();
         }

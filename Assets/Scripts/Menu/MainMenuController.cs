@@ -49,11 +49,6 @@ public class MainMenuController : MonoBehaviour
     /// sonido de click boton
     /// </summary>
     [SerializeField] private AudioClip _clickBotton;
-    /// <summary>
-    /// el tiempo que se espera al hacer click en un boton
-    /// </summary>
-    [SerializeField] private float _waitTime = 1f;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -69,15 +64,6 @@ public class MainMenuController : MonoBehaviour
     /// El input del jugador
     /// </summary>
     private PlayerInputActions _playerInput;
-
-    /// <summary>
-    /// tiempo en el que has dado a click
-    /// </summary>
-    float _clickTime;
-    /// <summary>
-    /// si ir a la escena play
-    /// </summary>
-    bool _goPlay = false;
     #endregion
 
 
@@ -94,33 +80,10 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _clickTime = 0f;
-        _goPlay = false;
         _playerInput = new PlayerInputActions();
-        _playerInput.Player.Disable();
         _playerInput.UI.Enable();
-
-        EventSystem.current.SetSelectedGameObject(_firstButton);
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// Comprueba si has dado a algun boton y si ha pasado el tiempo de espera
-    /// </summary>
-    void Update()
-    {
-        if (_clickTime != 0 && Time.time - _clickTime > _waitTime)
-        {
-            if (_goPlay)
-            {
-                SceneManager.LoadScene(_playSceneName);
-            }
-            else
-            {
-                Application.Quit();
-            }
-        }
         
+        EventSystem.current.SetSelectedGameObject(_firstButton);
     }
     #endregion
 
@@ -135,13 +98,9 @@ public class MainMenuController : MonoBehaviour
     /// <summary>
     /// Metodo que carga la escena del juego cuando se presiona el botón "Jugar"
     /// </summary>
-    public void OnPlayButtom()
+    public void OnPlayButton()
     {
-        _clickTime = Time.time;
-        _goPlay = true;
-
         SceneManager.LoadScene(_playSceneName);
-
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
 
     }
@@ -152,7 +111,6 @@ public class MainMenuController : MonoBehaviour
     public void OnExitButton()
     {
         //Cierra la aplicacion (solo en la build)
-        _clickTime = Time.time;
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
     }
 
