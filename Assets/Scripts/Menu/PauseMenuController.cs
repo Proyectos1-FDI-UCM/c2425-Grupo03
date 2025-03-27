@@ -8,6 +8,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 // Añadir aquí el resto de directivas using
 
@@ -23,45 +24,40 @@ public class PauseMenuController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
+    [SerializeField] private GameObject _pauseMenu;
     ///<summary>
     /// El nombre de la escena principal
     ///</summary>
-    [SerializeField]
-    string _mainMenuSceneName;
-
-    /// <summary>
-    /// Referencia al ui del menu de pausa
-    /// </summary>
-    [SerializeField] GameObject _uiPauseMenu;
+    [SerializeField] private string _mainMenuSceneName;
 
     /// <summary>
     /// Referencia a los rombos para indicar la seleccion de boton
     /// </summary>
-    [SerializeField] GameObject _continueRhombus;
+    [SerializeField] private GameObject _continueRhombus;
 
     /// <summary>
     /// Referencia a los rombos para indicar la seleccion de boton
     /// </summary>
-    [SerializeField] GameObject _mainMenuRhombus;
+    [SerializeField] private GameObject _mainMenuRhombus;
 
     /// <summary>
     /// Deshabilitar los movimientos del jugador
     /// </summary>
-    [SerializeField] PlayerStateMachine _player;
+    [SerializeField] private PlayerStateMachine _player;
 
     /// <summary>
     /// Referencia al primer boton que se selecciona al abrir el menu
     /// </summary>
-    [SerializeField] GameObject _firstButton;
+    [SerializeField] private GameObject _firstButton;
 
     /// <summary>
     /// Sonido que se reproduce al cambiar de boton
     /// </summary>
-    [SerializeField] AudioClip _changeBotton;
+    [SerializeField] private AudioClip _changeBotton;
     /// <summary>
     /// sonido de click boton
     /// </summary>
-    [SerializeField] AudioClip _clickBotton;
+    [SerializeField] private AudioClip _clickBotton;
 
     #endregion
 
@@ -102,7 +98,11 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _uiPauseMenu.SetActive(false);
+        _pauseMenu.SetActive(false);
+        _playerInput = new PlayerInputActions();
+        _playerInput.Player.Enable();
+        _playerInput.Player.Menu.performed += PausePress;
+        _playerInput.UI.Cancel.performed += UnpausePress;
     }
 
     /// <summary>
@@ -110,19 +110,7 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     void Update()
     {
-      
-        if (_playerInput.Player.Menu.WasPerformedThisFrame())
-        {
-            SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-            if (!_paused)
-            { 
-                PauseGame(); 
-            }
-            else
-            { 
-                ContinueGame(); 
-            }
-        }
+
     }
     #endregion
 
@@ -134,24 +122,37 @@ public class PauseMenuController : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public void PausePress(InputAction.CallbackContext context) {
+        Debug.Log("Esc pressed!");
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        if (!_paused)
+        {
+            PauseGame(); 
+        }
+    }
+
+    public void UnpausePress(InputAction.CallbackContext context) {
+        Debug.Log("Cancel pressed!");
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        if (_paused)
+        {
+            ContinueGame();
+        }
+    }
+
     /// <summary>
     /// Metodo que pausa el juego activando el menú de pausa
     /// </summary>
     public void PauseGame()
     {
-        //_uiPauseMenu.SetActive(true);
         // Activa el menú de pausa
-        if (_uiPauseMenu != null)
-        {
-            _uiPauseMenu.SetActive(true);
-        }
+        _pauseMenu.SetActive(true);
 
         // Desactiva el control del jugador
         if (_player != null)
         {
             _player.enabled = false;
         }
-        _playerInput = new PlayerInputActions();
         _playerInput.Player.Disable();
         _playerInput.UI.Enable();
 
@@ -171,26 +172,23 @@ public class PauseMenuController : MonoBehaviour
 
     public void PlayChangeBottonSFX()
     {
-        SoundManager.Instance.PlaySFX(_changeBotton,transform,0.2f);
+        SoundManager.Instance?.PlaySFX(_changeBotton,transform,0.2f);
     }
 
     /// <summary>
     ///  Metodo que reanuda el juego desactivando el menu de pausa
     /// </summary>
     public void ContinueGame()
-    {
-        if (_uiPauseMenu != null)
-        { 
-            _uiPauseMenu.SetActive(false);
-        }
+    { 
+        _pauseMenu.SetActive(false);
 
         if (_player != null)
         {
             _player.enabled = true;
         }
-        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-        _playerInput.Player.Enable();
+        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         _playerInput.UI.Disable();
+        _playerInput.Player.Enable();
         Time.timeScale = 1f;
         _paused = false;
     }
@@ -202,13 +200,13 @@ public class PauseMenuController : MonoBehaviour
     {
         Time.timeScale = 1f;
         _paused = false;
-        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     public void OnSelectContinue()
     {
-        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.5f);
         _continueRhombus.SetActive(true);
     }
 
@@ -227,7 +225,7 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     public void OnSelectMainMenu()
     {
-        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.5f);
         _mainMenuRhombus.SetActive(true);
     }
 

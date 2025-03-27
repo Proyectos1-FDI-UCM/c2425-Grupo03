@@ -26,33 +26,33 @@ public class MainMenuController : MonoBehaviour
     /// El nombre de la escena principal
     /// </summary>
     [SerializeField]
-    string _playSceneName;
+    private string _playSceneName;
     /// <summary>
     /// Referencia de la flecha del boton Jugar
     /// </summary>
-    [SerializeField] GameObject _playArrow;
+    [SerializeField] private GameObject _playArrow;
 
     /// <summary>
     /// Referencia del boton Salir
     /// </summary>
-    [SerializeField] GameObject _exitArrow;
+    [SerializeField] private GameObject _exitArrow;
 
     /// <summary>
     ///  Referencia al primer boton que se selecciona al abrir el menu
     /// </summary>
-    [SerializeField] GameObject _firstButton;
+    [SerializeField] private GameObject _firstButton;
     /// <summary>
     /// Sonido que se reproduce al cambiar de boton
     /// </summary>
-    [SerializeField] AudioClip _changeBotton;
+    [SerializeField] private AudioClip _changeBotton;
     /// <summary>
     /// sonido de click boton
     /// </summary>
-    [SerializeField] AudioClip _clickBotton;
+    [SerializeField] private AudioClip _clickBotton;
     /// <summary>
     /// el tiempo que se espera al hacer click en un boton
     /// </summary>
-    [SerializeField] float _waitTime = 1f;
+    [SerializeField] private float _waitTime = 1f;
 
     #endregion
 
