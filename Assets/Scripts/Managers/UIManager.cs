@@ -90,8 +90,8 @@ public class UIManager : MonoBehaviour
         _healthManager._onHealed.AddListener(UpdateHealthBar);
 
         // Coge las cargas iniciales de las habilidades
-        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
-        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
+        _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
     }
     void Update()
     {
@@ -132,12 +132,12 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void UpdateAbilityCharge() {
         // Actualizamos los valores de las cargas
-        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
-        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
+        _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
         
         // Calculamos el porcentaje de carga
-        float chargePercentageOne = _currentChargeOne / _playerCharge.abilities[0].maxCharge;
-        float chargePercentageTwo = _currentChargeTwo / _playerCharge.abilities[1].maxCharge;
+        float chargePercentageOne = _currentChargeOne / _playerCharge.SuperDash.maxCharge;
+        float chargePercentageTwo = _currentChargeTwo / _playerCharge.ManoDeLasSombras.maxCharge;
         
         // Cambiamos la carga
         _abilityOneSlider.value = chargePercentageOne;

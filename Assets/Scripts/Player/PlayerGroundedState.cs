@@ -233,12 +233,12 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(attackState);
             }
         }
-        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerCharge>().abilities[1].isCharged  && !Ctx.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
+        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerCharge>().ManoDeLasSombras.isCharged  && !Ctx.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
         {
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
-        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerCharge>().abilities[0].isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
+        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerCharge>().SuperDash.isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
         {
             PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
             Ctx.ChangeState(playerSuperDashState);

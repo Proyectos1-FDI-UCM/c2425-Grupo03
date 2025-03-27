@@ -212,7 +212,7 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
-        SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
+        // SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
         int extraDamage = 0;
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);

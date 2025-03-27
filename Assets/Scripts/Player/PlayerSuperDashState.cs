@@ -49,8 +49,6 @@ public class PlayerSuperDashState : BaseState
     /// El tiempo cuando hace el dash
     /// </summary>
     [SerializeField, Min(0)] private float _timeOfDash;
-
-    [SerializeField] private int _abilityIndex;
     [SerializeField] private float _abilityChargePercentage;
     [SerializeField] AudioClip _SoundEffect;
 
@@ -178,7 +176,7 @@ public class PlayerSuperDashState : BaseState
     {
         //Quitar inmunidad al jugador
         _ctx.GetComponent<HealthManager>().Inmune = false;
-        _chargeScript.ResetCharge(0);
+        _chargeScript.ResetSuperDash();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
         SoundManager.Instance.PlaySFX(_SoundEffect, transform, 0.5f);
     }
