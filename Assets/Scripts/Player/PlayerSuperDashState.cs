@@ -113,7 +113,7 @@ public class PlayerSuperDashState : BaseState
     /// <summary>
     /// El script de la carga de las habilidades
     /// </summary>
-    private PlayerChargeScript _chargeScript;
+    private PlayerCharge _chargeScript;
 
     /// <summary>
     /// El rango donde el daño es efectivo
@@ -135,7 +135,7 @@ public class PlayerSuperDashState : BaseState
     private void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
-        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+        _chargeScript = _ctx.GetComponent<PlayerCharge>();
         _isLocked = false;
     }
     #endregion

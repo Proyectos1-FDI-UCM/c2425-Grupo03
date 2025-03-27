@@ -11,7 +11,7 @@ using UnityEngine;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class PlayerChargeScript : MonoBehaviour
+public class PlayerCharge : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -53,11 +53,6 @@ public class PlayerChargeScript : MonoBehaviour
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     /// <summary>
-    /// El numero de habilidades que tiene el jugador.
-    /// </summary>
-    private static int _abilityNr = 2;
-
-    /// <summary>
     /// El valor minimo de la carga.
     /// </summary>
     private int _MIN_CHARGE = 0;
@@ -69,9 +64,9 @@ public class PlayerChargeScript : MonoBehaviour
         public bool isCharged;
         public float maxCharge;
     }
-    private static Ability abilityOne;
-    private static Ability abilityTwo;
-    public Ability[] abilities = new Ability[_abilityNr];
+    private static Ability abilityManoDeLasSombras;
+    private static Ability abilitySuperDash;
+    public Ability[] abilities = new Ability[2];
     #endregion
 
     // ---- PROPIEDADES ----
@@ -86,8 +81,8 @@ public class PlayerChargeScript : MonoBehaviour
     /// </summary>
     void Start()
     {
-        abilities[0] = abilityOne;
-        abilities[1] = abilityTwo;
+        abilities[0] = abilityManoDeLasSombras;
+        abilities[1] = abilitySuperDash;
         GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
         for (int i = 0; i < abilities.Length; i++) {
             abilities[i].currentCharge = 0;

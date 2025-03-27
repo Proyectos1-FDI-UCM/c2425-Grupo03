@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// El script de carga.
     /// </summary>
-    private PlayerChargeScript _playerCharge;
+    private PlayerCharge _playerCharge;
     /// <summary>
     /// El health manager.
     /// </summary>
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
     {
         // Coge todos los componentes.
         _healthSlider = GetComponentInChildren<Slider>(); 
-        _playerCharge = _playerPrefab.GetComponent<PlayerChargeScript>();
+        _playerCharge = _playerPrefab.GetComponent<PlayerCharge>();
         _healthManager = _playerPrefab.GetComponent<HealthManager>();
 
         // Slider Settings
@@ -93,7 +93,6 @@ public class UIManager : MonoBehaviour
         _currentChargeOne = _playerCharge.abilities[0].currentCharge;
         _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
     }
-
     void Update()
     {
         UpdateAbilityCharge();

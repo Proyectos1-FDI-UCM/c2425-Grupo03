@@ -98,7 +98,7 @@ public class PlayerAttackState : BaseState
     /// <summary>
     /// El script que controla las habilidades
     /// </summary>
-    private PlayerChargeScript _chargeScript;
+    private PlayerCharge _chargeScript;
 
     #endregion
 
@@ -119,7 +119,7 @@ public class PlayerAttackState : BaseState
     {
         //Coger el rigidbody del contexto
         _ctx = GetCTX<PlayerStateMachine>();
-        _chargeScript = _ctx?.GetComponent<PlayerChargeScript>();
+        _chargeScript = _ctx?.GetComponent<PlayerCharge>();
     }
     #endregion
 
