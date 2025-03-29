@@ -120,6 +120,7 @@ public class PlayerAttackState : BaseState
         //Coger el rigidbody del contexto
         _ctx = GetCTX<PlayerStateMachine>();
         _chargeScript = _ctx?.GetComponent<PlayerCharge>();
+        _combo = 0;
     }
     #endregion
 
@@ -212,15 +213,20 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void Attack(int direction)
     {
+        
         SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
         int extraDamage = 0;
+
+        //Coger la informacion de los enemigos que estan en el area de ataque
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
 
+        //Mirar el combo para el daño extra
         if (_combo == 3) 
         { 
             extraDamage += _comboExtraDamage; 
         }
+
 
         if(enemyInArea != null)
         {
@@ -255,6 +261,8 @@ public class PlayerAttackState : BaseState
         {
             _combo = 1;
         }
+        Debug.Log(_combo);
+        
     }
     /// <summary>
     /// Dibuja el rango de ataque basico

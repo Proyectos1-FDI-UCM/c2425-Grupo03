@@ -18699,6 +18699,30 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _maxCombo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _airHitList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _airHitList.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _airHitList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _airHitList.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
+    - target: {fileID: 3293462699059117500, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _airHitList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
     - target: {fileID: 4490924737868973245, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
