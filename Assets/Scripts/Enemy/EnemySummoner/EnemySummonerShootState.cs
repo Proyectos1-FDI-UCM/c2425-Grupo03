@@ -79,21 +79,6 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     private bool _attackFinished;
 
-    /// <summary>
-    /// Posicion de la bala en el mundo cuando mira a la izquierda
-    /// </summary>
-    private Vector3 _bulletRightPos;
-
-    /// <summary>
-    /// Posicion de la bala en el mundo cuando mira a la derecha
-    /// </summary>
-    private Vector3 _bulletLeftPos;
-
-
-    /// <summary>
-    /// Posicion de la bala en el momento de disparar
-    /// </summary>
-    private Vector3 _bulletCurrentPos;
 
     #endregion
 
@@ -121,11 +106,6 @@ public class EnemySummonerShootState : BaseState
         // activar animator
         _animator?.SetBool("IsAttack", true);
 
-        //determinar puntos de invocación de la bala
-        _bulletLeftPos = _bulletPosition.transform.position;
-        _bulletRightPos.y = _bulletLeftPos.y;
-        _bulletRightPos.x = transform.position.x - (_bulletPosition.transform.position.x - transform.position.x);
-
         //dar valor al tiempo de carga del ataque
         _shootTime = Time.time + _waitTimeShoot;
 
@@ -139,22 +119,11 @@ public class EnemySummonerShootState : BaseState
     public void Shoot()
     {
         // NO HACE FALTA COMPROBAR SI _CTX ES NULL PQ YA SE HA COMPROBADO DONDE SE LLAMA
-
-        //determinar el punto actual de la posicion para la bala 
-        if (_ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
-        {
-           _bulletCurrentPos = _bulletRightPos;
-        }
-        else
-        {
-            _bulletCurrentPos = _bulletLeftPos;
-        }
-
         // Reproducir el sonido de disparo
         SoundManager.Instance.PlaySFX(_shotSound, transform, 0.3f);
 
         // Instancia la bala
-        Instantiate(_magicBullet, _bulletCurrentPos, transform.rotation).Setup(_ctx.PlayerTransform.position);
+        Instantiate(_magicBullet, _bulletPosition.position, transform.rotation).Setup(_ctx.PlayerTransform.position);
     }
     
     /// <summary>
@@ -182,13 +151,7 @@ public class EnemySummonerShootState : BaseState
     {
         if (_ctx != null)
         {
-            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
-
-            //Se gira el sprite en función de la posición del jugador
-            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
-
+            _ctx.UpdateLookingDirection();
             //Disparar después del tiempo de recarga
             if (Time.time > _shootTime && !_attackFinished)
             {
@@ -202,7 +165,6 @@ public class EnemySummonerShootState : BaseState
 
                 // Termina el ataque
                 _attackFinished = true;
-
             }
         }
     }

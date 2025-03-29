@@ -91,12 +91,7 @@ public class EnemySummonerInvokeState : BaseState
 
         if (_ctx != null)
         {
-            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
-
-            //Invierte el sprite en función de hacia donde mira el enemigo
-            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
+            _ctx.UpdateLookingDirection();
 
             //Comienza la animación de invocar
             _animator.SetBool("IsInvoking", true);
