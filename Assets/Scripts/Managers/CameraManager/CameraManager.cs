@@ -168,7 +168,7 @@ public class CameraManager : MonoBehaviour
         _cameraInstructions.Enqueue(cameraInstruction);
 
         // si es la primera instrucción la inicializa
-        if(_cameraInstructions.Count == 0) cameraInstruction.SetUp();
+        if(_cameraInstructions.Count == 1) cameraInstruction.SetUp();
     }
 
     /// <summary>
