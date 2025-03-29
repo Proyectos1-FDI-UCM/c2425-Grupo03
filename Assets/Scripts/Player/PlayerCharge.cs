@@ -5,13 +5,15 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
-public class PlayerChargeScript : MonoBehaviour
+public class PlayerCharge : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -25,11 +27,7 @@ public class PlayerChargeScript : MonoBehaviour
     /// El valor máximo de la carga de Mano de La Sombra
     /// Y la carga actual de la Mano de la Sombra
     /// </summary>
-    [SerializeField] private int _maxChargeManoDeLaSombra;
-    /// <summary>
-    /// Carga de la Mano de la Sombra
-    /// </summary>
-    private float _currentChargeManoDeLaSombra;
+    [SerializeField] private int _maxChargeManoDeLasSombras;
 
     [Header("Super Dash")]
     /// <summary>
@@ -37,10 +35,6 @@ public class PlayerChargeScript : MonoBehaviour
     /// Y la carga actual de la Super Dash
     /// </summary>
     [SerializeField] private int _maxChargeSuperDash;
-    /// <summary>
-    /// Carga del Super Dash
-    /// </summary>
-    private float _currentChargeSuperDash;
 
     /// <summary>
     /// El porcentaje de carga que le quita al jugador de las habilidades
@@ -53,15 +47,6 @@ public class PlayerChargeScript : MonoBehaviour
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     /// <summary>
-    /// El numero de habilidades que tiene el jugador.
-    /// </summary>
-    private static int _abilityNr = 2;
-
-    /// <summary>
-    /// El valor minimo de la carga.
-    /// </summary>
-    private int _MIN_CHARGE = 0;
-    /// <summary>
     /// Una estructura que define la habilidad.
     /// </summary>
     public struct Ability {
@@ -69,13 +54,23 @@ public class PlayerChargeScript : MonoBehaviour
         public bool isCharged;
         public float maxCharge;
     }
-    private static Ability abilityOne;
-    private static Ability abilityTwo;
-    public Ability[] abilities = new Ability[_abilityNr];
+    private static Ability _abilityManoDeLasSombras;
+    private static Ability _abilitySuperDash;
     #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
+    public Ability ManoDeLasSombras { get => _abilityManoDeLasSombras; }
+    public Ability SuperDash { get => _abilitySuperDash; }
+    #endregion
+
+    // ---- ATRIBUTOS PUBLICOS ----
+    #region Atributos Públicos
+    /// <summary>
+    /// Evento para cuando cambia el valor de las cargas.
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _onChargeChange;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -86,22 +81,16 @@ public class PlayerChargeScript : MonoBehaviour
     /// </summary>
     void Start()
     {
-        abilities[0] = abilityOne;
-        abilities[1] = abilityTwo;
         GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
-        for (int i = 0; i < abilities.Length; i++) {
-            abilities[i].currentCharge = 0;
-            abilities[i].isCharged = false;
-        }
+        
+        _abilityManoDeLasSombras.currentCharge = 0;
+        _abilityManoDeLasSombras.isCharged = false;
+        _abilityManoDeLasSombras.maxCharge = _maxChargeManoDeLasSombras;
 
-        abilities[0].maxCharge = _maxChargeSuperDash;
-        abilities[1].maxCharge = _maxChargeManoDeLaSombra;
-    }
+        _abilitySuperDash.currentCharge = 0;
+        _abilitySuperDash.isCharged = false;
+        _abilitySuperDash.maxCharge = _maxChargeSuperDash;
 
-    private void Update()
-    {
-        _currentChargeManoDeLaSombra = abilities[1].currentCharge;
-        _currentChargeSuperDash = abilities[0].currentCharge;
     }
     #endregion
 
@@ -112,18 +101,10 @@ public class PlayerChargeScript : MonoBehaviour
     /// </summary>
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
     public void AddCharge(float chargePoints) 
-    {
-        for (int i = 0; i < abilities.Length; i++) 
-        {
-            if (!abilities[i].isCharged) abilities[i].currentCharge += chargePoints;
-
-            if ((abilities[i].currentCharge >= abilities[i].maxCharge))
-            {
-                abilities[i].currentCharge = abilities[i].maxCharge;
-                abilities[i].isCharged = true;
-            }
-        }
-        
+    {   
+        AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+        AddChargeAbility(ref _abilitySuperDash, chargePoints);
+        _onChargeChange.Invoke();   
     }
     /// <summary>
     /// Quita carga de la barra.
@@ -131,40 +112,49 @@ public class PlayerChargeScript : MonoBehaviour
     /// <param name="removedHealth">Los puntos de vida que se han quitado al jugador.</param>
     public void RemoveCharge(float removedHealth)
     {
-        float chargePoints = (_removedChargePercentage / 100 * removedHealth);
-        for (int i = 0; i < abilities.Length; i++)
-        {
-            Ability currAbility = abilities[i];
-            if (!currAbility.isCharged)
-            {
-                currAbility.currentCharge -= chargePoints;
-            }
-
-            if(currAbility.currentCharge <= _MIN_CHARGE)
-            {
-                currAbility.currentCharge = _MIN_CHARGE;
-            }
-
-            abilities[i] = currAbility;
-        }
+        // Calcula los puntos de carga que quitar
+        float chargePoints = -(_removedChargePercentage / 100 * removedHealth);
+        // Quita de la mano de las sombras.
+        AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+        // Quita del Super Dash.
+        AddChargeAbility(ref _abilitySuperDash, chargePoints);
+        _onChargeChange.Invoke();
     }
     /// <summary>
-    /// Método  que resetea la carga de la barra a 0.
+    /// Método  que resetea la carga de super dash a 0.
     /// </summary>
-    /// <param name="abilityNr">El número de la habilidad.</param>
-    public void ResetCharge(int abilityNr)
+    public void ResetSuperDash()
     {
-        abilities[abilityNr].currentCharge = 0;
-        abilities[abilityNr].isCharged = false;
+        _abilitySuperDash.currentCharge = 0;
+        _abilitySuperDash.isCharged = false;
+        _onChargeChange.Invoke();
+    }
+    /// <summary>
+    /// Método  que resetea la carga de mano de las sombras a 0.
+    /// </summary>
+    public void ResetManoDeLasSombras()
+    {
+        _abilityManoDeLasSombras.currentCharge = 0;
+        _abilityManoDeLasSombras.isCharged = false;
+        _onChargeChange.Invoke();
     }
 
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS ----
+    #region Métodos privados
     /// <summary>
-    /// Devuelve true o false dependiendo de si la habilidad está cargada o no.
+    /// Método que añade puntos de carga a cierta habilidad.
     /// </summary>
-    /// <param name="abilityNr">El número de la habilidad.</param>
-    /// <returns>True si la habilidad está cargada, false en caso contrario.</returns>
-    public bool GetCharge(int abilityNr) {
-        return abilities[abilityNr].isCharged;
+    /// <param name="ability">La habilidad a cual se le aplica el cambio.</param>
+    /// <param name="chargePoints">El número de puntos de carga para añadir.</param>
+    private void AddChargeAbility(ref Ability ability, float chargePoints) {
+        if (!ability.isCharged) {
+            ability.currentCharge = Math.Clamp(ability.currentCharge + chargePoints, 0, ability.maxCharge);
+            if (ability.currentCharge >= ability.maxCharge) {
+                ability.isCharged = true;
+            }
+        }
     }
     #endregion
 

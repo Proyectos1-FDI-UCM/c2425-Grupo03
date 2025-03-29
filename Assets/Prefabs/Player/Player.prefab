@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 1214668236577535999}
   - component: {fileID: 4886483801494157451}
   - component: {fileID: -4233722579977323440}
-  - component: {fileID: 1494383266299005258}
   - component: {fileID: 5441531688453424118}
+  - component: {fileID: 7590606572296611977}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 5
   _initialHealth: 250
   _onDeath:
     m_PersistentCalls:
@@ -302,21 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
---- !u!114 &1494383266299005258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450874108255313576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxChargeManoDeLaSombra: 30
-  _maxChargeSuperDash: 30
-  _removedChargePercentage: 10
 --- !u!82 &5441531688453424118
 AudioSource:
   m_ObjectHideFlags: 0
@@ -413,6 +398,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7590606572296611977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450874108255313576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxChargeManoDeLasSombras: 0
+  _maxChargeSuperDash: 5
+  _removedChargePercentage: 1
+  _onChargeChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6934603295301053230
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +577,6 @@ MonoBehaviour:
   _actionTime: 0.2
   _timeOfDamage: 1
   _timeOfDash: 1
-  _abilityIndex: 1
   _abilityChargePercentage: 0
   _SoundEffect: {fileID: 8300000, guid: fe416242c97fba7458d69386d2473c6f, type: 3}
 --- !u!114 &3132457056714941732
@@ -661,7 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _maxHeight: 5
+  _maxHeight: 4.5
   _jumpSound: {fileID: 8300000, guid: 9df19ee1923fb604380b2a2864207cd1, type: 3}
 --- !u!114 &470757805071825687
 MonoBehaviour:
@@ -681,10 +683,12 @@ MonoBehaviour:
   _attackSpeed: 0.4
   _damage: 5
   _abilityChargePercentage: 1000
-  _airHit1: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
-  _airHit2: {fileID: 8300000, guid: 48c961f5acc5f574f9a35154227d2988, type: 3}
-  _airHit3: {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
-  _airHit4: {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
+  _airHitList:
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}
+  - {fileID: 8300000, guid: 48c961f5acc5f574f9a35154227d2988, type: 3}
+  - {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
+  _maxCombo: 3
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1

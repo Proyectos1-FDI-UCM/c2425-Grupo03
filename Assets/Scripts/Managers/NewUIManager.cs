@@ -39,7 +39,7 @@ public class NewUIManager : MonoBehaviour
     /// <summary>
     /// El script de carga.
     /// </summary>
-    private PlayerChargeScript _playerCharge1;
+    private PlayerCharge _playerCharge1;
     /// <summary>
     /// El health manager.
     /// </summary>
@@ -71,7 +71,7 @@ public class NewUIManager : MonoBehaviour
     {
         // Coge todos los componentes.
         _healthSlider1 = GetComponentInChildren<Slider>(); 
-        _playerCharge1 = _playerPrefab1.GetComponent<PlayerChargeScript>();
+        _playerCharge1 = _playerPrefab1.GetComponent<PlayerCharge>();
         _healthManager1 = _playerPrefab1.GetComponent<HealthManager>();
 
         // Slider Settings
@@ -86,8 +86,8 @@ public class NewUIManager : MonoBehaviour
         _healthManager1._onHealed.AddListener(UpdateHealthBar1);
 
         // Coge las cargas iniciales de las habilidades
-        _currentChargeOne1 = _playerCharge1.abilities[0].currentCharge;
-        _currentChargeTwo1 = _playerCharge1.abilities[1].currentCharge;
+        _currentChargeOne1 = _playerCharge1.SuperDash.currentCharge;
+        _currentChargeTwo1 = _playerCharge1.ManoDeLasSombras.currentCharge;
     }
 
     void Update()
@@ -122,12 +122,12 @@ public class NewUIManager : MonoBehaviour
 
     private void UpdateAbilityCharge1() {
         // Actualizamos los valores de las cargas
-        _currentChargeOne1 = _playerCharge1.abilities[0].currentCharge;
-        _currentChargeTwo1 = _playerCharge1.abilities[1].currentCharge;
+        _currentChargeOne1 = _playerCharge1.SuperDash.currentCharge;
+        _currentChargeTwo1 = _playerCharge1.ManoDeLasSombras.currentCharge;
         
         // Calculamos el porcentaje de carga
-        float chargePercentageOne = _currentChargeOne1 / _playerCharge1.abilities[0].maxCharge;
-        float chargePercentageTwo = _currentChargeTwo1 / _playerCharge1.abilities[1].maxCharge;
+        float chargePercentageOne = _currentChargeOne1 / _playerCharge1.SuperDash.maxCharge;
+        float chargePercentageTwo = _currentChargeTwo1 / _playerCharge1.ManoDeLasSombras.maxCharge;
         
         // Cambiamos el color de las imagenes
         _abilityOneImg1.color = new Color(chargePercentageOne, chargePercentageOne, chargePercentageOne, 1f);

@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// El script de carga.
     /// </summary>
-    private PlayerChargeScript _playerCharge;
+    private PlayerCharge _playerCharge;
     /// <summary>
     /// El health manager.
     /// </summary>
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
     {
         // Coge todos los componentes.
         _healthSlider = GetComponentInChildren<Slider>(); 
-        _playerCharge = _playerPrefab.GetComponent<PlayerChargeScript>();
+        _playerCharge = _playerPrefab.GetComponent<PlayerCharge>();
         _healthManager = _playerPrefab.GetComponent<HealthManager>();
 
         // Slider Settings
@@ -88,14 +88,16 @@ public class UIManager : MonoBehaviour
         // Va a actualizar la bara de vida cuando el jugador recibe o se le quita vida. 
         _healthManager._onDamaged.AddListener(UpdateHealthBar);
         _healthManager._onHealed.AddListener(UpdateHealthBar);
+        _healthManager._onDeath.AddListener(ResetHealthBar);
 
         // Coge las cargas iniciales de las habilidades
-        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
-        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
-    }
+        _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
 
-    void Update()
-    {
+        // Subscribe el método para actualizar la carga de las habilidades al evento correspondiente.
+        _playerCharge._onChargeChange.AddListener(UpdateAbilityCharge);
+
+        // Valores iniciales de las barras.
         UpdateAbilityCharge();
     }
     #endregion
@@ -128,17 +130,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void ResetHealthBar() {
+        _healthSlider.value = 1;
+    }
+
     /// <summary>
     /// Actualiza la carga de las habilidades
     /// </summary>
     private void UpdateAbilityCharge() {
         // Actualizamos los valores de las cargas
-        _currentChargeOne = _playerCharge.abilities[0].currentCharge;
-        _currentChargeTwo = _playerCharge.abilities[1].currentCharge;
+        _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
         
         // Calculamos el porcentaje de carga
-        float chargePercentageOne = _currentChargeOne / _playerCharge.abilities[0].maxCharge;
-        float chargePercentageTwo = _currentChargeTwo / _playerCharge.abilities[1].maxCharge;
+        float chargePercentageOne = _currentChargeOne / _playerCharge.SuperDash.maxCharge;
+        float chargePercentageTwo = _currentChargeTwo / _playerCharge.ManoDeLasSombras.maxCharge;
         
         // Cambiamos la carga
         _abilityOneSlider.value = chargePercentageOne;

@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
 
 
@@ -104,16 +105,22 @@ public class CheckpointManager : MonoBehaviour
     /// <param name="player"></param>
     public void RespawnPlayer(GameObject player)
     {
-        //Transform lastCheckpoint = GameManager.Instance.GetCheckpoint();
+        // Recarga la escena actual
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         if (GameManager.Instance.GetCheckpoint() != null)
         {
             SoundManager.Instance.PlaySFX(_respawnSound, transform, 0.1f);
             // Mueve la posición del jugador a la posición del checkpoint
             player.transform.position = GameManager.Instance.GetCheckpoint();
+
+            //Restablece la camara para que siga al jugador
+            CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(0.1f, CameraManager.Instance.GetComponent<Camera>().orthographicSize));
+
         }
     }
     #endregion
+
 
 
 } // class CheckPointManager 

@@ -6125,22 +6125,31 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8005fe816a1432442940bed43bd7174e, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1494383266299005258, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4450874108255313576, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1687090390}
   m_SourcePrefab: {fileID: 100100000, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
 --- !u!114 &315796137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1214668236577535999, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
   m_PrefabInstance: {fileID: 315796136}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 315796138}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f4deab3d5a4db94195e749d7ff11c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &315796138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4450874108255313576, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+  m_PrefabInstance: {fileID: 315796136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &317845736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39401,6 +39410,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6415833642186472685, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
   m_PrefabInstance: {fileID: 315796136}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1687090390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315796138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxChargeManoDeLaSombra: 5
+  _maxChargeSuperDash: 5
+  _removedChargePercentage: 1
 --- !u!1001 &1687503434
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -125,11 +125,7 @@ public class EnemySummonerAttackState : BaseState
     {
         if (_ctx != null)
         {
-            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-                EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
-
-            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left;
+            _ctx.UpdateLookingDirection();
         }
         //si ha pasado el cooldown, aleatoriamente invocar o disparar
         if (Time.time > _cooldownTime) 

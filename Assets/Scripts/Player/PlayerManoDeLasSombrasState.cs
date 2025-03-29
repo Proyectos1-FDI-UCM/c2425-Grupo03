@@ -104,7 +104,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// coge referencia
     /// </summary>
-    private PlayerChargeScript _chargeScript;
+    private PlayerCharge _chargeScript;
     /// <summary>
     /// coge referencia del ctx
     /// </summary>
@@ -129,7 +129,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     private void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
-        _chargeScript = _ctx.GetComponent<PlayerChargeScript>();
+        _chargeScript = _ctx.GetComponent<PlayerCharge>();
         _isLocked = false;
     }
 
@@ -157,7 +157,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _chargeScript.ResetCharge(1);
+        _chargeScript.ResetManoDeLasSombras();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
     }
     #endregion

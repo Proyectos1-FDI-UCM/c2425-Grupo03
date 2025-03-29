@@ -153,6 +153,26 @@ public class EnemySummonerStateMachine : StateMachine
         }
     }
 
+    /// <summary>
+    /// Actualizar la direccion a la que mira el invocador
+    /// </summary>
+    public void UpdateLookingDirection()
+    {
+        //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+        LookingDirection = (PlayerTransform.position.x -transform.position.x) > 0 ?
+        EnemySummonerStateMachine.EnemyLookingDirection.Left : EnemySummonerStateMachine.EnemyLookingDirection.Right;
+
+        //se escala en x para cambiar hijos de lado
+        if (LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
     #endregion
 
 } // class EnemyStateMachine 
