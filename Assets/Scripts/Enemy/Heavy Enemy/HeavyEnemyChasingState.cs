@@ -52,6 +52,10 @@ public class HeavyEnemyChasingState : BaseState
     /// si debe girar o no de direccion
     /// </summary>
     bool _shouldFlip = false;
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
 
     #endregion
 
@@ -64,6 +68,7 @@ public class HeavyEnemyChasingState : BaseState
         _ctx = GetCTX<HeavyEnemyStateMachine>();
         //Coge la referencia al rigidbody por comodidad
         _rb = _ctx?.Rigidbody;
+        _animator = _ctx.GetComponent<Animator>();
     }
     #endregion
     private void OnTriggerExit2D(Collider2D collision)
@@ -74,6 +79,7 @@ public class HeavyEnemyChasingState : BaseState
             _ctx.IsPlayerInChaseRange = false;
         }
     }
+
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
     // Documentar cada método que aparece aquí con ///<summary>
@@ -88,7 +94,7 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        _animator.SetBool("Chasing", true);
     }
     
     /// <summary>
@@ -101,6 +107,7 @@ public class HeavyEnemyChasingState : BaseState
         {
             _rb.velocity = Vector3.zero;
         }
+        _animator.SetBool("Chasing", false);
     }
     #endregion
     

@@ -28,6 +28,10 @@ public class HeavyEnemyIdleState : BaseState
     /// Contexto del estado.
     /// </summary>
     HeavyEnemyStateMachine _ctx;
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
     #endregion
 
 
@@ -45,6 +49,7 @@ public class HeavyEnemyIdleState : BaseState
     private void Start()
     {
         _ctx = GetCTX<HeavyEnemyStateMachine>();
+        _animator = _ctx.GetComponent<Animator>();
     }
 
     /// <summary>
@@ -67,7 +72,7 @@ public class HeavyEnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        _animator.SetBool("Idle", true);
     }
     
     /// <summary>
@@ -75,7 +80,7 @@ public class HeavyEnemyIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _animator.SetBool("Idle", false);
     }
     #endregion
     
