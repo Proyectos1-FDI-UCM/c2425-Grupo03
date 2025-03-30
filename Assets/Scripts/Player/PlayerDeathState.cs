@@ -78,6 +78,8 @@ public class PlayerDeathState : BaseState
 
         _animator?.SetBool("IsDead", true);
         SoundManager.Instance.PlayRandomSFX(_playerDeath, transform, 0.2f);
+
+        Ctx.Rigidbody.velocity = Vector3.zero;
     }
 
     /// <summary>

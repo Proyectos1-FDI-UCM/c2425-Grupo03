@@ -23,6 +23,11 @@ public class WaveController : MonoBehaviour
     /// Puerta que se abre después de las oleadas
     /// </summary>
     [SerializeField] GameObject _door;
+
+    /// <summary>
+    /// El tamaño de la camara cuando entra en la zona
+    /// </summary>
+    [SerializeField] private int _zoom;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -104,7 +109,7 @@ public class WaveController : MonoBehaviour
         }
 
         // Cambia la cámara al centro del área de combate (el objeto vacío con este script)
-        CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, 6));
+        CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, _zoom));
     }
     #endregion
 
