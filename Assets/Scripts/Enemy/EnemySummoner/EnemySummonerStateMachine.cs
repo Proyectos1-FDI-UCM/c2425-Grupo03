@@ -47,6 +47,7 @@ public class EnemySummonerStateMachine : StateMachine
     /// Bool para determinar si el enemigo ha sido dañado o no.
     /// </summary>
     private bool _isFirstHit = true;
+
     /// <summary>
     /// El transform de la carpeta de Spawnpoints. 
     /// </summary>
@@ -165,11 +166,11 @@ public class EnemySummonerStateMachine : StateMachine
         //se escala en x para cambiar hijos de lado
         if (LookingDirection == EnemySummonerStateMachine.EnemyLookingDirection.Left)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 

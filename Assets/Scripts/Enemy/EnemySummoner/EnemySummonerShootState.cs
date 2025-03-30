@@ -29,6 +29,11 @@ public class EnemySummonerShootState : BaseState
     [SerializeField] int _damage;
 
     /// <summary>
+    /// Valor de tiempo del estado
+    /// </summary>
+    [SerializeField][Min(0)] float _waitTimeShootState;
+ 
+    /// <summary>
     /// Valor de tiempo para hacer disparo
     /// </summary>
     [SerializeField][Min(0)] float _waitTimeShoot;
@@ -70,6 +75,11 @@ public class EnemySummonerShootState : BaseState
     private EnemySummonerStateMachine _ctx;
 
     /// <summary>
+    /// Tiempo de EstadoShoot
+    /// </summary>
+    private float _shootStateTime;
+
+    /// <summary>
     /// Tiempo de espera para disparar más tiempo del momento del juego
     /// </summary>
     private float _shootTime;
@@ -78,6 +88,10 @@ public class EnemySummonerShootState : BaseState
     /// Booleana para ver si ha terminado de atacar
     /// </summary>
     private bool _attackFinished;
+    /// <summary>
+    /// Booleana para ver si ha terminado de atacar
+    /// </summary>
+    private bool _stateFinished;
 
 
     #endregion
@@ -107,10 +121,14 @@ public class EnemySummonerShootState : BaseState
         _animator?.SetBool("IsAttack", true);
 
         //dar valor al tiempo de carga del ataque
+        _shootStateTime = Time.time + _waitTimeShootState;
         _shootTime = Time.time + _waitTimeShoot;
 
         //indicar que el ataque no está acabado puesto que acaba de empezar
         _attackFinished = false;
+
+        // indicar que el estado no está acabado puesto que acaba de empezar
+        _stateFinished = false;
     }
 
     /// <summary>
@@ -134,6 +152,10 @@ public class EnemySummonerShootState : BaseState
         // Termina la animación de disparo
         _animator?.SetBool("IsAttack", false);
     }
+    public void TriggerEvent()
+    {
+        Shoot();
+    }
     #endregion
     
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -153,9 +175,18 @@ public class EnemySummonerShootState : BaseState
         {
             _ctx.UpdateLookingDirection();
             //Disparar después del tiempo de recarga
+
             if (Time.time > _shootTime && !_attackFinished)
             {
                 Shoot();
+                // Termina el ataque
+                _attackFinished = true;
+
+            }
+   
+            if (Time.time > _shootStateTime && !_stateFinished)
+            {
+                
 
                 // Cambia de estado al de ataque
                 _ctx.ChangeState(_ctx.GetStateByType<EnemySummonerAttackState>());
@@ -163,8 +194,8 @@ public class EnemySummonerShootState : BaseState
                 // Termina la animación de disparo
                 _animator?.SetBool("IsAttack", false);
 
-                // Termina el ataque
-                _attackFinished = true;
+                // Estado TErminado
+                _stateFinished = true;
             }
         }
     }

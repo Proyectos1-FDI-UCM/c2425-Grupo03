@@ -25,7 +25,7 @@ public class EnemySummonerAttackState : BaseState
     /// Tiempo entre habilidades
     /// </summary>
     [SerializeField] 
-    int _abilityCooldown;
+    float _abilityCooldown;
 
     [SerializeField][Range(0.0f, 1f)] float _invokeProbabilty;
 
