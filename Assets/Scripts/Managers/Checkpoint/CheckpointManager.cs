@@ -41,6 +41,11 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField] AudioClip _takeCheckPoint;
 
     #endregion
+    // ---- PROPIEDADES ----
+    #region Propiedades
+    // Documentar cada propiedad que aparece aquí.
+    // Escribir con PascalCase.
+    #endregion
 
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----

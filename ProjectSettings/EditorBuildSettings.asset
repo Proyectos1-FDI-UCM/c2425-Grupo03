@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Menu_Zhiyi/HUD_Alexa.unity
     guid: 272a76a3823e3c343bbee8e2fe980ad7
+  - enabled: 1
+    path: Assets/Scenes/Testing/Levels/Level_1.unity
+    guid: f2ca71fc4fc34be4cabad8fd660b31f6
+  - enabled: 1
+    path: Assets/Scenes/Testing/Levels/Level_2.unity
+    guid: 62e37bec2cd556f49ada3b414acdf242
+  - enabled: 1
+    path: Assets/Scenes/Testing/Levels/Level_3.unity
+    guid: 078c240c8c03cc444899cd3d9dbccc4c
   m_configObjects: {}

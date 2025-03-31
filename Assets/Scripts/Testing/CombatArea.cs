@@ -10,10 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// La clase que se utiliza para las areas del combate, tiene un zoom para la camara
+/// y la pared que se quita cuando estan eliminados todos los enemigos
 /// </summary>
-public class Removable : MonoBehaviour
+public class CombatArea : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -25,6 +25,8 @@ public class Removable : MonoBehaviour
     /// La puerta a eliminar 
     /// </summary>
     [SerializeField] private GameObject _door;
+
+    [SerializeField] private int _zoom;
 
     #endregion
 
@@ -71,7 +73,19 @@ public class Removable : MonoBehaviour
         if (transform.childCount == 0)
         {
             Destroy(_door);
+            CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 10));
+            Destroy(this.gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, _zoom));
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1,10));
     }
     #endregion
 
