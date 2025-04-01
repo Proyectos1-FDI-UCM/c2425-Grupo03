@@ -24,7 +24,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// <summary>
     /// Determina si está bloqueado o desbloqueado.
     /// </summary>
-    [SerializeField] private bool _isLocked = false;
+    [SerializeField] private bool _isLocked;
     [Header("Ability Properties")]
     /// <summary>
     /// // Daño de la habilidad.

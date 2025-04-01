@@ -22,7 +22,7 @@ public class PlayerChargedAttackState : BaseState
     /// <summary>
     /// Determina si está bloqueado o desbloqueado.
     /// </summary>
-    [SerializeField] private bool _isLocked = false;
+    [SerializeField] private bool _isLocked;
     [Header("Charge Attack Properties")]
     /// <summary>
     /// Radio de alcance del ataque cargado
