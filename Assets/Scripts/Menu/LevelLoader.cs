@@ -13,7 +13,6 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// La transicion a otra escena 
-/// 
 /// </summary>
 public class LevelLoader : MonoBehaviour
 {
@@ -77,7 +76,7 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         //Buscar el Player y coger su HealthManager
-        _healthManager = FindFirstObjectByType<PlayerStateMachine>().GetComponent<HealthManager>();
+        _healthManager = FindFirstObjectByType<PlayerStateMachine>()?.GetComponent<HealthManager>();
 
         //Añadir la animacion de transicion a cuando muere el jugador
         _healthManager?._onDeath.AddListener(ReloadSceneAnimation);
@@ -161,6 +160,7 @@ public class LevelLoader : MonoBehaviour
         //Buscar en el array el animador con el nombre correspondiente
         int i = 0;
         while (_transition[i].name != transitionName) i++;
+        //Devolver el animator correspondiente
         return _transition[i];
     }
 
