@@ -76,9 +76,13 @@ public class PauseMenuController : MonoBehaviour
     private bool _paused = false;
 
     /// <summary>
-    /// El input del jugador
+    /// El input del menu
     /// </summary>
     private PlayerInputActions _menuInput;
+
+    /// <summary>
+    /// El input del jugador
+    /// </summary>
     private PlayerInputActions.PlayerActions _playerInput;
     //private PlayerInputActions _playerInput;
     PlayerStateMachine _ctx;
@@ -106,10 +110,9 @@ public class PauseMenuController : MonoBehaviour
     void Start()
     {
         _pauseMenu.SetActive(false);
-        _menuInput.Player.Enable();
-        _menuInput.Player.Menu.performed += PausePress;
-        _menuInput.UI.Cancel.performed += UnpausePress;
+        _menuInput.Disable();
 
+        //coge referencia al input del jugador
         if (_player != null)
         {
             if (_player.GetComponent<PlayerStateMachine>() != null)
@@ -117,6 +120,9 @@ public class PauseMenuController : MonoBehaviour
                 _playerInput = _player.GetComponent<PlayerStateMachine>().PlayerInput;
             }
         }
+
+        _menuInput.UI.Cancel.performed += UnpausePress;
+        _playerInput.Menu.performed += PausePress;
     }
 
     #endregion
@@ -158,7 +164,6 @@ public class PauseMenuController : MonoBehaviour
         // Desactiva el control del jugador
         _playerInput.Disable();
 
-        _menuInput.Player.Disable();
         _menuInput.UI.Enable();
 
         // Detiene el tiempo del juego
@@ -195,7 +200,6 @@ public class PauseMenuController : MonoBehaviour
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
 
         _menuInput.UI.Disable();
-        _menuInput.Player.Enable();
         Time.timeScale = 1f;
         _paused = false;
     }
@@ -208,7 +212,7 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
         _paused = false;
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
-        SceneManager.LoadScene(_mainMenuSceneName);
+        SceneManager.LoadScene(_mainMenuSceneName); 
     }
 
     public void OnSelectContinue()
