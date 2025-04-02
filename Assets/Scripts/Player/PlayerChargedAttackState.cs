@@ -99,6 +99,7 @@ public class PlayerChargedAttackState : BaseState
         _rigidbody = Ctx?.Rigidbody;
         _animator = Ctx?.Animator;
         _isLocked = false;
+        _ctx.OnChargedAttackAddListener(ChargedAttack);
     }
    
     #endregion
@@ -129,7 +130,7 @@ public class PlayerChargedAttackState : BaseState
     /// <summary>
     /// Metodo encargado de hacer el ataque cargado en un circulo con el centro en el jugador
     /// </summary>
-    void ChargedAttack()
+    public void ChargedAttack()
     {
         SoundManager.Instance.PlaySFX(_airHit, transform, 0.5f);
         Vector2 position = transform.position;
@@ -170,7 +171,6 @@ public class PlayerChargedAttackState : BaseState
         {
             _animator?.SetBool("IsChargeAttacking", true);
             _animator?.SetBool("IsCharging", false);
-            ChargedAttack();
             _attacked = true;
         }
     }

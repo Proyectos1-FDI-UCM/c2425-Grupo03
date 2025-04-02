@@ -6,9 +6,7 @@
 //---------------------------------------------------------
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -110,6 +108,21 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     private PlayerStateMachine _ctx;
 
+    /// <summary>
+    /// Los enemigos golpeados cuando se ejecuta el ataque
+    /// </summary>
+    RaycastHit2D[] _hits;
+
+    /// <summary>
+    /// Cuantos enemigos han sido realmente golpeados con el ataque
+    /// </summary>
+    int _affectedEnemys;
+
+    /// <summary>
+    /// la dirección en la que se ejecuta el ataque
+    /// </summary>
+    Vector2 _direction;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -129,8 +142,9 @@ public class PlayerManoDeLasSombrasState : BaseState
     private void Start()
     {
         _ctx = GetCTX<PlayerStateMachine>();
-        _chargeScript = _ctx.GetComponent<PlayerCharge>();
+        _chargeScript = _ctx?.GetComponent<PlayerCharge>();
         _isLocked = false;
+        _ctx?.OnManoSombrasPushAddListener(ShadowSecondHit);
     }
 
     #endregion
@@ -143,13 +157,20 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        // frena el jugador
         GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
         _startTime = Time.time;
 
         Ctx.Animator.SetTrigger("ManoSombras");
 
-        // Lanza el Raycast en la dirección en la que el jugador está mirando
-        StartCoroutine(CastShadowHand(new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection, 0)));
+        // Actualiza la dirección en la que lanzar el ataque
+        _direction = new Vector2((short)GetCTX<PlayerStateMachine>().LookingDirection,0);
+
+        // Atrae a los enemigos y actualiza el arrays con los enemigos a golpear
+        ShadowHandAtract();
+
+        // Hace instantáneamente el primer golpe
+        ShadowFirstHit();
     }
     
     /// <summary>
@@ -160,8 +181,30 @@ public class PlayerManoDeLasSombrasState : BaseState
         _chargeScript.ResetManoDeLasSombras();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
     }
-    #endregion
+
     
+    public void ShadowSecondHit()
+    {
+        for (int i = 0; i < _affectedEnemys; i++)
+        {
+            EnemyStateMachine enemy = _hits[i].collider == null ? null : _hits[i].collider.GetComponent<EnemyStateMachine>();
+
+            if (enemy != null)
+            {
+                // Aplicar Knockback en la dirección contraria
+                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -_direction + new Vector2(0, -_liftingHeight));
+
+                // Aplicar daño si tiene un HealthManager
+                HealthManager health = enemy.GetComponent<HealthManager>();
+                if (health != null)
+                {
+                    health.RemoveHealth((int)(_secondHitDamage)); // Segundo golpe
+                }
+            }
+        }
+    }
+    #endregion
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -176,32 +219,27 @@ public class PlayerManoDeLasSombrasState : BaseState
     {
         
     }
-    /// <summary>
-    /// metodo que instancia la habilidad delante del jugador.
-    /// </summary>
-    /// <param name="direction"></param>
 
-    private IEnumerator CastShadowHand(Vector2 direction)
+    private void ShadowHandAtract()
     {
-        SoundManager.Instance.PlaySFX(_attracSound, transform, 0.2f); 
-        // Esperar x segundos antes del primer golpe
-        yield return new WaitForSeconds(_waitTimeForFirstHit);
+        //Sonido de atraer
+        SoundManager.Instance.PlaySFX(_attracSound, transform, 0.2f);
 
         // Posición de inicio del Raycast 
-        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * direction.x, 0f); 
+        Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * _direction.x, 0f);
 
         // Realizar el Raycast
-        RaycastHit2D[] hits = Physics2D.RaycastAll(startPosition, direction, _skillRange, LayerMask.GetMask("Enemy")| LayerMask.GetMask("Wall"));
+        _hits = Physics2D.RaycastAll(startPosition, _direction, _skillRange, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Wall"));
 
         // Dibujar el Raycast 
-        if (_drawRaycast) Debug.DrawRay(startPosition, direction * _skillRange, Color.green, 0.5f);
+        if (_drawRaycast) Debug.DrawRay(startPosition, _direction * _skillRange, Color.green, 0.5f);
 
         bool wallHit = false; // Bandera para detectar si hemos golpeado una pared
-        int affectedEnemys = 0; // Índice manual para recorrer hits[]
+        _affectedEnemys = 0; // Índice manual para recorrer hits[]
 
-        while (affectedEnemys < hits.Length && !wallHit)
+        while (_affectedEnemys < _hits.Length && !wallHit)
         {
-            RaycastHit2D hit = hits[affectedEnemys];
+            RaycastHit2D hit = _hits[_affectedEnemys];
 
             // Si colisiona con un muro, activamos la bandera para ignorar enemigos después de la pared
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
@@ -222,56 +260,24 @@ public class PlayerManoDeLasSombrasState : BaseState
                     float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
                     enemy.GetStateByType<KnockbackState>()
-                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, direction);
+                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, _direction);
                 }
-                affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
+                _affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
             }
-        }
-        if (affectedEnemys > 0) // Si hay mas de un enemigo afectado, les aplicamos el segundo hit
-        {
-            StartCoroutine(ApplySecondHit(hits, direction, affectedEnemys));
         }
     }
 
-    /// <summary>
-    /// Metodo que realiza el segundo ataque
-    /// </summary>
-    /// <param name="hits"></param>
-    /// <param name="direction"></param>
-    /// <returns></returns>
-    private IEnumerator ApplySecondHit(RaycastHit2D[] hits, Vector2 direction, int affectedEnemys)
+    void ShadowFirstHit()
     {
-        // Esperar a que termine de atraer a los enemigos para hacerles el primer golpe
-        yield return new WaitForSeconds(_attractEnemyTime);
         SoundManager.Instance.PlaySFX(_pushSound, transform, 0.8f);
 
         // Aplicar daño si tiene un HealthManager
-        for (int i = 0; i < affectedEnemys; i++)
+        for (int i = 0; i < _affectedEnemys; i++)
         {
-            HealthManager enemyHealth = hits[i].collider.gameObject.GetComponent<HealthManager>();
+            HealthManager enemyHealth = _hits[i].collider.gameObject.GetComponent<HealthManager>();
             if (enemyHealth != null)
             {
                 enemyHealth.RemoveHealth((int)_firstHitDamage); // Primer golpe
-            }
-        }
-        // Esperar a que termine el primer golpe para hacer el segundo golpe
-
-        yield return new WaitForSeconds(_waitTimeForSecondHit);
-        for (int i = 0; i < affectedEnemys; i++) 
-        {
-            EnemyStateMachine enemy = hits[i].collider == null ? null: hits[i].collider.GetComponent<EnemyStateMachine>();
-
-            if (enemy != null)
-            {
-                // Aplicar Knockback en la dirección contraria
-                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -direction + new Vector2 (0,-_liftingHeight));
-
-                // Aplicar daño si tiene un HealthManager
-                HealthManager health = enemy.GetComponent<HealthManager>();
-                if (health != null)
-                {
-                    health.RemoveHealth((int)(_secondHitDamage)); // Segundo golpe
-                }
             }
         }
     }

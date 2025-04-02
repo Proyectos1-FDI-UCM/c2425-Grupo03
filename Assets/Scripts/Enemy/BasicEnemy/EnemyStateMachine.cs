@@ -8,6 +8,7 @@
 // IMPORTANTE: No uses los métodos del MonoBehaviour: Awake(), Start(), Update, etc. (NINGUNO)
 
 using UnityEngine;
+using UnityEngine.Events;
 // Añadir aquí el resto de directivas using
 
 
@@ -84,9 +85,40 @@ public class EnemyStateMachine : StateMachine
     /// El rango de ataque del enemigo
     /// </summary>
     public float AttackDistance { get; set; }
-    
+
     #endregion
 
+    // ---- ATRIBUTOS PRIVADOS ---
+    #region Atributos Privados
+
+    /// <summary>
+    /// Evento que se llama cuando el enemigo realiza el ataque
+    /// </summary>
+    private UnityEvent _onAttack;
+
+    #endregion
+
+    // ---- MÉTODOS PUBLICOS ----
+    #region Métodos Públicos
+
+    /// <summary>
+    /// Método llamado desde un animation event de cuando el enemigo ataca
+    /// </summary>
+    public void OnEnemyAttack()
+    {
+        _onAttack?.Invoke();
+    }
+
+    /// <summary>
+    /// Método para subscribir otros métodos al evento de ataque y mantener el evento protegido
+    /// </summary>
+    /// <param name="action">El método a subscribir</param>
+    public void OnEnemyAttackAddListener(UnityAction action)
+    {
+        _onAttack.AddListener(action);
+    }
+
+    #endregion 
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
@@ -98,6 +130,8 @@ public class EnemyStateMachine : StateMachine
     {
         // Coge el sprite renderer (para invertirlo al girarse)
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        _onAttack = new UnityEvent();
     }
 
     protected override void OnStart()

@@ -91,6 +91,9 @@ public class EnemyAttackState : BaseState
 
             //Informar al contexto el rango de ataque del enemigo
             _ctx.AttackDistance = _attackRadius;
+
+            // Subscribe el método de ataque al evento para que se llame con el animation event
+            _ctx.OnEnemyAttackAddListener(Attack);
         }
     }
     #endregion
@@ -128,6 +131,31 @@ public class EnemyAttackState : BaseState
     {
         _animator?.SetBool("IsAttack", false);
     }
+
+    /// <summary>
+    /// Atacar al jugador
+    /// </summary>
+    public void Attack()
+    {
+        //El rango de ataque del enemigo
+        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * _lookingDirection);
+
+        //El posible HealthManager del jugador
+        HealthManager player;
+
+        //Mirar en el área del ataque
+        RaycastHit2D playerInRange = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6);
+
+        //Si en el área de ataque se encuentra el jugador, entonces le hace daño
+        if (playerInRange.collider != null && playerInRange.collider.GetComponent<PlayerStateMachine>() != null)
+        {
+            player = playerInRange.collider.gameObject.GetComponent<HealthManager>();
+            player?.RemoveHealth(_damage);
+        }
+
+        //Reproduce le sonido de ataque
+        SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -158,36 +186,11 @@ public class EnemyAttackState : BaseState
         //Ataca cuando termina la animacion del ataque, con el _attackFinished
         if (Time.time > _nextAttackTime && _attackFinished)
         {
-            Attack(_lookingDirection);
-
             Ctx?.ChangeState(Ctx.GetStateByType<EnemyChaseState>());
         }
     }
 
-    /// <summary>
-    /// Atacar al jugador
-    /// </summary>
-    private void Attack(int direction)
-    {
-        //El rango de ataque del enemigo
-        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
-
-        //El posible HealthManager del jugador
-        HealthManager player;
-
-        //Mirar en el área del ataque
-        RaycastHit2D playerInRange = Physics2D.CircleCast(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 6);
-
-        //Si en el área de ataque se encuentra el jugador, entonces le hace daño
-        if(playerInRange.collider != null && playerInRange.collider.GetComponent<PlayerStateMachine>() != null)
-        {
-            player = playerInRange.collider.gameObject.GetComponent<HealthManager>();
-            player?.RemoveHealth(_damage);
-        }
-
-        //Reproduce le sonido de ataque
-        SoundManager.Instance.PlaySFX(_attackSound, transform, 0.5f);
-    }
+    
     /*
     private void OnDrawGizmos()
     {

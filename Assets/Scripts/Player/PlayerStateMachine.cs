@@ -8,6 +8,7 @@
 // IMPORTANTE: No uses los métodos del MonoBehaviour: Awake(), Start(), Update, etc. (NINGUNO)
 
 using UnityEngine;
+using UnityEngine.Events;
 // Añadir aquí el resto de directivas using
 
 
@@ -84,6 +85,20 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public AudioSource PlayerAudio { get; private set; }
 
+    /// <summary>
+    /// Evento para cuando ataca el jugador
+    /// </summary>
+    private UnityEvent OnAttack { get;  set; }
+    /// <summary>
+    /// Evento para cuando el jugador hace un ataque cargado
+    /// </summary>
+    private UnityEvent OnChargedAttack { get;  set; }
+
+    /// <summary>
+    /// Evento llamado cuando los esqueletos son empujados por la habiliadad de Mano de las Sombras
+    /// </summary>
+    private UnityEvent OnManoSombrasPush { get; set; }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -96,10 +111,66 @@ public class PlayerStateMachine : StateMachine
         ChangeState(gameObject.GetComponentInChildren<PlayerDeathState>());
     }
 
+    /// <summary>
+    /// Reproduce sonido de hacerse daño del jugador
+    /// </summary>
+    /// <param name="damage"></param>
     public void PlayerDamagedSFX(float damage)
     {
         SoundManager.Instance.PlayRandomSFX(_playerDamaged, transform, 0.8f);
     }
+    #region Subscripciones e invocaciones de eventos de animación
+    /// <summary>
+    /// Método que se invoca desde el animator cuando el evento de ataque comienza en una animación
+    /// </summary>
+    public void OnPlayerAttack()
+    {
+        OnAttack.Invoke();
+    }
+
+    /// <summary>
+    /// Método que se invoca desde el animator cuando el evento de ataque cargado comienza en una animación
+    /// </summary>
+    public void OnPlayerChargedAttack()
+    {
+        OnChargedAttack.Invoke();
+    }
+    /// <summary>
+    /// Método que se invoca desde el animator cuando el evento de ataque cargado comienza en una animación
+    /// </summary>
+    public void OnPlayerManoSombrasPush()
+    {
+        OnManoSombrasPush.Invoke();
+    }
+
+    /// <summary>
+    /// Método que permite subscribir otro método al evento OnAttack. Así, el evento queda totalmente protegido.
+    /// </summary>
+    /// <param name="action"></param>
+    public void OnAttackAddListener(UnityAction action)
+    {
+        OnAttack.AddListener(action);
+    }
+
+    /// <summary>
+    /// Método que permite subscribir otro método al evento OnAttack. Así, el evento queda totalmente protegido.
+    /// </summary>
+    /// <param name="action"></param>
+    public void OnChargedAttackAddListener(UnityAction action)
+    {
+        OnChargedAttack.AddListener(action);
+    }
+
+    /// <summary>
+    /// Método que permite subscribir otro método al evento OnAttack. Así, el evento queda totalmente protegido.
+    /// </summary>
+    /// <param name="action"></param>
+    public void OnManoSombrasPushAddListener(UnityAction action)
+    {
+        OnManoSombrasPush.AddListener(action);
+    }
+    #endregion
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -111,6 +182,10 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     protected override void OnAwake()
     {
+        OnAttack = new UnityEvent();
+        OnChargedAttack = new UnityEvent();
+        OnManoSombrasPush = new UnityEvent();
+
         _gravityScale = Rigidbody.gravityScale;
 
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
