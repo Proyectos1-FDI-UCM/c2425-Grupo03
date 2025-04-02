@@ -395,17 +395,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: 842a061437231409385e5d08046b3753, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: 842a061437231409385e5d08046b3753, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: c31c53036fd857f418de6308afe7095c, type: 3}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 3710738434707379630, guid: c31c53036fd857f418de6308afe7095c, type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: c31c53036fd857f418de6308afe7095c, type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: c31c53036fd857f418de6308afe7095c, type: 3}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5771d42c96651f442b92750da34a7547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playSceneName: HUD_Alexa
+  _playSceneName: Level_1
   _playArrow: {fileID: 1135280110}
   _exitArrow: {fileID: 1161994860}
   _firstButton: {fileID: 1519248750}
