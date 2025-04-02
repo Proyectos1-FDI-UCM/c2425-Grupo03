@@ -30,15 +30,15 @@ public class EnemyFallingState : BaseState
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Detecta si el enemigo ha entrado en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
-        if (collision.gameObject.layer == 1 << 7)
+        if (collision.gameObject.layer == 7)
         {
             _isGrounded = true;
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         // Detecta si el enemigo ha dejado de estar en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
-        if (other.gameObject.layer == 1 << 7)
+        if (collision.gameObject.layer == 7)
         {
             _isGrounded = false;
         }
