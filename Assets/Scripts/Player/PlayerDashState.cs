@@ -47,6 +47,7 @@ public class PlayerDashState : BaseState
     /// </summary>
     [SerializeField] AudioClip _dashSound;
 
+    [SerializeField] ParallaxEffect ParallaxEffect;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -115,7 +116,8 @@ public class PlayerDashState : BaseState
         //Acelera al jugador para hacer el dash, calcula la velocidad haciendo. -> v = d / t
         _dashSpeed = _distance * (short)GetCTX<PlayerStateMachine>()?.LookingDirection / _duration;
         _rb.velocity = new Vector2(_dashSpeed, 0);
-        
+        ParallaxEffect.Posicion((float)GetCTX<PlayerStateMachine>()?.LookingDirection, _dashSpeed, true, _duration);
+
         //Quita la gravedad para que no caiga si dasheas en el aire.
         _rb.gravityScale = 0;
 

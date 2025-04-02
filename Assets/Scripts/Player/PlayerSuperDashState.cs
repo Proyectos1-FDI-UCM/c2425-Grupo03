@@ -51,6 +51,7 @@ public class PlayerSuperDashState : BaseState
     [SerializeField, Min(0)] private float _timeOfDash;
     [SerializeField] private float _abilityChargePercentage;
     [SerializeField] AudioClip _SoundEffect;
+    [SerializeField] ParallaxEffect ParallaxEffect;
 
     #endregion
 
@@ -174,7 +175,8 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        //Quitar inmunidad al jugador
+        //Quitar inmunidad al jugador y actualizar posición del escenario
+        ParallaxEffect.Posicion(-_lookingDirection, _dashDistance, true, 1);
         _ctx.GetComponent<HealthManager>().Inmune = false;
         _chargeScript.ResetSuperDash();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
