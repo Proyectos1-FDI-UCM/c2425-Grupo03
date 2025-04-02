@@ -32,7 +32,6 @@ public class EnemyFallingState : BaseState
         // Detecta si el enemigo ha entrado en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
         if (collision.gameObject.layer == 7)
         {
-            Debug.Log("is gound");
             _isGrounded = true;
         }
     }

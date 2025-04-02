@@ -90,25 +90,37 @@ public class PauseMenuController : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
-    
+
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
+
+    private void Awake()
+    {
+        _playerInput = new PlayerInputActions();
+    }
     void Start()
     {
         _pauseMenu.SetActive(false);
-        _playerInput = new PlayerInputActions();
         _playerInput.Player.Enable();
         _playerInput.Player.Menu.performed += PausePress;
         _playerInput.UI.Cancel.performed += UnpausePress;
+    }
+
+    private void Update()
+    {
+        if (_paused)
+        {
+            _playerInput.Disable();
+        }
     }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    
+
     /// <summary>
     /// Método que se llama cuando se pausa el juego.
     /// </summary>
@@ -145,7 +157,7 @@ public class PauseMenuController : MonoBehaviour
         {
             _player.enabled = false;
         }
-        _playerInput.Player.Disable();
+        _playerInput.Disable();
         _playerInput.UI.Enable();
 
         // Detiene el tiempo del juego
