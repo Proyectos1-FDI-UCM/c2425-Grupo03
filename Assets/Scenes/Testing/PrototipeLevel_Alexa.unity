@@ -1890,17 +1890,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 139593590}
     m_Modifications:
+    - target: {fileID: 3617879341829949427, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
+      propertyPath: m_Size.x
+      value: 2.3201292
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617879341829949427, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1dafe1178955cb4b89eda7edabbdf0d, type: 3}
     - target: {fileID: 5008241247525790272, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
       propertyPath: m_Name
       value: Platform1x2 (7)
       objectReference: {fileID: 0}
     - target: {fileID: 5373698538162213632, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 5373698538162213632, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.5
+      value: 3.87
       objectReference: {fileID: 0}
     - target: {fileID: 5373698538162213632, guid: a140ad8f3f80d1b468e4ca3cffded798, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2779,7 +2787,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 23.091618, y: 11.761283}
+  m_Size: {x: 29.511381, y: 11.568564}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2794,7 +2802,7 @@ Transform:
   m_GameObject: {fileID: 411646672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.0028, y: 2.4819, z: 0}
+  m_LocalPosition: {x: 6.2917, y: 2.4906, z: 0}
   m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8850,17 +8858,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
---- !u!114 &1135279104 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1264100759141006665, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
-  m_PrefabInstance: {fileID: 1135279103}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1144207642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2157437861631988242, guid: b9c4b76b31000334ca2fd543737d8796, type: 3}
@@ -10836,14 +10833,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 580149230629257244, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
-      propertyPath: _isLocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869404970991857936, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
-      propertyPath: _healthSlider
-      value: 
-      objectReference: {fileID: 1135279104}
     - target: {fileID: 4450874108255313576, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10887,10 +10876,6 @@ PrefabInstance:
     - target: {fileID: 6415833642186472685, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6600094170850908819, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

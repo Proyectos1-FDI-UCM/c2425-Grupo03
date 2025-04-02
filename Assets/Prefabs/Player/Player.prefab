@@ -221,7 +221,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 316183080, guid: b55cf1b909cc89e448e2fb54bc8b536a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxChargeManoDeLasSombras: 0
+  _maxChargeManoDeLasSombras: 5
   _maxChargeSuperDash: 5
   _removedChargePercentage: 1
   _onChargeChange:
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _isLocked: 0
+  _isLocked: 1
   _chargedAttackRadius: 2
   _chargedDamage: 20
   _chargingTime: 1
