@@ -78,13 +78,15 @@ public class PauseMenuController : MonoBehaviour
     /// <summary>
     /// El input del menu
     /// </summary>
-    private PlayerInputActions _menuInput;
+    //private PlayerInputActions.UIActions _menuInput;
 
     /// <summary>
     /// El input del jugador
     /// </summary>
     private PlayerInputActions.PlayerActions _playerInput;
-    //private PlayerInputActions _playerInput;
+
+    private PlayerInputActions.UIActions _menuInput;
+
     PlayerStateMachine _ctx;
     #endregion
 
@@ -102,26 +104,24 @@ public class PauseMenuController : MonoBehaviour
     /// Start is called on the frame when a script is enabled just before 
     /// any of the Update methods are called the first time.
     /// </summary>
-
-    private void Awake()
-    {
-        _menuInput = new PlayerInputActions();
-    }
     void Start()
     {
         _pauseMenu.SetActive(false);
-        _menuInput.Disable();
+
 
         //coge referencia al input del jugador
         if (_player != null)
         {
             if (_player.GetComponent<PlayerStateMachine>() != null)
             {
-                _playerInput = _player.GetComponent<PlayerStateMachine>().PlayerInput;
+                _playerInput = FindFirstObjectByType<PlayerStateMachine>().PlayerInput;
+                //Debug.Log("GET PLAYER INPUT");
             }
         }
 
-        _menuInput.UI.Cancel.performed += UnpausePress;
+        _menuInput = new PlayerInputActions().UI;
+
+        _menuInput.Cancel.performed += UnpausePress;
         _playerInput.Menu.performed += PausePress;
     }
 
@@ -134,19 +134,22 @@ public class PauseMenuController : MonoBehaviour
     /// Método que se llama cuando se pausa el juego.
     /// </summary>
     /// <param name="context"></param>
-    public void PausePress(InputAction.CallbackContext context) {
+    public void PausePress(InputAction.CallbackContext context)
+    {
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         if (!_paused) // si no está pausado, pausa el juego
         {
-            PauseGame(); 
+            PauseGame();
+            Debug.Log("Game Paused");
         }
     }
     /// <summary>
     /// Método llamado para salir del menú de pausa.
     /// </summary>
     /// <param name="context"></param>
-    public void UnpausePress(InputAction.CallbackContext context) {
-        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+    public void UnpausePress(InputAction.CallbackContext context)
+    {
+        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         if (_paused) // si está pausado, vuelve al juego
         {
             ContinueGame();
@@ -164,7 +167,7 @@ public class PauseMenuController : MonoBehaviour
         // Desactiva el control del jugador
         _playerInput.Disable();
 
-        _menuInput.UI.Enable();
+        _menuInput.Enable();
 
         // Detiene el tiempo del juego
         Time.timeScale = 0f;
@@ -182,7 +185,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void PlayChangeBottonSFX()
     {
-        SoundManager.Instance?.PlaySFX(_changeBotton,transform,0.2f);
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.2f);
     }
 
     /// <summary>
@@ -199,7 +202,7 @@ public class PauseMenuController : MonoBehaviour
         }
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
 
-        _menuInput.UI.Disable();
+        _menuInput.Disable();
         Time.timeScale = 1f;
         _paused = false;
     }
@@ -212,7 +215,7 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
         _paused = false;
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
-        SceneManager.LoadScene(_mainMenuSceneName); 
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     public void OnSelectContinue()
