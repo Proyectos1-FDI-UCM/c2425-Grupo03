@@ -19,6 +19,10 @@ public class ParallaxEffect : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField] private float _parallax_speed;
+
+    private Camera camera;
+
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -29,6 +33,7 @@ public class ParallaxEffect : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    private float _lenght, _startpos;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -43,6 +48,22 @@ public class ParallaxEffect : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+    void Start()
+    {
+        _startpos = transform.position.x;
+        _lenght = GetComponent<SpriteRenderer>().bounds.size.x;
+        camera = Camera.main;
+    }
+    void FixedUpdate()
+    {
+        float temp = (camera.transform.position.x * (1 - _parallax_speed));
+        float dist = (camera.transform.position.x * _parallax_speed);
+
+        transform.position = new Vector3(_startpos + dist, transform.position.y, transform.position.z);
+
+        if (temp > _startpos + _lenght) _startpos += _lenght;
+        if (temp < _startpos + _lenght) _startpos -= _lenght;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -54,28 +75,14 @@ public class ParallaxEffect : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    public void Posicion(float player_direction, float player_speed, bool Dash, float dash_duration)
-    {
-        if (!Dash && dash_duration != 1) // Andando
-        {
-            transform.Translate(_parallax_speed * player_speed * Time.deltaTime * player_direction * Vector3.left);
-        }
-        else if (dash_duration != 1) // Haciendo un dash
-        {
-            transform.Translate(_parallax_speed * -1 * dash_duration * player_speed * Vector3.right);
-        }
-        else // Haciendo un super dash
-        {
-            transform.Translate(_parallax_speed * dash_duration * player_direction * player_speed * Vector3.right);
-        }
-    }
+
     #endregion
 
 } // class ParallaxEffect 

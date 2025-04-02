@@ -23,7 +23,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     [Tooltip("The player's constant speed in units per second.")]
     [SerializeField][Min(0)] float _speed;
-    public ParallaxEffect ParallaxEffect;
+    [SerializeField] private ParallaxEffect ParallaxEffect;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -114,7 +114,6 @@ public class PlayerMoveState : BaseState
         }
 
         _rb.velocity = new Vector2(_moveDir * _speed, _rb.velocity.y);
-        ParallaxEffect.Posicion(_moveDir, _speed, false, 0);
     }
 
     /// <summary>

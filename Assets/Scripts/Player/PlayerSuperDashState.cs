@@ -176,7 +176,6 @@ public class PlayerSuperDashState : BaseState
     public override void ExitState()
     {
         //Quitar inmunidad al jugador y actualizar posición del escenario
-        ParallaxEffect.Posicion(-_lookingDirection, _dashDistance, true, 1);
         _ctx.GetComponent<HealthManager>().Inmune = false;
         _chargeScript.ResetSuperDash();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
