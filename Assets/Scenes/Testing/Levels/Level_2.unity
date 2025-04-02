@@ -26843,11 +26843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4786074262611602978, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: _maxChargeSuperDash
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4786074262611602978, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: _maxChargeManoDeLasSombras
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5100551949212222354, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: _maxHeight
@@ -26878,16 +26878,20 @@ PrefabInstance:
       value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8225277199237918885, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: _draw
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225277199237918885, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: _isLocked
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8229576178648808006, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.8
+      value: -247.2
       objectReference: {fileID: 0}
     - target: {fileID: 8229576178648808006, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 9.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
