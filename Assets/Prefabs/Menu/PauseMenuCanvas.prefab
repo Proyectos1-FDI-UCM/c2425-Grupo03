@@ -104,10 +104,10 @@ RectTransform:
   m_GameObject: {fileID: 3219206446497003898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 0.8, z: 1}
+  m_LocalScale: {x: 1.1, y: 0.8000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7233766974134050373}
+  m_Father: {fileID: 6778205096839001509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -292,10 +292,10 @@ RectTransform:
   m_GameObject: {fileID: 3833439875720003690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.785, y: 3.7799997, z: 4.2}
+  m_LocalScale: {x: 4.7850003, y: 3.7799997, z: 4.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7233766974134050373}
+  m_Father: {fileID: 6778205096839001509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -372,7 +372,7 @@ RectTransform:
   m_LocalScale: {x: 1.1, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7233766974134050373}
+  m_Father: {fileID: 6778205096839001509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -557,7 +557,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2235428801621926270}
+  - {fileID: 2375809796465785259}
+  - {fileID: 3797696435441201532}
+  - {fileID: 8202895311229895189}
   m_Father: {fileID: 7233766974134050373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -595,12 +599,7 @@ RectTransform:
   m_Children:
   - {fileID: 5095385759845395165}
   - {fileID: 3883395514266493738}
-  - {fileID: 8440583393367277085}
   - {fileID: 6778205096839001509}
-  - {fileID: 2235428801621926270}
-  - {fileID: 2375809796465785259}
-  - {fileID: 3797696435441201532}
-  - {fileID: 8202895311229895189}
   m_Father: {fileID: 7888828470830970482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -638,7 +637,7 @@ RectTransform:
   m_LocalScale: {x: 4.213, y: 3.78, z: 4.2000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7233766974134050373}
+  m_Father: {fileID: 6778205096839001509}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -710,7 +709,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8440583393367277085}
   m_Father: {fileID: 7233766974134050373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -837,7 +837,7 @@ MonoBehaviour:
   _mainMenuSceneName: MainMenu_Zhiyi
   _continueRhombus: {fileID: 6630582942397906796}
   _mainMenuRhombus: {fileID: 3833439875720003690}
-  _player: {fileID: 0}
+  _player: {fileID: 1214668236577535999, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
   _firstButton: {fileID: 3219206446497003898}
   _changeBotton: {fileID: 8300000, guid: 9022f53299433ca4da4e2f2ecd922336, type: 3}
   _clickBotton: {fileID: 8300000, guid: 41ce5dff3b56e7d41aa6350bb5d43c1d, type: 3}
@@ -871,7 +871,7 @@ RectTransform:
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7233766974134050373}
+  m_Father: {fileID: 3883395514266493738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
