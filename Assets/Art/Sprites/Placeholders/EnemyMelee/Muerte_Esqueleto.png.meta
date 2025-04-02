@@ -104,8 +104,8 @@ TextureImporter:
         y: 14
         width: 92
         height: 177
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -125,8 +125,8 @@ TextureImporter:
         y: 15
         width: 124
         height: 131
-      alignment: 9
-      pivot: {x: 0.5, y: 0.65981644}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,8 +146,8 @@ TextureImporter:
         y: 15
         width: 119
         height: 115
-      alignment: 9
-      pivot: {x: 0.5, y: 0.75505435}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,8 +167,8 @@ TextureImporter:
         y: 15
         width: 118
         height: 104
-      alignment: 9
-      pivot: {x: 0.5, y: 0.83247596}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,8 +188,8 @@ TextureImporter:
         y: 15
         width: 123
         height: 96
-      alignment: 9
-      pivot: {x: 0.5, y: 0.9024105}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Muerte_Esqueleto_6
       rect:
         serializedVersion: 2
-        x: 622
+        x: 621
         y: 15
         width: 125
         height: 96
-      alignment: 9
-      pivot: {x: 0.5, y: 0.9098627}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

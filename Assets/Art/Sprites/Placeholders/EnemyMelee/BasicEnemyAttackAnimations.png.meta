@@ -100,12 +100,12 @@ TextureImporter:
       name: BasicEnemyAttackAnimations_0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 39
         y: 0
         width: 203
         height: 235
       alignment: 9
-      pivot: {x: 0.44646767, y: 0.38005245}
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: BasicEnemyAttackAnimations_1
       rect:
         serializedVersion: 2
-        x: 243
+        x: 241
         y: 0
         width: 180
         height: 235
       alignment: 9
-      pivot: {x: 0.4287357, y: 0.37617317}
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: BasicEnemyAttackAnimations_2
       rect:
         serializedVersion: 2
-        x: 423
+        x: 425
         y: 0
         width: 208
         height: 235
       alignment: 9
-      pivot: {x: 0.36975434, y: 0.3708863}
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,7 +168,7 @@ TextureImporter:
         width: 181
         height: 235
       alignment: 9
-      pivot: {x: 0.38099155, y: 0.36237195}
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,7 +189,7 @@ TextureImporter:
         width: 151
         height: 235
       alignment: 9
-      pivot: {x: 0.4102941, y: 0.3651873}
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
