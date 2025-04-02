@@ -114,7 +114,7 @@ public class EnemyAppearState : BaseState
         //Tras el tiempo de espera el enemigo termina de aparecer y empieza el idle
         if (Time.time > _appearTime)
         {
-            Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
+            Ctx.ChangeState(Ctx.GetStateByType<EnemyFallingState>());
         }
     }
 
