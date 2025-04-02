@@ -321,7 +321,8 @@ public class PlayerSuperDashState : BaseState
 
     private void OnDrawGizmos()
     {
-        if (_draw)
+
+        if (_draw && Application.isPlaying)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(_ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0), new Vector2(_dashDistance, 1.8f));
