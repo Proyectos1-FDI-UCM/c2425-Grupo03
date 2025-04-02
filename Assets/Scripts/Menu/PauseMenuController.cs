@@ -78,8 +78,10 @@ public class PauseMenuController : MonoBehaviour
     /// <summary>
     /// El input del jugador
     /// </summary>
-    private PlayerInputActions _playerInput;
-
+    private PlayerInputActions _menuInput;
+    private PlayerInputActions.PlayerActions _playerInput;
+    //private PlayerInputActions _playerInput;
+    PlayerStateMachine _ctx;
     #endregion
 
 
@@ -99,23 +101,24 @@ public class PauseMenuController : MonoBehaviour
 
     private void Awake()
     {
-        _playerInput = new PlayerInputActions();
+        _menuInput = new PlayerInputActions();
     }
     void Start()
     {
         _pauseMenu.SetActive(false);
-        _playerInput.Player.Enable();
-        _playerInput.Player.Menu.performed += PausePress;
-        _playerInput.UI.Cancel.performed += UnpausePress;
-    }
+        _menuInput.Player.Enable();
+        _menuInput.Player.Menu.performed += PausePress;
+        _menuInput.UI.Cancel.performed += UnpausePress;
 
-    private void Update()
-    {
-        if (_paused)
+        if (_player != null)
         {
-            _playerInput.Disable();
+            if (_player.GetComponent<PlayerStateMachine>() != null)
+            {
+                _playerInput = _player.GetComponent<PlayerStateMachine>().PlayerInput;
+            }
         }
     }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -153,12 +156,10 @@ public class PauseMenuController : MonoBehaviour
         _pauseMenu.SetActive(true);
 
         // Desactiva el control del jugador
-        if (_player != null)
-        {
-            _player.enabled = false;
-        }
         _playerInput.Disable();
-        _playerInput.UI.Enable();
+
+        _menuInput.Player.Disable();
+        _menuInput.UI.Enable();
 
         // Detiene el tiempo del juego
         Time.timeScale = 0f;
@@ -183,7 +184,8 @@ public class PauseMenuController : MonoBehaviour
     ///  Metodo que reanuda el juego desactivando el menu de pausa
     /// </summary>
     public void ContinueGame()
-    { 
+    {
+        _playerInput.Enable();
         _pauseMenu.SetActive(false);
 
         if (_player != null)
@@ -191,8 +193,9 @@ public class PauseMenuController : MonoBehaviour
             _player.enabled = true;
         }
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
-        _playerInput.UI.Disable();
-        _playerInput.Player.Enable();
+
+        _menuInput.UI.Disable();
+        _menuInput.Player.Enable();
         Time.timeScale = 1f;
         _paused = false;
     }
