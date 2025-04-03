@@ -262,9 +262,7 @@ public class PlayerAttackState : BaseState
         if (_combo == 0)
         {
             _combo = 1;
-        }
-        Debug.Log(_combo);
-        
+        } 
     }
     /// <summary>
     /// Dibuja el rango de ataque basico
