@@ -66,7 +66,7 @@ public class MagicCircle : MonoBehaviour
         PlayerStateMachine _player = FindObjectOfType<PlayerStateMachine>();
         
         _objetivo = _player.transform.position;
-        _objetivo.y = _player.transform.position.y +1.2f;
+        _objetivo.y = _player.transform.position.y +0.60f;
         
         _direction = (_objetivo - transform.position).normalized;
         angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;

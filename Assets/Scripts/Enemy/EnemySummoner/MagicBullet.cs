@@ -115,10 +115,11 @@ public class MagicBullet : MonoBehaviour
     public void Setup(Vector3 _playerPosition)
     {
         // Calcula la dirección en la que s eitene que mover
+        _playerPosition.y += 0.25f;
         _direction = (_playerPosition - transform.position).normalized;
 
         // Calcula la rotación del sprite en función de la dirección en la que mira
-        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_direction.y , _direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
     #endregion
