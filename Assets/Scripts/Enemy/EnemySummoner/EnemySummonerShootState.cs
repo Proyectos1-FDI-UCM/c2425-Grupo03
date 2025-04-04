@@ -151,6 +151,12 @@ public class EnemySummonerShootState : BaseState
     {
         // Termina la animación de disparo
         _animator?.SetBool("IsAttack", false);
+
+        //Eliminar Hechizo ewn Caso de ser interrumpido
+        if (transform.GetChild(0).childCount != 0)
+        {
+            transform.GetChild(0).GetChild(0).GetComponent<MagicCast>().Destruirse();
+        }
     }
     public void TriggerEvent()
     {
@@ -207,7 +213,9 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
- 
+
+
+
     }
 
     #endregion   

@@ -68,6 +68,11 @@ public class MagicCast : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    public void Destruirse()
+    {
+        Destroy(gameObject);
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----

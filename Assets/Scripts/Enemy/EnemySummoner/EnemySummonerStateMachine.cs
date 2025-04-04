@@ -178,8 +178,6 @@ public class EnemySummonerStateMachine : StateMachine
     }
     public void CastSpell()
     {
-
-        Debug.Log("AAAAAAAAAHH");
         Transform emptyDestino = transform.Find("EnemyStates/BulletInstancePoint");
 
         if (emptyDestino != null)
