@@ -35,6 +35,8 @@ public class EnemySummonerStateMachine : StateMachine
 
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+
+
     /// <summary>
     /// Sonido reproducido al dañar al enemigo
     /// </summary>
@@ -85,9 +87,16 @@ public class EnemySummonerStateMachine : StateMachine
     public Transform[] Spawnpoints { get; private set; }
 
     /// <summary>
+    /// punto de instanciacion de la bala
+    /// </summary>
+    public Transform CastPoint { get; private set; }
+
+    /// <summary>
     /// Variable para saber cuando el jugador entra en la distancia de detección.
     /// </summary>
     public bool IsPlayerInAttackRange { get; set; }
+
+
 
     #endregion
 
@@ -117,6 +126,11 @@ public class EnemySummonerStateMachine : StateMachine
         // Coge todos los spawn points para invocar
         _allSpawnpoints = transform.parent.GetChild(1);
         Spawnpoints = _allSpawnpoints.GetComponentsInChildren<Transform>();
+
+
+        //Coge el InstancePoint
+
+        CastPoint = transform.GetChild(0).GetChild(0);
     }
     /// <summary>
     /// Método llamado en el start
@@ -178,14 +192,10 @@ public class EnemySummonerStateMachine : StateMachine
     }
     public void CastSpell()
     {
-        Transform emptyDestino = transform.Find("EnemyStates/BulletInstancePoint");
-
-        if (emptyDestino != null)
+        if (CastPoint != null)
         {
-            GameObject nuevo = Instantiate(_spellVFX, emptyDestino);
-            nuevo.transform.localPosition = Vector3.zero;
+             Instantiate(_spellVFX,CastPoint);
         }
-
     }
 
 

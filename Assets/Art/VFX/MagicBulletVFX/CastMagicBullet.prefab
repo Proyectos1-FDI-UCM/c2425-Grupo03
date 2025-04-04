@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 22347927639499785}
   - component: {fileID: 3154546542017756245}
-  - component: {fileID: 3168624277692552420}
-  - component: {fileID: 3384427383491741114}
+  - component: {fileID: 6279311013646459972}
   m_Layer: 0
   m_Name: OndaVFX_00
   m_TagString: Untagged
@@ -86,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3168624277692552420
+--- !u!95 &6279311013646459972
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -107,18 +106,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3384427383491741114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720167400426625441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c5382d5db236a458bf31c666a8d04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8930228137686314982
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +238,7 @@ Transform:
   m_GameObject: {fileID: 8950413019731236384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.978932, y: 3.8387477, z: 0.0895035}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -272,3 +259,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 1.167
+  _magicCircles: {fileID: 6720167400426625441}

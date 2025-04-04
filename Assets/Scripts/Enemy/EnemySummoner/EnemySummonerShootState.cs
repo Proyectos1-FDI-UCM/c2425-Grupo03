@@ -44,10 +44,6 @@ public class EnemySummonerShootState : BaseState
     /// </summary>
     [SerializeField] MagicBullet _magicBullet;
 
-    /// <summary>
-    /// Punto de invocación de Bala
-    /// </summary>
-    [SerializeField] Transform _bulletPosition;
 
     /// <summary>
     /// Sonido del invocador al disparar
@@ -141,7 +137,7 @@ public class EnemySummonerShootState : BaseState
         SoundManager.Instance.PlaySFX(_shotSound, transform, 0.3f);
 
         // Instancia la bala
-        Instantiate(_magicBullet, _bulletPosition.position, transform.rotation).Setup(_ctx.PlayerTransform.position);
+        Instantiate(_magicBullet, _ctx.CastPoint.position, transform.rotation).Setup(_ctx.PlayerTransform.position);
     }
     
     /// <summary>
@@ -155,7 +151,7 @@ public class EnemySummonerShootState : BaseState
         //Eliminar Hechizo ewn Caso de ser interrumpido
         if (transform.GetChild(0).childCount != 0)
         {
-            transform.GetChild(0).GetChild(0).GetComponent<MagicCast>().Destruirse();
+            transform.GetChild(0).GetChild(0).GetComponent<MagicCast>().EndCast();
         }
     }
     public void TriggerEvent()
@@ -202,6 +198,13 @@ public class EnemySummonerShootState : BaseState
 
                 // Estado TErminado
                 _stateFinished = true;
+            }
+
+            //Actualizar PosJugador al hechizo
+
+            if (transform.GetChild(0).childCount != 0)
+            {
+                transform.GetChild(0).GetChild(0).GetComponent<MagicCast>().UpdatePlayerPos(_ctx.PlayerTransform);
             }
         }
     }

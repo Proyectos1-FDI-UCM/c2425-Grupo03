@@ -21,6 +21,7 @@ public class MagicCast : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     [SerializeField, Min(0)] float _lifeTime;
+    [SerializeField] GameObject _magicCircles;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -32,6 +33,13 @@ public class MagicCast : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
     private float _lifeTimeTime;
+
+    float angle;
+    Vector3 _direction;
+    Vector3 _objetivo;
+    Transform _player;
+    
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -52,7 +60,13 @@ public class MagicCast : MonoBehaviour
     /// </summary>
     void Update()
     {
-        
+                
+        _objetivo.y += 0.60f;
+        _direction = (_objetivo - transform.position).normalized;
+        angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        _magicCircles.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+
         if (Time.time >_lifeTimeTime)
         {
             Destroy(gameObject);
@@ -68,9 +82,14 @@ public class MagicCast : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    public void Destruirse()
+    public void EndCast()
     {
         Destroy(gameObject);
+    }
+    public void UpdatePlayerPos(Transform _playerPos)
+    {
+        _player = _playerPos;
+        _objetivo = _player.transform.position;
     }
 
     #endregion
