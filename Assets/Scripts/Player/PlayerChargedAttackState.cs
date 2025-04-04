@@ -36,6 +36,10 @@ public class PlayerChargedAttackState : BaseState
     /// tiempo que necesita para cargar el ataque
     /// </summary>
     [SerializeField] private float _chargingTime = 2.0f;
+    /// <summary>
+    /// Tiempo que dura la animación
+    /// </summary>
+    [SerializeField] private float _attackDuration = 1f;
 
     [SerializeField] bool _drawRange = false;
     /// <summary>
@@ -46,6 +50,8 @@ public class PlayerChargedAttackState : BaseState
     /// Sonido para el ataque cargado
     /// </summary>
     [SerializeField] private AudioClip _airHit;
+
+
     
     #endregion
 
@@ -182,7 +188,7 @@ public class PlayerChargedAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if ((Time.time - _startChargingTime >= _chargingTime + 1f) || _ctx.PlayerInput.Attack.WasReleasedThisFrame())
+        if ((Time.time - _startChargingTime >= _chargingTime + _attackDuration) || (_ctx.PlayerInput.Attack.WasReleasedThisFrame() && !_attacked))
         {
             Ctx?.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }

@@ -29231,6 +29231,7 @@ MonoBehaviour:
   _chargedAttackRadius: 2
   _chargedDamage: 20
   _chargingTime: 1
+  _attackDuration: 0.5
   _drawRange: 1
   _abilityChargePercentage: 1000
   _airHit: {fileID: 8300000, guid: 7499cc93c8d5a3440ac1680e2acad68f, type: 3}
