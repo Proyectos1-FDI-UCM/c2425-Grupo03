@@ -127,7 +127,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -480,7 +480,7 @@ CircleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3967
+    m_Bits: 3959
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -579,6 +579,7 @@ MonoBehaviour:
   _timeOfDash: 1
   _abilityChargePercentage: 0
   _SoundEffect: {fileID: 8300000, guid: fe416242c97fba7458d69386d2473c6f, type: 3}
+  _draw: 0
 --- !u!114 &3132457056714941732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,9 +604,7 @@ MonoBehaviour:
   _pushDistance: 6
   _startSkillPosition: 0
   _liftingHeight: 1
-  _waitTimeForFirstHit: 0.1
   _attractEnemyTime: 0.6
-  _waitTimeForSecondHit: 0.4
   _abilityChargePercentage: 0
   _attracSound: {fileID: 8300000, guid: d95d3dc0c96017244bba601776b04e7e, type: 3}
   _pushSound: {fileID: 8300000, guid: e6e7e9cb7e9fe894a8389bbc43db3fb9, type: 3}

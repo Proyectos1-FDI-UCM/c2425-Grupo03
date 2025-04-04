@@ -61,17 +61,9 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     [SerializeField][Tooltip("Altura que elevas a los enemigos")] private float _liftingHeight = 1f;
     /// <summary>
-    /// el tiempo que hay entre pulsar el boton y el primer hit
-    /// </summary>
-    [SerializeField][Tooltip("tiempo entre pulsar el boton y el primer hit")] private float _waitTimeForFirstHit = 0.5f;
-    /// <summary>
     /// el tiempo que tarda en traer a los enemigos
     /// </summary>
     [SerializeField][Tooltip("tiempo entre el primer hit y segundo hit")] private float _attractEnemyTime = 0.3f;
-    /// <summary>
-    /// el tiempo que hay el primer hit y el segundo hit
-    /// </summary>
-    [SerializeField][Tooltip("tiempo entre pulsar el boton y el primer hit")] private float _waitTimeForSecondHit = 0.5f;
     /// <summary>
     /// Porcentaje de carga que aporta 
     /// </summary>
@@ -229,7 +221,7 @@ public class PlayerManoDeLasSombrasState : BaseState
         Vector2 startPosition = (Vector2)transform.position + new Vector2(_startSkillPosition * _direction.x, 0f);
 
         // Realizar el Raycast
-        _hits = Physics2D.RaycastAll(startPosition, _direction, _skillRange, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Wall"));
+        _hits = Physics2D.RaycastAll(startPosition, _direction, _skillRange, LayerMask.GetMask("Enemy") | LayerMask.GetMask("Platform"));
 
         // Dibujar el Raycast 
         if (_drawRaycast) Debug.DrawRay(startPosition, _direction * _skillRange, Color.green, 0.5f);
@@ -242,7 +234,7 @@ public class PlayerManoDeLasSombrasState : BaseState
             RaycastHit2D hit = _hits[_affectedEnemys];
 
             // Si colisiona con un muro, activamos la bandera para ignorar enemigos después de la pared
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Platform"))
             {
                 wallHit = true;
             }
