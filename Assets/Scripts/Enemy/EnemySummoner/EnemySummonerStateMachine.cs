@@ -39,6 +39,9 @@ public class EnemySummonerStateMachine : StateMachine
     /// Sonido reproducido al dañar al enemigo
     /// </summary>
     [SerializeField] AudioClip _enemyDamaged;
+
+
+    [SerializeField] GameObject _spellVFX;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -173,6 +176,20 @@ public class EnemySummonerStateMachine : StateMachine
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
+    public void CastSpell()
+    {
+
+        Debug.Log("AAAAAAAAAHH");
+        Transform emptyDestino = transform.Find("EnemyStates/BulletInstancePoint");
+
+        if (emptyDestino != null)
+        {
+            GameObject nuevo = Instantiate(_spellVFX, emptyDestino);
+            nuevo.transform.localPosition = Vector3.zero;
+        }
+
+    }
+
 
     #endregion
 
