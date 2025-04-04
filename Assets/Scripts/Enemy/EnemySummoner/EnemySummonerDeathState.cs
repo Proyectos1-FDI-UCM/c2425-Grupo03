@@ -87,6 +87,8 @@ public class EnemySummonerDeathState : BaseState
 
         //Establece la animación de morir
         _animator.SetBool("IsDead", true);
+
+
     }
     
     /// <summary>

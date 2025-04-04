@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 50
   _initialHealth: 150
   _onDeath:
     m_PersistentCalls:
@@ -288,7 +288,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 649e432931b29024a90f227521930ea3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 9211518800480732035}
   - {fileID: 1182801888833405018}
   _enemyDamaged: {fileID: 8300000, guid: 08a49fadf270249488ff5d000bde870c, type: 3}
+  _spellVFX: {fileID: 8950413019731236384, guid: 5bebb745e78892740ab278979afe5606, type: 3}
 --- !u!114 &8719321965046077272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,7 +475,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _teleportPoint: {fileID: 3977072330819180501}
-  _waitTimeTp: 2.083
+  _waitTimeTp: 2.25
   _waitTimePostTp: 1
   _teleportSound: {fileID: 8300000, guid: e9f4d96686873c545a3443a2e4d2ef72, type: 3}
 --- !u!114 &6408419066844692140
@@ -507,7 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTime: 1.1
+  _waitTime: 1.917
   _prefabEntero: {fileID: 7191960438516511554}
   _deathSound: {fileID: 8300000, guid: d85084b9053d4bd4b82d4da73ff6559b, type: 3}
 --- !u!1 &5333200817857762787
@@ -536,7 +537,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.298, y: 1.965, z: 0}
-  m_LocalScale: {x: 0.14263, y: 0.14263, z: 0.14263}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3824176062013514766}

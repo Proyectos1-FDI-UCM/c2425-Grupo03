@@ -24,11 +24,11 @@ AnimationClip:
       value: {fileID: 21300000, guid: 5727163f7461e654da5568f579fc339b, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: 6d2b82a4eda2cc34b994ab6c21c7dafe, type: 3}
-    - time: 0.33333334
+    - time: 0.25
       value: {fileID: 21300000, guid: 2f7a1d198a879f440b8545f9bea9f271, type: 3}
-    - time: 1.3333334
-      value: {fileID: 21300000, guid: 649e432931b29024a90f227521930ea3, type: 3}
-    - time: 1.5
+    - time: 1.4166666
+      value: {fileID: 21300000, guid: 6de0c2c2e5b16c94e8ba4106a241888e, type: 3}
+    - time: 1.5833334
       value: {fileID: 21300000, guid: 6de0c2c2e5b16c94e8ba4106a241888e, type: 3}
     - time: 1.6666666
       value: {fileID: 21300000, guid: 49583288a626afd45a9eaa9d91f1617d, type: 3}
@@ -57,7 +57,7 @@ AnimationClip:
     - {fileID: 21300000, guid: 5727163f7461e654da5568f579fc339b, type: 3}
     - {fileID: 21300000, guid: 6d2b82a4eda2cc34b994ab6c21c7dafe, type: 3}
     - {fileID: 21300000, guid: 2f7a1d198a879f440b8545f9bea9f271, type: 3}
-    - {fileID: 21300000, guid: 649e432931b29024a90f227521930ea3, type: 3}
+    - {fileID: 21300000, guid: 6de0c2c2e5b16c94e8ba4106a241888e, type: 3}
     - {fileID: 21300000, guid: 6de0c2c2e5b16c94e8ba4106a241888e, type: 3}
     - {fileID: 21300000, guid: 49583288a626afd45a9eaa9d91f1617d, type: 3}
   m_AnimationClipSettings:
@@ -84,4 +84,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.25
+    functionName: CastSpell
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
