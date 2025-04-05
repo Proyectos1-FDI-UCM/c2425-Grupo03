@@ -299,6 +299,14 @@ PrefabInstance:
       propertyPath: _airHitList.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
+    - target: {fileID: 2876048266150505504, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 32631
+      objectReference: {fileID: 0}
+    - target: {fileID: 3829226376568384553, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 136
+      objectReference: {fileID: 0}
     - target: {fileID: 4450874108255313576, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_Name
       value: Player

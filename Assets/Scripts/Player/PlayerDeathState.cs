@@ -107,11 +107,6 @@ public class PlayerDeathState : BaseState
         if (_ctx != null && Time.time > _deadTime)
         {
             CheckpointManager.Instance.RespawnPlayer(_ctx.gameObject);
-
-            HealthManager hm = _ctx.GetComponent<HealthManager>();
-            hm?.SetHealth(hm.MaxHealth);
-
-            _ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
         }
     }
 

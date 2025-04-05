@@ -151,7 +151,7 @@ public class HeavyEnemyChasingState : BaseState
     private bool CheckGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f * (float)_ctx.LookingDirection, gameObject.transform.position.y),
-            Vector2.down, 5f, LayerMask.GetMask("Ground"));
+            Vector2.down, 5f, LayerMask.GetMask("Platform"));
         return hit.collider != null;
     }
     /// <summary>

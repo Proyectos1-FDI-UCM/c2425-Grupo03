@@ -12,36 +12,31 @@ using UnityEngine;
 /// <summary>
 /// Estado que cambia a la animación de caer hasta que la velocidad sea 0
 /// </summary>
+[RequireComponent (typeof(IsGroundedCheck))]
 public class EnemyFallingState : BaseState
 {
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     /// <summary>
-    /// Booleana que determina si el enemigo toca el suelo o no.
+    /// Componente que mira si la entidad toca el suelo o no
     /// </summary>
-    bool _isGrounded;
+    IsGroundedCheck _isGroundedCheck;
+
+    /// <summary>
+    /// Si esta en el suelo
+    /// </summary>
+    bool _isGrounded => _isGroundedCheck.IsGrounded();
 
     #endregion
 
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        // Detecta si el enemigo ha entrado en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
-        if (collision.gameObject.layer == 7)
-        {
-            _isGrounded = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Detecta si el enemigo ha dejado de estar en contacto con un objeto en la capa del suelo. ( 1 << 7 ) es la capa del suelo.
-        if (collision.gameObject.layer == 7)
-        {
-            _isGrounded = false;
-        }
+        //Coge el componente que mira si la entidad toca el suelo
+        _isGroundedCheck = GetComponent<IsGroundedCheck>();
     }
     #endregion
 

@@ -12,6 +12,7 @@ using UnityEngine;
 /// <summary>
 /// El estado de caer del jugador
 /// </summary>
+[RequireComponent (typeof(IsGroundedCheck))]
 public class PlayerFallingState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
@@ -57,10 +58,16 @@ public class PlayerFallingState : BaseState
     /// //para detectar si el jugador esta en movimiento
     /// </summary>
     float _moveDir;
+
     /// <summary>
-    /// // para detectar si el jugador está en el suelo.
+    /// Componente que mira si la entidad toca el suelo o no
     /// </summary>
-    bool _isGrounded;
+    IsGroundedCheck _isGroundedCheck;
+
+    /// <summary>
+    /// Si esta en el suelo
+    /// </summary>
+    bool _isGrounded => _isGroundedCheck.IsGrounded();
 
     #endregion
 
@@ -76,29 +83,8 @@ public class PlayerFallingState : BaseState
 
         _ctx = GetCTX<PlayerStateMachine>();
         _rigidbody = Ctx?.Rigidbody;
-    }
-    /// <summary>
-    /// El trigger debe solo tocar la layer del suelo.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            _isGrounded = true;
-        }
-
-    }
-    /// <summary>
-    ///El trigger debe solo tocar la layer del suelo.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            _isGrounded = false;
-        }
+        //Coge el componente que mira si la entidad toca el suelo
+        _isGroundedCheck = GetComponent<IsGroundedCheck>();
     }
 
     #endregion
