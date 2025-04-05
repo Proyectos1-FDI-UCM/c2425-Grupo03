@@ -228,14 +228,14 @@ public class PlayerSuperDashState : BaseState
         Vector2 center = _ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0);
 
         //Mirar si hay pared dentro de la distancia del dash y si hay a que distancia esta del jugador
-        RaycastHit2D zone = Physics2D.BoxCast(center, new Vector2(_dashDistance, 1.8f), 0f, new Vector2(_lookingDirection, 0), 0, 1 << 3);
+        RaycastHit2D zone = Physics2D.BoxCast(center, new Vector2(_dashDistance, 1.8f), 0f, new Vector2(_lookingDirection, 0), 0, 1 << 7);
 
         RaycastHit2D wall;
 
         if (zone.collider != null)
         {
             Debug.Log(zone.point);
-            wall = Physics2D.Raycast(new Vector2(_ctx.transform.position.x,zone.point.y), new Vector2(_lookingDirection, 0), _dashDistance, 1 << 3);
+            wall = Physics2D.Raycast(new Vector2(_ctx.transform.position.x,zone.point.y), new Vector2(_lookingDirection, 0), _dashDistance, 1 << 7);
 
             if (wall.collider != null)
             {

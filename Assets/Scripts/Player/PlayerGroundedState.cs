@@ -14,6 +14,7 @@ using UnityEngine.InputSystem;
 /// Antes de cada class, descripción de qué es y para qué sirve,
 /// usando todas las líneas que sean necesarias.
 /// </summary>
+[RequireComponent(typeof(IsGroundedCheck))]
 public class PlayerGroundedState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
@@ -56,9 +57,14 @@ public class PlayerGroundedState : BaseState
     AudioSource _audioSource;
 
     /// <summary>
+    /// Componente que mira si la entidad toca el suelo o no
+    /// </summary>
+    IsGroundedCheck _isGroundedCheck;
+
+    /// <summary>
     /// Si esta en el suelo
     /// </summary>
-    bool _isGrounded;
+    bool _isGrounded => _isGroundedCheck.IsGrounded();
     #endregion
 
 
@@ -70,7 +76,6 @@ public class PlayerGroundedState : BaseState
     /// </summary>
     private void Start()
     {
-        
         _ctx = GetCTX<PlayerStateMachine>();
         //Coge el rigidbody del jugador
         _rigidbody = _ctx.Rigidbody;
@@ -78,6 +83,8 @@ public class PlayerGroundedState : BaseState
         _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
         //Coge le audio source para hacer sonar los pasos
         _audioSource = _ctx.PlayerAudio;
+        //Coge el componente que mira si la entidad toca el suelo
+        _isGroundedCheck = GetComponent<IsGroundedCheck>();
     }
     /// <summary>
     /// Metodo que actualiza todo el rato
@@ -88,31 +95,6 @@ public class PlayerGroundedState : BaseState
         if ( _jumpBuffer > 0)
         {
             _jumpBuffer-=Time.deltaTime;
-        }
-    }
-    /// <summary>
-    /// // El trigger debe solo tocar la layer del suelo.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer ("Ground"))
-        {
-            _isGrounded = true;
-        }
-
-    }
-    /// <summary>
-    /// El trigger debe solo tocar la layer del suelo.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            _isGrounded = false;
         }
     }
     #endregion
