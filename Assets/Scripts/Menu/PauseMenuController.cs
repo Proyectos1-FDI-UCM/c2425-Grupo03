@@ -215,8 +215,9 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1f;
         _paused = false;
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
-        SceneManager.LoadScene(_mainMenuSceneName);
+        Invoke("ChangeScene", _clickBotton.length);
     }
+    
 
     public void OnSelectContinue()
     {
@@ -253,6 +254,18 @@ public class PauseMenuController : MonoBehaviour
     }
 
 
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS ----
+    #region Métodos privados
+    /// <summary>
+    /// Cambia la escena a la del menú principal.
+    /// Se llama tras terminar el sonido de click.
+    /// </summary>
+    void ChangeScene()
+    {
+        SceneManager.LoadScene(_mainMenuSceneName);
+    }
     #endregion
 
 
