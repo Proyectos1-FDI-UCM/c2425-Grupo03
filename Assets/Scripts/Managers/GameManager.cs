@@ -100,6 +100,9 @@ public class GameManager : MonoBehaviour
     {
         //Inicializa el último checkpoint en(0, 0)
         _lastCheckpoint = Vector2.zero;
+
+        Cursor.visible = false;
+
     }
     #endregion
 
