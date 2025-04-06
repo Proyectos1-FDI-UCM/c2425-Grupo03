@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 40
   _initialHealth: 150
   _onDeath:
     m_PersistentCalls:
@@ -444,7 +444,6 @@ MonoBehaviour:
   _waitTimeShootState: 1.75
   _waitTimeShoot: 1.5
   _magicBullet: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
-  _bulletPosition: {fileID: 393862591464892332}
   _shotSound: {fileID: 8300000, guid: 709be34393f3efe42ba1e101d5f58e69, type: 3}
 --- !u!114 &1808163096419442921
 MonoBehaviour:
@@ -492,7 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _abilityCooldown: 1.417
+  _abilityCooldown: 1
   _invokeProbabilty: 0.37
 --- !u!114 &4894896949926512459
 MonoBehaviour:

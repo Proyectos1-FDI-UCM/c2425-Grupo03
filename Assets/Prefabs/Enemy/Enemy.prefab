@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 20
-  _initialHealth: 150
+  _initialHealth: 20
   _onDeath:
     m_PersistentCalls:
       m_Calls: []

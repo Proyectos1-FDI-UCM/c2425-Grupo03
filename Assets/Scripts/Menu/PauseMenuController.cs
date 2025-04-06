@@ -136,7 +136,7 @@ public class PauseMenuController : MonoBehaviour
     /// <param name="context"></param>
     public void PausePress(InputAction.CallbackContext context)
     {
-        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         if (!_paused) // si no está pausado, pausa el juego
         {
             PauseGame();
@@ -150,6 +150,7 @@ public class PauseMenuController : MonoBehaviour
     public void UnpausePress(InputAction.CallbackContext context)
     {
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
+        
         if (_paused) // si está pausado, vuelve al juego
         {
             ContinueGame();
@@ -265,6 +266,12 @@ public class PauseMenuController : MonoBehaviour
     void ChangeScene()
     {
         SceneManager.LoadScene(_mainMenuSceneName);
+    }
+
+    private void OnDestroy()
+    {
+        _menuInput.Cancel.performed -= UnpausePress;
+        _playerInput.Menu.performed -= PausePress;
     }
     #endregion
 

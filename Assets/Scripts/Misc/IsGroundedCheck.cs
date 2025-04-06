@@ -52,7 +52,7 @@ public class IsGroundedCheck : MonoBehaviour
         {
             // Al salir de un trigger hacemos una comprobación por si todavía estamos tocando otro trigger de suelo
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, _distanceToFloor, 1 << 7);
-            
+            Debug.Log(hit.collider);
             if(hit.collider == null)
             {
                 _isGrounded = false;
