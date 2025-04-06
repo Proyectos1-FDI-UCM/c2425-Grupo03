@@ -117,7 +117,7 @@ public class CheckpointManager : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX(_respawnSound, transform, 0.1f);
             // Mueve la posición del jugador a la posición del checkpoint
-            player.transform.position = GameManager.Instance.GetCheckpoint();
+            player.transform.position = (Vector3) GameManager.Instance.GetCheckpoint();
 
             //Restablece la camara para que siga al jugador
             CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(0.1f, CameraManager.Instance.GetComponent<Camera>().orthographicSize));

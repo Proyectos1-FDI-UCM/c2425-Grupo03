@@ -203,9 +203,10 @@ public class PlayerStateMachine : StateMachine
             healthManager._onDeath.AddListener(DeathState);
             healthManager._onDamaged.AddListener(PlayerDamagedSFX);
         }
+
         if (GameManager.Instance.GetCheckpoint()!= Vector2.zero)
         {
-            transform.position = GameManager.Instance.GetCheckpoint();
+            transform.position = (Vector3) GameManager.Instance.GetCheckpoint();
         }
     }
 

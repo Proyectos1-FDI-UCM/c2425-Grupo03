@@ -33,12 +33,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Guarda la posición del último checkpoint activado
     /// </summary>
-    private Vector2 _lastCheckpoint;
+    private Vector2? _lastCheckpoint;
+
 
     /// <summary>
-    /// Lista de checkpoints activados
+    /// guarda el ultimo checkpoint activado
     /// </summary>
-    List<int> _activatedCheckpoint = new List<int>();
+    int activatedCheckpoint = -1;
+
     #endregion
 
 
@@ -130,6 +132,12 @@ public class GameManager : MonoBehaviour
         return _instance != null;
     }
 
+    public void InitCheckpointArray()
+    {
+        activatedCheckpoint = -1;
+        _lastCheckpoint = null;
+    }
+
     /// <summary>
     /// Método que cambia la escena actual por la indicada en el parámetro.
     /// </summary>
@@ -168,7 +176,7 @@ public class GameManager : MonoBehaviour
     /// Metodo que devuelve la posición del último checkpoint guardado
     /// </summary>
     /// <returns></returns>
-    public Vector2 GetCheckpoint()
+    public Vector2? GetCheckpoint()
     {
         return _lastCheckpoint;
     }
@@ -180,19 +188,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool IsActivated(int _checkPointIndex) 
     {
-        bool result = false;
-        int i = 0;
-
-        // Busca en la lista
-        while (i < _activatedCheckpoint.Count && !result)
-        {
-            if (_activatedCheckpoint[i] == _checkPointIndex)
-            {
-                result = true;
-            }
-            i++;
-        }
-        return result;
+        return activatedCheckpoint >= _checkPointIndex;
     }
 
     /// <summary>
@@ -201,8 +197,10 @@ public class GameManager : MonoBehaviour
     /// <param name="_checkPointIndex"></param>
     public void AddCheckpoint (int _checkPointIndex)
     {
-        // Agrega el checkpoint a la lista
-        _activatedCheckpoint.Add(_checkPointIndex);
+        if (activatedCheckpoint < _checkPointIndex)
+        {
+            activatedCheckpoint = _checkPointIndex;
+        }
     }
     #endregion
 
