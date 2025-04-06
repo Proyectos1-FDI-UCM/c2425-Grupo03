@@ -105,7 +105,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void ChangeScene(string sceneName, float transitionTime = 1)
     {
-        GameManager.Instance.InitCheckpointArray();
+        GameManager.Instance.InitCheckpoint(); // resetea los checkpoint activados
         StartCoroutine(LoadLevel(sceneName,transitionTime));
     }
     /// <summary>

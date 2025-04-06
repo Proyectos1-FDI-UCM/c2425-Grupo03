@@ -100,6 +100,11 @@ public class GameManager : MonoBehaviour
     {
         //Inicializa el último checkpoint en(0, 0)
         _lastCheckpoint = Vector2.zero;
+
+        Cursor.visible = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
     #endregion
 
@@ -132,7 +137,10 @@ public class GameManager : MonoBehaviour
         return _instance != null;
     }
 
-    public void InitCheckpointArray()
+    /// <summary>
+    /// resetea los checkpoint activados
+    /// </summary>
+    public void InitCheckpoint()
     {
         activatedCheckpoint = -1;
         _lastCheckpoint = null;
@@ -192,7 +200,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Metodo que agrega un checkpoint activado a la lista de checkpoints guardados
+    /// Metodo que se llama cuando activas un checkpoint para marcarlo como activado
     /// </summary>
     /// <param name="_checkPointIndex"></param>
     public void AddCheckpoint (int _checkPointIndex)
