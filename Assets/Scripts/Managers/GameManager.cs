@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = false;
 
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
     #endregion
 
