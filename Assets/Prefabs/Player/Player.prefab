@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 5507718913834995455}
   - component: {fileID: 2876048266150505504}
   - component: {fileID: 1878743245120483010}
+  - component: {fileID: 1157077338450575930}
   m_Layer: 6
   m_Name: PlayerFalling
   m_TagString: Untagged
@@ -517,6 +518,19 @@ MonoBehaviour:
   _maxCoyoteTime: 0.075
   _maxSpeed: -20
   _landSound: {fileID: 8300000, guid: 47eef395ad9da3e4590ac5d3a19826c7, type: 3}
+--- !u!114 &1157077338450575930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934603295301053230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd0eae09426f9a48a0b0fe94054d3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToFloor: 1.5
 --- !u!1 &9124716735178180898
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +640,7 @@ MonoBehaviour:
   _chargedAttackRadius: 2
   _chargedDamage: 20
   _chargingTime: 1
+  _attackDuration: 1
   _drawRange: 1
   _abilityChargePercentage: 1000
   _airHit: {fileID: 8300000, guid: 7499cc93c8d5a3440ac1680e2acad68f, type: 3}
