@@ -5,8 +5,10 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -40,6 +42,17 @@ public class GameManager : MonoBehaviour
     /// guarda el ultimo checkpoint activado
     /// </summary>
     int activatedCheckpoint = -1;
+
+    private Dictionary<int, string> _levels = new Dictionary<int, string>()
+    {
+        { 1, "Level_1" },
+        { 2, "Level_2" },
+        { 3, "Level_3" }
+    };
+    /// <summary>
+    /// El nivel actual
+    /// </summary>
+    private int _actualLevel;
 
     #endregion
 
@@ -99,12 +112,12 @@ public class GameManager : MonoBehaviour
     protected void Start()
     {
         //Inicializa el último checkpoint en(0, 0)
-        _lastCheckpoint = Vector2.zero;
+        _lastCheckpoint = null;
 
         Cursor.visible = false;
 
         Cursor.lockState = CursorLockMode.Locked;
-
+        _actualLevel = 1;
     }
     #endregion
 
@@ -137,6 +150,15 @@ public class GameManager : MonoBehaviour
         return _instance != null;
     }
 
+    public void GoActualLevel()
+    {
+        SceneManager.LoadScene(_levels[_actualLevel]);   
+    }
+
+    public void AddActualLevel()
+    {
+        _actualLevel++;
+    }
     /// <summary>
     /// resetea los checkpoint activados
     /// </summary>
@@ -185,7 +207,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     public Vector2? GetCheckpoint()
-    {
+    { 
         return _lastCheckpoint;
     }
 

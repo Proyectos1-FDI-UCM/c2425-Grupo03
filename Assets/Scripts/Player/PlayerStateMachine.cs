@@ -204,7 +204,7 @@ public class PlayerStateMachine : StateMachine
             healthManager._onDamaged.AddListener(PlayerDamagedSFX);
         }
 
-        if (GameManager.Instance.GetCheckpoint()!= Vector2.zero)
+        if (GameManager.Instance.GetCheckpoint()!= null)
         {
             transform.position = (Vector3) GameManager.Instance.GetCheckpoint();
         }

@@ -113,6 +113,7 @@ public class MainMenuController : MonoBehaviour
     {
         //Cierra la aplicacion (solo en la build)
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        Application.Quit();
     }
 
     /// <summary>
@@ -157,7 +158,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void ChangeScene()
     {
-        SceneManager.LoadScene(_playSceneName);
+        GameManager.Instance.GoActualLevel();
     }
     #endregion
 
