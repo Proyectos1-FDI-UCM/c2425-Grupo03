@@ -115,7 +115,6 @@ public class UIManager : MonoBehaviour
 
         // Subscribe el método para actualizar la carga de las habilidades al evento correspondiente.
         _playerCharge._onChargeChange.AddListener(UpdateAbilityCharge);
-
         // Valores iniciales de las barras.
         UpdateAbilityCharge();
     }
