@@ -107,6 +107,8 @@ public class PlayerDeathState : BaseState
         if (_ctx != null && Time.time > _deadTime)
         {
             CheckpointManager.Instance.RespawnPlayer(_ctx.gameObject);
+            _ctx.GetComponent<PlayerCharge>().ResetSuperDash();
+            _ctx.GetComponent<PlayerCharge>().ResetManoDeLasSombras();
         }
     }
 
