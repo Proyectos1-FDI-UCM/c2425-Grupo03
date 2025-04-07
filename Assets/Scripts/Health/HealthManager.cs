@@ -123,19 +123,17 @@ public class HealthManager : MonoBehaviour
     {
         if (Inmune) { return; }
 
-        if (_health > 0)
+        if (_health - removedHealth <= 0)
         {
-            if (_health - removedHealth <= 0)
-            {
-                _health = 0;
-                _onDeath.Invoke();
-            }
-            else
-            {
-                _health = _health - removedHealth;
-            }
-            _onDamaged.Invoke(removedHealth);
+            _health = 0;
+            _onDeath.Invoke();
         }
+        else
+        {
+            _health = _health - removedHealth;
+        }
+        _onDamaged.Invoke(removedHealth);
+        
     }
 
     /// <summary>
