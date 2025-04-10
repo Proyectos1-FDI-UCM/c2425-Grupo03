@@ -27,6 +27,13 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private string _playSceneName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [SerializeField]
+    private string _creditsSceneName;
+
     /// <summary>
     /// Referencia de la flecha del boton Jugar
     /// </summary>
@@ -36,6 +43,8 @@ public class MainMenuController : MonoBehaviour
     /// Referencia del boton Salir
     /// </summary>
     [SerializeField] private GameObject _exitArrow;
+
+    [SerializeField] private GameObject _creditsArrow;
 
     /// <summary>
     ///  Referencia al primer boton que se selecciona al abrir el menu
@@ -116,6 +125,17 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
+    //public void OnCreditsButtom()
+    //{
+    //    SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+    //    Invoke("LoadCreditsScene", _clickBotton.length);
+    //}
+
+    //private void LoadCreditsScene()
+    //{
+    //    SceneManager.LoadScene(_creditsSceneName);
+    //}
+
     /// <summary>
     /// Activa la flecha del botón "Jugar"
     /// </summary>
@@ -148,6 +168,17 @@ public class MainMenuController : MonoBehaviour
     public void OnDeselectExit()
     {
         _exitArrow.SetActive(false);
+    }
+
+    public void OnSelectCredits()
+    {
+        //SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        _creditsArrow.SetActive(true);
+    }
+
+    public void OnDeselectCredits()
+    {
+        _creditsArrow.SetActive(false);
     }
     #endregion
 
