@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 // Añadir aquí el resto de directivas using
 
@@ -121,6 +122,7 @@ public class PlayerAttackState : BaseState
         _ctx = GetCTX<PlayerStateMachine>();
         _chargeScript = _ctx?.GetComponent<PlayerCharge>();
         _combo = 0;
+        _ctx?.OnAttackAddListener(Attack);
     }
     #endregion
 
@@ -165,11 +167,43 @@ public class PlayerAttackState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        Attack(_direction);
         Ctx.Animator.SetFloat("AttackIndex", 0);
     }
+
+    /// <summary>
+    /// Hacer un CirclecastAll en la capa del "Enemy" en la dirección donde mira el jugador.
+    /// Añadir el daño extra del combo si lo hay, y hace daño a todos los enemigos que están en el circlecast.
+    /// </summary>
+    private void Attack()
+    {
+        SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
+        int extraDamage = 0;
+
+        //Coger la informacion de los enemigos que estan en el area de ataque
+        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * _direction);
+        RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
+
+        //Mirar el combo para el daño extra
+        if (_combo == 3)
+        {
+            extraDamage += _comboExtraDamage;
+        }
+
+
+        if (enemyInArea != null)
+        {
+            foreach (RaycastHit2D enemy in enemyInArea)
+            {
+                //Daño al enemigo
+                enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
+                //Añadir carga a las habilidades
+                _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+            }
+        }
+
+    }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -207,39 +241,7 @@ public class PlayerAttackState : BaseState
 
     }
 
-    /// <summary>
-    /// Hacer un CirclecastAll en la capa del "Enemy" en la dirección donde mira el jugador.
-    /// Añadir el daño extra del combo si lo hay, y hace daño a todos los enemigos que están en el circlecast.
-    /// </summary>
-    private void Attack(int direction)
-    {
-        
-        SoundManager.Instance.PlaySFX(_airHitList[_combo], transform, 1);
-        int extraDamage = 0;
-
-        //Coger la informacion de los enemigos que estan en el area de ataque
-        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * direction);
-        RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _attackRadius, new Vector2(0, 0), _attackRadius, 1 << 10);
-
-        //Mirar el combo para el daño extra
-        if (_combo == 3) 
-        { 
-            extraDamage += _comboExtraDamage; 
-        }
-
-
-        if(enemyInArea != null)
-        {
-            foreach (RaycastHit2D enemy in enemyInArea)
-            {
-                //Daño al enemigo
-                enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
-                //Añadir carga a las habilidades
-                _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
-            }
-        }
-        
-    }
+    
 
     /// <summary>
     /// Actualizar el tiempo de gracia, y actualiza el combo
@@ -260,9 +262,7 @@ public class PlayerAttackState : BaseState
         if (_combo == 0)
         {
             _combo = 1;
-        }
-        Debug.Log(_combo);
-        
+        } 
     }
     /// <summary>
     /// Dibuja el rango de ataque basico

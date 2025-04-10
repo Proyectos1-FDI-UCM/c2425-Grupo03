@@ -36,6 +36,10 @@ public class PlayerChargedAttackState : BaseState
     /// tiempo que necesita para cargar el ataque
     /// </summary>
     [SerializeField] private float _chargingTime = 2.0f;
+    /// <summary>
+    /// Tiempo que dura la animación
+    /// </summary>
+    [SerializeField] private float _attackDuration = 1f;
 
     [SerializeField] bool _drawRange = false;
     /// <summary>
@@ -46,6 +50,8 @@ public class PlayerChargedAttackState : BaseState
     /// Sonido para el ataque cargado
     /// </summary>
     [SerializeField] private AudioClip _airHit;
+
+
     
     #endregion
 
@@ -99,6 +105,7 @@ public class PlayerChargedAttackState : BaseState
         _rigidbody = Ctx?.Rigidbody;
         _animator = Ctx?.Animator;
         _isLocked = false;
+        _ctx.OnChargedAttackAddListener(ChargedAttack);
     }
    
     #endregion
@@ -129,7 +136,7 @@ public class PlayerChargedAttackState : BaseState
     /// <summary>
     /// Metodo encargado de hacer el ataque cargado en un circulo con el centro en el jugador
     /// </summary>
-    void ChargedAttack()
+    public void ChargedAttack()
     {
         SoundManager.Instance.PlaySFX(_airHit, transform, 0.5f);
         Vector2 position = transform.position;
@@ -170,7 +177,6 @@ public class PlayerChargedAttackState : BaseState
         {
             _animator?.SetBool("IsChargeAttacking", true);
             _animator?.SetBool("IsCharging", false);
-            ChargedAttack();
             _attacked = true;
         }
     }
@@ -182,7 +188,7 @@ public class PlayerChargedAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if ((Time.time - _startChargingTime >= _chargingTime + 1f) || _ctx.PlayerInput.Attack.WasReleasedThisFrame())
+        if ((Time.time - _startChargingTime >= _chargingTime + _attackDuration) || (_ctx.PlayerInput.Attack.WasReleasedThisFrame() && !_attacked))
         {
             Ctx?.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }

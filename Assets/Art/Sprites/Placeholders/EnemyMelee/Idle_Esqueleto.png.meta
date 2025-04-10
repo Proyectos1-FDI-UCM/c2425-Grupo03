@@ -104,8 +104,8 @@ TextureImporter:
         y: 12
         width: 105
         height: 183
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: Idle_Esqueleto_1
       rect:
         serializedVersion: 2
-        x: 114
+        x: 113
         y: 12
         width: 91
         height: 179
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

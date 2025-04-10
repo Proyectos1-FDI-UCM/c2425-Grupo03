@@ -127,7 +127,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -221,7 +221,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 316183080, guid: b55cf1b909cc89e448e2fb54bc8b536a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 5
-  _initialHealth: 250
+  _maxHealth: 10
+  _initialHealth: 10
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -410,9 +410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxChargeManoDeLasSombras: 0
-  _maxChargeSuperDash: 5
-  _removedChargePercentage: 1
+  _maxChargeManoDeLasSombras: 30
+  _maxChargeSuperDash: 50
+  _removedChargePercentage: 100
   _onChargeChange:
     m_PersistentCalls:
       m_Calls: []
@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 5507718913834995455}
   - component: {fileID: 2876048266150505504}
   - component: {fileID: 1878743245120483010}
+  - component: {fileID: 1157077338450575930}
   m_Layer: 6
   m_Name: PlayerFalling
   m_TagString: Untagged
@@ -480,7 +481,7 @@ CircleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3967
+    m_Bits: 3959
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -517,6 +518,19 @@ MonoBehaviour:
   _maxCoyoteTime: 0.075
   _maxSpeed: -20
   _landSound: {fileID: 8300000, guid: 47eef395ad9da3e4590ac5d3a19826c7, type: 3}
+--- !u!114 &1157077338450575930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934603295301053230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd0eae09426f9a48a0b0fe94054d3df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceToFloor: 1.45
 --- !u!1 &9124716735178180898
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,12 +587,13 @@ MonoBehaviour:
   _name: 
   _isLocked: 0
   _dashDistance: 5
-  _damage: 5
+  _damage: 25
   _actionTime: 0.2
   _timeOfDamage: 1
   _timeOfDash: 1
   _abilityChargePercentage: 0
   _SoundEffect: {fileID: 8300000, guid: fe416242c97fba7458d69386d2473c6f, type: 3}
+  _draw: 0
 --- !u!114 &3132457056714941732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,18 +609,16 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _isLocked: 0
-  _firstHitDamage: 3
-  _secondHitDamage: 6
-  _skillRange: 20
+  _firstHitDamage: 5
+  _secondHitDamage: 10
+  _skillRange: 7
   _cantMovePlayerTime: 1
   _drawRaycast: 1
-  _attractDistance: 20
+  _attractDistance: 7
   _pushDistance: 6
   _startSkillPosition: 0
   _liftingHeight: 1
-  _waitTimeForFirstHit: 0.1
   _attractEnemyTime: 0.6
-  _waitTimeForSecondHit: 0.4
   _abilityChargePercentage: 0
   _attracSound: {fileID: 8300000, guid: d95d3dc0c96017244bba601776b04e7e, type: 3}
   _pushSound: {fileID: 8300000, guid: e6e7e9cb7e9fe894a8389bbc43db3fb9, type: 3}
@@ -625,10 +638,11 @@ MonoBehaviour:
   _name: 
   _isLocked: 0
   _chargedAttackRadius: 2
-  _chargedDamage: 20
+  _chargedDamage: 15
   _chargingTime: 1
+  _attackDuration: 1
   _drawRange: 1
-  _abilityChargePercentage: 1000
+  _abilityChargePercentage: 200
   _airHit: {fileID: 8300000, guid: 7499cc93c8d5a3440ac1680e2acad68f, type: 3}
 --- !u!114 &886796386253165598
 MonoBehaviour:
@@ -679,10 +693,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _attackRadius: 1.5
+  _attackRadius: 1
   _attackSpeed: 0.4
   _damage: 5
-  _abilityChargePercentage: 1000
+  _abilityChargePercentage: 100
   _airHitList:
   - {fileID: 0}
   - {fileID: 8300000, guid: 57323916d0b08a8469a4dc64d5f61743, type: 3}

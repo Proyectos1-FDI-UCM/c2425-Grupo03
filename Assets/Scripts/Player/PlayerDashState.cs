@@ -130,7 +130,7 @@ public class PlayerDashState : BaseState
         _playerHitTrigger.enabled = false;
 
         //Mira a ver si el dash podrías atravesar una pared.
-        CheckDashLimit();
+        //CheckDashLimit(); Se ha quitado porque las plataformas son lo suficientemente gruesas y el dash lo suficientemente lento como para que no se puedan atravesar
 
         //Comienza la animación del dash
         Ctx?.Animator.SetBool("IsDashing", true);

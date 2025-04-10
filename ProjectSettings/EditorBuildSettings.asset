@@ -11,11 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Menu_Zhiyi/MainMenu_Zhiyi.unity
     guid: 09d43e79412ab234783fa2705d956911
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Testing/Menu_Zhiyi/LevelTest_Zhiyi.unity
     guid: e18cc1911fec9bc45af1b3fd4f59a00e
-  - enabled: 1
-    path: Assets/Scenes/Testing/Menu_Zhiyi/HUD_Alexa.unity
+  - enabled: 0
+    path: Assets/Scenes/Testing/Menu_Zhiyi/HUD.unity
     guid: 272a76a3823e3c343bbee8e2fe980ad7
   - enabled: 1
     path: Assets/Scenes/Testing/Levels/Level_1.unity

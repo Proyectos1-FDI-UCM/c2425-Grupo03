@@ -53,6 +53,8 @@ public class PlayerSuperDashState : BaseState
     [SerializeField] AudioClip _SoundEffect;
     [SerializeField] ParallaxEffect ParallaxEffect;
 
+    [SerializeField] private bool _draw;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -223,12 +225,25 @@ public class PlayerSuperDashState : BaseState
     /// </summary>
     private void CheckWall()
     {
-        RaycastHit2D wall = Physics2D.Raycast(_ctx.transform.position, new Vector2(_lookingDirection, 0), _dashDistance, 1 << 3);
+        //El centro "rectangulo" del BoxCast
+        Vector2 center = _ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0);
 
-        if (wall)
+        //Mirar si hay pared dentro de la distancia del dash y si hay a que distancia esta del jugador
+        RaycastHit2D zone = Physics2D.BoxCast(center, new Vector2(_dashDistance, 1.8f), 0f, new Vector2(_lookingDirection, 0), 0, 1 << 7);
+
+        RaycastHit2D wall;
+
+        if (zone.collider != null)
         {
-            _endPosition.x = wall.point.x + (0.5f * -_lookingDirection);
-            _damageDistance = wall.distance;
+            Debug.Log(zone.point);
+            wall = Physics2D.Raycast(new Vector2(_ctx.transform.position.x,zone.point.y), new Vector2(_lookingDirection, 0), _dashDistance, 1 << 7);
+
+            if (wall.collider != null)
+            {
+                Debug.Log(wall.distance);
+                _endPosition.x = wall.point.x;
+                _damageDistance = wall.distance;
+            }
         }
         else
         {
@@ -303,6 +318,16 @@ public class PlayerSuperDashState : BaseState
         _tpDone = false;
 
         _damageDone = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        if (_draw && Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(_ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0), new Vector2(_dashDistance, 1.8f));
+        }
     }
 
     #endregion   

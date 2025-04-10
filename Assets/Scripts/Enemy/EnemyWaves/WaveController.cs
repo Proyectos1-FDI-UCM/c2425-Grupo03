@@ -138,7 +138,7 @@ public class WaveController : MonoBehaviour
         {
             _door.gameObject.SetActive(false);
             _endWaves = true;
-            CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 10));
+            CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 6));
             Destroy(gameObject);
         }
     }

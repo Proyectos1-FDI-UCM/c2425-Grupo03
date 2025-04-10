@@ -5,8 +5,10 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -33,12 +35,25 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Guarda la posición del último checkpoint activado
     /// </summary>
-    private Vector2 _lastCheckpoint;
+    private Vector2? _lastCheckpoint;
+
 
     /// <summary>
-    /// Lista de checkpoints activados
+    /// guarda el ultimo checkpoint activado
     /// </summary>
-    List<int> _activatedCheckpoint = new List<int>();
+    int activatedCheckpoint = -1;
+
+    private Dictionary<int, string> _levels = new Dictionary<int, string>()
+    {
+        { 1, "Level_1" },
+        { 2, "Level_2" },
+        { 3, "Level_3" }
+    };
+    /// <summary>
+    /// El nivel actual
+    /// </summary>
+    private int _actualLevel;
+
     #endregion
 
 
@@ -97,7 +112,12 @@ public class GameManager : MonoBehaviour
     protected void Start()
     {
         //Inicializa el último checkpoint en(0, 0)
-        _lastCheckpoint = Vector2.zero;
+        _lastCheckpoint = null;
+
+        Cursor.visible = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        _actualLevel = 1;
     }
     #endregion
 
@@ -128,6 +148,24 @@ public class GameManager : MonoBehaviour
     public static bool HasInstance()
     {
         return _instance != null;
+    }
+
+    public void GoActualLevel()
+    {
+        SceneManager.LoadScene(_levels[_actualLevel]);   
+    }
+
+    public void AddActualLevel()
+    {
+        _actualLevel++;
+    }
+    /// <summary>
+    /// resetea los checkpoint activados
+    /// </summary>
+    public void InitCheckpoint()
+    {
+        activatedCheckpoint = -1;
+        _lastCheckpoint = null;
     }
 
     /// <summary>
@@ -168,8 +206,8 @@ public class GameManager : MonoBehaviour
     /// Metodo que devuelve la posición del último checkpoint guardado
     /// </summary>
     /// <returns></returns>
-    public Vector2 GetCheckpoint()
-    {
+    public Vector2? GetCheckpoint()
+    { 
         return _lastCheckpoint;
     }
 
@@ -180,29 +218,19 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool IsActivated(int _checkPointIndex) 
     {
-        bool result = false;
-        int i = 0;
-
-        // Busca en la lista
-        while (i < _activatedCheckpoint.Count && !result)
-        {
-            if (_activatedCheckpoint[i] == _checkPointIndex)
-            {
-                result = true;
-            }
-            i++;
-        }
-        return result;
+        return activatedCheckpoint >= _checkPointIndex;
     }
 
     /// <summary>
-    /// Metodo que agrega un checkpoint activado a la lista de checkpoints guardados
+    /// Metodo que se llama cuando activas un checkpoint para marcarlo como activado
     /// </summary>
     /// <param name="_checkPointIndex"></param>
     public void AddCheckpoint (int _checkPointIndex)
     {
-        // Agrega el checkpoint a la lista
-        _activatedCheckpoint.Add(_checkPointIndex);
+        if (activatedCheckpoint < _checkPointIndex)
+        {
+            activatedCheckpoint = _checkPointIndex;
+        }
     }
     #endregion
 

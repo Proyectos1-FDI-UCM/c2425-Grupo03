@@ -90,30 +90,31 @@ public class UIManager : MonoBehaviour
         _healthManager._onHealed.AddListener(UpdateHealthBar);
         _healthManager._onDeath.AddListener(ResetHealthBar);
 
-        // Coge las cargas iniciales de las habilidades
-        if (_playerPrefab.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
-        {
-            _abilityOneSlider.gameObject.SetActive(false);
-        }
-        else
-        {
-            _abilityOneSlider.gameObject.SetActive(true);
-            _currentChargeOne = _playerCharge.SuperDash.currentCharge;
-        }
+        //// Coge las cargas iniciales de las habilidades
+        //if (_playerPrefab.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
+        //{
+        //    _abilityOneSlider.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    _abilityOneSlider.gameObject.SetActive(true);
+        //    _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        //}
 
-        if (_playerPrefab.GetStateByType<PlayerSuperDashState>().IsLocked)
-        {
-            _abilityTwoSlider.gameObject.SetActive(false);
-        }
-        else
-        {
-            _abilityTwoSlider.gameObject.SetActive(true);
-            _currentChargeTwo = _playerCharge.SuperDash.currentCharge;
-        }
+        //if (_playerPrefab.GetStateByType<PlayerSuperDashState>().IsLocked)
+        //{
+        //    _abilityTwoSlider.gameObject.SetActive(false);
+        //}
+        //else
+        //{
+        //    _abilityTwoSlider.gameObject.SetActive(true);
+        //    _currentChargeTwo = _playerCharge.SuperDash.currentCharge;
+        //}
+        _currentChargeOne = _playerCharge.SuperDash.currentCharge;
+        _currentChargeTwo = _playerCharge.SuperDash.currentCharge;
 
         // Subscribe el método para actualizar la carga de las habilidades al evento correspondiente.
         _playerCharge._onChargeChange.AddListener(UpdateAbilityCharge);
-
         // Valores iniciales de las barras.
         UpdateAbilityCharge();
     }

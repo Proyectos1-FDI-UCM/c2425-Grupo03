@@ -100,10 +100,11 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(_playSceneName);
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-
+        Invoke("ChangeScene", _clickBotton.length);
     }
+
+
 
     /// <summary>
     /// Metodo que cierra la aplicación cuando se presiona el botón "Salir"
@@ -112,6 +113,7 @@ public class MainMenuController : MonoBehaviour
     {
         //Cierra la aplicacion (solo en la build)
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        Application.Quit();
     }
 
     /// <summary>
@@ -148,7 +150,19 @@ public class MainMenuController : MonoBehaviour
         _exitArrow.SetActive(false);
     }
     #endregion
- 
+
+    // ---- MÉTODOS PRIVADOS ----
+    #region
+    /// <summary>
+    /// Método llamado tras terminar el sonido de click para transicionar de escena
+    /// </summary>
+    void ChangeScene()
+    {
+        GameManager.Instance.GoActualLevel();
+    }
+    #endregion
+
+
 
 } // class MainMenuController 
 // namespace
