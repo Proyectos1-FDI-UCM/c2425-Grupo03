@@ -20,7 +20,7 @@ public class ParallaxEffect : MonoBehaviour
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField] private float _parallax_speed;
 
-    private Camera camera;
+    private Camera _camera;
 
     
     #endregion
@@ -52,18 +52,24 @@ public class ParallaxEffect : MonoBehaviour
     {
         _startpos = transform.position.x;
         _lenght = GetComponent<SpriteRenderer>().bounds.size.x;
-        camera = Camera.main;
+        _camera = Camera.main;
     }
     void FixedUpdate()
     {
-        float temp = (camera.transform.position.x * (1 - _parallax_speed));
-        float dist = (camera.transform.position.x * _parallax_speed);
+        float temp = (_camera.transform.position.x * (1 - _parallax_speed));
+        float dist = (_camera.transform.position.x * _parallax_speed);
 
         transform.position = new Vector3(_startpos + dist, transform.position.y, transform.position.z);
-        /*
-        if (temp > _startpos + _lenght) _startpos += _lenght;
-        if (temp < _startpos + _lenght) _startpos -= _lenght;
-        */
+
+        if (temp > _startpos + _lenght)
+        {
+            _startpos += _lenght;
+        }
+        else if (temp < _startpos - _lenght)
+        {
+            _startpos -= _lenght;
+        }
+        
     }
     #endregion
 
