@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bacb270f971886247a906c3c207391c6
+guid: 4b84284d976522449bf8758a17f4a61c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,295 +97,316 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_0
+      name: PlayerChargedAttackAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 369
+        width: 156
+        height: 185
+      alignment: 9
+      pivot: {x: 0.48094139, y: 0.4959824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b52f2794acd114486e65b34e3cd156
+      internalID: 49909403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 375
+        width: 218
+        height: 177
+      alignment: 9
+      pivot: {x: 0.6321193, y: 0.5246549}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b478fb7d1c8c6f4a83d976f51de97a9
+      internalID: 629821951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 374
+        width: 242
+        height: 178
+      alignment: 9
+      pivot: {x: 0.67852503, y: 0.5122581}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1f513bf5f2493e489dcb765d1046455
+      internalID: 2113976996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 374
+        width: 269
+        height: 178
+      alignment: 9
+      pivot: {x: 0.7076523, y: 0.5196132}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93037ed0c46a5944fa86d0073e01494e
+      internalID: -1792777711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 374
+        width: 262
+        height: 179
+      alignment: 9
+      pivot: {x: 0.69987524, y: 0.53900725}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ef2172b28d789141bb8278330854f66
+      internalID: 1420246835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 1341
+        y: 374
+        width: 267
+        height: 178
+      alignment: 9
+      pivot: {x: 0.7026692, y: 0.5171613}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5318a5fb7798b7041bef8bf9680e8744
+      internalID: 1075602741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 372
+        width: 265
+        height: 178
+      alignment: 9
+      pivot: {x: 0.69761246, y: 0.5171613}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13fe5fd9d61ef6a40accc68d7177c3d3
+      internalID: -480838361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 375
+        width: 265
+        height: 179
+      alignment: 9
+      pivot: {x: 0.6992593, y: 0.5219415}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea7166e97f52ce438125e2f66f2736c
+      internalID: -1843495235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 2233
+        y: 374
+        width: 263
+        height: 178
+      alignment: 9
+      pivot: {x: 0.69745594, y: 0.5073549}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44b9c1fbe30e4e74181e051fd52338d6
+      internalID: -360844102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 2551
+        y: 381
+        width: 231
+        height: 166
+      alignment: 9
+      pivot: {x: 0.7777052, y: 0.46582437}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bf96382cfaed4242b30d3af056ac786
+      internalID: -549821835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 2863
+        y: 379
+        width: 151
+        height: 167
+      alignment: 9
+      pivot: {x: 0.6767853, y: 0.48299512}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f6ee34e68206d546a597b0a78462d84
+      internalID: 241728452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerChargedAttackAnimation_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 155
-        height: 180
+        width: 308
+        height: 292
       alignment: 9
-      pivot: {x: 0.6878782, y: 0.4649727}
+      pivot: {x: 0.26468182, y: 0.2909001}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eeebfe7513d40b848a03de35d3024905
-      internalID: 1779567882
+      spriteID: 0b7409e4ae69f524192875f60f2c166d
+      internalID: -659007593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_1
+      name: PlayerChargedAttackAnimation_14
       rect:
         serializedVersion: 2
-        x: 267
-        y: 4
-        width: 116
-        height: 214
+        x: 366
+        y: 2
+        width: 235
+        height: 242
       alignment: 9
-      pivot: {x: 0.6680732, y: 0.39677617}
+      pivot: {x: 0.6629415, y: 0.32606047}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25fc94464f78a5548b3462de53f2331a
-      internalID: -1993919277
+      spriteID: 43b0e310af371fa49bc4e65168e5d810
+      internalID: -581333131
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_2
+      name: PlayerChargedAttackAnimation_16
       rect:
         serializedVersion: 2
-        x: 468
-        y: 14
-        width: 236
-        height: 221
+        x: 648
+        y: 1
+        width: 280
+        height: 178
       alignment: 9
-      pivot: {x: 0.40891925, y: 0.38735205}
+      pivot: {x: 0.71489304, y: 0.5032503}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6feffd8f7b626cc439e68f9226e546be
-      internalID: -120207732
+      spriteID: a99dde4a895dc0143a9d457acc518eb9
+      internalID: 1645211297
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_10
+      name: PlayerChargedAttackAnimation_19
       rect:
         serializedVersion: 2
-        x: 2526
-        y: 10
-        width: 220
-        height: 254
-      alignment: 9
-      pivot: {x: 0.5846979, y: 0.32518885}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e716d3056e17e8c46acf05af2be93d52
-      internalID: 874038108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_11
-      rect:
-        serializedVersion: 2
-        x: 2775
-        y: 10
-        width: 283
-        height: 220
-      alignment: 9
-      pivot: {x: 0.41943446, y: 0.37375233}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b543d625b9666945ae9da3581a372c8
-      internalID: 869518906
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_3
-      rect:
-        serializedVersion: 2
-        x: 729
-        y: 16
-        width: 198
-        height: 157
-      alignment: 9
-      pivot: {x: 0.49642882, y: 0.49378258}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab325723f8589b0499177e1a860cc88a
-      internalID: 1204371624
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_4
-      rect:
-        serializedVersion: 2
-        x: 952
-        y: 10
-        width: 199
-        height: 170
-      alignment: 9
-      pivot: {x: 0.66178304, y: 0.47243652}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea9d99a35d3b86e4bac72a1d48f4ae6a
-      internalID: 966538264
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_5
-      rect:
-        serializedVersion: 2
-        x: 1175
-        y: 13
-        width: 179
-        height: 174
-      alignment: 9
-      pivot: {x: 0.5741083, y: 0.4778616}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f259a8892f3e5a4998ae22ab9d9c872
-      internalID: 154593378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_6
-      rect:
-        serializedVersion: 2
-        x: 1382
-        y: 12
-        width: 290
-        height: 169
-      alignment: 9
-      pivot: {x: 0.5038069, y: 0.50005484}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2de101a1a2fbec84c9fece5639fac1e1
-      internalID: 163087359
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_7
-      rect:
-        serializedVersion: 2
-        x: 1697
-        y: 8
-        width: 242
-        height: 181
-      alignment: 9
-      pivot: {x: 0.59764063, y: 0.4793873}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e1a8934602eb114db86983842bd96f8
-      internalID: 887854489
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_8
-      rect:
-        serializedVersion: 2
-        x: 1952
-        y: 6
-        width: 218
-        height: 167
-      alignment: 9
-      pivot: {x: 0.69586235, y: 0.5223406}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 54e5bf1cb229fc44793d2f076ef5a381
-      internalID: -777263017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_9
-      rect:
-        serializedVersion: 2
-        x: 2195
-        y: 8
+        x: 992
+        y: 3
         width: 277
-        height: 169
+        height: 178
       alignment: 9
-      pivot: {x: 0.6901001, y: 0.5143844}
+      pivot: {x: 0.7151315, y: 0.50000006}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f6ed2b347465934cacf2ffc11f04942
-      internalID: 1025722622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_12
-      rect:
-        serializedVersion: 2
-        x: 3071
-        y: 10
-        width: 297
-        height: 175
-      alignment: 9
-      pivot: {x: 0.38855845, y: 0.48535213}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6d818f85e1e2744abb8d8a28892b2c4
-      internalID: -717591892
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerAttackAnimationsNewEffects_13
-      rect:
-        serializedVersion: 2
-        x: 3384
-        y: 10
-        width: 156
-        height: 179
-      alignment: 9
-      pivot: {x: 0.45482615, y: 0.47684103}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11875768a31fa624ab9f9314b664dae0
-      internalID: -1281281306
+      spriteID: 68d18ea3590cb2a438bdf64c74a558c0
+      internalID: 1633951147
       vertices: []
       indices: 
       edges: []
@@ -401,23 +422,28 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerAttackAnimationsNewEffects_0: 1779567882
-      PlayerAttackAnimationsNewEffects_1: -1993919277
-      PlayerAttackAnimationsNewEffects_10: 874038108
-      PlayerAttackAnimationsNewEffects_11: 869518906
-      PlayerAttackAnimationsNewEffects_12: -717591892
-      PlayerAttackAnimationsNewEffects_13: -1281281306
-      PlayerAttackAnimationsNewEffects_14: -116817344
-      PlayerAttackAnimationsNewEffects_16: 1981268974
-      PlayerAttackAnimationsNewEffects_17: -740024339
-      PlayerAttackAnimationsNewEffects_2: -120207732
-      PlayerAttackAnimationsNewEffects_3: 1204371624
-      PlayerAttackAnimationsNewEffects_4: 966538264
-      PlayerAttackAnimationsNewEffects_5: 154593378
-      PlayerAttackAnimationsNewEffects_6: 163087359
-      PlayerAttackAnimationsNewEffects_7: 887854489
-      PlayerAttackAnimationsNewEffects_8: -777263017
-      PlayerAttackAnimationsNewEffects_9: 1025722622
+      PlayerChargedAttackAnimation_0: 49909403
+      PlayerChargedAttackAnimation_1: 629821951
+      PlayerChargedAttackAnimation_10: -549821835
+      PlayerChargedAttackAnimation_11: 241728452
+      PlayerChargedAttackAnimation_12: -659007593
+      PlayerChargedAttackAnimation_13: 133171126
+      PlayerChargedAttackAnimation_14: -581333131
+      PlayerChargedAttackAnimation_15: 964318639
+      PlayerChargedAttackAnimation_16: 1645211297
+      PlayerChargedAttackAnimation_17: -1380952161
+      PlayerChargedAttackAnimation_18: 259436212
+      PlayerChargedAttackAnimation_19: 1633951147
+      PlayerChargedAttackAnimation_2: 2113976996
+      PlayerChargedAttackAnimation_20: -1101738844
+      PlayerChargedAttackAnimation_21: 883346284
+      PlayerChargedAttackAnimation_3: -1792777711
+      PlayerChargedAttackAnimation_4: 1420246835
+      PlayerChargedAttackAnimation_5: 1075602741
+      PlayerChargedAttackAnimation_6: -480838361
+      PlayerChargedAttackAnimation_7: -1843495235
+      PlayerChargedAttackAnimation_8: 1195576178
+      PlayerChargedAttackAnimation_9: -360844102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
