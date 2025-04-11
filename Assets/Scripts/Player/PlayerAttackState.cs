@@ -66,6 +66,10 @@ public class PlayerAttackState : BaseState
     /// Dibujar rango del ataque
     /// </summary>
     [SerializeField] bool _drawRange = false;
+    /// <summary>
+    /// How much the player moves when attacking
+    /// </summary>
+    [SerializeField, Min(0)] float _amountMoved;
     #endregion
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -154,6 +158,13 @@ public class PlayerAttackState : BaseState
 
         //Calcular el tiempo para realizar el siguiente ataque
         NextAttackTime = Time.time + _attackSpeed;
+
+        //Avanza el jugador en una dirección pero lo detiene si detecta que la plataforma no continua
+        Collider2D col = Physics2D.Raycast(transform.position + _direction * _amountMoved * Vector3.right, Vector2.down, 1.2f, 1 << 7).collider;
+        if(col != null)
+        {
+            Ctx.Rigidbody.MovePosition(transform.position + _direction * _amountMoved * Vector3.right);
+        }
 
         //Actualizar combo
         UpdateCombo();

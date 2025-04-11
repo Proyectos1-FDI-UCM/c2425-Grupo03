@@ -593,6 +593,7 @@ MonoBehaviour:
   _timeOfDash: 1
   _abilityChargePercentage: 0
   _SoundEffect: {fileID: 8300000, guid: fe416242c97fba7458d69386d2473c6f, type: 3}
+  ParallaxEffect: {fileID: 0}
   _draw: 0
 --- !u!114 &3132457056714941732
 MonoBehaviour:
@@ -663,6 +664,7 @@ MonoBehaviour:
   _rechargeTime: 0.5
   _playerHitTrigger: {fileID: 6312170735057447645}
   _dashSound: {fileID: 8300000, guid: fd82b521a7f41574e828585df0f09a15, type: 3}
+  ParallaxEffect: {fileID: 0}
 --- !u!114 &7922959446255207737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +708,7 @@ MonoBehaviour:
   _comboDuration: 1
   _comboExtraDamage: 5
   _drawRange: 1
+  _amountMoved: 1
 --- !u!114 &1132800426723031295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,6 +724,7 @@ MonoBehaviour:
   _isRootState: 0
   _name: 
   _speed: 10
+  ParallaxEffect: {fileID: 0}
 --- !u!114 &4128716076676134296
 MonoBehaviour:
   m_ObjectHideFlags: 0
