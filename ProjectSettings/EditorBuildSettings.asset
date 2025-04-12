@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/Levels/Level_3.unity
     guid: 078c240c8c03cc444899cd3d9dbccc4c
+  - enabled: 1
+    path: Assets/Scenes/Testing/Menu_Zhiyi/CreditsScene.unity
+    guid: abe17e20d2379f547b6c7720cafc24b5
   m_configObjects: {}

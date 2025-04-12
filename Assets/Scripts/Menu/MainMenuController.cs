@@ -125,16 +125,16 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    //public void OnCreditsButtom()
-    //{
-    //    SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
-    //    Invoke("LoadCreditsScene", _clickBotton.length);
-    //}
+    public void OnCreditsButtom()
+    {
+        SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
+        Invoke("LoadCreditsScene", _clickBotton.length);
+    }
 
-    //private void LoadCreditsScene()
-    //{
-    //    SceneManager.LoadScene(_creditsSceneName);
-    //}
+    private void LoadCreditsScene()
+    {
+        SceneManager.LoadScene(_creditsSceneName);
+    }
 
     /// <summary>
     /// Activa la flecha del botón "Jugar"
