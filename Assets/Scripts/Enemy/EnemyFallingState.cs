@@ -27,6 +27,7 @@ public class EnemyFallingState : BaseState
     /// Si esta en el suelo
     /// </summary>
     bool _isGrounded => _isGroundedCheck.IsGrounded();
+    Animator _animator;
 
     #endregion
 
@@ -54,7 +55,10 @@ public class EnemyFallingState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        // Cambia a la animación a caer (WIP)
+        _animator = Ctx.GetComponent<Animator>();
+
+        //Ponemos la animación correspondiente a aparecer
+        _animator?.SetBool("IsFalling", true);
     }
     
     /// <summary>
@@ -62,7 +66,7 @@ public class EnemyFallingState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        // Quita la animación de caer (WIP)
+        _animator?.SetBool("IsFalling", false);
     }
     #endregion
     

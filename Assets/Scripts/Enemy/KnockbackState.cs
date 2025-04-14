@@ -35,7 +35,10 @@ public class KnockbackState : BaseState
     /// La dirección en la que se aplica le knockback.
     /// </summary>
     Vector2 _direction;
-
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
     #endregion
 
 
@@ -61,6 +64,11 @@ public class KnockbackState : BaseState
         {
             // Para aplicar el knockback forzamos el cambio al estado de knockback
             Ctx.ChangeState(this);
+                //Coger animator del contexto
+            _animator = Ctx.GetComponent<Animator>();
+
+            //Ponemos la animación correspondiente a aparecer
+            _animator?.SetBool("IsKnockedBack", true);
         }
     }
 
@@ -88,6 +96,7 @@ public class KnockbackState : BaseState
         {
             // Terminamos con cualquier velocidad al salir del estado de knockback
             Ctx.Rigidbody.velocity = Vector2.zero;
+             _animator?.SetBool("IsKnockedBack", false);
         }
     }
     #endregion
