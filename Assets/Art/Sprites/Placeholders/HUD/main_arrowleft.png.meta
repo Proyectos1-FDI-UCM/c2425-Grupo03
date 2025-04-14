@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b0ff49af88242ca4b8faf0455c9315ed
+guid: cac024c42e0ba9e4dacf7396ca755fa3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,13 +43,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 2278, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 1756, y: 0, z: 0, w: 751}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -95,49 +95,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: arrows_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1139
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62da2270913966e40b2828b4dc6adfdc
-      internalID: -1033196494
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrows_1
-      rect:
-        serializedVersion: 2
-        x: 1748
-        y: 0
-        width: 530
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae1165b241f84d5419902e655ddded2c
-      internalID: 1499689846
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -148,9 +106,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      arrows_0: -1033196494
-      arrows_1: 1499689846
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -34,6 +34,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField]
     private string _creditsSceneName;
 
+
+    [SerializeField]
+    private string _mainMenuSceneName;
     /// <summary>
     /// Referencia de la flecha del boton Jugar
     /// </summary>
@@ -131,9 +134,15 @@ public class MainMenuController : MonoBehaviour
         Invoke("LoadCreditsScene", _clickBotton.length);
     }
 
-    private void LoadCreditsScene()
+    public void OnReturnButton()
     {
-        SceneManager.LoadScene(_creditsSceneName);
+        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
+        Invoke("ReturnToMainMenu", _clickBotton.length);
+    }
+
+    private void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     /// <summary>
@@ -193,6 +202,10 @@ public class MainMenuController : MonoBehaviour
     }
     #endregion
 
+    private void LoadCreditsScene()
+    {
+        SceneManager.LoadScene(_creditsSceneName);
+    }
 
 
 } // class MainMenuController 
