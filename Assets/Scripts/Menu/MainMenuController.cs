@@ -181,7 +181,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnSelectCredits()
     {
-        //SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
+        SoundManager.Instance.PlaySFX(_changeBotton, transform, 0.5f);
         _creditsArrow.SetActive(true);
     }
 
