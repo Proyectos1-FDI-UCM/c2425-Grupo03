@@ -194,6 +194,9 @@ public class PlayerManoDeLasSombrasState : BaseState
                 }
             }
         }
+
+        //La camara tiembla
+        CameraManager.Instance.ShakeCamera(0.1f, 0.5f);
     }
     #endregion
 
@@ -225,6 +228,9 @@ public class PlayerManoDeLasSombrasState : BaseState
 
         // Dibujar el Raycast 
         if (_drawRaycast) Debug.DrawRay(startPosition, _direction * _skillRange, Color.green, 0.5f);
+
+        //La camara tiembla
+        CameraManager.Instance.ShakeCamera(0.1f, 0.5f);
 
         bool wallHit = false; // Bandera para detectar si hemos golpeado una pared
         _affectedEnemys = 0; // Índice manual para recorrer hits[]

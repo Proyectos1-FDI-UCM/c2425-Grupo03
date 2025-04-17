@@ -142,6 +142,9 @@ public class PlayerChargedAttackState : BaseState
         Vector2 position = transform.position;
         RaycastHit2D[] enemyInArea = Physics2D.CircleCastAll(position, _chargedAttackRadius, Vector2.zero, 0, 1 << 10);
 
+        //Hacer que la camara tiembla
+        CameraManager.Instance.ShakeCamera(0.5f, 0.1f);
+
         foreach (RaycastHit2D enemy in enemyInArea)
         {
             enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
