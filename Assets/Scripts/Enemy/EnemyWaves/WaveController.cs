@@ -49,6 +49,8 @@ public class WaveController : MonoBehaviour
     /// </summary>
     bool _endWaves;
 
+    private Animator _doorAnimator;
+
     #endregion
 
 
@@ -80,7 +82,9 @@ public class WaveController : MonoBehaviour
         _numWave = 0;
 
         //la puerta no esta cerrada
-        _door.gameObject.SetActive(false); 
+        //_door.gameObject.SetActive(false);
+
+        _doorAnimator = _door?.gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -103,6 +107,7 @@ public class WaveController : MonoBehaviour
         // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
         if (transform.childCount > 0) 
         {
+            _doorAnimator.SetBool("Closed",true);
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _door.gameObject.SetActive(true);
             _endWaves = false;
@@ -136,10 +141,11 @@ public class WaveController : MonoBehaviour
         // si no hay mas oleadas activar puerta, colocar la cámara en el jugador y terminar oleada
         else
         {
-            _door.gameObject.SetActive(false);
+            //_door.gameObject.SetActive(false);
+            _doorAnimator.SetBool("Closed", false);
             _endWaves = true;
             CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 6));
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
