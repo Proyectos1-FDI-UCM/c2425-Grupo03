@@ -40,7 +40,7 @@ public class HarmIndicatorManager : MonoBehaviour
     public void AskForHealth(float damage)
     {
         // Instancia el texto con el número que va a representar el daño.
-        Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform);
+        Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform.position, gameObject.transform.rotation);
 
         // Establece el número que debe representar el texto.
         text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString());

@@ -148,7 +148,7 @@ public class EnemyChaseState : BaseState
         if (_rb != null)
         {
             //Si todavía hay plataforma se mueve, sino se detiene
-            if (CheckGround())
+            if (CheckGround() && CheckEnemyInFront())
             {
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
             }
@@ -170,6 +170,18 @@ public class EnemyChaseState : BaseState
             Vector2.down, 1.2f, LayerMask.GetMask("Platform"));
 
         return hit.collider != null;
+    }
+    /// <summary>
+    /// Método para que el enemigo no empuje a otros enemigos.
+    /// Hace un raycast en la dirección que mira el enemigo.
+    /// </summary>
+    /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
+    private bool CheckEnemyInFront()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.5f, gameObject.transform.position.y ),
+            Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("Enemy"));
+
+        return hit.collider == null;
     }
 
     /// <summary>
