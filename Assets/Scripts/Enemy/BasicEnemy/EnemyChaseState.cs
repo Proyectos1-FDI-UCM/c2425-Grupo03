@@ -150,10 +150,14 @@ public class EnemyChaseState : BaseState
             //Si todavía hay plataforma se mueve, sino se detiene
             if (CheckGround() && CheckEnemyInFront())
             {
+                _animator.SetBool("IsChasing", true);
+                _animator.SetBool("IsIdle", false);
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
             }
             else
             {
+                _animator.SetBool("IsChasing", false);
+                _animator.SetBool("IsIdle", true);
                 _rb.velocity = Vector3.zero;
             }
         }
