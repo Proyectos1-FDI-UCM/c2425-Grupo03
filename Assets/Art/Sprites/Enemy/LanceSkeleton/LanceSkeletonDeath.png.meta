@@ -1,0 +1,290 @@
+fileFormatVersion: 2
+guid: 4db41f4ce924a714790c6eb332813678
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 212
+        height: 192
+      alignment: 9
+      pivot: {x: 0.35056368, y: 0.019472448}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a52731a5bad086a479164fd1050be4ce
+      internalID: 709968922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 201
+        height: 192
+      alignment: 9
+      pivot: {x: 0.45279765, y: 0.015971074}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa2f5b27f6a5a95458878c816f22c538
+      internalID: 280908083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_2
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 0
+        width: 177
+        height: 192
+      alignment: 9
+      pivot: {x: 0.61701095, y: 0.012568683}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05533f71a62346b4c99b30f5a8060820
+      internalID: -1938750884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_3
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 0
+        width: 112
+        height: 192
+      alignment: 9
+      pivot: {x: 0.48763767, y: 0.013031161}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63cc34bab55df849978daeddb7c88ea
+      internalID: -742181621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_4
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 0
+        width: 94
+        height: 124
+      alignment: 9
+      pivot: {x: 0.48983505, y: 0.010177821}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b161c365191ef143b421592e905dcc8
+      internalID: -1118491207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_5
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 0
+        width: 90
+        height: 95
+      alignment: 9
+      pivot: {x: 0.4773546, y: 0.019129587}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29841a45d552a5f43ada354df16827cd
+      internalID: 263487191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_6
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 0
+        width: 79
+        height: 81
+      alignment: 9
+      pivot: {x: 0.47581, y: 0.02071213}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 541b8cd6ba081f9439b86edf82764730
+      internalID: -684762923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonDeath_7
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 130
+        width: 65
+        height: 54
+      alignment: 9
+      pivot: {x: 0.47674656, y: 0.06334206}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 937b2d94890e75f478e3192062da6bcb
+      internalID: 336124000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      LanceSkeletonDeath_0: 709968922
+      LanceSkeletonDeath_1: 280908083
+      LanceSkeletonDeath_2: -1938750884
+      LanceSkeletonDeath_3: -742181621
+      LanceSkeletonDeath_4: -1118491207
+      LanceSkeletonDeath_5: 263487191
+      LanceSkeletonDeath_6: -684762923
+      LanceSkeletonDeath_7: 336124000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

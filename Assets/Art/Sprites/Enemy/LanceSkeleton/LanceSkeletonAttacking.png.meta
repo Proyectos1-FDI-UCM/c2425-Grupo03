@@ -1,0 +1,312 @@
+fileFormatVersion: 2
+guid: 592b239dba6a6e6498cf4f9ceb2493dd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 153
+        height: 224
+      alignment: 9
+      pivot: {x: 0.38935837, y: 0.006971606}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c308b957542c3c348ac4a5b9e01958c2
+      internalID: 1668188791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_1
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 187
+        height: 197
+      alignment: 9
+      pivot: {x: 0.44739962, y: 0.0036299394}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13f05d546a21c864b9e0d134a646578b
+      internalID: -1586678818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_2
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 0
+        width: 222
+        height: 186
+      alignment: 9
+      pivot: {x: 0.4276857, y: 0.0054825083}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad3cc4b4432c7184ba4a5dbec5ecd2da
+      internalID: -1406244259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_3
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 230
+        height: 185
+      alignment: 9
+      pivot: {x: 0.39313778, y: 0.006617502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd3a790c25411c4e9f7183f678bcec9
+      internalID: 1235215285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_4
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 1
+        width: 237
+        height: 185
+      alignment: 9
+      pivot: {x: 0.2898204, y: 0.012393883}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614d886a90f87a940a20c86671e0e907
+      internalID: -1982935784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_5
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 0
+        width: 232
+        height: 185
+      alignment: 9
+      pivot: {x: 0.21473274, y: 0.020402225}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 140f8e64332762d4a844c811743c4cd3
+      internalID: 1855077691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_6
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 224
+        height: 185
+      alignment: 9
+      pivot: {x: 0.4419937, y: 0.019221418}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e1abc03d6c3c64db74064caec5d8f4
+      internalID: -1494494655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_7
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 0
+        width: 224
+        height: 186
+      alignment: 9
+      pivot: {x: 0.28467014, y: 0.017757442}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e4e4df34a4bf8c4f80f10727e1144a4
+      internalID: 1847447149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonAttacking_8
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 0
+        width: 231
+        height: 185
+      alignment: 9
+      pivot: {x: 0.22559017, y: 0.018433176}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e87885fa09a2d8a43804049c54137b34
+      internalID: -2134978356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      LanceSkeletonAttacking_0: 1668188791
+      LanceSkeletonAttacking_1: -1586678818
+      LanceSkeletonAttacking_2: -1406244259
+      LanceSkeletonAttacking_3: 1235215285
+      LanceSkeletonAttacking_4: -1982935784
+      LanceSkeletonAttacking_5: 1855077691
+      LanceSkeletonAttacking_6: -1494494655
+      LanceSkeletonAttacking_7: 1847447149
+      LanceSkeletonAttacking_8: -2134978356
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

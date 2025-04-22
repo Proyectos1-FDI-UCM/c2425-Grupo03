@@ -1,0 +1,290 @@
+fileFormatVersion: 2
+guid: c370dc4fb69b33d46b4f1bf1186b83c8
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 174
+        height: 206
+      alignment: 9
+      pivot: {x: 0.4296585, y: 0.01698584}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa09a2270688f94f8147bf4d87753c7
+      internalID: 1779500356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_1
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 0
+        width: 172
+        height: 204
+      alignment: 9
+      pivot: {x: 0.41540775, y: 0.01793348}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79dfcda5fc719454c89226dbb901b015
+      internalID: 514412963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_2
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 0
+        width: 103
+        height: 241
+      alignment: 9
+      pivot: {x: 0.4842396, y: 0.012112298}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f7247f3e625567498f798fb6bd4178f
+      internalID: -775273027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_3
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 0
+        width: 82
+        height: 235
+      alignment: 9
+      pivot: {x: 0.35877657, y: 0.013223076}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9851e6605d033064ba8c69194fb5eb0d
+      internalID: 1284915067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_4
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 0
+        width: 113
+        height: 221
+      alignment: 9
+      pivot: {x: 0.3745074, y: 0.017388804}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adee0e68a82552b478f9daf2c073653c
+      internalID: 1591250111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_5
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 0
+        width: 94
+        height: 231
+      alignment: 9
+      pivot: {x: 0.4668936, y: 0.011242971}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33e45643b72509942827f9e5383ca3fd
+      internalID: 539159141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_6
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 0
+        width: 103
+        height: 237
+      alignment: 9
+      pivot: {x: 0.46519217, y: 0.017520344}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30cf16791ad37a2459c2ad07e6b0e66c
+      internalID: 1016263409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LanceSkeletonWalking_7
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 0
+        width: 71
+        height: 232
+      alignment: 9
+      pivot: {x: 0.44834533, y: 0.01449701}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aca3902a7d38e246b0886d3dd1e939f
+      internalID: 1003323299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      LanceSkeletonWalking_0: 1779500356
+      LanceSkeletonWalking_1: 514412963
+      LanceSkeletonWalking_2: -775273027
+      LanceSkeletonWalking_3: 1284915067
+      LanceSkeletonWalking_4: 1591250111
+      LanceSkeletonWalking_5: 539159141
+      LanceSkeletonWalking_6: 1016263409
+      LanceSkeletonWalking_7: 1003323299
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
