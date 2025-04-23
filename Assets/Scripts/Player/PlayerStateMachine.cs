@@ -187,11 +187,11 @@ public class PlayerStateMachine : StateMachine
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         PlayerAudio = GetComponent<AudioSource>();
-
-        InputManager.Instance.EnablePlayerInput();
     }
     protected override void OnStart()
     {
+        InputManager.Instance.EnablePlayerInput();
+
         HealthManager healthManager = GetComponent<HealthManager>();
         if (healthManager != null)
         {
