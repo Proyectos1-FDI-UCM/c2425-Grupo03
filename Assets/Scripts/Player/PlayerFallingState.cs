@@ -144,7 +144,7 @@ public class PlayerFallingState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _moveDir = _ctx.PlayerInput.Move.ReadValue<float>();
+        _moveDir = InputManager.Instance.MoveDirection;
 
         if (_coyoteTime > 0) 
         {
@@ -177,11 +177,11 @@ public class PlayerFallingState : BaseState
                 SoundManager.Instance.PlaySFX(_landSound, transform, 1);
                 Ctx.ChangeState(Ctx.GetStateByType<PlayerGroundedState>());
             }
-            else if (_coyoteTime > 0 && _ctx.PlayerInput.Jump.WasPressedThisFrame()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
+            else if (_coyoteTime > 0 && InputManager.Instance.jumpWasPressedThisFrame()) // detecta si el jugador a dado a saltar o si el coyotetime es mayor que 0 para pasar la estado Jump
             {
                 Ctx.ChangeState(Ctx.GetStateByType<PlayerJumpState>());
             }
-            else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador ha presionado al dash
+            else if (InputManager.Instance.DashIsPressed()) // detecta si el jugador ha presionado al dash
             {
                 PlayerDashState dashState = Ctx.GetStateByType<PlayerDashState>();
                 if (Time.time > dashState.NextAvailableDashTime)

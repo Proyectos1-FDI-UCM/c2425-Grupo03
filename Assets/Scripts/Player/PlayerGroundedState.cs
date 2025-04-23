@@ -80,7 +80,7 @@ public class PlayerGroundedState : BaseState
         //Coge el rigidbody del jugador
         _rigidbody = _ctx.Rigidbody;
         //Si el jugador mantiene pulsado el salto, solo lo detecta 1 vez.
-        _ctx.PlayerInput.Jump.started += (InputAction.CallbackContext context) => _jumpBuffer = _jumpBufferTime;
+        InputManager.Instance.AddJumpStartedListener(OnJumpPressed);
         //Coge le audio source para hacer sonar los pasos
         _audioSource = _ctx.PlayerAudio;
         //Coge el componente que mira si la entidad toca el suelo
@@ -151,8 +151,8 @@ public class PlayerGroundedState : BaseState
     protected override void UpdateState()
     {
         //_moveDir será 0 si no esta moviendo el jugador
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>(); 
-        if (_ctx != null && _ctx.PlayerInput.Move.ReadValue<float>() != 0 )
+        _moveDir = InputManager.Instance.MoveDirection; 
+        if (InputManager.Instance.MoveDirection != 0 )
         {
             Ctx.Animator.SetBool("IsRunning", true);
             Ctx.Animator.SetBool("IsIdle", false);
@@ -199,7 +199,7 @@ public class PlayerGroundedState : BaseState
             fallingState.ResetCoyoteTime();
         }
         //detecta si presionas al Dash
-        else if (_ctx.PlayerInput.Dash.IsPressed()) 
+        else if (InputManager.Instance.DashIsPressed()) 
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if (Time.time > dashState.NextAvailableDashTime)
@@ -207,7 +207,7 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(dashState);
             }
         }
-        else if (_ctx.PlayerInput.Attack.triggered)
+        else if (InputManager.Instance.attackTriggered())
         {
             PlayerAttackState attackState = _ctx.GetStateByType<PlayerAttackState>();
             if (Time.time > attackState.NextAttackTime)
@@ -215,16 +215,21 @@ public class PlayerGroundedState : BaseState
                 Ctx.ChangeState(attackState);
             }
         }
-        else if (_ctx.PlayerInput.ManoDeLasSombras.IsPressed() && _ctx.GetComponent<PlayerCharge>().ManoDeLasSombras.isCharged  && !Ctx.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
+        else if (InputManager.Instance.manoDeLasSombrasIsPressed() && _ctx.GetComponent<PlayerCharge>().ManoDeLasSombras.isCharged  && !Ctx.GetStateByType<PlayerManoDeLasSombrasState>().IsLocked)
         {
             PlayerManoDeLasSombrasState playerManoDeLasSombras = _ctx.GetStateByType<PlayerManoDeLasSombrasState>();
             Ctx.ChangeState(playerManoDeLasSombras);
         }
-        else if (_ctx.PlayerInput.SuperDash.triggered && _ctx.GetComponent<PlayerCharge>().SuperDash.isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
+        else if (InputManager.Instance.superDashIsPressed() && _ctx.GetComponent<PlayerCharge>().SuperDash.isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
         {
             PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
             Ctx.ChangeState(playerSuperDashState);
         }
+    }
+
+    private void OnJumpPressed()
+    {
+        _jumpBuffer = _jumpBufferTime;
     }
     #endregion   
 

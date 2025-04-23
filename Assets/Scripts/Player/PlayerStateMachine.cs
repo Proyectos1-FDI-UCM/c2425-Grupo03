@@ -75,10 +75,6 @@ public class PlayerStateMachine : StateMachine
     public float GravityScale => _gravityScale;
 
 
-    /// <summary>
-    /// El input actions del jugador.
-    /// </summary>
-    public PlayerInputActions.PlayerActions PlayerInput { get; private set; }
 
     /// <summary>
     /// El AudioSource que tiene el sonido de los pasos del jugador.
@@ -192,8 +188,7 @@ public class PlayerStateMachine : StateMachine
 
         PlayerAudio = GetComponent<AudioSource>();
 
-        PlayerInput = new PlayerInputActions().Player;
-        PlayerInput.Enable();
+        InputManager.Instance.EnablePlayerInput();
     }
     protected override void OnStart()
     {

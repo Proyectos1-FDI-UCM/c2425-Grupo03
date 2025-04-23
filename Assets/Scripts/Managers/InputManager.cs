@@ -4,7 +4,9 @@
 // TemplateP1
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 
@@ -58,14 +60,36 @@ public class InputManager : MonoBehaviour
     /// InputAction que se puede configurar desde el editor y que está en
     /// la carpeta Settings
     /// </summary>
-    private InputActionSettings _theController;
+    private @PlayerInputActions _theController;
     
     /// <summary>
-    /// Acción para Fire. Si tenemos más botones tendremos que crear más
-    /// acciones como esta (y crear los métodos que necesitemos para
-    /// conocer el estado del botón)
+    /// Acción para Fire.
     /// </summary>
-    private InputAction _fire;
+    private InputAction _attack;
+    /// <summary>
+    /// Acción para Fire.
+    /// </summary>
+    private InputAction _jump;
+    /// <summary>
+    /// Acción para Fire.
+    /// </summary>
+    private InputAction _dash;
+    /// <summary>
+    /// Acción para Fire.
+    /// </summary>
+    private InputAction _manoDeLasSombras;
+    /// <summary>
+    /// Acción para Fire.
+    /// </summary>
+    private InputAction _superDash;
+
+    private InputAction _pause;
+
+    private InputAction _cancelPause;
+
+    private UnityEvent _OnJumpStarted = new UnityEvent();
+    private UnityEvent _OnPausePressed = new UnityEvent();
+    private UnityEvent _OnPauseCancel = new UnityEvent();
 
     #endregion
 
@@ -151,16 +175,16 @@ public class InputManager : MonoBehaviour
     /// Según está configurado el InputActionController,
     /// es un vector normalizado 
     /// </summary>
-    public Vector2 MovementVector { get; private set; }
+    public float MoveDirection { get; private set; }
 
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) está pulsado
     /// Devolverá true en todos los frames en los que se mantenga pulsado
     /// <returns>True, si el botón está pulsado</returns>
     /// </summary>
-    public bool FireIsPressed()
+    public bool attackIsPressed()
     {
-        return _fire.IsPressed();
+        return _attack.IsPressed();
     }
 
     /// <summary>
@@ -169,11 +193,18 @@ public class InputManager : MonoBehaviour
     /// y false, en otro caso
     /// </returns>
     /// </summary>
-    public bool FireWasPressedThisFrame()
+    public bool attackWasPressedThisFrame()
     {
-        return _fire.WasPressedThisFrame();
+        return _attack.WasPressedThisFrame();
     }
-
+    public bool attackWasReleasedThisFrame()
+    {
+        return _attack.WasReleasedThisFrame();
+    }
+    public bool attackTriggered()
+    {
+        return _attack.triggered;
+    }
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) ha dejado de pulsarse
     /// durante este frame
@@ -181,11 +212,78 @@ public class InputManager : MonoBehaviour
     /// este frame; y false, en otro caso.
     /// </returns>
     /// </summary>
-    public bool FireWasReleasedThisFrame()
+    public bool jumpIsPressed()
     {
-        return _fire.WasReleasedThisFrame();
+        return _jump.IsPressed();
+    }
+    public bool jumpWasPressedThisFrame()
+    {
+        return _jump.WasPressedThisFrame();
+    }
+    public bool DashIsPressed()
+    {
+        return _dash.IsPressed();
+    }
+    public void EnablePlayerInput()
+    {
+        _theController.Player.Enable();
+    }
+    public void DisablePlayerInput()
+    {
+        _theController.Player.Disable();
     }
 
+    public void EnableMenuInput()
+    {
+        _theController.UI.Enable();
+    }
+
+    public void DisableMenuInput()
+    {
+        _theController.UI.Disable();
+    }
+    public bool manoDeLasSombrasIsPressed()
+    {
+        return _manoDeLasSombras.IsPressed();
+    }
+
+    public bool superDashIsPressed()
+    {
+        return _superDash.IsPressed();
+    }
+
+    public PlayerInputActions GetInputActions()
+    {
+        return _theController;
+    }
+
+    public void AddJumpStartedListener(UnityAction listener)
+    {
+        _OnJumpStarted.AddListener(listener);
+    }
+    public void RemoveJumpStartedListener(UnityAction listener)
+    {
+        _OnJumpStarted.RemoveListener(listener);
+    }
+    public void AddPausePressedListener(UnityAction listener)
+    {
+        _OnPausePressed.AddListener(listener);
+    }
+
+    public void RemovePausePressedListener(UnityAction listener)
+    {
+        _OnPausePressed.RemoveListener(listener);
+    }
+
+    public void AddPauseCancelListener (UnityAction listener)
+    {
+        _OnPauseCancel.AddListener(listener);
+    }
+
+    public void RemovePauseCancelListener(UnityAction listener)
+    {
+        _OnPauseCancel.RemoveListener(listener);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -198,15 +296,26 @@ public class InputManager : MonoBehaviour
     private void Init()
     {
         // Creamos el controlador del input y activamos los controles del jugador
-        _theController = new InputActionSettings();
-        _theController.Player.Enable();
+        _theController = new PlayerInputActions();
 
         // Cacheamos la acción de movimiento
         InputAction movement = _theController.Player.Move;
         // Para el movimiento, actualizamos el vector de movimiento usando
         // el método OnMove
-        movement.performed += OnMove;
-        movement.canceled += OnMove;
+        movement.performed += ctx => MoveDirection = ctx.ReadValue<float>();
+        movement.canceled += ctx => MoveDirection = ctx.ReadValue<float>();
+
+        _attack = _theController.Player.Attack;
+        _jump = _theController.Player.Jump;
+        _dash = _theController.Player.Dash;
+        _manoDeLasSombras = _theController.Player.ManoDeLasSombras;
+        _superDash = _theController.Player.SuperDash;
+        _pause = _theController.Player.Menu;
+        _cancelPause = _theController.UI.Cancel;
+
+        _jump.started += ctx => _OnJumpStarted?.Invoke();
+        _pause.performed += ctx => _OnPausePressed?.Invoke();
+        _cancelPause.performed += ctx => _OnPauseCancel?.Invoke();
 
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
@@ -220,10 +329,10 @@ public class InputManager : MonoBehaviour
     /// eventos de movimiento (relacionados con la acción Move)
     /// </summary>
     /// <param name="context">Información sobre el evento de movimiento</param>
-    private void OnMove(InputAction.CallbackContext context)
+    /*private void OnMove(InputAction.CallbackContext context)
     {
-        MovementVector = context.ReadValue<Vector2>();
-    }
+        MoveDirection = context.ReadValue<float>();
+    }*/
 
     #endregion
 } // class InputManager 

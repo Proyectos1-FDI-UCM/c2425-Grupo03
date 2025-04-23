@@ -248,7 +248,7 @@ public class PlayerAttackState : BaseState
     {
         if (Time.time > NextAttackTime)
         {
-            if (_ctx.PlayerInput.Attack.IsPressed() && !Ctx.GetStateByType<PlayerChargedAttackState>().IsLocked)
+            if (InputManager.Instance.attackIsPressed() && !Ctx.GetStateByType<PlayerChargedAttackState>().IsLocked)
             {
                 Ctx.ChangeState(Ctx.GetStateByType<PlayerChargedAttackState>());
             }

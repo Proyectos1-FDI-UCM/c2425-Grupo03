@@ -122,7 +122,7 @@ public class PlayerJumpState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();//_moveDir será 0 si no esta moviendo el jugador
+        _moveDir = InputManager.Instance.MoveDirection;//_moveDir será 0 si no esta moviendo el jugador
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ public class PlayerJumpState : BaseState
         {
             Ctx.ChangeState(Ctx.GetStateByType<PlayerFallingState>());
         }
-        else if (_ctx.PlayerInput.Dash.IsPressed()) // detecta si el jugador presiona al dash.
+        else if (InputManager.Instance.DashIsPressed()) // detecta si el jugador presiona al dash.
         {
             PlayerDashState dashState = _ctx.GetStateByType<PlayerDashState>();
             if (Time.time > dashState.NextAvailableDashTime)

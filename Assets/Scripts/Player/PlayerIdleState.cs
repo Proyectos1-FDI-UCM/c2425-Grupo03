@@ -79,7 +79,7 @@ public class PlayerIdleState : BaseState
     protected override void UpdateState()
     {
         GetCTX<PlayerStateMachine>().Rigidbody.velocity = new Vector2(0, GetCTX<PlayerStateMachine>().Rigidbody.velocity.y);
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
+        _moveDir = InputManager.Instance.MoveDirection;
     }
 
     /// <summary>

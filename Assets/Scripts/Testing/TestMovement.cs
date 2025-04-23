@@ -46,7 +46,7 @@ public class TestMovement : MonoBehaviour
     /// </summary>
     void Update()
     {
-        transform.localPosition = InputManager.Instance.MovementVector;
+      //  transform.localPosition = InputManager.Instance.MovementVector;
     }
     #endregion
 

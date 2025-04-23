@@ -53,7 +53,7 @@ public class TestFire : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (InputManager.Instance.FireWasPressedThisFrame())
+      /*  if (InputManager.Instance.FireWasPressedThisFrame())
             Debug.Log($"{Time.frameCount}[{Time.deltaTime}]: Fire was pressed this frame");
 
         if (InputManager.Instance.FireWasReleasedThisFrame())
@@ -62,7 +62,7 @@ public class TestFire : MonoBehaviour
         if (displayIsPressed && InputManager.Instance.FireIsPressed())
         {
             Debug.Log($"{Time.frameCount}[{Time.deltaTime}]: Fire was pressed");
-        }
+        }*/
     }
 
     #endregion
