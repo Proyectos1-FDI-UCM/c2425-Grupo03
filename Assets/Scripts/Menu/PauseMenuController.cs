@@ -110,7 +110,6 @@ public class PauseMenuController : MonoBehaviour
     /// <param name="context"></param>
     public void PausePress()
     {
-        Debug.Log("Pause button pressed");
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         if (!_paused) // si no está pausado, pausa el juego
         {
