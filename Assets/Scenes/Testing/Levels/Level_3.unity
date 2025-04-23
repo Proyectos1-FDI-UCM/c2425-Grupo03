@@ -2441,7 +2441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589916680943661861, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_Size.y
-      value: 3.1726036
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2598,7 +2598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.8265
+      value: 4.3265
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2638,7 +2638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589916680943661861, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_Size.y
-      value: 5.192994
+      value: 5.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9889,6 +9889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291279194}
   - component: {fileID: 1291279195}
+  - component: {fileID: 1291279196}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -9934,6 +9935,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1291279196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291279193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd182e61f212ffa4dbfa6e77c6b895cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1304902073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10897,7 +10910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.3568
+      value: 15.1068
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10937,7 +10950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589916680943661861, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_Size.y
-      value: 2.7135277
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13426,6 +13439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799273164}
   - component: {fileID: 1799273165}
+  - component: {fileID: 1799273166}
   m_Layer: 0
   m_Name: FinalDoor
   m_TagString: Untagged
@@ -13471,6 +13485,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1799273166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799273163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd182e61f212ffa4dbfa6e77c6b895cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1803479118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14522,7 +14548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.1958
+      value: 4.4458
       objectReference: {fileID: 0}
     - target: {fileID: 678002208633064504, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14562,7 +14588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5589916680943661861, guid: 341d6e167e4d08043a6ace96d5c7e824, type: 3}
       propertyPath: m_Size.y
-      value: 5.608252
+      value: 5.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14898,6 +14924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2057293249}
   - component: {fileID: 2057293250}
+  - component: {fileID: 2057293251}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -14914,7 +14941,7 @@ Transform:
   m_GameObject: {fileID: 2057293248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.05, z: 0}
+  m_LocalPosition: {x: 0, y: 11.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14943,6 +14970,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2057293251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057293248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd182e61f212ffa4dbfa6e77c6b895cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2076019119 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4564690295959494375, guid: 316224faf4e126d4f83cf40e86f70b96, type: 3}
