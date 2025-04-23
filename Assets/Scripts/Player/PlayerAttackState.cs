@@ -70,6 +70,10 @@ public class PlayerAttackState : BaseState
     /// How much the player moves when attacking
     /// </summary>
     [SerializeField, Min(0)] float _amountMoved;
+
+    [Header("Knockback Properties")]
+    [SerializeField, Min(0)] float _knockbackDistance;
+    [SerializeField, Min(0)] float _knockbackTime;
     #endregion
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
@@ -207,6 +211,10 @@ public class PlayerAttackState : BaseState
             {
                 //Daño al enemigo
                 enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
+
+                KnockbackState knockback = enemy.collider.GetComponent<EnemyStateMachine>()?.GetStateByType<KnockbackState>();
+                knockback?.ApplyKnockBack(_knockbackDistance,_knockbackTime,(Vector2.right * (float)_ctx.LookingDirection));
+
                 //Añadir carga a las habilidades
                 _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
             }

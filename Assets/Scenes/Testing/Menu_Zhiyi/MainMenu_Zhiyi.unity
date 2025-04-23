@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5771d42c96651f442b92750da34a7547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playSceneName: Level_1
+  _playSceneName: Level_2
   _creditsSceneName: CreditsScene
   _mainMenuSceneName: 
   _playArrow: {fileID: 1278574344}
