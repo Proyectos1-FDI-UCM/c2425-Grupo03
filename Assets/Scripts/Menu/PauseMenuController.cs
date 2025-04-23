@@ -249,8 +249,6 @@ public class PauseMenuController : MonoBehaviour
             InputManager.Instance.RemovePausePressedListener(PausePress);
             InputManager.Instance.RemovePauseCancelListener(UnpausePress);
         }
-
-
     }
     #endregion
 
