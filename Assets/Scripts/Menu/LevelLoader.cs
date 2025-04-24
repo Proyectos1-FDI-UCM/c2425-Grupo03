@@ -83,7 +83,7 @@ public class LevelLoader : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         //Cuando el jugador se encuentra en el fin de nivel cambia de escena
         ChangeScene(_sceneName, _transitionTime);

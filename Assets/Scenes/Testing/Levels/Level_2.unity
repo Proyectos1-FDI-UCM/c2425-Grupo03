@@ -8388,6 +8388,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7236546981685554009, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7631294179147842642, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_FillAmount
       value: 0

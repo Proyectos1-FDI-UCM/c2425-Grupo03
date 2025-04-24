@@ -184,11 +184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6415833642186472685, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -240.5
+      value: -265.4
       objectReference: {fileID: 0}
     - target: {fileID: 6415833642186472685, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.7
+      value: 22.24
       objectReference: {fileID: 0}
     - target: {fileID: 6415833642186472685, guid: 02a6e0ab829019d4b86dbdb45ba66a58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -365,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8713837547812444644, guid: 9d3900aca0a9db64faf598339ba1679e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -533,6 +533,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f1845fdc28986e944a775a9dc80a8a74, type: 3}
+    - target: {fileID: 4440654909880468268, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478588905561436082, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
       propertyPath: _abilityOneText
       value: 
@@ -584,6 +588,10 @@ PrefabInstance:
     - target: {fileID: 5607813968058677880, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
       propertyPath: m_PreserveAspect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229086580819861100, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6950985555384010374, guid: ba81ed0aead20e3478c9f2e4313ff5b0, type: 3}
       propertyPath: m_Pivot.x
@@ -828,6 +836,10 @@ PrefabInstance:
     - target: {fileID: 1017680637214323204, guid: 67a95beba8ef6574689c38bc223cd52a, type: 3}
       propertyPath: m_Offset.y
       value: -0.13188648
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017680637214323204, guid: 67a95beba8ef6574689c38bc223cd52a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1598864602063998077, guid: 67a95beba8ef6574689c38bc223cd52a, type: 3}
       propertyPath: m_LocalPosition.x
