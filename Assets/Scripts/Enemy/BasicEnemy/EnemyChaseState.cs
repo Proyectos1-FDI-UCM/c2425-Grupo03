@@ -170,9 +170,9 @@ public class EnemyChaseState : BaseState
     /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
     private bool CheckGround()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f*(float)_ctx.LookingDirection, gameObject.transform.position.y),
-            Vector2.down, 1.2f, LayerMask.GetMask("Platform"));
-
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + 0.5f * (float)_ctx.LookingDirection, gameObject.transform.position.y),
+                 Vector2.down, 0.2f, LayerMask.GetMask("Platform"));
+  
         return hit.collider != null;
     }
     /// <summary>
@@ -182,10 +182,10 @@ public class EnemyChaseState : BaseState
     /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
     private bool CheckEnemyInFront()
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.5f, gameObject.transform.position.y ),
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.2f, gameObject.transform.position.y+ 0.5f),
             Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("Enemy"));
 
-        return hit.collider == null;
+        return !(hit.collider != null && hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() == null);
     }
 
     /// <summary>
