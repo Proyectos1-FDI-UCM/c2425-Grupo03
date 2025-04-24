@@ -55,10 +55,6 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private Vector3 _moveDir;
 
-    /// <summary>
-    /// El input del jugador.
-    /// </summary>
-    private PlayerInputActions.PlayerActions _playerInput;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -93,10 +89,6 @@ public class CameraManager : MonoBehaviour
             // Establece la variable de cámara
             _camera = GetComponent<Camera>();
 
-            // Coge el input del jugador
-            _playerInput = new PlayerInputActions().Player;
-            _playerInput.Enable();
-
             //Pone la instrucción de seguir al jugador por defecto
             EnqueueInstruction(new CameraFollowPlayer(0.1f, _camera.orthographicSize));
         }
@@ -105,9 +97,13 @@ public class CameraManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+    
     }
-
+    private void Start()
+    {
+        // Activa el input del jugador
+        InputManager.Instance.EnablePlayerInput();
+    }
     /// <summary>
     /// Actualiza la instrucción actual y cambia de instrucción cuando esta termina.
     /// </summary>
@@ -141,7 +137,7 @@ public class CameraManager : MonoBehaviour
         }
 
         // Lee el input del jugador.
-        _moveDir = _playerInput.MoveCamera.ReadValue<Vector2>();
+        _moveDir = InputManager.Instance.MoveCamara;
     }
 
     void FixedUpdate()

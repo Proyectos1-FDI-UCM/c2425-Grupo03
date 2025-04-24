@@ -63,32 +63,45 @@ public class InputManager : MonoBehaviour
     private @PlayerInputActions _theController;
     
     /// <summary>
-    /// Acción para Fire.
+    /// Acción para atacar.
     /// </summary>
     private InputAction _attack;
     /// <summary>
-    /// Acción para Fire.
+    /// Acción para saltar.
     /// </summary>
     private InputAction _jump;
     /// <summary>
-    /// Acción para Fire.
+    /// Acción para dash.
     /// </summary>
     private InputAction _dash;
     /// <summary>
-    /// Acción para Fire.
+    /// Acción para _manoDeLasSombras.
     /// </summary>
     private InputAction _manoDeLasSombras;
     /// <summary>
-    /// Acción para Fire.
+    /// Acción para _superDash.
     /// </summary>
     private InputAction _superDash;
-
+    /// <summary>
+    /// Acción para _pausar
+    /// </summary>
     private InputAction _pause;
-
+    /// <summary>
+    /// Acción para despausar
+    /// </summary>
     private InputAction _cancelPause;
 
+    /// <summary>
+    /// Evento de salto
+    /// </summary>
     private UnityEvent _OnJumpStarted = new UnityEvent();
+    /// <summary>
+    /// Evento de pausa
+    /// </summary>
     private UnityEvent _OnPausePressed = new UnityEvent();
+    /// <summary>
+    /// Evento de Despausar
+    /// </summary>
     private UnityEvent _OnPauseCancel = new UnityEvent();
 
     #endregion
@@ -171,11 +184,18 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Propiedad para acceder al vector de movimiento.
+    /// Propiedad para acceder al direccion  de movimiento.
     /// Según está configurado el InputActionController,
     /// es un vector normalizado 
-    /// </summary>
+    /// </summary> 
     public float MoveDirection { get; private set; }
+
+    /// <summary>
+    /// Propiedad para acceder al vector de movimiento de camara.
+    /// Según está configurado el InputActionController,
+    /// es un vector normalizado 
+    /// </summary> 
+    public Vector2 MoveCamara { get; private set; }
 
     /// <summary>
     /// Método para saber si el botón de disparo (Fire) está pulsado
@@ -206,80 +226,113 @@ public class InputManager : MonoBehaviour
         return _attack.triggered;
     }
     /// <summary>
-    /// Método para saber si el botón de disparo (Fire) ha dejado de pulsarse
-    /// durante este frame
-    /// <returns>Devuelve true, si el botón se ha dejado de pulsar en
-    /// este frame; y false, en otro caso.
-    /// </returns>
+    /// Devuelve si ha ha sido pulsado jump en este frame
     /// </summary>
-    public bool jumpIsPressed()
-    {
-        return _jump.IsPressed();
-    }
+    /// <returns>si ha ha sido pulsado jump en este frame</returns>
     public bool jumpWasPressedThisFrame()
     {
         return _jump.WasPressedThisFrame();
     }
+    /// <summary>
+    /// Devuelve true si ha ha sido pulsado dash en este frame
+    /// </summary>
+    /// <returns>si ha ha sido pulsado dash en este frame</returns>
     public bool DashIsPressed()
     {
         return _dash.IsPressed();
     }
+    /// <summary>
+    /// Activa el input del player
+    /// </summary>
     public void EnablePlayerInput()
     {
         _theController.Player.Enable();
     }
+    /// <summary>
+    /// Desactivar el input del player
+    /// </summary>
     public void DisablePlayerInput()
     {
         _theController.Player.Disable();
     }
-
+    /// <summary>
+    /// Activar el input del menu
+    /// </summary>
     public void EnableMenuInput()
     {
         _theController.UI.Enable();
     }
 
+    /// <summary>
+    /// Desactiva el input del menu
+    /// </summary>
     public void DisableMenuInput()
     {
         _theController.UI.Disable();
     }
+
+    /// <summary>
+    /// Devuelve si ha ha sido pulsado manoDeLasSombras en este frame
+    /// </summary>
     public bool manoDeLasSombrasIsPressed()
     {
         return _manoDeLasSombras.IsPressed();
     }
-
+    /// <summary>
+    /// Devuelve si ha ha sido pulsado superDash en este frame
+    /// </summary>
     public bool superDashIsPressed()
     {
         return _superDash.IsPressed();
     }
 
+    /// <summary>
+    /// Devuelve el inputactions
+    /// </summary>
     public PlayerInputActions GetInputActions()
     {
         return _theController;
     }
 
+    /// <summary>
+    /// Suscribe un metodo al evento salto
+    /// </summary>
     public void AddJumpStartedListener(UnityAction listener)
     {
         _OnJumpStarted.AddListener(listener);
     }
+    /// <summary>
+    /// Dessuscribe un metodo al evento salto
+    /// </summary>
     public void RemoveJumpStartedListener(UnityAction listener)
     {
         _OnJumpStarted.RemoveListener(listener);
     }
+
+    /// <summary>
+    /// Suscribe un metodo al evento pausar
+    /// </summary>
     public void AddPausePressedListener(UnityAction listener)
     {
         _OnPausePressed.AddListener(listener);
     }
-
+    /// <summary>
+    /// Dessuscribe un metodo al evento pausar
+    /// </summary>
     public void RemovePausePressedListener(UnityAction listener)
     {
         _OnPausePressed.RemoveListener(listener);
     }
-
+    /// <summary>
+    /// Suscribe un metodo al evento despausar
+    /// </summary>
     public void AddPauseCancelListener (UnityAction listener)
     {
         _OnPauseCancel.AddListener(listener);
     }
-
+    /// <summary>
+    /// Dessuscribe un metodo al evento despausar
+    /// </summary>
     public void RemovePauseCancelListener(UnityAction listener)
     {
         _OnPauseCancel.RemoveListener(listener);
@@ -299,11 +352,12 @@ public class InputManager : MonoBehaviour
         _theController = new PlayerInputActions();
 
         // Cacheamos la acción de movimiento
-        InputAction movement = _theController.Player.Move;
-        // Para el movimiento, actualizamos el vector de movimiento usando
-        // el método OnMove
-        movement.performed += ctx => MoveDirection = ctx.ReadValue<float>();
-        movement.canceled += ctx => MoveDirection = ctx.ReadValue<float>();
+        InputAction _movement = _theController.Player.Move;
+        InputAction _moveCamara = _theController.Player.MoveCamera;
+
+        _movement.performed += ctx => MoveDirection = ctx.ReadValue<float>();
+        _movement.canceled += ctx => MoveDirection = ctx.ReadValue<float>();
+        _moveCamara.performed += ctx => MoveCamara = ctx.ReadValue<Vector2>();
 
         _attack = _theController.Player.Attack;
         _jump = _theController.Player.Jump;
@@ -312,6 +366,7 @@ public class InputManager : MonoBehaviour
         _superDash = _theController.Player.SuperDash;
         _pause = _theController.Player.Menu;
         _cancelPause = _theController.UI.Cancel;
+    
 
         _jump.started += ctx => _OnJumpStarted?.Invoke();
         _pause.performed += ctx => _OnPausePressed?.Invoke();
