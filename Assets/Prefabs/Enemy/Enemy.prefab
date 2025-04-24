@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTime: 0.6
+  _waitTime: 0.5
   _enemyDeath: {fileID: 8300000, guid: c38aa9dfea9a5194697207d60ed4725b, type: 3}
   _enemyDropWeapon: {fileID: 8300000, guid: c023af3463e661148899215498995060, type: 3}
 --- !u!114 &5438967828372433778
@@ -511,7 +511,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _attackRadius: 1
-  _attackSpeed: 1
+  _attackSpeed: 1.5
   _damage: 1
   _attackSound: {fileID: 8300000, guid: c68bfb77ab3a06047966073f9e858096, type: 3}
 --- !u!114 &743638334100870885
