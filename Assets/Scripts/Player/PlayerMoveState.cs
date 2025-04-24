@@ -101,7 +101,8 @@ public class PlayerMoveState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        _moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
+        //_moveDir = GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>();
+        _moveDir = InputManager.Instance.MoveDirection;
         if (_moveDir < 0)
         {
             GetCTX<PlayerStateMachine>().LookingDirection = PlayerStateMachine.PlayerLookingDirection.Left;
@@ -122,7 +123,7 @@ public class PlayerMoveState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (GetCTX<PlayerStateMachine>().PlayerInput.Move.ReadValue<float>() == 0)
+        if (InputManager.Instance.MoveDirection == 0)
         {
             Ctx.ChangeState(Ctx.GetStateByType<PlayerIdleState>());
         }

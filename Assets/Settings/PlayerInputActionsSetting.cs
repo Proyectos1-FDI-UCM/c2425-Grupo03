@@ -139,7 +139,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""id"": ""fea4b0e6-00bc-466e-9d21-7e64572aa9c8"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.3)"",
+                    ""processors"": ""AxisDeadzone(min=0.5)"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": true,

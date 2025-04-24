@@ -191,7 +191,7 @@ public class PlayerChargedAttackState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if ((Time.time - _startChargingTime >= _chargingTime + _attackDuration) || (_ctx.PlayerInput.Attack.WasReleasedThisFrame() && !_attacked))
+        if ((Time.time - _startChargingTime >= _chargingTime + _attackDuration) || (InputManager.Instance.attackWasReleasedThisFrame() && !_attacked))
         {
             Ctx?.ChangeState(_ctx.GetStateByType<PlayerGroundedState>());
         }

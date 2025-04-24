@@ -1,40 +1,29 @@
 //---------------------------------------------------------
-// Componente de test para probar el input de disparo 
-// Guillermo Jiménez Díaz
-// TemplateP1
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
+// Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
+// Añadir aquí el resto de directivas using
+
 
 /// <summary>
-/// Componente de prueba que se comunica con el InputManager
-/// para mostrar por consola los eventos de la acción Fire.
-/// Como los eventos IsPressed se muestran cada frame y
-/// saturan la consola, tenemos un tick en el editor para
-/// habilitarlos
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-public class TestFire : MonoBehaviour
+public class EndOfWaves : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
-
     #region Atributos del Inspector (serialized fields)
-    
-    /// <summary>
-    /// Si está activado, se muestran todos los eventos de que
-    /// la acción está siendo realizada (uno por frame)
-    /// </summary>
-    [SerializeField]
-    private bool displayIsPressed = false;
+    // Documentar cada atributo que aparece aquí.
+    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
 
     #endregion
 
-
-
     // ---- ATRIBUTOS PRIVADOS ----
-
     #region Atributos Privados (private fields)
-
     // Documentar cada atributo que aparece aquí.
     // El convenio de nombres de Unity recomienda que los atributos
     // privados se nombren en formato _camelCase (comienza con _, 
@@ -42,52 +31,74 @@ public class TestFire : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// El gameobject del waveController
+    /// </summary>
+    private GameObject _waveController;
+
     #endregion
 
+    // ---- PROPIEDADES ----
+    #region Propiedades
+    // Documentar cada propiedad que aparece aquí.
+    // Escribir con PascalCase.
+    #endregion
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
-
     #region Métodos de MonoBehaviour
+    
+    // Por defecto están los típicos (Update y Start) pero:
+    // - Hay que añadir todos los que sean necesarios
+    // - Hay que borrar los que no se usen 
+    
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before 
+    /// any of the Update methods are called the first time.
+    /// </summary>
+    void Start()
+    {
+        
+    }
 
     /// <summary>
     /// Update is called every frame, if the MonoBehaviour is enabled.
     /// </summary>
     void Update()
     {
-      /*  if (InputManager.Instance.FireWasPressedThisFrame())
-            Debug.Log($"{Time.frameCount}[{Time.deltaTime}]: Fire was pressed this frame");
-
-        if (InputManager.Instance.FireWasReleasedThisFrame())
-            Debug.Log($"{Time.frameCount}[{Time.deltaTime}]: Fire was released this frame");
-
-        if (displayIsPressed && InputManager.Instance.FireIsPressed())
-        {
-            Debug.Log($"{Time.frameCount}[{Time.deltaTime}]: Fire was pressed");
-        }*/
+        
     }
-
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
-
     #region Métodos públicos
-
     // Documentar cada método que aparece aquí con ///<summary>
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    //Coge el waveController
+    public void SetWaveController(GameObject waveController)
+    {
+        _waveController = waveController;
+    }
+
+    //Destruye el waveController
+    public void DestroyWaveController()
+    {
+        Destroy(_waveController);
+    }
+
     #endregion
 
-    // ---- MÉTODOS PRIVADOS ----
-
-    #region Métodos Privados
-
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
     #endregion
-} // class TestFire 
+
+} // class EndOfWaves 
 // namespace
