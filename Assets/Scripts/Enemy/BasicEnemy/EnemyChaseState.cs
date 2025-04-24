@@ -185,22 +185,7 @@ public class EnemyChaseState : BaseState
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.2f, gameObject.transform.position.y+ 0.5f),
             Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("Enemy"));
 
-   
-        if (hit.collider == null)
-        {
-            return true;
-        }
-
-        else if (hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() != null)
-        {
-            return true;
-        }
-
-        else
-        {
-            return false;
-        }
-        //return !(hit.collider != null && hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() == null);
+        return hit.collider == null || hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() != null;
     }
 
     /// <summary>
