@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<int, string> _levels = new Dictionary<int, string>()
     {
-        { 1, "TestingLevel"},
+        { 1, "Level_Turorial"},
+        { 2, "TestingLevel"},
         //{ 2, "Level_3"},
     };
     /// <summary>

@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadGame: 1
-  _mainMenuName: 
+  _sceneToLoad: 
 --- !u!1001 &1352416995
 PrefabInstance:
   m_ObjectHideFlags: 0
