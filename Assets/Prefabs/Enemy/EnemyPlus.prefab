@@ -511,7 +511,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _attackRadius: 1
-  _attackSpeed: 1.5
+  _attackSpeed: 1
   _damage: 1.5
   _attackSound: {fileID: 8300000, guid: c68bfb77ab3a06047966073f9e858096, type: 3}
 --- !u!114 &9121050162296451483
