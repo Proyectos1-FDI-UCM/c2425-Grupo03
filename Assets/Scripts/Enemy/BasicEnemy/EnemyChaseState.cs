@@ -200,7 +200,8 @@ public class EnemyChaseState : BaseState
             _animator?.SetBool("IsChasing", false);
             Ctx.ChangeState(Ctx.GetStateByType<EnemyIdleState>());
         }
-        else if((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance)
+        // hago: _ctx.transform.position + new Vector3(0,0.5f,0) porque el pivote del esqueleto está en los pies y el del jugador en el centro
+        else if ((_ctx.PlayerTransform.position - (_ctx.transform.position+new Vector3(0,0.5f,0))).magnitude < _ctx.AttackDistance)
         {
             //Si el jugador esta en el rango de ataque, pasa a atacar
             Ctx.ChangeState(Ctx.GetStateByType<EnemyAttackState>());
