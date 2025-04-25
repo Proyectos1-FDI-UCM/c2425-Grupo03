@@ -116,8 +116,6 @@ public class MainMenuController : MonoBehaviour
         Invoke("ChangeScene", _clickBotton.length);
     }
 
-
-
     /// <summary>
     /// Metodo que cierra la aplicación cuando se presiona el botón "Salir"
     /// </summary>
@@ -128,12 +126,18 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnCreditsButtom()
+    /// <summary>
+    /// Cambia a la escena de creditos
+    /// </summary>
+    public void OnCreditsButton()
     {
         SoundManager.Instance.PlaySFX(_clickBotton, transform, 0.5f);
         Invoke("LoadCreditsScene", _clickBotton.length);
     }
 
+    /// <summary>
+    /// Vuelve al menú principal
+    /// </summary>
     public void OnReturnButton()
     {
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
