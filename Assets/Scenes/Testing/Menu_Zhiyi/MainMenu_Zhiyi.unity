@@ -572,6 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playSceneName: Level_2
   _creditsSceneName: CreditsScene
+  _introScene: Intro
   _mainMenuSceneName: 
   _playArrow: {fileID: 1278574344}
   _exitArrow: {fileID: 288079280}
@@ -1169,7 +1170,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 523489469}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OnPlayButton
+        m_MethodName: OnEnterButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

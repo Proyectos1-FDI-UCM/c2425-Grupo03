@@ -33,7 +33,8 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     [SerializeField]
     private string _creditsSceneName;
-
+    [SerializeField]
+    private string _introScene;
 
     [SerializeField]
     private string _mainMenuSceneName;
@@ -143,6 +144,9 @@ public class MainMenuController : MonoBehaviour
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         Invoke("ReturnToMainMenu", _clickBotton.length);
     }
+    public void OnEnterButton() {
+        Invoke("LoadIntro", _clickBotton.length);
+    }
 
     private void ReturnToMainMenu()
     {
@@ -203,6 +207,10 @@ public class MainMenuController : MonoBehaviour
     void ChangeScene()
     {
         GameManager.Instance.GoActualLevel();
+    }
+    private void LoadIntro()
+    {
+        SceneManager.LoadScene(_introScene);
     }
     #endregion
 
