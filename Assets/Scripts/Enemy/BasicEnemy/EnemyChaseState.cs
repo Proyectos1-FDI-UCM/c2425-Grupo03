@@ -183,7 +183,7 @@ public class EnemyChaseState : BaseState
     private bool CheckEnemyInFront()
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.12f, gameObject.transform.position.y+ 0.5f),
-            Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("Enemy"));
+            Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("EnemyDistance"));
 
         return hit.collider == null || hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() != null;
     }
