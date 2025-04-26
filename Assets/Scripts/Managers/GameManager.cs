@@ -157,7 +157,10 @@ public class GameManager : MonoBehaviour
 
     public void AddActualLevel()
     {
-        _actualLevel++;
+        if (_actualLevel < _levels.Count)
+        {
+            _actualLevel++;
+        }
     }
     /// <summary>
     /// resetea los checkpoint activados

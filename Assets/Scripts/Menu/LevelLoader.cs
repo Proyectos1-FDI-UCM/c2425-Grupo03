@@ -36,7 +36,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     [SerializeField] private Animator[] _transition;
 
-
+    private bool _isLoading = false;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -77,7 +77,6 @@ public class LevelLoader : MonoBehaviour
     {
         //Buscar el Player y coger su HealthManager
         _healthManager = FindFirstObjectByType<PlayerStateMachine>()?.GetComponent<HealthManager>();
-
         //Añadir la animacion de transicion a cuando muere el jugador
         _healthManager?._onDeath.AddListener(ReloadSceneAnimation);
     }
@@ -85,7 +84,9 @@ public class LevelLoader : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        if (_isLoading) return;
         //Cuando el jugador se encuentra en el fin de nivel cambia de escena
+        _isLoading = true;
         ChangeScene(_sceneName, _transitionTime);
     }
 
@@ -105,6 +106,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void ChangeScene(string sceneName, float transitionTime = 1)
     {
+        Debug.Log("Go next level" + sceneName);
         GameManager.Instance.InitCheckpoint(); // resetea los checkpoint activados
         GameManager.Instance.AddActualLevel();
         StartCoroutine(LoadLevel(sceneName,transitionTime));
