@@ -66,7 +66,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.037125915, y: -1}
+  m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6262471, y: 0.099999905}
+  m_Size: {x: 0.7477876, y: 0.099999905}
   m_EdgeRadius: 0
 --- !u!114 &134160376055564889
 MonoBehaviour:
@@ -227,7 +227,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.9583907}
+  m_Offset: {x: 0, y: 1.064227}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.44430014, y: 0.0017586582}
@@ -238,7 +238,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 1.9167814}
+  m_Size: {x: 0.78421545, y: 2.128454}
   m_EdgeRadius: 0
 --- !u!114 &8641506554148786533
 MonoBehaviour:
@@ -252,8 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 15
-  _initialHealth: 15
+  _maxHealth: 150
+  _initialHealth: 150
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -273,7 +273,7 @@ Animator:
   m_GameObject: {fileID: 4752918805132756057}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f845d5bf980f3784bb62efdd689e2172, type: 2}
+  m_Controller: {fileID: 22100000, guid: 1d1a23ff30cf6b944b1f46be1c52a72d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -348,7 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _textColor: {r: 0.8543254, g: 0.67154855, b: 0.96981126, a: 1}
 --- !u!1 &8807441236356059883
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +560,7 @@ MonoBehaviour:
   _name: 
   _attackRadius: 1.6
   _attackSpeed: 2
-  _damage: 1
+  _damage: 10
   _attackSound: {fileID: 8300000, guid: c68bfb77ab3a06047966073f9e858096, type: 3}
 --- !u!114 &743638334100870885
 MonoBehaviour:

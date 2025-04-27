@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
-  _initialHealth: 10
+  _maxHealth: 200
+  _initialHealth: 200
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -301,7 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _textColor: {r: 0.645283, g: 0.1302741, b: 0.16160117, a: 0}
 --- !u!82 &5441531688453424118
 AudioSource:
   m_ObjectHideFlags: 0
@@ -410,9 +411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7648971dd47b90141888fa39fadca3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxChargeManoDeLasSombras: 30
-  _maxChargeSuperDash: 50
-  _removedChargePercentage: 100
+  _maxChargeManoDeLasSombras: 300
+  _maxChargeSuperDash: 500
+  _removedChargePercentage: 300
   _onChargeChange:
     m_PersistentCalls:
       m_Calls: []
@@ -500,7 +501,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.4
 --- !u!114 &1878743245120483010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd0eae09426f9a48a0b0fe94054d3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceToFloor: 1.45
+  _distanceToFloor: 1.4
 --- !u!1 &9124716735178180898
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +588,7 @@ MonoBehaviour:
   _name: 
   _isLocked: 0
   _dashDistance: 5
-  _damage: 25
+  _damage: 100
   _actionTime: 0.2
   _timeOfDamage: 1
   _timeOfDash: 1
@@ -610,8 +611,8 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _isLocked: 0
-  _firstHitDamage: 5
-  _secondHitDamage: 10
+  _firstHitDamage: 50
+  _secondHitDamage: 100
   _skillRange: 7
   _cantMovePlayerTime: 1
   _drawRaycast: 1
@@ -639,7 +640,7 @@ MonoBehaviour:
   _name: 
   _isLocked: 0
   _chargedAttackRadius: 2
-  _chargedDamage: 15
+  _chargedDamage: 150
   _chargingTime: 1
   _attackDuration: 1
   _drawRange: 1
@@ -697,7 +698,7 @@ MonoBehaviour:
   _name: 
   _attackRadius: 1
   _attackSpeed: 0.4
-  _damage: 5
+  _damage: 50
   _abilityChargePercentage: 100
   _airHitList:
   - {fileID: 0}
@@ -706,7 +707,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 554db89782931ba4a8191c912e3e0afd, type: 3}
   _maxCombo: 3
   _comboDuration: 1
-  _comboExtraDamage: 5
+  _comboExtraDamage: 50
   _drawRange: 1
   _amountMoved: 1
   _knockbackDistance: 1

@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 40
-  _initialHealth: 150
+  _maxHealth: 350
+  _initialHealth: 350
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -333,7 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _textColor: {r: 0.85490197, g: 0.67058825, b: 0.96862745, a: 0}
 --- !u!1 &4599733437207699549
 GameObject:
   m_ObjectHideFlags: 0

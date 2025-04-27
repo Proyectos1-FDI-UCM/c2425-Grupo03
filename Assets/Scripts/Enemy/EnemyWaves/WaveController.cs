@@ -112,6 +112,10 @@ public class WaveController : MonoBehaviour
             _doorAnimator.SetBool("Closed",true);
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _endWaves = false;
+            if(TryGetComponent(out BoxCollider2D trigger))
+            {
+                trigger.enabled = false;
+            }
         }
 
         // Cambia la cámara al centro del área de combate (el objeto vacío con este script)

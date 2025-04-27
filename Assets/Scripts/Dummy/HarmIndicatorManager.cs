@@ -19,7 +19,13 @@ public class HarmIndicatorManager : MonoBehaviour
     /// El prefab del texto donde se mostrará el daño.
     /// </summary>
     [SerializeField]
-    private Canvas DamageText; 
+    private Canvas _damageText;
+
+    /// <summary>
+    /// El color del los números
+    /// </summary>
+    [SerializeField]
+    private Color _textColor;
 
     #endregion
 
@@ -40,10 +46,10 @@ public class HarmIndicatorManager : MonoBehaviour
     public void AskForHealth(float damage)
     {
         // Instancia el texto con el número que va a representar el daño.
-        Canvas text = Instantiate<Canvas>(DamageText, gameObject.transform.position, gameObject.transform.rotation);
+        Canvas text = Instantiate<Canvas>(_damageText, gameObject.transform.position, gameObject.transform.rotation);
 
         // Establece el número que debe representar el texto.
-        text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString());
+        text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString(), _textColor);
     }
     #endregion
 

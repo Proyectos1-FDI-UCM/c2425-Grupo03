@@ -358,6 +358,7 @@ public class InputManager : MonoBehaviour
         _movement.performed += ctx => MoveDirection = ctx.ReadValue<float>();
         _movement.canceled += ctx => MoveDirection = ctx.ReadValue<float>();
         _moveCamara.performed += ctx => MoveCamara = ctx.ReadValue<Vector2>();
+        _moveCamara.canceled += ctx => MoveCamara = Vector2.zero;
 
         _attack = _theController.Player.Attack;
         _jump = _theController.Player.Jump;

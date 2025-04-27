@@ -41,11 +41,6 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject _mainMenuRhombus;
 
     /// <summary>
-    /// Deshabilitar los movimientos del jugador
-    /// </summary>
-    [SerializeField] private PlayerStateMachine _player;
-
-    /// <summary>
     /// Referencia al primer boton que se selecciona al abrir el menu
     /// </summary>
     [SerializeField] private GameObject _firstButton;
@@ -110,9 +105,9 @@ public class PauseMenuController : MonoBehaviour
     /// <param name="context"></param>
     public void PausePress()
     {
-        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         if (!_paused) // si no está pausado, pausa el juego
         {
+            SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
             PauseGame();
             Debug.Log("Game Paused");
         }
@@ -123,10 +118,9 @@ public class PauseMenuController : MonoBehaviour
     /// <param name="context"></param>
     public void UnpausePress()
     {
-        SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
-        
         if (_paused) // si está pausado, vuelve al juego
         {
+            SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
             ContinueGame();
         }
     }
@@ -171,10 +165,6 @@ public class PauseMenuController : MonoBehaviour
         InputManager.Instance.EnablePlayerInput();
         _pauseMenu.SetActive(false);
 
-        if (_player != null)
-        {
-            _player.enabled = true;
-        }
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
 
         InputManager.Instance.DisableMenuInput();
@@ -191,6 +181,7 @@ public class PauseMenuController : MonoBehaviour
         _paused = false;
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         Invoke("ChangeScene", _clickBotton.length);
+        
     }
     
 

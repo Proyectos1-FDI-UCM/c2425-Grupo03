@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -138,7 +139,7 @@ public class EnemyAttackState : BaseState
     public void Attack()
     {
         //El rango de ataque del enemigo
-        Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * _lookingDirection);
+        Vector2 position = transform.position + new Vector3(_attackRadius * _lookingDirection, 1f);
 
         //El posible HealthManager del jugador
         HealthManager player;
@@ -191,13 +192,13 @@ public class EnemyAttackState : BaseState
     }
 
     
-    /*
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + (new Vector3(_attackRadius, 0) * (int)_ctx.LookingDirection), _attackRadius);
+        Gizmos.DrawWireSphere(transform.position + new Vector3(_attackRadius * _lookingDirection, 1f), _attackRadius);
     }
-    */
+    
     #endregion   
 
 } // class EnemyAttackState 

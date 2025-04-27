@@ -153,6 +153,9 @@ MonoBehaviour:
   _onDamaged:
     m_PersistentCalls:
       m_Calls: []
+  _onHealed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7788290074669837193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _textColor: {r: 0.7747312, g: 0.8567346, b: 0.8792453, a: 0}
 --- !u!1 &7078370505836430187
 GameObject:
   m_ObjectHideFlags: 0

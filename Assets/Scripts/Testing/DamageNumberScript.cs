@@ -59,9 +59,10 @@ public class DamageNumberScript : MonoBehaviour
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    public void SetText(string number)
+    public void SetText(string number, Color textColor)
     {
-        _text.text = number;    
+        _text.text = number;
+        _text.color = textColor;
     }
 
     #endregion

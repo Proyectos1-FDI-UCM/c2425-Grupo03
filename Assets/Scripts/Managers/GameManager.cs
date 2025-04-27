@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<int, string> _levels = new Dictionary<int, string>()
     {
-        { 1, "Level_Turorial"},
-        { 2, "TestingLevel"},
-        //{ 2, "Level_3"},
+        { 1, "Level_Tutorial"},
+        { 2, "Level_2"},
+        { 3, "Level_3"},
     };
     /// <summary>
     /// El nivel actual
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void GoActualLevel()
     {
-        SceneManager.LoadScene(_levels[_actualLevel]);   
+        ChangeScene(_levels[_actualLevel]);   
     }
 
     public void AddActualLevel()
@@ -160,6 +160,10 @@ public class GameManager : MonoBehaviour
         if (_actualLevel < _levels.Count)
         {
             _actualLevel++;
+        }
+        else
+        {
+            _actualLevel = 1;
         }
     }
     /// <summary>
@@ -176,7 +180,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="index">Índice de la escena (en el build settings)
     /// que se cargará.</param>
-    public void ChangeScene(int index)
+    public void ChangeScene(string sceneName)
     {
         // Antes y después de la carga fuerza la recolección de basura, por eficiencia,
         // dado que se espera que la carga tarde un tiempo, y dado que tenemos al
@@ -191,7 +195,7 @@ public class GameManager : MonoBehaviour
         //
         // En realidad... todo esto es algo antiguo por lo que lo mismo ya está resuelto)
         System.GC.Collect();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         System.GC.Collect();
     } // ChangeScene
 
