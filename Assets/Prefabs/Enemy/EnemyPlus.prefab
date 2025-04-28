@@ -525,7 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTime: 1.1
+  _waitTime: 2
 --- !u!114 &3074968057473147487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _enemyWalkingSpeed: 2
+  _enemyWalkingSpeed: 1.5
 --- !u!114 &4832438905177310766
 MonoBehaviour:
   m_ObjectHideFlags: 0

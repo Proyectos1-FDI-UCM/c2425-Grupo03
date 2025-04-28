@@ -710,8 +710,8 @@ MonoBehaviour:
   _comboExtraDamage: 50
   _drawRange: 1
   _amountMoved: 1
-  _knockbackDistance: 1
-  _knockbackTime: 0.1
+  _knockbackDistance: 1.3
+  _knockbackTime: 0.2
 --- !u!114 &1132800426723031295
 MonoBehaviour:
   m_ObjectHideFlags: 0
