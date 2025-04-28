@@ -158,7 +158,7 @@ public class EnemyChaseState : BaseState
             {
                 _animator.SetBool("IsChasing", false);
                 _animator.SetBool("IsIdle", true);
-                _rb.velocity = Vector3.zero;
+                _rb.velocity = new Vector2(0,_rb.velocity.y);
             }
         }
     }
@@ -194,7 +194,7 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (!_ctx.IsPlayerInChaseRange || !CheckGround())
+        if (!_ctx.IsPlayerInChaseRange)
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             _animator?.SetBool("IsChasing", false);
