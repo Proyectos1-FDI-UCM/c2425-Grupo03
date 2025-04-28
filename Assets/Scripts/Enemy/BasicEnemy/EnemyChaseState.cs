@@ -194,7 +194,7 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (!_ctx.IsPlayerInChaseRange)
+        if (!_ctx.IsPlayerInChaseRange || !CheckGround())
         {
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             _animator?.SetBool("IsChasing", false);
