@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private Vector2? _lastCheckpoint;
 
+    float _masterVolume = 1;
+    float _sfxVolume = 1;
+    float _musicVolume = 1;
 
     /// <summary>
     /// guarda el ultimo checkpoint activado
@@ -226,6 +229,34 @@ public class GameManager : MonoBehaviour
     public bool IsActivated(int _checkPointIndex) 
     {
         return activatedCheckpoint >= _checkPointIndex;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        _masterVolume = volume;
+    }
+
+    public float GetMasterVolume()
+    {
+        return _masterVolume;
+    }
+    public void SetSFXVolume(float volume)
+    {
+        _sfxVolume = volume;
+    }
+
+    public float GetSFXVolume()
+    {
+        return _sfxVolume;
+    }
+    public void SetMusicVolume(float volume)
+    {
+        _musicVolume = volume;
+    }
+
+    public float GetMusicVolume()
+    {
+        return _musicVolume;
     }
 
     /// <summary>
