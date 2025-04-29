@@ -156,6 +156,7 @@ public class GameManager : MonoBehaviour
     public void GoActualLevel()
     {
         ChangeScene(_levels[_actualLevel]);
+        MusicPlayer.Instance.PlayLevelSound();
     }
 
     public void AddActualLevel()

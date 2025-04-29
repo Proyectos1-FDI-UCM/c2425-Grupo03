@@ -141,5 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b819c843fea764d8ab73c42bad8007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escenasPermitidas:
-  - CreditsScene
+  _audioSource: {fileID: 4365429243814289533}
+  _menuMusic: {fileID: 8300000, guid: 7b01356d940de3c4788584a16b59ca02, type: 3}
+  _levelMusic: {fileID: 8300000, guid: 9f19103a2c2e2dc46bfd780b154c0d88, type: 3}

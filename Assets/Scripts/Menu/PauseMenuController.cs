@@ -268,6 +268,7 @@ public class PauseMenuController : MonoBehaviour
     void ChangeScene()
     {
         SceneManager.LoadScene(_mainMenuSceneName);
+        MusicPlayer.Instance.PlayMenuSound();
     }
 
     private void OnDestroy()

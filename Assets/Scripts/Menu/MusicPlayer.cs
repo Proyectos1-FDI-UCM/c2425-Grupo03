@@ -21,8 +21,11 @@ public class MusicPlayer : MonoBehaviour
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-    public static MusicPlayer instance;
+    public static MusicPlayer Instance;
 
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] AudioClip _menuMusic;
+    [SerializeField] AudioClip _levelMusic;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -45,22 +48,40 @@ public class MusicPlayer : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void Awake()
     {
-        if (instance == null)
+        if (Instance != null)
         {
-            instance = this;
+            Destroy(gameObject);
         }
-        if (instance != this)
+        else
         {
-            Destroy(instance.gameObject);
-            instance = this;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
     #endregion
 
     // ---- MÉTODOS PUBLICOS ----
     #region Métodos públicos
 
+    public void PauseMusic()
+    {
+        _audioSource.Pause();
+    }
+
+    public void PlayMusic()
+    {
+        _audioSource.Play();
+    }
+    public void PlayMenuSound()
+    {
+        _audioSource.clip = _menuMusic;
+        _audioSource.Play();
+    }
+    public void PlayLevelSound()
+    {
+        _audioSource.clip = _levelMusic;
+        _audioSource.Play();
+    }
     #endregion
 
 } // class DontDestroy 
