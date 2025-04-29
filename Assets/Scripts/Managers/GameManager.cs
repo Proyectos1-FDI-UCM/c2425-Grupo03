@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
 
     public void GoActualLevel()
     {
-        ChangeScene(_levels[_actualLevel]);   
+        ChangeScene(_levels[_actualLevel]);
     }
 
     public void AddActualLevel()
