@@ -233,9 +233,11 @@ public class PlayerSuperDashState : BaseState
 
         RaycastHit2D wall;
 
+        //Si hay pared
         if (zone.collider != null)
         {
-            Debug.Log(zone.point);
+            //Debug.Log(zone.point);
+            //Mirar donde esta la pared
             wall = Physics2D.Raycast(new Vector2(_ctx.transform.position.x,zone.point.y), new Vector2(_lookingDirection, 0), _dashDistance, 1 << 7);
 
             if (wall.collider != null)
@@ -245,6 +247,7 @@ public class PlayerSuperDashState : BaseState
                 _damageDistance = wall.distance;
             }
         }
+        //Si no hay pared
         else
         {
             _endPosition.x += _dashDistance * _lookingDirection;
