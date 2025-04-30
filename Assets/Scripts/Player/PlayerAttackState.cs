@@ -209,13 +209,28 @@ public class PlayerAttackState : BaseState
         {
             foreach (RaycastHit2D enemy in enemyInArea)
             {
+
+                var enemySM = enemy.collider.GetComponent<EnemyStateMachine>();
+                var summonerSM = enemy.collider.GetComponent<EnemySummonerStateMachine>();
+
+                KnockbackState knockback = null;
+
+                if (enemySM != null)
+                {
+                    knockback = enemySM.GetStateByType<KnockbackState>();
+                }
+                else if (summonerSM != null)
+                {
+                    knockback = summonerSM.GetStateByType<KnockbackState>();
+                }
+
+                knockback?.ApplyKnockBack(_knockbackDistance, _knockbackTime, (Vector2.right * (float)_ctx.LookingDirection));
+                //Añadir carga a las habilidades
+
                 //Daño al enemigo
                 enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
 
-                KnockbackState knockback = enemy.collider.GetComponent<EnemyStateMachine>()?.GetStateByType<KnockbackState>();
-                knockback?.ApplyKnockBack(_knockbackDistance,_knockbackTime,(Vector2.right * (float)_ctx.LookingDirection));
 
-                //Añadir carga a las habilidades
                 _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
             }
         }

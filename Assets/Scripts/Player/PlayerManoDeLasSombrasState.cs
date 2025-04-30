@@ -175,29 +175,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     }
 
     
-    public void ShadowSecondHit()
-    {
-        for (int i = 0; i < _affectedEnemys; i++)
-        {
-            EnemyStateMachine enemy = _hits[i].collider == null ? null : _hits[i].collider.GetComponent<EnemyStateMachine>();
 
-            if (enemy != null)
-            {
-                // Aplicar Knockback en la dirección contraria
-                enemy.GetStateByType<KnockbackState>()?.ApplyKnockBack(-_pushDistance, 0.2f, -_direction + new Vector2(0, -_liftingHeight));
-
-                // Aplicar daño si tiene un HealthManager
-                HealthManager health = enemy.GetComponent<HealthManager>();
-                if (health != null)
-                {
-                    health.RemoveHealth((int)(_secondHitDamage)); // Segundo golpe
-                }
-            }
-        }
-
-        //La camara tiembla
-        CameraManager.Instance.ShakeCamera(0.1f, 0.5f);
-    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -250,14 +228,20 @@ public class PlayerManoDeLasSombrasState : BaseState
             {
                 // Comprobar si el objeto impactado es un enemigo
                 EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
+                EnemySummonerStateMachine enemyS = hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>();
+
+                float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
                 if (enemy != null)
                 {
                     // Aplicar Knockback           
                     // Comprobar si el enemigo puede sobrepasar startPosition, limitamos la atracción
-                    float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
-
                     enemy.GetStateByType<KnockbackState>()
+                        .ApplyKnockBack(-maxKnockback, _attractEnemyTime, _direction);
+                }
+                else if (enemyS != null)
+                {
+                    enemyS.GetStateByType<KnockbackState>()
                         .ApplyKnockBack(-maxKnockback, _attractEnemyTime, _direction);
                 }
                 _affectedEnemys++; // Añadimos 1 al indice de enemigos afectados
@@ -280,6 +264,41 @@ public class PlayerManoDeLasSombrasState : BaseState
         }
     }
 
+    private void ShadowSecondHit()
+    {
+        for (int i = 0; i < _affectedEnemys; i++)
+        {
+            HealthManager enemy = _hits[i].collider == null ? null : _hits[i].collider.GetComponent<HealthManager>();
+
+            if (enemy != null)
+            {
+                var enemyMelee = enemy.GetComponent<EnemyStateMachine>();
+                var enemySummoner = enemy.GetComponent<EnemySummonerStateMachine>();
+
+                KnockbackState knockback = null;
+
+                if (enemyMelee != null)
+                {
+                    knockback = enemyMelee.GetStateByType<KnockbackState>();
+                }
+                else if (enemySummoner != null)
+                {
+                    knockback = enemySummoner.GetStateByType<KnockbackState>();
+                }
+
+                // Aplicar Knockback en la dirección contraria
+                knockback?.ApplyKnockBack(-_pushDistance, 0.2f, -_direction + new Vector2(0, -_liftingHeight));
+
+                // Aplicar daño si tiene un HealthManager
+
+                 enemy.RemoveHealth((int)(_secondHitDamage)); // Segundo golpe
+                
+            }
+        }
+
+        //La camara tiembla
+        CameraManager.Instance.ShakeCamera(0.1f, 0.5f);
+    }
     /// <summary>
     /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
     /// Cambia el estado de jugador si ha acabado el _cantMovePlayerTime
