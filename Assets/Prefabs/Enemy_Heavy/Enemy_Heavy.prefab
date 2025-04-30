@@ -377,8 +377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84d78dae4e493e4dadf9e42fe6e5f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageText: {fileID: 0}
-  _textColor: {r: 0, g: 0, b: 0, a: 0}
+  _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
+  _textColor: {r: 0.94716984, g: 0.60583127, b: 0.92543155, a: 0}
 --- !u!95 &5100640281315969214
 Animator:
   serializedVersion: 5
