@@ -75,6 +75,11 @@ public class PlayerDashState : BaseState
     /// </summary>
     float _dashSpeed;
 
+    /// <summary>
+    /// El SpriteRenderer del jugador.
+    /// </summary>
+    SpriteRenderer _spriteRenderer;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -97,6 +102,7 @@ public class PlayerDashState : BaseState
     void Start()
     {
         _rb = Ctx?.Rigidbody;
+        _spriteRenderer = Ctx?.GetComponent<SpriteRenderer>();
     }
     #endregion
 
@@ -132,6 +138,12 @@ public class PlayerDashState : BaseState
         //Mira a ver si el dash podrías atravesar una pared.
         //CheckDashLimit(); Se ha quitado porque las plataformas son lo suficientemente gruesas y el dash lo suficientemente lento como para que no se puedan atravesar
 
+        // Cambia la opacidad del jugador para mostrar al jugador que es invulnerable durante el dash
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 0.2f);
+        }
+
         //Comienza la animación del dash
         Ctx?.Animator.SetBool("IsDashing", true);
     }
@@ -141,17 +153,29 @@ public class PlayerDashState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        //Quita la velocidad.
-        _rb.velocity = Vector2.zero;
+        if (_rb != null)
+        {
+            //Quita la velocidad.
+            _rb.velocity = Vector2.zero;
 
-        //Reestablece la gravedad.
-        _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
+            //Reestablece la gravedad.
+            _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
+        }
 
-        //Vuelve a activar el trigger para que golpeen al jugador.
-        _playerHitTrigger.enabled = true;
+        if (_playerHitTrigger != null)
+        {
+            //Vuelve a activar el trigger para que golpeen al jugador.
+            _playerHitTrigger.enabled = true;
+        }
 
         //Reestablece la posición final del dash al máximo para que permita volver a hacer un dash.
         _finishDashingPositionX = 0;
+
+        if (_spriteRenderer != null)
+        {
+            // Cambia la opacidad del jugador para mostrar al jugador que termina la invulnerabilidad
+            _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1f);
+        }
 
         //Termina la animación del dash
         Ctx?.Animator.SetBool("IsDashing", false);
