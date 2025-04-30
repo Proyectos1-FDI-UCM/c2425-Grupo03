@@ -199,6 +199,10 @@ public class EnemySummonerStateMachine : StateMachine
         }
     }
 
+    public bool IsFirstHit()
+    {
+        return _isFirstHit;
+    }
 
     #endregion
 

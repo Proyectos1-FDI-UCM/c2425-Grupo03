@@ -59,8 +59,10 @@ public class KnockbackState : BaseState
 
         // Cogemos el HealthManager a partir del gameObject con el RigidBody (sabemos que ahí se encuentra el HealthManager)
         HealthManager hm = Ctx.Rigidbody.gameObject.GetComponent<HealthManager>();
+        EnemySummonerStateMachine enemyS = Ctx.GetComponent<EnemySummonerStateMachine>();
         // Este if nos protege de que el enemigo pueda volver a la vida si ha muerto y le intentan hacer knockback
-        if (Ctx != null && hm != null && hm.Health > 0)
+
+        if (Ctx != null && hm != null && hm.Health > 0 && (enemyS == null || enemyS.CurrState != enemyS.GetStateByName("TPstate")))
         {
             // Para aplicar el knockback forzamos el cambio al estado de knockback
             Ctx.ChangeState(this);

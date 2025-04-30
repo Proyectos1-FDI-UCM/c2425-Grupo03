@@ -72,10 +72,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4266248451198481556}
   - component: {fileID: 4559328067753098830}
-  - component: {fileID: 3521741486571773464}
   - component: {fileID: 9068335304273517605}
   - component: {fileID: 2467241839179347293}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FallingState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +128,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.013661504}
+  m_Offset: {x: 0, y: -0.0393676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -140,21 +139,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.68, y: 0.13476586}
+  m_Size: {x: 0.68, y: 0.18617806}
   m_EdgeRadius: 0
---- !u!114 &3521741486571773464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3581451929178739654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd0eae09426f9a48a0b0fe94054d3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distanceToFloor: 0
 --- !u!114 &9068335304273517605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: 
+  _name: TPstate
   _teleportPoint: {fileID: 3977072330819180501}
   _waitTimeTp: 2.25
   _waitTimePostTp: 1
@@ -663,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd0eae09426f9a48a0b0fe94054d3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distanceToFloor: 0
+  _distanceToFloor: 1.1
 --- !u!114 &5357442929870169413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,8 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5df6397c72d85c48a50c203ca375dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isRootState: 0
-  _name: 
+  _isRootState: 1
+  _name: FallingState
 --- !u!1 &5333200817857762787
 GameObject:
   m_ObjectHideFlags: 0
