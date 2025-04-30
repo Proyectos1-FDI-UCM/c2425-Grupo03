@@ -230,8 +230,10 @@ public class PlayerAttackState : BaseState
                 //Daño al enemigo
                 enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
 
-
-                _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+                if (enemy.collider.GetComponent<HealthManager>()?.Inmune == false)
+                {
+                    _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+                }
             }
         }
 
