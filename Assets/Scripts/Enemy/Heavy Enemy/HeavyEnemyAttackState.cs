@@ -134,7 +134,7 @@ public class HeavyEnemyAttackState : BaseState
     /// <returns></returns>
     private IEnumerator Attack(int direction)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
         _ctx?.GetComponent<Animator>().SetBool("IsIdle", false);
 
         if (_ctx.IsPlayerInChaseRange)

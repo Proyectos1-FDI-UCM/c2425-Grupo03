@@ -114,7 +114,7 @@ MonoBehaviour:
   _attackWidth: 2
   _attackHeight: 3
   _attackTime: 2.083
-  _damage: 5
+  _damage: 30
   _waitDamageTime: 0.833
 --- !u!114 &8929789900559718187
 MonoBehaviour:
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _initialHealth: 100
+  _maxHealth: 300
+  _initialHealth: 300
   _onDeath:
     m_PersistentCalls:
       m_Calls: []
