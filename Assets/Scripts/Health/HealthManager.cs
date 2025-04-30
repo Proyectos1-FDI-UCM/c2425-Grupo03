@@ -57,6 +57,7 @@ public class HealthManager : MonoBehaviour
     /// Propiedad para la vida
     /// </summary>
     public float Health { get { return _health; } private set { _health = value; } }
+
     /// <summary>
     /// Vida máxima de la entidad
     /// </summary>
@@ -65,6 +66,8 @@ public class HealthManager : MonoBehaviour
     /// Booleana que determina si se le puede hacer daño al enemigo.
     /// </summary>
     public bool Inmune { get; set; } = false;
+
+    public bool HitButInmune { get; set; } = false;
     #endregion
 
     // ---- ATRIBUTOS PUBLICOS ----
@@ -121,7 +124,7 @@ public class HealthManager : MonoBehaviour
     /// <param name="removedHealth"></param>
     public void RemoveHealth(float removedHealth)
     {
-        if (Inmune) { return; }
+        if (Inmune || HitButInmune) { return; }
 
         if (_health - removedHealth <= 0)
         {

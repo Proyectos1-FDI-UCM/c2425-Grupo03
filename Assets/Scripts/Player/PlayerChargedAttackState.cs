@@ -6,6 +6,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using JetBrains.Annotations;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -147,10 +148,16 @@ public class PlayerChargedAttackState : BaseState
 
         foreach (RaycastHit2D enemy in enemyInArea)
         {
-            enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
+            HealthManager health = enemy.collider?.GetComponent<HealthManager>();
+            if (health != null)
+            {
+                health?.RemoveHealth((int)_chargedDamage);
 
-            if (enemy.collider.GetComponent<HealthManager>()?.Inmune == false)
-                GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
+                if (!health.Inmune && !health.HitButInmune)
+                {
+                    GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
+                }
+            }
         }
     }
     /// <summary>

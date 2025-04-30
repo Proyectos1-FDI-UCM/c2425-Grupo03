@@ -30,14 +30,20 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     [SerializeField, Min(0)] float _attackHeight;
     /// <summary>
-    /// El tiempo cuando el enemigo pueda volver a atacar
+    /// la distancia que deja con el jugador al acercarte
+    /// </summary>
+    [SerializeField] float _distanceWithPlayer;
+    /// <summary>
+    /// El tiempo que tarda la animacion de ataque
     /// </summary>
     [SerializeField, Min(0)] float _attackTime;
     /// <summary>
     /// El daño del ataque basico
     /// </summary>
     [SerializeField] float _damage;
-
+    /// <summary>
+    /// cuanto tiempo esepera en hacerte el daño
+    /// </summary>
     [SerializeField, Min(0)] float _waitDamageTime;
 
     #endregion
@@ -78,7 +84,7 @@ public class HeavyEnemyAttackState : BaseState
         _ctx = GetCTX<HeavyEnemyStateMachine>();
 
         //Informar al contexto el rango de ataque del enemigo
-        _ctx.AttackDistance = _attackWidth-0.6f;
+        _ctx.AttackDistance = _attackWidth- _distanceWithPlayer;
 
     }
 
@@ -88,7 +94,7 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _ctx?.GetComponent<Animator>().SetBool("IsIdle", true);
+        _ctx?.GetComponent<Animator>().SetBool("IsAttacking", true);
         StartCoroutine(Attack((int)_ctx.LookingDirection));
     }
     
@@ -114,6 +120,7 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+
     }
 
     /// <summary>
@@ -134,12 +141,8 @@ public class HeavyEnemyAttackState : BaseState
     /// <returns></returns>
     private IEnumerator Attack(int direction)
     {
-        yield return new WaitForSeconds(0.7f);
-        _ctx?.GetComponent<Animator>().SetBool("IsIdle", false);
-
-        if (_ctx.IsPlayerInChaseRange)
+        if (_ctx.IsPlayerInAttackRange)
         {
-            _ctx?.GetComponent<Animator>().SetBool("IsAttacking", true);
             //Espera el tiempo de la animación de ataque para hacer el daño.
             yield return new WaitForSeconds(_waitDamageTime);
 

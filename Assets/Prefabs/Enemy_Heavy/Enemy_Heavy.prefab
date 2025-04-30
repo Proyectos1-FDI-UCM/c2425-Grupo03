@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2553536535281833303}
   - component: {fileID: 2184130126838535886}
+  - component: {fileID: 7440391460798179512}
   - component: {fileID: 2133665469649698233}
   - component: {fileID: 4749044361887798971}
   - component: {fileID: 8929789900559718187}
@@ -80,8 +81,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.5, y: 2.3707786}
+  m_Size: {x: 10, y: 2.3707786}
   m_EdgeRadius: 0
+--- !u!114 &7440391460798179512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379228130745871155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc580d704a644e64295e6455fc537016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: KnockedBackState
 --- !u!114 &2133665469649698233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,9 +125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: 
+  _name: AttackState
   _attackWidth: 2
   _attackHeight: 3
+  _distanceWithPlayer: 0.5
   _attackTime: 2.083
   _damage: 30
   _waitDamageTime: 0.833
@@ -130,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _flipTime: 0.1
+  _flipTime: 0.3
 --- !u!114 &4888381099746808698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +162,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _enemyWalkingSpeed: 2
+  _waitTimeToAttack: 0.5
 --- !u!114 &9020828698283325866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: 
+  _name: FallingState
 --- !u!1 &3217597675906775356
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +330,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -365,6 +382,7 @@ MonoBehaviour:
   - {fileID: 8929789900559718187}
   - {fileID: 4749044361887798971}
   - {fileID: 2133665469649698233}
+  - {fileID: 7440391460798179512}
 --- !u!114 &8464606913913831553
 MonoBehaviour:
   m_ObjectHideFlags: 0

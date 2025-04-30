@@ -24,6 +24,12 @@ public class HeavyEnemyChasingState : BaseState
     [SerializeField]
     [Tooltip("Enemy walking speed in units per second")]
     float _enemyWalkingSpeed;
+
+    /// <summary>
+    /// el tiempo que se queda parado en frentre del jugador antes de atacar
+    /// </summary>
+    [SerializeField]
+    float _waitTimeToAttack;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -57,6 +63,15 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     private Animator _animator;
 
+    /// <summary>
+    /// contador local del tiempo
+    /// </summary>
+    private float _startAttackTime = -1;
+
+    /// <summary>
+    /// si puede atacar
+    /// </summary>
+    bool _goAttack = false;
     #endregion
 
 
@@ -95,6 +110,7 @@ public class HeavyEnemyChasingState : BaseState
     public override void EnterState()
     {
         _animator?.SetBool("IsChasing", true);
+        _startAttackTime = -1;
     }
     
     /// <summary>
@@ -109,6 +125,8 @@ public class HeavyEnemyChasingState : BaseState
             _rb.velocity = Vector3.zero;
         }
         _animator?.SetBool("IsChasing", false);
+        _startAttackTime = -1;
+        _goAttack = false;
     }
     #endregion
     
@@ -134,14 +152,40 @@ public class HeavyEnemyChasingState : BaseState
             //si no coincide con su direccion actual, debe de girarse
             _shouldFlip = newDirection != _ctx.LookingDirection;
 
-            //Si todavía hay plataforma se mueve, sino se detiene
-            if (CheckGround() && _ctx.IsMoving())
+            //Si todavía hay plataforma o no esta preparando el ataque se mueve, sino se detiene
+            if (CheckGround() && _ctx.IsMoving() && _startAttackTime < 0)
             {
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
             }
             else
             {
                 _rb.velocity = Vector3.zero;
+            }
+
+            //si hay un enemigo en area de ataque, empieza a preparar el ataque
+            if (_ctx.IsPlayerInAttackRange)
+            {
+                if (_startAttackTime < 0)
+                {
+ 
+                    _startAttackTime = Time.time;
+                    _animator?.SetBool("IsChasing", false);
+                    _animator?.SetBool("IsIdle", true);
+                }
+
+                else if (Time.time - _startAttackTime > _waitTimeToAttack)
+                {
+                    //Si el jugador esta en el rango de ataque, pasa a atacar
+                    _animator?.SetBool("IsChasing", false);
+                    _animator?.SetBool("IsIdle", false);
+                    _goAttack = true;
+                }
+            }
+            else
+            {
+                _startAttackTime = -1;
+                _animator?.SetBool("IsIdle", false);
+                _animator?.SetBool("IsChasing", true);
             }
         }
     }
@@ -170,10 +214,8 @@ public class HeavyEnemyChasingState : BaseState
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());
         }
-        else if (((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance))
+        else if (_goAttack)
         {
-
-            //Si el jugador esta en el rango de ataque, pasa a atacar
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyAttackState>());
         }
     }

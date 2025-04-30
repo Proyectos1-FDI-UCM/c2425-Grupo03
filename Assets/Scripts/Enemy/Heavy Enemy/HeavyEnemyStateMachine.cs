@@ -55,6 +55,8 @@ public class HeavyEnemyStateMachine : StateMachine
     /// </summary>
     public bool IsPlayerInChaseRange { get; set; }
 
+    public bool IsPlayerInAttackRange { get; set; }
+
     /// <summary>
     /// El Transform del jugador. 
     /// </summary>
@@ -104,7 +106,9 @@ public class HeavyEnemyStateMachine : StateMachine
             Vector2 directionToPlayer = (PlayerTransform.position - transform.position).normalized;
             Vector2 enemyLookingDirection = new Vector2((short)LookingDirection, 0);
             float dotProduct = Vector2.Dot(enemyLookingDirection, directionToPlayer); //si apuntan a direcciones contrarias, canTakeDamage es true
-            canTakeDamage = dotProduct < 0;
+
+            float distanceToPlayer = Vector2.Distance(PlayerTransform.position, transform.position);
+            canTakeDamage = dotProduct < 0 && distanceToPlayer >= 0.2;
         }
         return canTakeDamage; 
         
@@ -123,13 +127,19 @@ public class HeavyEnemyStateMachine : StateMachine
     {
         _healthManager = GetComponent<HealthManager>();
         _healthManager?._onDeath.AddListener(DeathState);
+        IsPlayerInAttackRange = false;
+        IsPlayerInChaseRange = false;
     }
 
     protected override void OnUpdate()
     {
         if (_healthManager != null)
         {
-            _healthManager.Inmune = !CanTakeDamage();    
+            _healthManager.HitButInmune = !CanTakeDamage();    
+        }
+        if (PlayerTransform != null)
+        {
+            IsPlayerInAttackRange = (PlayerTransform.position - transform.position).magnitude < AttackDistance;
         }
     }
 

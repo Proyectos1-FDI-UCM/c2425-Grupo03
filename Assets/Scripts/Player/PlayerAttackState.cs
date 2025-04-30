@@ -210,29 +210,35 @@ public class PlayerAttackState : BaseState
             foreach (RaycastHit2D enemy in enemyInArea)
             {
 
-                var enemySM = enemy.collider.GetComponent<EnemyStateMachine>();
-                var summonerSM = enemy.collider.GetComponent<EnemySummonerStateMachine>();
+                var enemySM = enemy.collider?.GetComponent<EnemyStateMachine>();
+                var summonerSM = enemy.collider?.GetComponent<EnemySummonerStateMachine>();
+                var heavySM = enemy.collider?.GetComponent<HeavyEnemyStateMachine>();
 
                 KnockbackState knockback = null;
-
+       
                 if (enemySM != null)
                 {
-                    knockback = enemySM.GetStateByType<KnockbackState>();
+                    knockback = enemySM?.GetStateByType<KnockbackState>();
                 }
                 else if (summonerSM != null)
                 {
-                    knockback = summonerSM.GetStateByType<KnockbackState>();
+                    knockback = summonerSM?.GetStateByType<KnockbackState>();
+                }
+                else if (heavySM != null)
+                {
+                    knockback = heavySM?.GetStateByType<KnockbackState>();
                 }
 
                 knockback?.ApplyKnockBack(_knockbackDistance, _knockbackTime, (Vector2.right * (float)_ctx.LookingDirection));
                 //Añadir carga a las habilidades
 
                 //Daño al enemigo
-                enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_damage + extraDamage);
+                HealthManager health = enemy.collider?.GetComponent<HealthManager>();
 
-                if (enemy.collider.GetComponent<HealthManager>()?.Inmune == false)
+                health?.RemoveHealth((int)_damage + extraDamage);
+                if (health != null && !health.Inmune && !health.HitButInmune)
                 {
-                    _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
+                    _chargeScript?.AddCharge((_abilityChargePercentage / 100) * _damage);
                 }
             }
         }

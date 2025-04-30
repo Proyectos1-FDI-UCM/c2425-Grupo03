@@ -230,6 +230,7 @@ public class PlayerManoDeLasSombrasState : BaseState
                 EnemyStateMachine enemy = hit.collider.gameObject.GetComponent<EnemyStateMachine>();
                 EnemySummonerStateMachine enemyS = hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>();
 
+
                 float maxKnockback = Mathf.Min(Mathf.Abs(_attractDistance), Mathf.Abs(transform.position.x - hit.point.x));
 
                 if (enemy != null)

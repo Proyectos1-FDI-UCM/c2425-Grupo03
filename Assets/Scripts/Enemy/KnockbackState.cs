@@ -58,16 +58,18 @@ public class KnockbackState : BaseState
         _direction = direction;
 
         // Cogemos el HealthManager a partir del gameObject con el RigidBody (sabemos que ahí se encuentra el HealthManager)
-        HealthManager hm = Ctx.Rigidbody.gameObject.GetComponent<HealthManager>();
-        EnemySummonerStateMachine enemyS = Ctx.GetComponent<EnemySummonerStateMachine>();
+        HealthManager hm = Ctx?.Rigidbody?.gameObject?.GetComponent<HealthManager>();
+        EnemySummonerStateMachine enemyS = Ctx?.GetComponent<EnemySummonerStateMachine>();
+        HeavyEnemyStateMachine enemyH = Ctx?.GetComponent<HeavyEnemyStateMachine>();
         // Este if nos protege de que el enemigo pueda volver a la vida si ha muerto y le intentan hacer knockback
 
-        if (Ctx != null && hm != null && hm.Health > 0 && (enemyS == null || enemyS.CurrState != enemyS.GetStateByName("TPstate")))
+        if (Ctx != null && hm != null && hm.Health > 0 && (enemyS == null || enemyS.CurrState != enemyS.GetStateByName("AttackState"))
+            && (enemyH == null || enemyH.CurrState != enemyH.GetStateByName("AttackState")))
         {
             // Para aplicar el knockback forzamos el cambio al estado de knockback
             Ctx.ChangeState(this);
                 //Coger animator del contexto
-            _animator = Ctx.GetComponent<Animator>();
+            _animator = Ctx?.GetComponent<Animator>();
 
             //Ponemos la animación correspondiente a aparecer
             _animator?.SetBool("IsKnockedBack", true);
@@ -79,7 +81,7 @@ public class KnockbackState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        if (Ctx != null)
+        if (Ctx != null && Ctx?.GetComponent<HeavyEnemyStateMachine>() == null)
         {
             // Aplicamos una velocidad en función de la distancia, tiempo y dirección dados
             Ctx.Rigidbody.velocity = (_knockBackDistance / _knockBackTime) * _direction.normalized;
@@ -113,7 +115,7 @@ public class KnockbackState : BaseState
     {
         // Mientras que la velocidad sea positiva, resto un poco de la velocidad para que se sienta más natural.
         // (he puesto un número random porque no importa mucho).
-        if(Ctx != null && Ctx.Rigidbody.velocity.x > 0 && Ctx.Rigidbody.velocity.y > 0)
+        if (Ctx != null && Ctx?.GetComponent<HeavyEnemyStateMachine>()==null && Ctx.Rigidbody.velocity.x > 0 && Ctx.Rigidbody.velocity.y > 0)
         {
             Ctx.Rigidbody.velocity = Ctx.Rigidbody.velocity - new Vector2(1, 1) * 100f * Time.deltaTime;
         }
