@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // Añadir aquí el resto de directivas using
 
@@ -54,6 +55,12 @@ public class PauseMenuController : MonoBehaviour
     /// </summary>
     [SerializeField] private AudioClip _clickBotton;
 
+    [SerializeField] private GameObject _masterRhombus;
+    [SerializeField] private GameObject _sfxRhombus;
+    [SerializeField] private GameObject _musicRhombus;
+    [SerializeField] private Slider _masterSlider;
+    [SerializeField] private Slider _sfxSlider;
+    [SerializeField] private Slider _musicSlider;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -90,7 +97,9 @@ public class PauseMenuController : MonoBehaviour
     {
         InputManager.Instance.AddPausePressedListener(PausePress);
         InputManager.Instance.AddPauseCancelListener(UnpausePress);
-
+        _masterSlider.value = GameManager.Instance.GetMasterVolume();
+        _sfxSlider.value = GameManager.Instance.GetSFXVolume();
+        _musicSlider.value = GameManager.Instance.GetMusicVolume();
         _pauseMenu.SetActive(false);
     }
 
@@ -181,9 +190,9 @@ public class PauseMenuController : MonoBehaviour
         _paused = false;
         SoundManager.Instance?.PlaySFX(_clickBotton, transform, 0.5f);
         Invoke("ChangeScene", _clickBotton.length);
-        
+
     }
-    
+
 
     public void OnSelectContinue()
     {
@@ -219,6 +228,34 @@ public class PauseMenuController : MonoBehaviour
         _mainMenuRhombus.SetActive(false);
     }
 
+    public void OnSelectMasterSlider()
+    {
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.5f);
+        _masterRhombus.SetActive(true);
+    }
+    public void OnDeSelectMasterSlider()
+    {
+        _masterRhombus.SetActive(false);
+    }
+    public void OnSelectSFXSlider()
+    {
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.5f);
+        _sfxRhombus.SetActive(true);
+    }
+    public void OnDeSelecSFXSlider()
+    {
+        _sfxRhombus.SetActive(false);
+    }
+    public void OnSelectMusicSlider()
+    {
+        SoundManager.Instance?.PlaySFX(_changeBotton, transform, 0.5f);
+        _musicRhombus.SetActive(true);
+    }
+    public void OnDeSelectMusicSlider()
+    {
+        _musicRhombus.SetActive(false);
+    }
+
 
     #endregion
 
@@ -231,6 +268,7 @@ public class PauseMenuController : MonoBehaviour
     void ChangeScene()
     {
         SceneManager.LoadScene(_mainMenuSceneName);
+        MusicPlayer.Instance.PlayMenuSound();
     }
 
     private void OnDestroy()

@@ -70,6 +70,7 @@ public class VideoManager : MonoBehaviour
         videoPlayer = gameObject.GetComponent<VideoPlayer>();
         // Cuando el video termina, se llama el método EndReached
         videoPlayer.loopPointReached += EndReached;
+        MusicPlayer.Instance.PauseMusic();
     }
 
     /// <summary>

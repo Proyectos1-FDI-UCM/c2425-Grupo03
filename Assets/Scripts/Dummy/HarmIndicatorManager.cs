@@ -45,11 +45,16 @@ public class HarmIndicatorManager : MonoBehaviour
     #region Métodos Públicos
     public void AskForHealth(float damage)
     {
-        // Instancia el texto con el número que va a representar el daño.
-        Canvas text = Instantiate<Canvas>(_damageText, gameObject.transform.position, gameObject.transform.rotation);
+        EnemySummonerStateMachine enemyS = GetComponent<EnemySummonerStateMachine>();
 
-        // Establece el número que debe representar el texto.
-        text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString(), _textColor);
+        if (enemyS==null || !enemyS.IsFirstHit())
+        {
+            // Instancia el texto con el número que va a representar el daño.
+            Canvas text = Instantiate<Canvas>(_damageText, gameObject.transform.position, gameObject.transform.rotation);
+
+            // Establece el número que debe representar el texto.
+            text.GetComponent<DamageNumberScript>()?.SetText(damage.ToString(), _textColor);
+        }
     }
     #endregion
 

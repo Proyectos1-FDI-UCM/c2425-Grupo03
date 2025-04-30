@@ -168,6 +168,11 @@ public class EnemySummonerStateMachine : StateMachine
 
             // Los siguientes golpes ya no serán los primeros
             _isFirstHit = false;
+            if (GetComponent<HealthManager>() != null)
+            {
+                GetComponent<HealthManager>().Inmune = true;
+            }
+            GetComponent<Animator>()?.SetBool("IsKnockedBack", false);
         }
     }
 
@@ -198,6 +203,10 @@ public class EnemySummonerStateMachine : StateMachine
         }
     }
 
+    public bool IsFirstHit()
+    {
+        return _isFirstHit;
+    }
 
     #endregion
 

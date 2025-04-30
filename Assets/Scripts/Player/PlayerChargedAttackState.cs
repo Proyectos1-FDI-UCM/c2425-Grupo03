@@ -149,7 +149,8 @@ public class PlayerChargedAttackState : BaseState
         {
             enemy.collider.GetComponent<HealthManager>()?.RemoveHealth((int)_chargedDamage);
 
-            GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
+            if (enemy.collider.GetComponent<HealthManager>()?.Inmune == false)
+                GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
         }
     }
     /// <summary>

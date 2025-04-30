@@ -49,6 +49,8 @@ public class EnemyChaseState : BaseState
     /// </summary>
     AudioSource _audioSource;
 
+    private float diffX;
+
     #endregion
 
 
@@ -135,14 +137,20 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        if (_ctx != null)
-        {
-            //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
-            _ctx.LookingDirection = (_ctx.PlayerTransform.position.x - _ctx.transform.position.x) > 0 ?
-                EnemyStateMachine.EnemyLookingDirection.Right : EnemyStateMachine.EnemyLookingDirection.Left;
 
-            // Invierte el sprite en función de la dirección en la que mira el jugador
-            _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyStateMachine.EnemyLookingDirection.Left;
+        if (_ctx != null)
+        {   //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            diffX = _ctx.PlayerTransform.position.x - _ctx.transform.position.x;
+
+            //Solo cambia de direccion si hay diferencia en la posicion X
+            if (Mathf.Abs(diffX) > 0.1f)
+            {
+                _ctx.LookingDirection = diffX > 0 ?
+                EnemyStateMachine.EnemyLookingDirection.Right:EnemyStateMachine.EnemyLookingDirection.Left;
+
+                // Invierte el sprite en función de la dirección en la que mira el jugador
+                _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == EnemyStateMachine.EnemyLookingDirection.Left;
+            }
         }
 
         if (_rb != null)
@@ -158,7 +166,7 @@ public class EnemyChaseState : BaseState
             {
                 _animator.SetBool("IsChasing", false);
                 _animator.SetBool("IsIdle", true);
-                _rb.velocity = Vector3.zero;
+                _rb.velocity = new Vector2(0,_rb.velocity.y);
             }
         }
     }
