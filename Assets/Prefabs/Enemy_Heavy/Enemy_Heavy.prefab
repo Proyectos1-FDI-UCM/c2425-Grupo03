@@ -52,7 +52,7 @@ BoxCollider2D:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65463
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -69,7 +69,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.67}
+  m_Offset: {x: 0, y: 1.2796109}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -80,7 +80,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.5, y: 2.43}
+  m_Size: {x: 9.5, y: 2.3707786}
   m_EdgeRadius: 0
 --- !u!114 &2133665469649698233
 MonoBehaviour:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _waitTime: 2
+  _waitTime: 0.33
 --- !u!114 &4749044361887798971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,8 +113,9 @@ MonoBehaviour:
   _name: 
   _attackWidth: 2
   _attackHeight: 3
-  _attackTime: 2
+  _attackTime: 2.083
   _damage: 5
+  _waitDamageTime: 0.833
 --- !u!114 &8929789900559718187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _flipTime: 1
+  _flipTime: 0.1
 --- !u!114 &4888381099746808698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,10 +333,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.11614162, y: 1.0695654}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.47, y: 0.16}
     oldSize: {x: 3.38, y: 3.35}
     newSize: {x: 3.38, y: 3.35}
     adaptiveTilingThreshold: 0.5
@@ -343,7 +344,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0615598, y: 1.256984}
+  m_Size: {x: 1.2189058, y: 2.0825908}
   m_EdgeRadius: 0
 --- !u!114 &6340979192876585138
 MonoBehaviour:

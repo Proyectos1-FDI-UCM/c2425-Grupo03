@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using TMPro;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -68,6 +69,7 @@ public class HeavyEnemyDeathState : BaseState
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
+        _ctx?.GetComponent<Animator>().SetBool("IsDeath", true);
     }
 
     /// <summary>
@@ -75,7 +77,7 @@ public class HeavyEnemyDeathState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        
+        _ctx?.GetComponent<Animator>().SetBool("IsDeath", false);
     }
     #endregion
     
@@ -95,6 +97,7 @@ public class HeavyEnemyDeathState : BaseState
         // Destruye el objeto una vez pasado el tiempo de espera
         if (Time.time > _deadTime)
         {
+            _ctx?.GetComponent<Animator>().SetBool("IsDeath", false);
             Destroy(_ctx.gameObject);
         }
     }

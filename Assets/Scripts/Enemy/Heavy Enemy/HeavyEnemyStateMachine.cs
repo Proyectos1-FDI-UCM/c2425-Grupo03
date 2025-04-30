@@ -75,6 +75,8 @@ public class HeavyEnemyStateMachine : StateMachine
     /// El health manager del enemigo pesado
     /// </summary>
     private HealthManager _healthManager;
+
+    private bool _isMoving = false;
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -139,6 +141,18 @@ public class HeavyEnemyStateMachine : StateMachine
         ChangeState(gameObject.GetComponentInChildren<HeavyEnemyDeathState>());
     }
 
+    public bool IsMoving()
+    {
+        return _isMoving;
+    }
+    public void CanMove()
+    {
+        _isMoving = true;
+    }
+    public void CantMove()
+    {
+        _isMoving = false;
+    }
     #endregion
 
 } // class EnemyStateMachine 

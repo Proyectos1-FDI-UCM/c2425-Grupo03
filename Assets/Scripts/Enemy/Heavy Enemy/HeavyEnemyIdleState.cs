@@ -72,7 +72,7 @@ public class HeavyEnemyIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator.SetBool("Idle", true);
+        _animator?.SetBool("IsIdle", true);
     }
     
     /// <summary>
@@ -80,7 +80,7 @@ public class HeavyEnemyIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _animator.SetBool("Idle", false);
+        _animator?.SetBool("IsIdle", false);
     }
     #endregion
     

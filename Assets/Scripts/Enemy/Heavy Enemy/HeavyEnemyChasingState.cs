@@ -94,7 +94,7 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        _animator.SetBool("Chasing", true);
+        _animator?.SetBool("IsChasing", true);
     }
     
     /// <summary>
@@ -102,12 +102,13 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        _ctx.CantMove();
         _shouldFlip = false;
         if (_rb != null)
         {
             _rb.velocity = Vector3.zero;
         }
-        _animator.SetBool("Chasing", false);
+        _animator?.SetBool("IsChasing", false);
     }
     #endregion
     
@@ -134,7 +135,7 @@ public class HeavyEnemyChasingState : BaseState
             _shouldFlip = newDirection != _ctx.LookingDirection;
 
             //Si todavía hay plataforma se mueve, sino se detiene
-            if (CheckGround())
+            if (CheckGround() && _ctx.IsMoving())
             {
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
             }
@@ -169,8 +170,9 @@ public class HeavyEnemyChasingState : BaseState
             //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyIdleState>());
         }
-        else if ((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance)
+        else if (((_ctx.PlayerTransform.position - _ctx.transform.position).magnitude < _ctx.AttackDistance))
         {
+
             //Si el jugador esta en el rango de ataque, pasa a atacar
             Ctx.ChangeState(Ctx.GetStateByType<HeavyEnemyAttackState>());
         }
