@@ -25,6 +25,3 @@ Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* 
 - [He Deng](https://github.com/A2stedB)
 - [Santiago Salto](https://github.com/SantiagoSalto)
 - [Zhiyi Zhou](https://github.com/Zhiyi1223)
-
-## Licencia
-[WIP]
