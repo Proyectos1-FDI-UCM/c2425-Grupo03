@@ -146,9 +146,16 @@ public class EnemyHealthBar : MonoBehaviour
     private void ShowEnemyHealthBar(float _damage)
     {
         _currentHealth = _healthManager.Health;
+
+        if (_healthManager.Health > 10)
+            _currentHealth = _healthManager.Health - 10;
+        else
+            _currentHealth = 0;
+
         _enemyHealthSlider.value = _currentHealth / _maxHealth;
         _canvas.enabled = true;
         _timer = _visibleTime;
+
     }
 
     private void HideEnemyHealthBar()
