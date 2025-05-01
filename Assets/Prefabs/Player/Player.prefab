@@ -689,6 +689,7 @@ MonoBehaviour:
   _playerHitTrigger: {fileID: 6312170735057447645}
   _dashSound: {fileID: 8300000, guid: fd82b521a7f41574e828585df0f09a15, type: 3}
   ParallaxEffect: {fileID: 0}
+  _invulnerableTime: 0.1
 --- !u!114 &7922959446255207737
 MonoBehaviour:
   m_ObjectHideFlags: 0

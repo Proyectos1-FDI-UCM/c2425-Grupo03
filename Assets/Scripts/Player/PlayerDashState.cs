@@ -48,6 +48,12 @@ public class PlayerDashState : BaseState
     [SerializeField] AudioClip _dashSound;
 
     [SerializeField] ParallaxEffect ParallaxEffect;
+
+    /// <summary>
+    /// Tiempo en el que te quedas invulenrable tras usar el dash
+    /// </summary>
+    [Tooltip("Tiempo en el que te quedas invulenrable tras usar el dash")]
+    [SerializeField] float _invulnerableTime;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -162,12 +168,6 @@ public class PlayerDashState : BaseState
             _rb.gravityScale = GetCTX<PlayerStateMachine>().GravityScale;
         }
 
-        if (_playerHitTrigger != null)
-        {
-            //Vuelve a activar el trigger para que golpeen al jugador.
-            _playerHitTrigger.enabled = true;
-        }
-
         //Reestablece la posición final del dash al máximo para que permita volver a hacer un dash.
         _finishDashingPositionX = 0;
 
@@ -177,8 +177,19 @@ public class PlayerDashState : BaseState
             _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1f);
         }
 
+        Invoke("ActivatePlayerCollider", _invulnerableTime);
+
         //Termina la animación del dash
         Ctx?.Animator.SetBool("IsDashing", false);
+    }
+
+    public void ActivatePlayerCollider()
+    {
+        if (_playerHitTrigger != null)
+        {
+            //Vuelve a activar el trigger para que golpeen al jugador.
+            _playerHitTrigger.enabled = true;
+        }
     }
     #endregion
 
