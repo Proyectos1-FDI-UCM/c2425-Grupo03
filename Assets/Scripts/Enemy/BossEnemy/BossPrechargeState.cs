@@ -1,29 +1,29 @@
 //---------------------------------------------------------
-// Estado de vulnerabilidad del jefe final
-// Adrián Isasi
+// Estado previo a la carga del jefe final
+// Responsable de la creación de este archivo
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
 using UnityEngine;
+// Añadir aquí el resto de directivas using
 
 
 /// <summary>
-/// Estado de vulnerabilidad del jefe final
+/// Estado previo a la carga del jefe final
 /// </summary>
-public class BossVulnerableState : BaseState
+public class BossPrechargeState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     [SerializeField]
-    [Min(0)]
-    float _vulnerableTime;
+    float _timeToCharge;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
-    HealthManager _healthManager;
-    float _stateEndTime;
+    float _prechargeStateEnd;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -31,47 +31,41 @@ public class BossVulnerableState : BaseState
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void Start()
-    {
-        Ctx?.TryGetComponent<HealthManager>(out _healthManager);
-    }
+    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-
+    
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
-        _stateEndTime = Time.time + _vulnerableTime;
-        _healthManager.Inmune = false;
-        Ctx.Rigidbody.velocity = Vector3.zero;
-        Ctx.Animator.SetBool("IsVulnerable", true);
+        _prechargeStateEnd = Time.time + _timeToCharge;
+        Ctx.Animator.SetBool("IsPreparingCharge", true);
+
     }
-    
+
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
     {
-        _healthManager.Inmune = true;
-        Ctx.Animator.SetBool("IsVulnerable", false);
+        Ctx.Animator.SetBool("IsPreparingCharge", false);
+
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
+    // Documentar cada método que aparece aquí
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
 
     /// <summary>
     /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
@@ -87,13 +81,13 @@ public class BossVulnerableState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if(Time.time > _stateEndTime)
+        if(Time.time > _prechargeStateEnd)
         {
-            Ctx.ChangeState(Ctx.GetStateByName("Idle"));
+            Ctx.ChangeState(Ctx.GetStateByName("Charging"));
         }
     }
 
     #endregion   
 
-} // class BossVulnerableState 
+} // class BossPrechargeState 
 // namespace

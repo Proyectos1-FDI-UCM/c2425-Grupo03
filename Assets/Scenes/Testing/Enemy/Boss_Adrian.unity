@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 489832658}
   - component: {fileID: 489832656}
   - component: {fileID: 489832657}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Phase0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: Idle State
+  _name: Idle
+  _timeWaitAfterDetection: 2
 --- !u!61 &489832657
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1264,6 +1265,7 @@ MonoBehaviour:
   - {fileID: 489832656}
   - {fileID: 2127662173}
   - {fileID: 2127662175}
+  - {fileID: 2127662177}
 --- !u!95 &1629581319
 Animator:
   serializedVersion: 5
@@ -1311,7 +1313,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1629581321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1658,6 +1660,7 @@ GameObject:
   - component: {fileID: 2127662172}
   - component: {fileID: 2127662173}
   - component: {fileID: 2127662175}
+  - component: {fileID: 2127662177}
   - component: {fileID: 2127662174}
   - component: {fileID: 2127662176}
   m_Layer: 0
@@ -1695,9 +1698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: Charging State
-  _maxSpeed: 20
-  _speedAcceleration: 8
+  _name: Charging
+  _launchSpeed: 20
+  _speedDeceleration: 25
   _damage: 20
   _damageFrequency: 0.5
 --- !u!61 &2127662174
@@ -1743,7 +1746,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 3.154377, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2127662175
 MonoBehaviour:
@@ -1758,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isRootState: 1
-  _name: Vulnerable State
+  _name: Vulnerable
   _vulnerableTime: 5
 --- !u!61 &2127662176
 BoxCollider2D:
@@ -1805,6 +1808,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.74, y: 1.73}
   m_EdgeRadius: 0
+--- !u!114 &2127662177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127662171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6100884bd46354b93ccaf5452199fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRootState: 1
+  _name: Precharge
+  _timeToCharge: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -16,18 +16,18 @@ public class BossChargingState : BaseState
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     /// <summary>
-    /// Velocidad máxima del jefe mientras corre
+    /// Velocidad del jefe al iniciar la carga contra el jugador
     /// </summary>
     [SerializeField]
     [Min(0f)]
-    float _maxSpeed;
+    float _launchSpeed;
 
     /// <summary>
     /// aceleración de la velocidad
     /// </summary>
     [SerializeField]
     [Min(0f)]
-    float _speedAcceleration;
+    float _speedDeceleration;
 
     /// <summary>
     /// Daño causado al jugador al entrar en contacto con el jefe
@@ -54,7 +54,7 @@ public class BossChargingState : BaseState
 
     bool _hasHitPlayer;
 
-    float _nextHit;
+    bool _hasMissedPlayer;
 
     #endregion
 
@@ -93,13 +93,20 @@ public class BossChargingState : BaseState
 
     public override void EnterState()
     {
+        _ctx.LookingDirection = GetNewLookingDirection();
+
         _hasHitWall = false;
-        Ctx.Animator.SetTrigger("PrepareChase");
+        _hasHitPlayer = false;
+        _hasMissedPlayer = false;
+
+        Ctx.Animator.SetBool("IsCharging", true);
+        Ctx.Rigidbody.velocity = new Vector2(_launchSpeed * (int)_ctx.LookingDirection, 0);
     }
 
     public override void ExitState()
     {
-        Ctx.Animator.ResetTrigger("PrepareChase");
+        _ctx.LookingDirection = GetNewLookingDirection();
+        Ctx.Animator.SetBool("IsCharging", false);
     }
     #endregion
 
@@ -117,23 +124,27 @@ public class BossChargingState : BaseState
         }
     }
 
+    private BossStateMachine.EnemyLookingDirection GetNewLookingDirection()
+    {
+        return DistanceToPlayer() < 0 ? BossStateMachine.EnemyLookingDirection.Left : BossStateMachine.EnemyLookingDirection.Rigth;
+    }
+
     protected override void OnStateSetUp()
     {
         _ctx = GetCTX<BossStateMachine>();
     }
     protected override void UpdateState()
     {
-        _ctx.LookingDirection = DistanceToPlayer() < 0 ? BossStateMachine.EnemyLookingDirection.Left : BossStateMachine.EnemyLookingDirection.Rigth;
-
-        float nextVelocityX = Ctx.Rigidbody.velocity.x + ((int)_ctx.LookingDirection * _speedAcceleration * Time.deltaTime);
-        nextVelocityX = Mathf.Clamp(nextVelocityX, -_maxSpeed, _maxSpeed);
-
-        Ctx.Rigidbody.velocity = new Vector2(nextVelocityX, 0);
-
-        if(_hasHitPlayer && Time.time > _nextHit)
+        if (_hasMissedPlayer)
         {
-            _nextHit = Time.time + _damageFrequency;
-            _ctx.Player?.GetComponent<HealthManager>()?.RemoveHealth(_damage);
+            float nextVelocityX = Ctx.Rigidbody.velocity.x - (Mathf.Sign(Ctx.Rigidbody.velocity.x) * _speedDeceleration * Time.deltaTime);
+            nextVelocityX = nextVelocityX > 0 ? Mathf.Max(nextVelocityX, 0) : Mathf.Min(nextVelocityX, 0);
+
+            Ctx.Rigidbody.velocity = new Vector2(nextVelocityX, 0);
+        }
+        else if(GetNewLookingDirection() != _ctx.LookingDirection)
+        {
+            _hasMissedPlayer = true;
         }
     }
 
@@ -141,7 +152,16 @@ public class BossChargingState : BaseState
     {
         if (_hasHitWall)
         {
-            Ctx.ChangeState(Ctx.GetStateByName("Vulnerable State"));
+            Ctx.ChangeState(Ctx.GetStateByName("Vulnerable"));
+        }
+        else if(_hasHitPlayer)
+        {
+            _ctx.Player?.GetComponent<HealthManager>()?.RemoveHealth(_damage);
+            Ctx.ChangeState(Ctx.GetStateByName("Idle"));
+        }
+        else if (Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.1f && _hasMissedPlayer)
+        {
+            Ctx.ChangeState(Ctx.GetStateByName("Precharge"));
         }
     }
     #endregion

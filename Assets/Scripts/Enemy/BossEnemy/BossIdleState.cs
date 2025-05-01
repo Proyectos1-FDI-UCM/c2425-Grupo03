@@ -11,18 +11,21 @@ using UnityEngine;
 /// <summary>
 /// Estado de inactivo del jefe final
 /// </summary>
+[RequireComponent (typeof(BoxCollider2D))]
 public class BossIdleState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
+    [SerializeField]
+    [Min(0f)]
+    float _timeWaitAfterDetection;
 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     bool _playerDetected = false;
+    float _idleStateEnd;
 
     #endregion
 
@@ -36,7 +39,7 @@ public class BossIdleState : BaseState
     #region Métodos de MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<PlayerStateMachine>(out PlayerStateMachine player))
+        if(collision.TryGetComponent(out PlayerStateMachine player))
         {
             _playerDetected = true;
             GetCTX<BossStateMachine>().Player = player;
@@ -58,7 +61,9 @@ public class BossIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
-        
+        _idleStateEnd = Time.time + _timeWaitAfterDetection;
+        Ctx.Animator.SetBool("IsIdle", true);
+        Ctx.Rigidbody.velocity = Vector3.zero;
     }
     
     /// <summary>
@@ -66,7 +71,7 @@ public class BossIdleState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        _playerDetected = false;
+        Ctx.Animator.SetBool("IsIdle", false);
     }
     #endregion
     
@@ -91,9 +96,9 @@ public class BossIdleState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if( _playerDetected )
+        if(_playerDetected && Time.time > _idleStateEnd)
         {
-            Ctx.ChangeState(Ctx.GetStateByName("Charging State"));
+            Ctx.ChangeState(Ctx.GetStateByName("Precharge"));
         }
     }
 
