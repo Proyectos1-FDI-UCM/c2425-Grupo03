@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 9173700178501717750}
   - component: {fileID: 5292387667439897737}
   m_Layer: 5
-  m_Name: Canvas 1
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &9173700178501717750
 MonoBehaviour:
   m_ObjectHideFlags: 0

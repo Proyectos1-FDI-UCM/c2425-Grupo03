@@ -147,10 +147,14 @@ public class EnemyHealthBar : MonoBehaviour
     {
         _currentHealth = _healthManager.Health;
 
-        if (_healthManager.Health > 10)
+        if (_healthManager.Health - 10 > 0)
+        {
             _currentHealth = _healthManager.Health - 10;
+        }
         else
+        {
             _currentHealth = 0;
+        }
 
         _enemyHealthSlider.value = _currentHealth / _maxHealth;
         _canvas.enabled = true;
