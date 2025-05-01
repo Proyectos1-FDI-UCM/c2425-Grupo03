@@ -142,7 +142,6 @@ public class EnemySummonerStateMachine : StateMachine
         {
             //Se subscribe a los eventos de muerte y daño para ejecutar los métodos
             hm._onDeath.AddListener(DeathState);
-            hm._onDamaged.AddListener(TPState);
             hm._onDamaged.AddListener(EnemyDamagedSFX);
         }
     }
@@ -159,22 +158,21 @@ public class EnemySummonerStateMachine : StateMachine
     /// Si es el primer golpe recibido, cambia al estado de TP
     /// </summary>
     /// <param name="removedHealth"></param>
-    public void TPState(float removedHealth)
+    public void TPState()
     {
-        if (_isFirstHit && GetComponent<HealthManager>()?.Health > 0) 
+        if (GetComponent<HealthManager>() != null)
         {
-            if (GetComponent<HealthManager>() != null)
-            {
-                GetComponent<HealthManager>().Inmune = true;
-            }
-            //Si es el primer golpe y todavía está vivo se teletransporta
-            ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
-
-            // Los siguientes golpes ya no serán los primeros
-            _isFirstHit = false;
-
-            GetComponent<Animator>()?.SetBool("IsKnockedBack", false);
+            GetComponent<HealthManager>().Inmune = true;
         }
+
+        //Si es el primer golpe y todavía está vivo se teletransporta
+
+        ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
+        
+        // Los siguientes golpes ya no serán los primeros
+
+        _isFirstHit = false;
+        GetComponent<Animator>()?.SetBool("IsKnockedBack", false);
     }
 
     /// <summary>

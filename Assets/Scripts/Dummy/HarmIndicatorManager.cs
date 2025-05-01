@@ -47,7 +47,7 @@ public class HarmIndicatorManager : MonoBehaviour
     {
         EnemySummonerStateMachine enemyS = GetComponent<EnemySummonerStateMachine>();
 
-        if (enemyS==null || !enemyS.IsFirstHit())
+        if ((enemyS == null || !enemyS.IsFirstHit()) && GetComponent<HealthManager>().Inmune != true && GetComponent<HealthManager>().HitButInmune != true)
         {
             // Instancia el texto con el número que va a representar el daño.
             Canvas text = Instantiate<Canvas>(_damageText, gameObject.transform.position, gameObject.transform.rotation);

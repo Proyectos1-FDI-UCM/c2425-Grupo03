@@ -124,9 +124,16 @@ public class HealthManager : MonoBehaviour
     /// <param name="removedHealth"></param>
     public void RemoveHealth(float removedHealth)
     {
+        EnemySummonerStateMachine enemyS = GetComponent<EnemySummonerStateMachine>();
+
         if (Inmune || HitButInmune) { return; }
 
-        if (_health - removedHealth <= 0)
+        if (enemyS != null && enemyS.IsFirstHit())
+        {
+            enemyS.TPState();
+        }
+
+        else if (_health - removedHealth <= 0)
         {
             _health = 0;
             _onDeath.Invoke();
@@ -135,8 +142,11 @@ public class HealthManager : MonoBehaviour
         {
             _health = _health - removedHealth;
         }
-        _onDamaged.Invoke(removedHealth);
-        
+
+        if (Health > 0)
+        {
+            _onDamaged.Invoke(removedHealth);
+        }   
     }
 
     /// <summary>
