@@ -99,6 +99,11 @@ public class EnemyTPState : BaseState
 
         //Reproduce le sonido de teletransporte
         SoundManager.Instance.PlaySFX(_teleportSound, transform, 0.1f);
+
+        if (_ctx != null)
+        {
+            _ctx.GetComponent<HealthManager>().CanBeKnockbacked = false;
+        }
     }
     
     /// <summary>
@@ -115,6 +120,11 @@ public class EnemyTPState : BaseState
         
         _animator?.SetBool("IsDisappearing", false);
         _animator?.SetBool("IsAppearing", false);
+
+        if (_ctx != null)
+        {
+            _ctx.GetComponent<HealthManager>().CanBeKnockbacked = true;
+        }
 
     }
     #endregion

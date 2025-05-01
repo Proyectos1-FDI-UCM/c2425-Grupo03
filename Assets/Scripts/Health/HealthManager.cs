@@ -46,6 +46,11 @@ public class HealthManager : MonoBehaviour
     /// La vida que tiene la entidad
     /// </summary>
     private float _health = 0f;
+
+    /// <summary>
+    /// si esta muerto 
+    /// </summary>
+    private bool _death;
     #endregion
 
 
@@ -67,7 +72,10 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     public bool Inmune { get; set; } = false;
 
-    public bool HitButInmune { get; set; } = false;
+    /// <summary>
+    /// Booleana que determina si se le puede hacer knockback
+    /// </summary>
+    public bool CanBeKnockbacked { get; set; } = true;
     #endregion
 
     // ---- ATRIBUTOS PUBLICOS ----
@@ -77,7 +85,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent _onDeath;
-
+        
     /// <summary>
     /// Evento para cuando la entidad reciba daño.
     /// </summary>
@@ -104,6 +112,7 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        _death = false;
         //Dar una vida inicial a la entidad
         SetHealth(_initialHealth);
     }
@@ -122,31 +131,38 @@ public class HealthManager : MonoBehaviour
     /// Quitar vida a la entidad
     /// </summary>
     /// <param name="removedHealth"></param>
-    public void RemoveHealth(float removedHealth)
+    public bool RemoveHealth(float removedHealth)
     {
         EnemySummonerStateMachine enemyS = GetComponent<EnemySummonerStateMachine>();
-
-        if (Inmune || HitButInmune) { return; }
+        if (Inmune)
+        {
+            return false; 
+        }
 
         if (enemyS != null && enemyS.IsFirstHit())
         {
             enemyS.TPState();
+            return false;
         }
 
-        else if (_health - removedHealth <= 0)
+        else if (_health != 0) 
         {
-            _health = 0;
-            _onDeath.Invoke();
-        }
-        else
-        {
-            _health = _health - removedHealth;
-        }
 
-        if (Health > 0)
-        {
+            if (_health - removedHealth <= 0)
+            {
+                _health = 0;
+                _onDeath.Invoke();
+            }
+            else
+            {
+                _health = _health - removedHealth;
+            }
+
             _onDamaged.Invoke(removedHealth);
-        }   
+            return true;
+        }
+
+        else { return false; }
     }
 
     /// <summary>

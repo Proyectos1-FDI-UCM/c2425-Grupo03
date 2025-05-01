@@ -149,14 +149,10 @@ public class PlayerChargedAttackState : BaseState
         foreach (RaycastHit2D enemy in enemyInArea)
         {
             HealthManager health = enemy.collider?.GetComponent<HealthManager>();
-            if (health != null)
+ 
+            if (health?.RemoveHealth((int)_chargedDamage) == true)
             {
-                health?.RemoveHealth((int)_chargedDamage);
-
-                if (!health.Inmune && !health.HitButInmune)
-                {
-                    GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
-                }
+                GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
             }
         }
     }

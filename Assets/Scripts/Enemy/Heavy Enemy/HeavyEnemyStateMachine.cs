@@ -135,7 +135,7 @@ public class HeavyEnemyStateMachine : StateMachine
     {
         if (_healthManager != null)
         {
-            _healthManager.HitButInmune = !CanTakeDamage();    
+            _healthManager.Inmune = !CanTakeDamage();    
         }
         if (PlayerTransform != null)
         {

@@ -95,6 +95,10 @@ public class HeavyEnemyAttackState : BaseState
     public override void EnterState()
     {
         _ctx?.GetComponent<Animator>().SetBool("IsAttacking", true);
+        if (_ctx != null )
+        {
+           _ctx.GetComponent<HealthManager>().CanBeKnockbacked = false;
+        }
         StartCoroutine(Attack((int)_ctx.LookingDirection));
     }
     
@@ -105,6 +109,10 @@ public class HeavyEnemyAttackState : BaseState
     {
         _ctx?.GetComponent<Animator>().SetBool("IsAttacking", false);
         _attackFinished = false;
+        if (_ctx != null)
+        {
+            _ctx.GetComponent<HealthManager>().CanBeKnockbacked = true;
+        }
     }
     #endregion
     

@@ -174,9 +174,7 @@ public class PlayerAirAttackState : BaseState
                 //Daño al enemigo
                 HealthManager health = enemy?.GetComponent<HealthManager>();
 
-                health?.RemoveHealth((int)_damage);
-
-                if (health != null && !health.Inmune && !health.HitButInmune)
+                if (health?.RemoveHealth((int)_damage) == true)
                 {
                     _chargeScript?.AddCharge((_abilityChargePercentage / 100) * _damage);
                 }
