@@ -139,7 +139,7 @@ public class HealthManager : MonoBehaviour
             return false; 
         }
 
-        if (enemyS != null && enemyS.IsFirstHit())
+        else if (enemyS != null && enemyS.IsFirstHit())
         {
             enemyS.TPState();
             return false;
