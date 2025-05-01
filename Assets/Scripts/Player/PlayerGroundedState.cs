@@ -122,7 +122,11 @@ public class PlayerGroundedState : BaseState
         {
             SetSubState(Ctx.GetStateByType<PlayerIdleState>());
         }
-        _ctx.AttackedOnAir = false;
+
+        if (_ctx!=null)
+        {
+            _ctx.AttackedOnAir = false;
+        }
     }
     
     /// <summary>
