@@ -431,6 +431,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2381913555785135826, guid: bd2ed0f3058122b49929fb455993e494, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 11.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381913555785135826, guid: bd2ed0f3058122b49929fb455993e494, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381913555785135826, guid: bd2ed0f3058122b49929fb455993e494, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: bd2ed0f3058122b49929fb455993e494, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
