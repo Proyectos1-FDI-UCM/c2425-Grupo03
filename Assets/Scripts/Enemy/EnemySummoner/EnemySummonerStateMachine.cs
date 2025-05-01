@@ -167,7 +167,7 @@ public class EnemySummonerStateMachine : StateMachine
 
         //Si es el primer golpe y todavía está vivo se teletransporta
 
-        ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
+        ChangeState(GetStateByType<EnemyTPState>());
         
         // Los siguientes golpes ya no serán los primeros
 
