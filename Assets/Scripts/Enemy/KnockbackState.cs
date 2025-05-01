@@ -63,7 +63,7 @@ public class KnockbackState : BaseState
         HeavyEnemyStateMachine enemyH = Ctx?.GetComponent<HeavyEnemyStateMachine>();
         // Este if nos protege de que el enemigo pueda volver a la vida si ha muerto y le intentan hacer knockback
 
-        if (Ctx != null && hm != null && hm.Health > 0 && (enemyS == null || enemyS.CurrState != enemyS.GetStateByName("AttackState"))
+        if (Ctx != null && hm != null && hm.Health > 0 && (enemyS == null || enemyS.CurrState != enemyS.GetStateByName("TPstate"))
             && (enemyH == null || enemyH.CurrState != enemyH.GetStateByName("AttackState")))
         {
             // Para aplicar el knockback forzamos el cambio al estado de knockback

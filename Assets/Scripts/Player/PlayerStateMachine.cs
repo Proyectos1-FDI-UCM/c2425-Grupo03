@@ -62,6 +62,9 @@ public class PlayerStateMachine : StateMachine
     /// </summary>
     public PlayerLookingDirection LookingDirection { get; set; } = PlayerLookingDirection.Left;
 
+    ///comprueba si el jugador ya ha atacado en el aire durante este salto
+
+    public bool AttackedOnAir { get; set; } = false;
 
     /// <summary>
     /// El sprite renderer del jugador.
@@ -85,6 +88,11 @@ public class PlayerStateMachine : StateMachine
     /// Evento para cuando ataca el jugador
     /// </summary>
     private UnityEvent OnAttack { get;  set; }
+
+    /// <summary>
+    /// Evento para cuando ataca el jugador
+    /// </summary>
+    private UnityEvent OnAirAttack { get; set; }
     /// <summary>
     /// Evento para cuando el jugador hace un ataque cargado
     /// </summary>
@@ -124,6 +132,11 @@ public class PlayerStateMachine : StateMachine
         OnAttack.Invoke();
     }
 
+    public void OnPlayerAirAttack()
+    {
+        OnAirAttack.Invoke();
+    }
+
     /// <summary>
     /// Método que se invoca desde el animator cuando el evento de ataque cargado comienza en una animación
     /// </summary>
@@ -146,6 +159,11 @@ public class PlayerStateMachine : StateMachine
     public void OnAttackAddListener(UnityAction action)
     {
         OnAttack.AddListener(action);
+    }
+
+    public void OnAirAttackAddListener(UnityAction action)
+    {
+        OnAirAttack.AddListener(action);
     }
 
     /// <summary>
@@ -181,6 +199,7 @@ public class PlayerStateMachine : StateMachine
         OnAttack = new UnityEvent();
         OnChargedAttack = new UnityEvent();
         OnManoSombrasPush = new UnityEvent();
+        OnAirAttack = new UnityEvent();
 
         _gravityScale = Rigidbody.gravityScale;
 

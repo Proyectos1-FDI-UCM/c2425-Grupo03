@@ -183,6 +183,7 @@ public class PlayerAttackState : BaseState
     public override void ExitState()
     {
         Ctx.Animator.SetFloat("AttackIndex", 0);
+        _ctx.AttackedOnAir = true;
     }
 
     /// <summary>

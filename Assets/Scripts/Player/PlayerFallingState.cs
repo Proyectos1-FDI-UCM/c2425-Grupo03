@@ -189,6 +189,11 @@ public class PlayerFallingState : BaseState
                     Ctx.ChangeState(dashState);
                 }
             }
+            else if (InputManager.Instance.attackTriggered() && !_ctx.AttackedOnAir)
+            {
+                PlayerAirAttackState airAttackState = _ctx.GetStateByType<PlayerAirAttackState>();
+                Ctx.ChangeState(airAttackState);
+            }
         }
     }
 

@@ -163,15 +163,16 @@ public class EnemySummonerStateMachine : StateMachine
     {
         if (_isFirstHit && GetComponent<HealthManager>()?.Health > 0) 
         {
+            if (GetComponent<HealthManager>() != null)
+            {
+                GetComponent<HealthManager>().Inmune = true;
+            }
             //Si es el primer golpe y todavía está vivo se teletransporta
             ChangeState(gameObject.GetComponentInChildren<EnemyTPState>());
 
             // Los siguientes golpes ya no serán los primeros
             _isFirstHit = false;
-            if (GetComponent<HealthManager>() != null)
-            {
-                GetComponent<HealthManager>().Inmune = true;
-            }
+
             GetComponent<Animator>()?.SetBool("IsKnockedBack", false);
         }
     }
