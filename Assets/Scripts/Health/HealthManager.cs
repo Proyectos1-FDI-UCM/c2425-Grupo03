@@ -134,6 +134,8 @@ public class HealthManager : MonoBehaviour
     public bool RemoveHealth(float removedHealth)
     {
         EnemySummonerStateMachine enemyS = GetComponent<EnemySummonerStateMachine>();
+        float initialHealth = _health;
+
         if (Inmune)
         {
             return false; 
@@ -145,24 +147,26 @@ public class HealthManager : MonoBehaviour
             return false;
         }
 
-        else if (_health != 0) 
+        if (_health - removedHealth <= 0)
         {
+            _health = 0;
+            _onDeath.Invoke();
+        }
+        else
+        {
+            _health = _health - removedHealth;
+            
+        }
 
-            if (_health - removedHealth <= 0)
-            {
-                _health = 0;
-                _onDeath.Invoke();
-            }
-            else
-            {
-                _health = _health - removedHealth;
-            }
-
+        if (initialHealth != _health)
+        {
             _onDamaged.Invoke(removedHealth);
             return true;
         }
-
-        else { return false; }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
