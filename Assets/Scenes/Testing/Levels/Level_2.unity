@@ -4802,6 +4802,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.65
@@ -5772,6 +5776,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7449,6 +7457,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 4.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.48
@@ -8748,6 +8760,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.28
@@ -10086,6 +10102,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.04
@@ -11535,6 +11555,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.57
@@ -12492,6 +12516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13122,6 +13150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13168,6 +13200,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.98
@@ -14577,6 +14613,10 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.04
@@ -15701,6 +15741,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17611,11 +17655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8229576178648808006, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.53
+      value: -142.4
       objectReference: {fileID: 0}
     - target: {fileID: 8229576178648808006, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.32
+      value: 7.05
       objectReference: {fileID: 0}
     - target: {fileID: 8474956066871955040, guid: e2abdc1852f61fe4883307cc290cc531, type: 3}
       propertyPath: m_AnchorMax.x
@@ -18343,6 +18387,10 @@ PrefabInstance:
     - target: {fileID: 3977072330819180501, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7191960438516511554, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_Name
@@ -20084,6 +20132,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23401,6 +23453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23768,6 +23824,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24919,6 +24979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25242,6 +25306,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30605,6 +30673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31122,6 +31194,10 @@ PrefabInstance:
     - target: {fileID: 3977072330819180501, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839915340331077406, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6590562517416698595, guid: 68101d91a51e43946b703c7d3f791707, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32131,6 +32207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LanceEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32576,6 +32656,10 @@ PrefabInstance:
     - target: {fileID: 4752918805132756057, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
       propertyPath: m_Name
       value: LanceEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880252440756882119, guid: ef67803c1ed35214eb076fa26c282e2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

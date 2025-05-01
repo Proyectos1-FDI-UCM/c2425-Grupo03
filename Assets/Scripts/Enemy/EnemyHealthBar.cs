@@ -92,13 +92,20 @@ public class EnemyHealthBar : MonoBehaviour
         _enemyHealthSlider.maxValue = 1;
 
         // Health Settings
-        _currentHealth = _healthManager.Health;
-        _maxHealth = _healthManager.MaxHealth;
+
+        if (_healthManager != null)
+        {
+            _currentHealth = _healthManager.Health;
+            _maxHealth = _healthManager.MaxHealth;
+
+            // Conecta eventos del HealthManager
+            _healthManager._onDamaged.AddListener(ShowEnemyHealthBar);
+            _healthManager._onDeath.AddListener(HideEnemyHealthBar);
+        }
+
         _canvas.enabled = false;
 
-        // Conecta eventos del HealthManager
-        _healthManager._onDamaged.AddListener(ShowEnemyHealthBar);
-        _healthManager._onDeath.AddListener(HideEnemyHealthBar);
+
 
     }
 
