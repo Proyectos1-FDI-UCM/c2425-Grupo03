@@ -60,6 +60,14 @@ public class UIManager : MonoBehaviour
     /// Carga de la habilidad 2
     /// </summary>
     private float _currentChargeTwo;
+    /// <summary>
+    /// El script que controla el animator de Super Dash.
+    /// </summary>
+    private AbilityChargedManager _abilityOneCharged;
+    /// <summary>
+    /// El script que controla el animator de Mano de las Sombras.
+    /// </summary>
+    private AbilityChargedManager _abilityTwoCharged;
     #endregion
 
     
@@ -76,6 +84,9 @@ public class UIManager : MonoBehaviour
         _healthSlider = GetComponentInChildren<Slider>(); 
         _playerCharge = _playerPrefab.GetComponent<PlayerCharge>();
         _healthManager = _playerPrefab.GetComponent<HealthManager>();
+
+        _abilityOneCharged = _abilityOneSlider.GetComponentInChildren<AbilityChargedManager>();
+        _abilityTwoCharged = _abilityTwoSlider.GetComponentInChildren<AbilityChargedManager>();
 
         // Slider Settings
         _healthSlider.minValue = 0;
@@ -96,9 +107,12 @@ public class UIManager : MonoBehaviour
         _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
 
         // Subscribe el método para actualizar la carga de las habilidades al evento correspondiente.
-        _playerCharge._onChargeChange.AddListener(UpdateAbilityCharge);
+        _playerCharge._onChargeChangeSuperDash.AddListener(UpdateSuperDashCharge);
+        _playerCharge._onChargeChangeManoSombras.AddListener(UpdateManoSombrasCharge);
+
         // Valores iniciales de las barras.
-        UpdateAbilityCharge();
+        UpdateSuperDashCharge();
+        UpdateManoSombrasCharge();
     }
     #endregion
 
@@ -137,18 +151,30 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// Actualiza la carga de las habilidades
     /// </summary>
-    private void UpdateAbilityCharge() {
+    private void UpdateSuperDashCharge() {
         // Actualizamos los valores de las cargas
         _currentChargeOne = _playerCharge.SuperDash.currentCharge;
-        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
         
         // Calculamos el porcentaje de carga
         float chargePercentageOne = _currentChargeOne / _playerCharge.SuperDash.maxCharge;
-        float chargePercentageTwo = _currentChargeTwo / _playerCharge.ManoDeLasSombras.maxCharge;
         
         // Cambiamos la carga
         _abilityOneSlider.value = chargePercentageOne;
+        if (_playerCharge.SuperDash.isCharged)
+            _abilityOneCharged.StartAnimation();
+    }
+    private void UpdateManoSombrasCharge() {
+        // Actualizamos los valores de las cargas
+        _currentChargeTwo = _playerCharge.ManoDeLasSombras.currentCharge;
+        
+        // Calculamos el porcentaje de carga
+        float chargePercentageTwo = _currentChargeTwo / _playerCharge.ManoDeLasSombras.maxCharge;
+        
+        // Cambiamos la carga
         _abilityTwoSlider.value = chargePercentageTwo;
+
+        if (_playerCharge.ManoDeLasSombras.isCharged)
+        _abilityTwoCharged.StartAnimation();
     }
     #endregion   
 

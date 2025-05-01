@@ -67,10 +67,15 @@ public class PlayerCharge : MonoBehaviour
     // ---- ATRIBUTOS PUBLICOS ----
     #region Atributos Públicos
     /// <summary>
-    /// Evento para cuando cambia el valor de las cargas.
+    /// Evento para cuando cambia el valor de la carga de Super Dash.
     /// </summary>
     [HideInInspector]
-    public UnityEvent _onChargeChange;
+    public UnityEvent _onChargeChangeSuperDash;
+    /// <summary>
+    /// Evento para cuando cambia el valor de la carga de Mano de las Sombras.
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _onChargeChangeManoSombras;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -102,9 +107,14 @@ public class PlayerCharge : MonoBehaviour
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
     public void AddCharge(float chargePoints) 
     {   
-        AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
-        AddChargeAbility(ref _abilitySuperDash, chargePoints);
-        _onChargeChange.Invoke();   
+        if (!_abilityManoDeLasSombras.isCharged) {
+            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            _onChargeChangeManoSombras.Invoke();
+        }
+        if (!_abilitySuperDash.isCharged) {
+            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            _onChargeChangeSuperDash.Invoke();
+        }
     }
     /// <summary>
     /// Quita carga de la barra.
@@ -114,11 +124,16 @@ public class PlayerCharge : MonoBehaviour
     {
         // Calcula los puntos de carga que quitar
         float chargePoints = -(_removedChargePercentage / 100 * removedHealth);
+        if (!_abilityManoDeLasSombras.isCharged) {
         // Quita de la mano de las sombras.
-        AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            _onChargeChangeManoSombras.Invoke();
+        }
+        if (!_abilitySuperDash.isCharged) {
         // Quita del Super Dash.
-        AddChargeAbility(ref _abilitySuperDash, chargePoints);
-        _onChargeChange.Invoke();
+            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            _onChargeChangeSuperDash.Invoke();
+        }
     }
     /// <summary>
     /// Método  que resetea la carga de super dash a 0.
@@ -127,7 +142,8 @@ public class PlayerCharge : MonoBehaviour
     {
         _abilitySuperDash.currentCharge = 0;
         _abilitySuperDash.isCharged = false;
-        _onChargeChange.Invoke();
+        _onChargeChangeManoSombras.Invoke();
+        _onChargeChangeSuperDash.Invoke();
     }
     /// <summary>
     /// Método  que resetea la carga de mano de las sombras a 0.
@@ -136,7 +152,8 @@ public class PlayerCharge : MonoBehaviour
     {
         _abilityManoDeLasSombras.currentCharge = 0;
         _abilityManoDeLasSombras.isCharged = false;
-        _onChargeChange.Invoke();
+        _onChargeChangeManoSombras.Invoke();
+        _onChargeChangeSuperDash.Invoke();
     }
 
     #endregion
