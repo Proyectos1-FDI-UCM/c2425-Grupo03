@@ -170,6 +170,8 @@ public class PlayerSuperDashState : BaseState
         //Ver los enemigos que esta en el area del dash
         _enemyInArea = GetEnemyInDash();
 
+        _ctx.Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+
     }
 
     /// <summary>
@@ -182,6 +184,8 @@ public class PlayerSuperDashState : BaseState
         _chargeScript.ResetSuperDash();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * _damage);
         SoundManager.Instance.PlaySFX(_SoundEffect, transform, 0.5f);
+
+        _ctx.Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     #endregion
 

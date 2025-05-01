@@ -148,6 +148,11 @@ public class PlayerJumpState : BaseState
             PlayerAirAttackState airAttackState = _ctx.GetStateByType<PlayerAirAttackState>();
             Ctx.ChangeState(airAttackState);   
         }
+        else if (InputManager.Instance.superDashIsPressed() && _ctx.GetComponent<PlayerCharge>().SuperDash.isCharged && !Ctx.GetStateByType<PlayerSuperDashState>().IsLocked)
+        {
+            PlayerSuperDashState playerSuperDashState = _ctx.GetStateByType<PlayerSuperDashState>();
+            Ctx.ChangeState(playerSuperDashState);
+        }
     }
 
     #endregion   
