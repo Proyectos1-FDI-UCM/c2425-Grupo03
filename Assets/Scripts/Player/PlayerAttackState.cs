@@ -289,21 +289,24 @@ public class PlayerAttackState : BaseState
     /// </summary>
     private void UpdateCombo()
     {
-        //Comprobar si sigue en el tiempo de gracia
-        if (Time.time > _endOfCombo)
+        // Solo incrementa si el tiempo aún está dentro del combo
+        if (Time.time <= _endOfCombo)
         {
-            _combo = 0;
+            _combo++;
         }
-        //Actualizar el tiempo de gracia
+        else
+        {
+            _combo = 1; // se reinicia desde 1, no desde 0
+        }
+
+        // Siempre actualiza el fin del combo
         _endOfCombo = Time.time + _comboDuration;
 
-        //Calcular el combo
-        _combo = (_combo + 1) % (_maxCombo + 1);
-
-        if (_combo == 0)
+        // Si pasa el máximo, vuelve a 1 (no a 0)
+        if (_combo > _maxCombo)
         {
             _combo = 1;
-        } 
+        }
     }
     /// <summary>
     /// Dibuja el rango de ataque basico
