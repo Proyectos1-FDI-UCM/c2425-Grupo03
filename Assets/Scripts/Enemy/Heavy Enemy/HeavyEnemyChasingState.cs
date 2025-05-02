@@ -176,7 +176,6 @@ public class HeavyEnemyChasingState : BaseState
             {
                 if (_startAttackTime < 0)
                 {
- 
                     _startAttackTime = Time.time;
                     _animator?.SetBool("IsChasing", false);
                     _animator?.SetBool("IsIdle", true);
@@ -189,6 +188,7 @@ public class HeavyEnemyChasingState : BaseState
                     _animator?.SetBool("IsIdle", false);
                     _goAttack = true;
                 }
+                _ctx.CantMove();
             }
             else
             {
