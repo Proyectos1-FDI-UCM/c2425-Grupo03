@@ -72,7 +72,7 @@ public class HeavyEnemyDeathState : BaseState
         _deadTime = Time.time + _waitTime;
 
         _ctx?.GetComponent<Animator>().SetBool("IsDeath", true);
-        SoundManager.Instance.PlaySFX(_shiledFall,transform,1);
+        SoundManager.Instance.PlaySFX(_shiledFall,transform,0.6f);
     }
 
     /// <summary>
