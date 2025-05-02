@@ -565,7 +565,7 @@ MonoBehaviour:
   _attackRadius: 1.6
   _attackSpeed: 2
   _damage: 10
-  _attackSound: {fileID: 8300000, guid: 6e5ae48453aec6e4c863bb6d5f7612b0, type: 3}
+  _attackSound: {fileID: 8300000, guid: a422c6fd0f77ab04b85c8a3ce178b695, type: 3}
 --- !u!114 &743638334100870885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -8816925341778198534, guid: e4effc905b2ed274b875abbedb03a2b1, type: 2}
   m_audioClip: {fileID: 8300000, guid: c439883d59cb858488227a5c8990e5b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.341
+  m_Volume: 0.268
   m_Pitch: 1
   Loop: 1
   Mute: 0
