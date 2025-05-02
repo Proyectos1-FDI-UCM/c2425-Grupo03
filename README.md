@@ -1,4 +1,7 @@
-<h1 align="center"><b>Kingless Dungeon</b></h1>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/54c336d5-4cbe-4c7e-8698-a0d6921861b6" alt="Link a Itch.io" style="width:50%;height:50%">
+</p>
+<hr style="border: 1px solid #000; width: 50%; height: 2px;">
 
 ![image](https://github.com/user-attachments/assets/56ea0bd9-c08a-45a6-b00e-8f0bca767631)
 
@@ -11,15 +14,20 @@ Pero ni siquiera las habilidades del príncipe pudieron evitar las leyes element
 
 ![IlustraciónMenuPrincipal](https://github.com/user-attachments/assets/66637d51-c543-4643-bb49-1d99353f1ff1)
 
-## Enlaces
-<h4 align="Left">Itch.io</h4>
-<a href="https://cr00kie.itch.io/kingless-dungeon"><img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Link a Itch.io" style="width:42px;height:42px;text-align: center;"></a>
-
-<h4 align="Left">Githu Pages</h4>
-[WIP]
+<hr style="border: 1px solid #000; width: 50%; height: 2px;">
 
 ## Issues
-Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* ([aquí](https://github.com/Proyectos1-FDI-UCM/c2425-Grupo03/issues)). Asegúrate de que el bug que has encontrado no se ha reportado ya.
+Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* aquí: <a href="https://github.com/Proyectos1-FDI-UCM/c2425-Grupo03/issues"><img src="https://github.com/user-attachments/assets/57153cf5-d9c0-459d-97b4-0e61efc2e9d9" alt="Link a Itch.io" style="width:80px;height:30px;"></a>. Asegúrate de que el bug que has encontrado no se ha reportado ya.
+
+## Enlaces
+<h4 align="center">Itch.io</h4>
+
+<p align="center">
+<a href="https://cr00kie.itch.io/kingless-dungeon"><img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Link a Itch.io" style="width:80px;height:80px;text-align: center;"></a>
+</p>
+
+<h4 align="center">Githu Pages</h4>
+<p align="center"> [WIP] </p>
 
 ## Equipo
 - [Adrián Isasi](https://github.com/Cr00kie)
