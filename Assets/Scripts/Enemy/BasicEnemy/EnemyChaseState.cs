@@ -161,12 +161,16 @@ public class EnemyChaseState : BaseState
                 _animator.SetBool("IsChasing", true);
                 _animator.SetBool("IsIdle", false);
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+                if (!_audioSource.isPlaying)
+                    _audioSource?.Play();
             }
             else
             {
                 _animator.SetBool("IsChasing", false);
                 _animator.SetBool("IsIdle", true);
                 _rb.velocity = new Vector2(0,_rb.velocity.y);
+                if (_audioSource.isPlaying)
+                    _audioSource?.Stop();
             }
         }
     }
