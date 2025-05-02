@@ -145,6 +145,11 @@ public class HealthManager : MonoBehaviour
         if (Inmune)
         {
             _onInmune.Invoke();
+
+            if (_health==0)
+            {
+                _onDamaged.Invoke(removedHealth);
+            }
             return false; 
         }
 
