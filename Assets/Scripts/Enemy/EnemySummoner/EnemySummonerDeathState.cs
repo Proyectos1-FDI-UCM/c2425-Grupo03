@@ -75,7 +75,7 @@ public class EnemySummonerDeathState : BaseState
     public override void EnterState()
     {
 
-        SoundManager.Instance.PlaySFX(_deathSound, transform, 0.1f);
+        SoundManager.Instance.PlaySFX(_deathSound, transform, 0.05f);
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
         _ctx = GetCTX<EnemySummonerStateMachine>();
 

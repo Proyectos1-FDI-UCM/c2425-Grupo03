@@ -69,7 +69,7 @@ public class AbilityChargedManager : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void StartAnimation() {
         _anim.SetTrigger("Charged");
-        SoundManager.Instance.PlaySFX(_chargedSFX, transform, 1);
+        SoundManager.Instance.PlaySFX(_chargedSFX, transform, 0.5f);
     }
     #endregion
     
