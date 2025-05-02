@@ -290,6 +290,9 @@ MonoBehaviour:
   _onHealed:
     m_PersistentCalls:
       m_Calls: []
+  _onInmune:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-4233722579977323440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +418,10 @@ MonoBehaviour:
   _maxChargeManoDeLasSombras: 300
   _maxChargeSuperDash: 500
   _removedChargePercentage: 300
-  _onChargeChange:
+  _onChargeChangeSuperDash:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChargeChangeManoSombras:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6934603295301053230
@@ -590,7 +596,7 @@ MonoBehaviour:
   _name: 
   _attackRadius: 1
   _damage: 100
-  _abilityChargePercentage: 100
+  _abilityChargePercentage: 150
   _attackTime: 0.433
   _airHit: {fileID: 8300000, guid: 48c961f5acc5f574f9a35154227d2988, type: 3}
   _knockbackDistance: 1.3

@@ -97,6 +97,7 @@ MonoBehaviour:
   _door: {fileID: 0}
   _doorOpen: {fileID: 8300000, guid: e2cdf6bc5802c2149b22e92bc62a7224, type: 3}
   _doorClose: {fileID: 8300000, guid: 62affea58397eb644abd591bc32c1135, type: 3}
+  _appearEnemy: {fileID: 8300000, guid: c24bfc7eef7a79c4a8badd7adc72d47d, type: 3}
   _zoom: 0
 --- !u!1 &1575856899367809173
 GameObject:

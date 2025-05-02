@@ -26,6 +26,7 @@ public class WaveController : MonoBehaviour
 
     [SerializeField] AudioClip _doorOpen;
     [SerializeField] AudioClip _doorClose;
+    [SerializeField] AudioClip _appearEnemy;
 
     /// <summary>
     /// El tamaño de la camara cuando entra en la zona
@@ -123,6 +124,7 @@ public class WaveController : MonoBehaviour
         }
 
         // Cambia la cámara al centro del área de combate (el objeto vacío con este script)
+        SoundManager.Instance.PlaySFX(_appearEnemy, transform, 0.7f);
         CameraManager.Instance.EnqueueInstruction(new CameraPan(this.transform.position, 1, _zoom));
     }
     #endregion
@@ -146,6 +148,7 @@ public class WaveController : MonoBehaviour
             _numWave++;
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _numWave = 0;
+            SoundManager.Instance.PlaySFX(_appearEnemy, transform, 0.7f);
         }
         // si no hay mas oleadas activar puerta, colocar la cámara en el jugador y terminar oleada
         else
