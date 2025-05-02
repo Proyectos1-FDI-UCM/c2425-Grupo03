@@ -296,13 +296,13 @@ public class PlayerAttackState : BaseState
         }
         else
         {
-            _combo = 1; // se reinicia desde 1, no desde 0
+            _combo = 1; 
         }
 
         // Siempre actualiza el fin del combo
         _endOfCombo = Time.time + _comboDuration;
 
-        // Si pasa el máximo, vuelve a 1 (no a 0)
+        // Si pasa el máximo, vuelve a 1 
         if (_combo > _maxCombo)
         {
             _combo = 1;
