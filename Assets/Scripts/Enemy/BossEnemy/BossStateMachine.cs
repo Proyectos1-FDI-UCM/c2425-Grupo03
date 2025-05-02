@@ -31,6 +31,10 @@ public class BossStateMachine : StateMachine
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
 
+    bool _isOnPhase2 = false;
+
+    HealthManager _healthManager;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -55,16 +59,26 @@ public class BossStateMachine : StateMachine
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
+    public void StartPhase2(float damage)
+    {
+        if(_healthManager.Health > _healthManager.MaxHealth / 2 || _isOnPhase2)
+            return;
 
+        _healthManager.Inmune = true;
+        _isOnPhase2 = true;
+        ChangeState(GetStateByName("Transition"));
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     protected override void OnStart()
     {
-        if(TryGetComponent<HealthManager>(out HealthManager healthManager))
+        if(TryGetComponent(out _healthManager))
         {
-            healthManager.Inmune = true;
+            _healthManager.Inmune = true;
+            _healthManager.CanBeKnockbacked = false;
+            _healthManager._onDamaged.AddListener(StartPhase2);
         }
     }
     #endregion   

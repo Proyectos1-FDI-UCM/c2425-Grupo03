@@ -102,6 +102,7 @@ public class BossChargingState : BaseState
         Ctx.Animator.SetBool("IsCharging", true);
         Ctx.Rigidbody.velocity = new Vector2(_launchSpeed * (int)_ctx.LookingDirection, 0);
     }
+    
 
     public override void ExitState()
     {
@@ -123,7 +124,6 @@ public class BossChargingState : BaseState
             return 0;
         }
     }
-
     private BossStateMachine.EnemyLookingDirection GetNewLookingDirection()
     {
         return DistanceToPlayer() < 0 ? BossStateMachine.EnemyLookingDirection.Left : BossStateMachine.EnemyLookingDirection.Rigth;
@@ -141,6 +141,7 @@ public class BossChargingState : BaseState
             nextVelocityX = nextVelocityX > 0 ? Mathf.Max(nextVelocityX, 0) : Mathf.Min(nextVelocityX, 0);
 
             Ctx.Rigidbody.velocity = new Vector2(nextVelocityX, 0);
+            
         }
         else if(GetNewLookingDirection() != _ctx.LookingDirection)
         {

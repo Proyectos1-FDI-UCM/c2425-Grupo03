@@ -90,7 +90,7 @@ public class MagicBullet : MonoBehaviour
     void Update()
     {
         transform.position +=  _direction * Time.deltaTime * _velocity;
-        _distance = (_originalPosition - transform.position).normalized;
+        _distance = (_originalPosition - transform.position);
 
         //comprobar si ha llegado a la distancia máxima
         if ( _distance.magnitude >= _maxDistance)
@@ -117,10 +117,13 @@ public class MagicBullet : MonoBehaviour
         // Calcula la dirección en la que s eitene que mover
         _playerPosition.y += 0.25f;
         _direction = (_playerPosition - transform.position).normalized;
+        _direction.Set(_direction.x, _direction.y, 0);
 
         // Calcula la rotación del sprite en función de la dirección en la que mira
         float angle = Mathf.Atan2(_direction.y , _direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        _originalPosition = transform.position;
     }
     #endregion
 
