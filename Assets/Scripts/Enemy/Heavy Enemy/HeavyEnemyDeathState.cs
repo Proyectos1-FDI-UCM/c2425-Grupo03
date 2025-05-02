@@ -24,6 +24,8 @@ public class HeavyEnemyDeathState : BaseState
     /// Tiempo de espera hasta morir
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+
+    [SerializeField] AudioClip _shiledFall;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -70,6 +72,7 @@ public class HeavyEnemyDeathState : BaseState
         _deadTime = Time.time + _waitTime;
 
         _ctx?.GetComponent<Animator>().SetBool("IsDeath", true);
+        SoundManager.Instance.PlaySFX(_shiledFall,transform,1);
     }
 
     /// <summary>

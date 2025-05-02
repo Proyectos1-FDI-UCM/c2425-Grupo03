@@ -87,7 +87,7 @@ public class EnemySummonerInvokeState : BaseState
         _animator = _ctx?.GetComponent<Animator>();
 
         //Reproduce el sonido de invocar
-        SoundManager.Instance.PlaySFX(_invokeSound, transform, 0.1f);
+        SoundManager.Instance.PlaySFX(_invokeSound, transform, 0.3f);
 
         if (_ctx != null)
         {

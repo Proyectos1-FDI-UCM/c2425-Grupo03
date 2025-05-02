@@ -112,6 +112,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _waitTime: 0.33
+  _shiledFall: {fileID: 8300000, guid: 5e48ff0ae08dd774bab1b6051aed4e0c, type: 3}
 --- !u!114 &4749044361887798971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +133,7 @@ MonoBehaviour:
   _attackTime: 2.083
   _damage: 30
   _waitDamageTime: 0.833
+  _shieldAttack: {fileID: 8300000, guid: aedc94bdf5385ba4cb1526dca81cfd70, type: 3}
 --- !u!114 &8929789900559718187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +165,7 @@ MonoBehaviour:
   _name: 
   _enemyWalkingSpeed: 2
   _waitTimeToAttack: 0.5
+  _heavyStep: {fileID: 8300000, guid: 3bbae1ee36a053a418fa0d142418370d, type: 3}
 --- !u!114 &9020828698283325866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +268,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _onHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  _onInmune:
     m_PersistentCalls:
       m_Calls: []
 --- !u!212 &9027199383980983993
@@ -384,6 +390,7 @@ MonoBehaviour:
   - {fileID: 4749044361887798971}
   - {fileID: 2133665469649698233}
   - {fileID: 7440391460798179512}
+  _blockSound: {fileID: 8300000, guid: 67427ad5ea45c044f8a1df91da2cafdc, type: 3}
 --- !u!114 &8464606913913831553
 MonoBehaviour:
   m_ObjectHideFlags: 0

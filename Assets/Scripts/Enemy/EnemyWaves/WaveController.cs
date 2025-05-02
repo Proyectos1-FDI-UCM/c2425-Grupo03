@@ -24,6 +24,9 @@ public class WaveController : MonoBehaviour
     /// </summary>
     [SerializeField] GameObject _door;
 
+    [SerializeField] AudioClip _doorOpen;
+    [SerializeField] AudioClip _doorClose;
+
     /// <summary>
     /// El tamaño de la camara cuando entra en la zona
     /// </summary>
@@ -110,6 +113,7 @@ public class WaveController : MonoBehaviour
         if (transform.childCount > 0) 
         {
             _doorAnimator.SetBool("Closed",true);
+            SoundManager.Instance.PlaySFX(_doorClose, transform, 1);
             transform.GetChild(_numWave).gameObject.SetActive(true);
             _endWaves = false;
             if(TryGetComponent(out BoxCollider2D trigger))
@@ -146,6 +150,7 @@ public class WaveController : MonoBehaviour
         // si no hay mas oleadas activar puerta, colocar la cámara en el jugador y terminar oleada
         else
         {
+            SoundManager.Instance.PlaySFX(_doorOpen, transform, 1);
             _doorAnimator.SetBool("Closed", false);
             _endWaves = true;
             CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 6));

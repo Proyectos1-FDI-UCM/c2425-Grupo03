@@ -97,6 +97,12 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent<float> _onHealed;
+
+    /// <summary>
+    /// Evento para cuando la entidad reciba vida.
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _onInmune;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -138,6 +144,7 @@ public class HealthManager : MonoBehaviour
 
         if (Inmune)
         {
+            _onInmune.Invoke();
             return false; 
         }
 

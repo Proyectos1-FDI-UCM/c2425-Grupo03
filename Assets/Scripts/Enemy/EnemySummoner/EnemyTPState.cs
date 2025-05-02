@@ -98,7 +98,7 @@ public class EnemyTPState : BaseState
         _animator?.SetBool("IsDisappearing", true);
 
         //Reproduce le sonido de teletransporte
-        SoundManager.Instance.PlaySFX(_teleportSound, transform, 0.1f);
+        SoundManager.Instance.PlaySFX(_teleportSound, transform, 0.3f);
 
         if (_ctx != null)
         {

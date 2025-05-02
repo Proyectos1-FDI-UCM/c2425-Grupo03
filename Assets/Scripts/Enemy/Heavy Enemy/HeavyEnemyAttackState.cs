@@ -46,6 +46,8 @@ public class HeavyEnemyAttackState : BaseState
     /// </summary>
     [SerializeField, Min(0)] float _waitDamageTime;
 
+    [SerializeField] AudioClip _shieldAttack;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -153,7 +155,7 @@ public class HeavyEnemyAttackState : BaseState
         {
             //Espera el tiempo de la animación de ataque para hacer el daño.
             yield return new WaitForSeconds(_waitDamageTime);
-
+            SoundManager.Instance.PlaySFX(_shieldAttack, transform, 1);
             //El rango de ataque del enemigo
             Vector2 attackBoxSize = new Vector2(_attackWidth, _attackHeight);
             Vector2 attackPosition = (Vector2)transform.position + new Vector2((_attackWidth / 2) * direction, 0);

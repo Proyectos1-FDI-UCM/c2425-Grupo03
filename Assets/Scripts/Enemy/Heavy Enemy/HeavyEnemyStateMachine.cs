@@ -31,7 +31,7 @@ public class HeavyEnemyStateMachine : StateMachine
         Right = 1,
         Left = -1,
     }
-
+    [SerializeField] AudioClip _blockSound;
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -127,6 +127,7 @@ public class HeavyEnemyStateMachine : StateMachine
     {
         _healthManager = GetComponent<HealthManager>();
         _healthManager?._onDeath.AddListener(DeathState);
+        _healthManager?._onInmune.AddListener(PlayBlockSound);
         IsPlayerInAttackRange = false;
         IsPlayerInChaseRange = false;
     }
@@ -141,6 +142,12 @@ public class HeavyEnemyStateMachine : StateMachine
         {
             IsPlayerInAttackRange = (PlayerTransform.position - transform.position).magnitude < AttackDistance;
         }
+    }
+
+    public void PlayBlockSound()
+    {
+        if (!CanTakeDamage())
+        SoundManager.Instance.PlaySFX(_blockSound, transform, 0.3f);
     }
 
     /// <summary>

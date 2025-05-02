@@ -30,6 +30,8 @@ public class HeavyEnemyChasingState : BaseState
     /// </summary>
     [SerializeField]
     float _waitTimeToAttack;
+
+    [SerializeField] AudioClip _heavyStep;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -72,6 +74,8 @@ public class HeavyEnemyChasingState : BaseState
     /// si puede atacar
     /// </summary>
     bool _goAttack = false;
+
+    private bool _wasMoving = false;
     #endregion
 
 
@@ -152,16 +156,21 @@ public class HeavyEnemyChasingState : BaseState
             //si no coincide con su direccion actual, debe de girarse
             _shouldFlip = newDirection != _ctx.LookingDirection;
 
+            bool isMovingNow = _ctx.IsMoving();
             //Si todavía hay plataforma o no esta preparando el ataque se mueve, sino se detiene
             if (CheckGround() && _ctx.IsMoving() && _startAttackTime < 0)
             {
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
+                if (!_wasMoving)
+                {
+                    SoundManager.Instance.PlaySFX(_heavyStep, transform, 1);
+                }
             }
             else
             {
                 _rb.velocity = Vector3.zero;
             }
-
+            _wasMoving = isMovingNow;
             //si hay un enemigo en area de ataque, empieza a preparar el ataque
             if (_ctx.IsPlayerInAttackRange)
             {

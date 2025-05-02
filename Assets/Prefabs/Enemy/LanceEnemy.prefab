@@ -264,6 +264,9 @@ MonoBehaviour:
   _onHealed:
     m_PersistentCalls:
       m_Calls: []
+  _onInmune:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &2948423097268125715
 Animator:
   serializedVersion: 5
@@ -615,12 +618,12 @@ AudioSource:
   m_GameObject: {fileID: 8833475570477809297}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 89e0492d81da6084594d742094af3137, type: 3}
+  OutputAudioMixerGroup: {fileID: -8816925341778198534, guid: e4effc905b2ed274b875abbedb03a2b1, type: 2}
+  m_audioClip: {fileID: 8300000, guid: c439883d59cb858488227a5c8990e5b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.219
+  m_Volume: 0.341
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
