@@ -10,16 +10,16 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Clase que controla el indicador visual y auditivo de la carga de habilidades.
 /// </summary>
 public class AbilityChargedManager : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    /// <summary>
+    /// El sonido que se reproduce cuando una habilidad se carga
+    /// </summary>
+    [SerializeField] AudioClip _chargedSFX;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -69,6 +69,7 @@ public class AbilityChargedManager : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void StartAnimation() {
         _anim.SetTrigger("Charged");
+        SoundManager.Instance.PlaySFX(_chargedSFX, transform, 1);
     }
     #endregion
     

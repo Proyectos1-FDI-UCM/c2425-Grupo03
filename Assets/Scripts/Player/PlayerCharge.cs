@@ -142,7 +142,6 @@ public class PlayerCharge : MonoBehaviour
     {
         _abilitySuperDash.currentCharge = 0;
         _abilitySuperDash.isCharged = false;
-        _onChargeChangeManoSombras.Invoke();
         _onChargeChangeSuperDash.Invoke();
     }
     /// <summary>
@@ -153,7 +152,6 @@ public class PlayerCharge : MonoBehaviour
         _abilityManoDeLasSombras.currentCharge = 0;
         _abilityManoDeLasSombras.isCharged = false;
         _onChargeChangeManoSombras.Invoke();
-        _onChargeChangeSuperDash.Invoke();
     }
 
     #endregion

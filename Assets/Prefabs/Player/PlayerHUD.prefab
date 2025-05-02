@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6621309b3129343af5f4d86afe4bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chargedSFX: {fileID: 8300000, guid: 19592140dd6112f44ac9e032f893e9df, type: 3}
 --- !u!222 &1217037192466691150
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6621309b3129343af5f4d86afe4bac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chargedSFX: {fileID: 8300000, guid: 19592140dd6112f44ac9e032f893e9df, type: 3}
 --- !u!222 &2954375278645562952
 CanvasRenderer:
   m_ObjectHideFlags: 0
