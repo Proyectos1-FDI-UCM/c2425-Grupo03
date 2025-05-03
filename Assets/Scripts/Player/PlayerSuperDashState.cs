@@ -230,10 +230,10 @@ public class PlayerSuperDashState : BaseState
     private void CheckWall()
     {
         //El centro "rectangulo" del BoxCast
-        Vector2 center = _ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0);
+        Vector2 center = _ctx.transform.position + new Vector3((_dashDistance / 2) * _lookingDirection, 0.1f);
 
         //Mirar si hay pared dentro de la distancia del dash y si hay a que distancia esta del jugador
-        RaycastHit2D zone = Physics2D.BoxCast(center, new Vector2(_dashDistance, 1.8f), 0f, new Vector2(_lookingDirection, 0), 0, 1 << 7);
+        RaycastHit2D zone = Physics2D.BoxCast(center, new Vector2(_dashDistance, 1.6f), 0f, new Vector2(_lookingDirection, 0), 0, 1 << 7);
 
         RaycastHit2D wall;
 
@@ -244,7 +244,7 @@ public class PlayerSuperDashState : BaseState
             //Mirar donde esta la pared
             wall = Physics2D.Raycast(new Vector2(_ctx.transform.position.x,zone.point.y), new Vector2(_lookingDirection, 0), _dashDistance, 1 << 7);
 
-            if (wall.collider != null)
+            if (wall.collider != null && wall.distance > 0.1f)
             {
                 Debug.Log(wall.distance);
                 _endPosition.x = wall.point.x;
