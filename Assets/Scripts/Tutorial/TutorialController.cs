@@ -41,6 +41,8 @@ public class TutorialController : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    bool[] _playerTutorialsMask;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -76,6 +78,11 @@ public class TutorialController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        _playerTutorialsMask = new bool[_tutorialObjects.Length];
+        for (int i=0; i< _tutorialObjects.Length; i++)
+        {
+            _playerTutorialsMask[i] = false;
+        }
         HideTutorial();
     }
 
@@ -98,7 +105,7 @@ public class TutorialController : MonoBehaviour
     public void ShowTutorial(int index)
     {
         TutorialObject tutorial = _tutorialObjects[index];
-        if (!tutorial.IsPlayed)
+        if (!_playerTutorialsMask[index])
         {
             _tutorial.SetActive(true);
 
@@ -111,7 +118,7 @@ public class TutorialController : MonoBehaviour
             videoPlayer.Play();
 
             PauseGame();
-            tutorial.SetTutorialIsPlayed();
+            _playerTutorialsMask[index] = true;
         }
     }
 
