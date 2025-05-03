@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0385731e465cc5a40b6f57b24a46fb0d, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  _tutorialTitle: How to Attack
-  _tutorialDescription: Press "J" to attack
-  _tutorialVideo: {fileID: 0}
+  _tutorialTitle: Como atacar
+  _tutorialDescription: 'Presiona "J" (teclado) o "X" (Xbox) para atacar.
+
+'
+  _tutorialVideo: {fileID: 32900000, guid: 32852ba16f3fbc042939b1705c2438f8, type: 3}
