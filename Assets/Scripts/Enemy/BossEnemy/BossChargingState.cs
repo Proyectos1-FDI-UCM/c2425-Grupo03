@@ -72,12 +72,16 @@ public class BossChargingState : BaseState
         {
             _hasHitPlayer = true;
         }
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             _hasHitWall = true;
+            Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 0.2f));
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerStateMachine>() != null)
