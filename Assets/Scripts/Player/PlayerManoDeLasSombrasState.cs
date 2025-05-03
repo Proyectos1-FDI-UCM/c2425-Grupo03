@@ -151,6 +151,7 @@ public class PlayerManoDeLasSombrasState : BaseState
     {
         // frena el jugador
         GetCTX<PlayerStateMachine>().Rigidbody.velocity = Vector2.zero;
+        GetCTX<PlayerStateMachine>().Rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         _startTime = Time.time;
 
         Ctx.Animator.SetTrigger("ManoSombras");
@@ -170,8 +171,10 @@ public class PlayerManoDeLasSombrasState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        GetCTX<PlayerStateMachine>().Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         _chargeScript.ResetManoDeLasSombras();
         _chargeScript.AddCharge((_abilityChargePercentage / 100) * ((_firstHitDamage + _secondHitDamage) / 2));
+        Ctx.Animator.SetBool("IsIdle", true);
     }
 
     
