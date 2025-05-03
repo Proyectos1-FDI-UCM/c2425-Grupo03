@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTitle: Habilidad SuperDash
   _tutorialDescription: "Pulsa \"U\" (teclado) o \"LB\" (Xbox) \nDash hacia delante
-    que hace da\xF1o a los enemigos"
+    y hace da\xF1o a enemigos"
   _tutorialVideo: {fileID: 32900000, guid: c687f57da1e0db6498e4a01e7b8d25f9, type: 3}

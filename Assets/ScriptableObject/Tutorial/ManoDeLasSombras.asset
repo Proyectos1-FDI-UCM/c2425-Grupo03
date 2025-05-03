@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tutorialTitle: Habilidad Mano De Las Sombras
   _tutorialDescription: "Pulsa \"I\" (teclado) o \"RB\" (Xbox) \nPrimero atrae enemigos
-    y luego los empuja"
+    y  los empuja"
   _tutorialVideo: {fileID: 32900000, guid: c51375dd03a793a4b9ef5deb85ea57ff, type: 3}
