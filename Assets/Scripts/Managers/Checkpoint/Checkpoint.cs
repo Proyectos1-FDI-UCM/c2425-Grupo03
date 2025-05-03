@@ -59,7 +59,20 @@ public class Checkpoint : MonoBehaviour
             _isActivated = true;
             _animator?.SetTrigger("CpAppear");
         }
+
+        CheckpointManager.Instance.AddCheckPointData(_checkPointIndex, transform.position);
+
     }
+    #endregion
+
+    // ---- MÉTODOS PÚBLICOS ----
+    #region Métodos públicos
+
+    public int GetCheckPointIndex()
+    {
+        return _checkPointIndex;
+    }
+
     #endregion
 
 

@@ -88,6 +88,9 @@ public class LevelLoader : MonoBehaviour
         //Cuando el jugador se encuentra en el fin de nivel cambia de escena
         _isLoading = true;
         ChangeScene(_sceneName, _transitionTime);
+
+        //Resetear el indice del checkpoint
+        CheckpointManager.Instance.ResetCurrentCheckpointIndex();
     }
 
 

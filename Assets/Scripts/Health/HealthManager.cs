@@ -202,7 +202,6 @@ public class HealthManager : MonoBehaviour
             _health = setHealth;
         }
     }
-
     #endregion
 
 

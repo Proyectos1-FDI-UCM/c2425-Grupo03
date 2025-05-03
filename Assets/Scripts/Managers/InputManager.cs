@@ -92,6 +92,11 @@ public class InputManager : MonoBehaviour
     private InputAction _cancelPause;
 
     /// <summary>
+    /// Accion para controlar invulnerabilidad del jugador
+    /// </summary>
+    private InputAction _invulnerability;
+
+    /// <summary>
     /// Evento de salto
     /// </summary>
     private UnityEvent _OnJumpStarted = new UnityEvent();
@@ -103,6 +108,16 @@ public class InputManager : MonoBehaviour
     /// Evento de Despausar
     /// </summary>
     private UnityEvent _OnPauseCancel = new UnityEvent();
+
+    /// <summary>
+    /// Evento de invulnerabilidad
+    /// </summary>
+    public UnityEvent _invulnerabilityAction;
+
+    /// <summary>
+    /// Evento de invulnerabilidad
+    /// </summary>
+    public UnityEvent _skipWaveEvent;
 
     #endregion
 
@@ -373,11 +388,45 @@ public class InputManager : MonoBehaviour
         _pause.performed += ctx => _OnPausePressed?.Invoke();
         _cancelPause.performed += ctx => _OnPauseCancel?.Invoke();
 
+
+        ////Asignar la accion de invulnerabilidad
+        //_invulnerability = _theController.Player.Invulnerability;
+
+        //Cuando se ejecuta la accion de invulnerabilidad, ejecuta el metodo _invulnerability_performed
+        _theController.Player.Invulnerability.performed += _invulnerability_performed;
+
+        //Cuando se ejecuta la accion de saltar el wave, ejecuta el metodo
+        _theController.Player.SkipWave.performed += SkipWave_performed;
+
+        //Cuando se ejecuta la accion de ir al siguiente Checkpoint, ejecuta el metodo
+        _theController.Player.NextCheckpoint.performed += NextCheckpoint_performed;
+
+
+
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
         // y FireWasReleasedThisFrame)
         //_fire = _theController.Player.Fire;
+    }
+
+    private void NextCheckpoint_performed(InputAction.CallbackContext obj)
+    {
+        CheckpointManager.Instance.NextCheckpoint();
+    }
+
+    private void SkipWave_performed(InputAction.CallbackContext obj)
+    {
+        _skipWaveEvent?.Invoke();
+    }
+
+    /// <summary>
+    /// Metodo "subscrito" a la accion de invulnerabilidad
+    /// </summary>
+    /// <param name="obj"></param>
+    private void _invulnerability_performed(InputAction.CallbackContext obj)
+    {
+        _invulnerabilityAction?.Invoke();
     }
 
     /// <summary>

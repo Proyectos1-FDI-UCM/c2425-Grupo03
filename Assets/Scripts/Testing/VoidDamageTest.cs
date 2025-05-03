@@ -42,6 +42,18 @@ public class VoidDamageTest : MonoBehaviour
     #region Métodos de MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Si es el jugador
+        if(collision.gameObject.GetComponent<PlayerStateMachine>() != null)
+        {
+            HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+
+            //Si el jugador tiene invulnerabilidad
+            if(healthManager.Inmune == true)
+            {
+                //Quitarle invulnerabilidad
+                healthManager.Inmune = false;
+            }
+        }
         collision.gameObject.GetComponent<HealthManager>()?.RemoveHealth(int.MaxValue);
     }
     #endregion

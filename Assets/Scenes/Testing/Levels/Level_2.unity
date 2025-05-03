@@ -36755,6 +36755,14 @@ MonoBehaviour:
   _initialPoint: {fileID: 750660481}
   _respawnSound: {fileID: 8300000, guid: 4e53784d95e040745ba7f218c3433c27, type: 3}
   _takeCheckPoint: {fileID: 8300000, guid: fc2dfdde5e041874a8175df285530f2c, type: 3}
+  _checkPointsLevel2:
+  - {fileID: 233131045}
+  - {fileID: 34894677}
+  - {fileID: 2118952650}
+  _checkPointsLevel3:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2371473504908993151
 MonoBehaviour:
   m_ObjectHideFlags: 0
