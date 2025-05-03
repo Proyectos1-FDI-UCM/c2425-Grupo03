@@ -38610,6 +38610,26 @@ PrefabInstance:
       propertyPath: _initialPoint
       value: 
       objectReference: {fileID: 6258975531705233365}
+    - target: {fileID: 2554507411459215387, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
+      propertyPath: _checkPointsLevel2.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554507411459215387, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
+      propertyPath: _checkPointsLevel3.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554507411459215387, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
+      propertyPath: _checkPointsLevel3.Array.data[0]
+      value: 
+      objectReference: {fileID: 1882918201}
+    - target: {fileID: 2554507411459215387, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
+      propertyPath: _checkPointsLevel3.Array.data[1]
+      value: 
+      objectReference: {fileID: 153358280}
+    - target: {fileID: 2554507411459215387, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
+      propertyPath: _checkPointsLevel3.Array.data[2]
+      value: 
+      objectReference: {fileID: 1663370487}
     - target: {fileID: 7335843122940686174, guid: c01378a91c56c7a40a08e6c30a3ed9a7, type: 3}
       propertyPath: m_Name
       value: CheckpointManager

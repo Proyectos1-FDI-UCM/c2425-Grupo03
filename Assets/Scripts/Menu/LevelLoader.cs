@@ -88,6 +88,9 @@ public class LevelLoader : MonoBehaviour
         //Cuando el jugador se encuentra en el fin de nivel cambia de escena
         _isLoading = true;
         ChangeScene(_sceneName, _transitionTime);
+
+        //Resetear el indice del checkpoint
+        CheckpointManager.Instance.ResetCheckpoint();
     }
 
 
@@ -106,7 +109,6 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void ChangeScene(string sceneName, float transitionTime = 1)
     {
-        Debug.Log("Go next level" + sceneName);
         GameManager.Instance.InitCheckpoint(); // resetea los checkpoint activados
         GameManager.Instance.AddActualLevel();
         StartCoroutine(LoadLevel(sceneName,transitionTime));
@@ -142,6 +144,20 @@ public class LevelLoader : MonoBehaviour
 
         //Hacer el cambio de la escena
         SceneManager.LoadScene(sceneName);
+
+        //Cuando realiza un cambio de escena, ejecuta el metodo
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+
+    }
+
+    /// <summary>
+    /// Metodo subscrito al cambio de escena con el level loader
+    /// </summary>
+    /// <param name="arg0"></param>
+    /// <param name="arg1"></param>
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        CheckpointManager.Instance?.ResetCheckpoint();
     }
 
     private IEnumerator OnDeath(float transitionTime = 1)

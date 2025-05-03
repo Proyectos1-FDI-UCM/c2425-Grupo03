@@ -79,6 +79,7 @@ public class BossStateMachine : StateMachine
             _healthManager.Inmune = true;
             _healthManager.CanBeKnockbacked = false;
             _healthManager._onDamaged.AddListener(StartPhase2);
+            _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
         }
     }
     #endregion   

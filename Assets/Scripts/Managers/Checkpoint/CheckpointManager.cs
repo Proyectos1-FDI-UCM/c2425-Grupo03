@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 // Añadir aquí el resto de directivas using
@@ -40,11 +41,27 @@ public class CheckpointManager : MonoBehaviour
     /// </summary>
     [SerializeField] AudioClip _takeCheckPoint;
 
+    /// <summary>
+    /// Array de los checkpoints de nivel actual
+    /// </summary>
+    private CheckPointData[] _checkPointDatas;
+
+    /// <summary>
+    /// El indice el checkpoint actual
+    /// </summary>
+    private int _currentCheckPointIndex;
+
     #endregion
     // ---- PROPIEDADES ----
     #region Propiedades
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
+
+    struct CheckPointData
+    {
+        public int index;
+        public Vector3 position;
+    }
     #endregion
 
 
@@ -66,6 +83,10 @@ public class CheckpointManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //Inicializar el array de checkpoint
+        _checkPointDatas = new CheckPointData[FindObjectsByType(typeof(Checkpoint), FindObjectsSortMode.None).Length];
+        InitCheckPointDatas(ref _checkPointDatas);
     }
 
     /// <summary>
@@ -79,6 +100,9 @@ public class CheckpointManager : MonoBehaviour
             // Si no hay checkpoint guardado, establece el punto inicial como checkpoint
             GameManager.Instance.SetCheckpoint(_initialPoint);
         }
+
+        //Inicializar el indice del checkpoint actual
+        _currentCheckPointIndex = -1;
     }
     #endregion
 
@@ -102,6 +126,9 @@ public class CheckpointManager : MonoBehaviour
         // Guarda el nuevo checkpoint en el GameManager
         GameManager.Instance.SetCheckpoint(checkpointTransform);
         // Asigna la referencia del último punto a este checkpoint
+
+        //Actualizar el indice del checkpoint actual
+        _currentCheckPointIndex = checkpointTransform.GetComponent<Checkpoint>().GetCheckPointIndex();
     }
 
     /// <summary>
@@ -121,12 +148,60 @@ public class CheckpointManager : MonoBehaviour
 
             //Restablece la camara para que siga al jugador
             CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(0.1f, CameraManager.Instance.GetComponent<Camera>().orthographicSize));
-
         }
+    }
+
+    /// <summary>
+    /// Añadir la informacion del checkpoint al array
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="position"></param>
+
+    public void AddCheckPointData(int index, Vector3 position)
+    {
+        _checkPointDatas[index].position = position;  
+    }
+
+    /// <summary>
+    /// Resetear el array de los checkpoints
+    /// </summary>
+    public void ResetCheckpoint()
+    {
+        _checkPointDatas = new CheckPointData[FindObjectsByType(typeof(Checkpoint), FindObjectsSortMode.None).Length];
+        InitCheckPointDatas(ref _checkPointDatas);
+        _currentCheckPointIndex = -1;
     }
     #endregion
 
+    /// <summary>
+    /// Ir al siguiente checkpoint disponible
+    /// </summary>
+    public void NextCheckpoint()
+    {
+        PlayerStateMachine player = FindFirstObjectByType<PlayerStateMachine>();
 
+        if (_currentCheckPointIndex + 1 < _checkPointDatas.Length)
+        {
+            player.transform.position = _checkPointDatas[_currentCheckPointIndex + 1].position;
+        }
+    }
+
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
+
+    /// <summary>
+    /// Inicializar los datos del checkpoint
+    /// </summary>
+    /// <param name="datas"></param>
+    private void InitCheckPointDatas(ref CheckPointData[] datas)
+    {
+        for (int i = 0;i < datas.Length;i++)
+        {
+            datas[i].index = i;
+            datas[i].position = Vector3.zero;
+        }
+    }
+    #endregion
 
 } // class CheckPointManager 
 // namespace

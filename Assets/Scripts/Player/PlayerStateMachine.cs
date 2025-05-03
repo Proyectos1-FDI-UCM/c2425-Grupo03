@@ -216,11 +216,31 @@ public class PlayerStateMachine : StateMachine
         {
             healthManager._onDeath.AddListener(DeathState);
             healthManager._onDamaged.AddListener(PlayerDamagedSFX);
+
+            //Añadir el cheat de invulnerabilidad al jugador
+            InputManager.Instance._invulnerabilityAction.AddListener(SetInvulnerability);
         }
 
         if (GameManager.Instance.GetCheckpoint()!= null)
         {
             transform.position = (Vector3) GameManager.Instance.GetCheckpoint();
+        }
+    }
+
+    /// <summary>
+    /// Ajustar la invulnerabilidad del jugador
+    /// </summary>
+    private void SetInvulnerability()
+    {
+        HealthManager healthManager = GetComponent<HealthManager>();
+
+        if (healthManager.Inmune)
+        {
+            healthManager.Inmune = false;
+        }
+        else
+        {
+            healthManager.Inmune = true;
         }
     }
 

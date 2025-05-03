@@ -104,6 +104,16 @@ public class InputManager : MonoBehaviour
     /// </summary>
     private UnityEvent _OnPauseCancel = new UnityEvent();
 
+    /// <summary>
+    /// Evento de invulnerabilidad
+    /// </summary>
+    public UnityEvent _invulnerabilityAction;
+
+    /// <summary>
+    /// Evento de invulnerabilidad
+    /// </summary>
+    public UnityEvent _skipWaveEvent;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -373,11 +383,62 @@ public class InputManager : MonoBehaviour
         _pause.performed += ctx => _OnPausePressed?.Invoke();
         _cancelPause.performed += ctx => _OnPauseCancel?.Invoke();
 
+        //Me da perza crear un InputAction para cada uno
+
+        //Cuando se ejecuta la accion de invulnerabilidad, ejecuta el metodo _invulnerability_performed
+        _theController.Player.Invulnerability.performed += _invulnerability_performed;
+
+        //Cuando se ejecuta la accion de saltar el wave, ejecuta el metodo
+        _theController.Player.SkipWave.performed += SkipWave_performed;
+
+        //Cuando se ejecuta la accion de ir al siguiente Checkpoint, ejecuta el metodo
+        _theController.Player.NextCheckpoint.performed += NextCheckpoint_performed;
+
+        //Cuando se ejecuta la accion de ir al siguiente nivel, ejecuta el metodo 
+        _theController.Player.NextLevel.performed += NextLevel_performed;
+
+
+
         // Para el disparo solo cacheamos la acción de disparo.
         // El estado lo consultaremos a través de los métodos públicos que 
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
         // y FireWasReleasedThisFrame)
         //_fire = _theController.Player.Fire;
+    }
+
+    /// <summary>
+    /// Metodo subscrito a la accion de ir al siguiente nivel
+    /// </summary>
+    /// <param name="obj"></param>
+    private void NextLevel_performed(InputAction.CallbackContext obj)
+    {
+        GameManager.Instance.NextLevel();
+    }
+    /// <summary>
+    /// Metodo subscrito a la accion de ir al siguiente checkpoint
+    /// </summary>
+    /// <param name="obj"></param>
+    private void NextCheckpoint_performed(InputAction.CallbackContext obj)
+    {
+        CheckpointManager.Instance.NextCheckpoint();
+    }
+
+    /// <summary>
+    /// Metodo subscrito a la accion de saltar zona de combate
+    /// </summary>
+    /// <param name="obj"></param>
+    private void SkipWave_performed(InputAction.CallbackContext obj)
+    {
+        _skipWaveEvent?.Invoke();
+    }
+
+    /// <summary>
+    /// Metodo "subscrito" a la accion de invulnerabilidad
+    /// </summary>
+    /// <param name="obj"></param>
+    private void _invulnerability_performed(InputAction.CallbackContext obj)
+    {
+        _invulnerabilityAction?.Invoke();
     }
 
     /// <summary>

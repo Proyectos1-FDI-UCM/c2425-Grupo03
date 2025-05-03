@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Script para tener un vacío que mate provisionalmente
+// Estado de muerte del boss
 // Adrián Isasi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -10,17 +10,17 @@ using UnityEngine;
 
 
 /// <summary>
-/// Daña al jugador y le quita toda la vida si toca con él
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-public class VoidDamageTest : MonoBehaviour
+public class BossDeathState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
-    // Documentar cada atributo que aparece aquí.
-    // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
-
+    [SerializeField]
+    float _timeToDestroy;
     #endregion
-
+    
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -37,25 +37,10 @@ public class VoidDamageTest : MonoBehaviour
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Si es el jugador
-        if(collision.gameObject.GetComponent<PlayerStateMachine>() != null)
-        {
-            HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
-
-            //Si el jugador tiene invulnerabilidad
-            if(healthManager.Inmune == true)
-            {
-                //Quitarle invulnerabilidad
-                healthManager.Inmune = false;
-            }
-        }
-        collision.gameObject.GetComponent<HealthManager>()?.RemoveHealth(int.MaxValue);
-    }
+    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -66,16 +51,56 @@ public class VoidDamageTest : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    #endregion
+    
+    /// <summary>
+    /// Metodo llamado cuando al transicionar a este estado.
+    /// </summary>
+    public override void EnterState()
+    {
+        if(Ctx.TryGetComponent(out HealthManager hm))
+        {
+            hm.Inmune = true;
+        }
 
+        Destroy(transform.root.gameObject, _timeToDestroy);
+    }
+    
+    /// <summary>
+    /// Metodo llamado antes de cambiar a otro estado.
+    /// </summary>
+    public override void ExitState()
+    {
+        
+    }
+    #endregion
+    
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
+
+
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion
+    /// <summary>
+    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// </summary>
+    protected override void UpdateState()
+    {
+        
+    }
 
-} // class VoidDamageTest 
+    /// <summary>
+    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// </summary>
+    protected override void CheckSwitchState()
+    {
+        
+    }
+
+    #endregion   
+
+} // class BossDeathState 
 // namespace

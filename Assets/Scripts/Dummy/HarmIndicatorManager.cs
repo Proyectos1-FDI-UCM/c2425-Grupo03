@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using UnityEditor.Build;
 using UnityEngine;
 
 /// <summary>
@@ -39,6 +40,11 @@ public class HarmIndicatorManager : MonoBehaviour
         GetComponent<HealthManager>()?._onDamaged.AddListener(AskForHealth);
     }
 
+    private void Start()
+    {
+        InputManager.Instance._invulnerabilityAction.AddListener(SetInvulnerabilityIndicator);
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -58,5 +64,36 @@ public class HarmIndicatorManager : MonoBehaviour
     }
     #endregion
 
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
+
+    /// <summary>
+    /// Texto que indica si el jugador tiene invulnerabilidad
+    /// </summary>
+    private void SetInvulnerabilityIndicator()
+    {
+        PlayerStateMachine player = GetComponent<PlayerStateMachine>();
+
+        //Mirar si es el jugador 
+        if(player != null)
+        {
+            Canvas text = Instantiate<Canvas>(_damageText, player.transform.position, player.transform.rotation);
+
+            //Poner los textos correspondientes
+            if (player.GetComponent<HealthManager>().Inmune)
+            {
+                text.GetComponent<DamageNumberScript>()?.SetText("Disabled", Color.cyan,0.4f);
+                Debug.Log("Disable");
+            }
+            else
+            {
+                text.GetComponent<DamageNumberScript>()?.SetText("Enabled", Color.cyan,0.4f);
+                Debug.Log("Enable");
+            }
+        }
+
+    }
+
+    #endregion
 } // class HarmIndicatorManager 
 // namespace

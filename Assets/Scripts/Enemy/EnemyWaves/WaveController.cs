@@ -110,7 +110,11 @@ public class WaveController : MonoBehaviour
     }
     private void OnTriggerEnter2D(UnityEngine.Collider2D other)
     {
+        //Añadir el cheat al jugador cuando entra
+        InputManager.Instance._skipWaveEvent.AddListener(DestroyWave);
         // Activa solo la primera oleada, cierra la puerta y activa el estado de oleada
+
+
         if (transform.childCount > 0) 
         {
             _doorAnimator.SetBool("Closed",true);
@@ -161,6 +165,20 @@ public class WaveController : MonoBehaviour
     }
 
     #endregion
+
+    /// <summary>
+    /// Metodo que sirve para destruir el waveController directamente
+    /// </summary>
+    private void DestroyWave()
+    {
+        //Quitar el cheat al jugador para evitar posibles problemas
+        InputManager.Instance._skipWaveEvent.RemoveAllListeners();
+
+
+        _doorAnimator.SetBool("Closed", false);
+        CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 6));
+        Destroy(this.gameObject);
+    }
 
 } // class WaveController 
 // namespace

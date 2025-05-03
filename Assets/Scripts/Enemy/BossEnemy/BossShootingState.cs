@@ -136,7 +136,7 @@ public class BossShootingState : BaseState
     {
         if (Time.time > _timeToEndState)
         {
-            Ctx.ChangeState(Ctx.GetStateByName("Flying Charge"));
+            Ctx.ChangeState(Ctx.GetStateByName("Air Vulnerable"));
         }
     }
 

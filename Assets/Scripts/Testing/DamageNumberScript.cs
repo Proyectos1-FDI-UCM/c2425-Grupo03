@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System;
 using TMPro;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
@@ -59,10 +60,11 @@ public class DamageNumberScript : MonoBehaviour
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    public void SetText(string number, Color textColor)
+    public void SetText(string number, Color textColor, float fontSize = 0.7f)
     {
         _text.text = number;
         _text.color = textColor;
+        _text.fontSize = fontSize;
     }
 
     #endregion
