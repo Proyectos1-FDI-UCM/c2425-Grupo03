@@ -17,3 +17,4 @@ MonoBehaviour:
 
 '
   _tutorialVideo: {fileID: 32900000, guid: 32852ba16f3fbc042939b1705c2438f8, type: 3}
+  _tutorialID: attack

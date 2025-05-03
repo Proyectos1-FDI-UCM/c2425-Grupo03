@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Reproduce en tutorial en el juego
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

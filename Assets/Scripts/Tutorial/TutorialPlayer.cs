@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Llama al tutorialcontroller para reproducir el tutorial
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
@@ -31,7 +31,6 @@ public class TutorialPlayer : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    private bool _isPlayed;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -53,7 +52,6 @@ public class TutorialPlayer : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _isPlayed = false;
     }
 
     /// <summary>
@@ -74,10 +72,12 @@ public class TutorialPlayer : MonoBehaviour
     // Ejemplo: GetPlayerController
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!_isPlayed)
-        TutorialController.Instance.ShowTutorial(tutorialData);
-        _isPlayed=true;
-        
+        string tutorialID = tutorialData.GetTutorialID();
+        if (PlayerPrefs.GetInt("Tutorial_" + tutorialID, 0) == 0)
+        {
+            TutorialController.Instance.ShowTutorial(tutorialData);
+            PlayerPrefs.SetInt("Tutorial_" + tutorialID, 1);
+        } 
     }
     #endregion
 

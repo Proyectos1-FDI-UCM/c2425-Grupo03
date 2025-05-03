@@ -18,3 +18,4 @@ MonoBehaviour:
 
 '
   _tutorialVideo: {fileID: 32900000, guid: b423ba0d79fb0f64082f8031cf00e8bf, type: 3}
+  _tutorialID: chargeAttack

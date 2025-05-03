@@ -24,6 +24,7 @@ public class TutorialObject : ScriptableObject
     [SerializeField] string _tutorialTitle;
     [SerializeField][TextArea] string _tutorialDescription;
     [SerializeField] VideoClip _tutorialVideo;
+    [SerializeField] string _tutorialID;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -88,6 +89,11 @@ public class TutorialObject : ScriptableObject
     public VideoClip GetTutorialVideo()
     {
         return _tutorialVideo;
+    }
+
+    public string GetTutorialID()
+    {
+        return _tutorialID;
     }
     #endregion
     

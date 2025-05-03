@@ -15,3 +15,4 @@ MonoBehaviour:
   _tutorialTitle: Area de combate
   _tutorialDescription: Mata a todos los enemigos para salir
   _tutorialVideo: {fileID: 32900000, guid: ee4c04d73d5c0c645be5f95e349dabb0, type: 3}
+  _tutorialID: CombatArea
