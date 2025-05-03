@@ -29,7 +29,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""c580f617-a756-4835-9950-b4f03fefb38c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

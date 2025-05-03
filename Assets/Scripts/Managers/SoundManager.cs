@@ -66,6 +66,23 @@ public class SoundManager : MonoBehaviour
         float clipLengh = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLengh);
     }
+    /// <summary>
+    /// Metodo que hace lo mismo que PlaySFX pero devolviendo el audioSource para que lo pueda manejar otros
+    /// </summary>
+    /// <param name="audioClip"></param>
+    /// <param name="spawnPosition"></param>
+    /// <param name="volume"></param>
+    /// <returns></returns>
+    public AudioSource PlaySFXWithAudioSource(AudioClip audioClip, Transform spawnPosition, float volume)
+    {
+        AudioSource audioSource = Instantiate(_audioSourceObject, spawnPosition.position, Quaternion.identity);
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+        audioSource.loop = true;
+
+        return audioSource;
+    }
 
     /// <summary>
     ///     Crea un audioSouce temporal en la escena para producir un sonido random entre el array de audio dados y despues se autodestruye

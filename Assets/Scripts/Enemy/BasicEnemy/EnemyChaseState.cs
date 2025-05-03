@@ -47,7 +47,9 @@ public class EnemyChaseState : BaseState
     /// <summary>
     /// El audio source con el sonido que reproduce el enemigo al andar.
     /// </summary>
-    AudioSource _audioSource;
+    [SerializeField] AudioClip _walkSound;
+
+    private AudioSource _audioSource;
 
     private float diffX;
 
@@ -72,7 +74,6 @@ public class EnemyChaseState : BaseState
         }
 
         //Coge la referencia al audio source para reproducir sonido de andar.
-        _audioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -82,7 +83,8 @@ public class EnemyChaseState : BaseState
             _ctx.IsPlayerInChaseRange = false;
         }
         // Para de reproducir el sonido de andar
-        _audioSource?.Stop();
+        //_audioSource?.Stop();
+        
     }
     #endregion
 
@@ -103,7 +105,8 @@ public class EnemyChaseState : BaseState
         _animator?.SetBool("IsChasing", true);
 
         // Reproduce sonido de andar
-        _audioSource?.Play();
+        //_audioSource?.Play();
+        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_walkSound, transform, 0.5f);
     }
     
     /// <summary>
@@ -121,7 +124,8 @@ public class EnemyChaseState : BaseState
         _animator?.SetBool("IsChasing", false);
 
         // Para el sonido de andar
-        _audioSource?.Stop();
+        //_audioSource?.Stop();
+        Destroy(_audioSource);
     }
     #endregion
     
@@ -153,6 +157,16 @@ public class EnemyChaseState : BaseState
             }
         }
 
+        //Comprobacion de que si ha entrado en pausa el juego
+        if(Time.timeScale == 0)
+        {
+            _audioSource.Pause();
+        }
+        else if(Time.timeScale != 0)
+        {
+            _audioSource.UnPause();
+        }
+
         if (_rb != null)
         {
             //Si todavía hay plataforma se mueve, sino se detiene
@@ -161,16 +175,16 @@ public class EnemyChaseState : BaseState
                 _animator.SetBool("IsChasing", true);
                 _animator.SetBool("IsIdle", false);
                 _rb.velocity = new Vector2(_enemyWalkingSpeed * (short)_ctx.LookingDirection, 0);
-                if (!_audioSource.isPlaying)
-                    _audioSource?.Play();
+                //if (!_audioSource.isPlaying)
+                //    _audioSource?.Play();
             }
             else
             {
                 _animator.SetBool("IsChasing", false);
                 _animator.SetBool("IsIdle", true);
                 _rb.velocity = new Vector2(0,_rb.velocity.y);
-                if (_audioSource.isPlaying)
-                    _audioSource?.Stop();
+                //if (_audioSource.isPlaying)
+                //    _audioSource?.Stop();
             }
         }
     }
