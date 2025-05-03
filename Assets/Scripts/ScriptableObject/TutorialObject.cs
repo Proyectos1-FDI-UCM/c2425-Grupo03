@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using TMPro;
 using UnityEngine;
 using UnityEngine.Video;
 // Añadir aquí el resto de directivas using
@@ -24,7 +25,7 @@ public class TutorialObject : ScriptableObject
     [SerializeField] string _tutorialTitle;
     [SerializeField][TextArea] string _tutorialDescription;
     [SerializeField] VideoClip _tutorialVideo;
-    [SerializeField] string _tutorialID;
+    [SerializeField] int _tutorialIndex;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -35,7 +36,7 @@ public class TutorialObject : ScriptableObject
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
+    public bool IsPlayed { get; private set; } = false;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -43,31 +44,7 @@ public class TutorialObject : ScriptableObject
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-
-    // Por defecto están los típicos (Update y Start) pero:
-    // - Hay que añadir todos los que sean necesarios
-    // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
-    #endregion
+ 
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
@@ -91,12 +68,13 @@ public class TutorialObject : ScriptableObject
         return _tutorialVideo;
     }
 
-    public string GetTutorialID()
+    public void SetTutorialIsPlayed()
     {
-        return _tutorialID;
+        IsPlayed = true;
     }
+
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -104,7 +82,7 @@ public class TutorialObject : ScriptableObject
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    #endregion
 
 } // class TutorialObject 
 // namespace

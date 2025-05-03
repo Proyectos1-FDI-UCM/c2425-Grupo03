@@ -28,7 +28,9 @@ public class TutorialController : MonoBehaviour
     [SerializeField] VideoPlayer videoPlayer;
     [SerializeField] GameObject _tutorial;
     [SerializeField] GameObject _skipBottom;
-    
+
+    [SerializeField] TutorialObject []_tutorialObjects;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -39,7 +41,6 @@ public class TutorialController : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-
     #endregion
 
     // ---- PROPIEDADES ----
@@ -58,13 +59,14 @@ public class TutorialController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
+            Destroy(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -93,19 +95,24 @@ public class TutorialController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
-    public void ShowTutorial(TutorialObject tutorial)
+    public void ShowTutorial(int index)
     {
-        _tutorial.SetActive(true);
+        TutorialObject tutorial = _tutorialObjects[index];
+        if (!tutorial.IsPlayed)
+        {
+            _tutorial.SetActive(true);
 
-        //init
-        titleText.text = tutorial.GetTutorialTitle();
-        descriptionText.text = tutorial.GetTutorialDescription();
-        videoPlayer.clip = tutorial.GetTutorialVideo();
+            //init
+            titleText.text = tutorial.GetTutorialTitle();
+            descriptionText.text = tutorial.GetTutorialDescription();
+            videoPlayer.clip = tutorial.GetTutorialVideo();
 
 
-        videoPlayer.Play();
+            videoPlayer.Play();
 
-        PauseGame();
+            PauseGame();
+            tutorial.SetTutorialIsPlayed();
+        }
     }
 
     public void PauseGame()

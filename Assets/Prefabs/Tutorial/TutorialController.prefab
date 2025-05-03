@@ -333,15 +333,15 @@ RectTransform:
   m_GameObject: {fileID: 2589369568624778085}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8431187612186298038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.608696, y: 4.730392}
-  m_SizeDelta: {x: 1280, y: 720}
+  m_AnchoredPosition: {x: 47.692, y: 1.2086}
+  m_SizeDelta: {x: 466.2517, y: 262.2672}
   m_Pivot: {x: 0.60364604, y: 0.5}
 --- !u!212 &6201424419674392112
 SpriteRenderer:
@@ -587,6 +587,13 @@ MonoBehaviour:
   videoPlayer: {fileID: 1668917302465075441}
   _tutorial: {fileID: 6782303851459169633}
   _skipBottom: {fileID: 8026441124267540481}
+  _tutorialObjects:
+  - {fileID: 11400000, guid: 039c8b9159b766544a3b79dba407f89f, type: 2}
+  - {fileID: 11400000, guid: 55848ff2757576e48859d0d595991055, type: 2}
+  - {fileID: 11400000, guid: 454a96a49cab77e428501af28ddf1e69, type: 2}
+  - {fileID: 11400000, guid: e6b8cb5ede5eee6478976908f458c098, type: 2}
+  - {fileID: 11400000, guid: 081dfb5504a771a42b27db7180c92aec, type: 2}
+  - {fileID: 11400000, guid: 1ba48c25355934942969c822ca613366, type: 2}
 --- !u!1 &6281306167676991564
 GameObject:
   m_ObjectHideFlags: 0

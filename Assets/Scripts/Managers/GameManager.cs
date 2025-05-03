@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         _actualLevel = 1;
-        PlayerPrefs.DeleteAll();
     }
     #endregion
 

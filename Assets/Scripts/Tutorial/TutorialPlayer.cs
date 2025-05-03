@@ -31,6 +31,7 @@ public class TutorialPlayer : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+    [SerializeField] int _index;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -72,12 +73,7 @@ public class TutorialPlayer : MonoBehaviour
     // Ejemplo: GetPlayerController
     private void OnTriggerEnter2D(Collider2D other)
     {
-        string tutorialID = tutorialData.GetTutorialID();
-        if (PlayerPrefs.GetInt("Tutorial_" + tutorialID, 0) == 0)
-        {
-            TutorialController.Instance.ShowTutorial(tutorialData);
-            PlayerPrefs.SetInt("Tutorial_" + tutorialID, 1);
-        } 
+         TutorialController.Instance.ShowTutorial(_index);
     }
     #endregion
 
