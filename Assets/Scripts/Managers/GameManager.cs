@@ -271,6 +271,19 @@ public class GameManager : MonoBehaviour
             activatedCheckpoint = _checkPointIndex;
         }
     }
+
+    /// <summary>
+    /// Metodo para ir al siguiente nivel
+    /// </summary>
+    public void NextLevel()
+    {
+        if(_actualLevel + 1 <= _levels.Count)
+        {
+            Debug.Log("Yep");
+            LevelLoader levelLoader = FindFirstObjectByType<LevelLoader>();
+            levelLoader.ChangeScene(_levels[_actualLevel + 1]);
+        }
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -290,6 +303,8 @@ public class GameManager : MonoBehaviour
         // De momento no hay que transferir ningún estado
         // entre escenas
     }
+
+    
 
     #endregion
 } // class GameManager 

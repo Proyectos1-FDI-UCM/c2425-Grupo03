@@ -125,6 +125,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ba85def-e8f5-44a1-a44b-ded882df69b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -494,7 +503,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""modifier"",
                     ""id"": ""f3ebf5e1-2c89-4b01-87b2-a36424a4fb7c"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -505,7 +514,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""binding"",
                     ""id"": ""38d4213f-dd89-47e1-872d-17ae120601c2"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -554,6 +563,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""178bc7c4-2ded-40cb-9996-2dcbcdc12217"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""78a66a00-9086-421b-8497-7491bb11fdfd"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""1f63d3d0-288c-48af-9307-fd55e4565c82"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""d01e222a-8aa4-4d12-8308-5210985126da"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -907,6 +960,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Invulnerability = m_Player.FindAction("Invulnerability", throwIfNotFound: true);
         m_Player_SkipWave = m_Player.FindAction("SkipWave", throwIfNotFound: true);
         m_Player_NextCheckpoint = m_Player.FindAction("NextCheckpoint", throwIfNotFound: true);
+        m_Player_NextLevel = m_Player.FindAction("NextLevel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -984,6 +1038,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Invulnerability;
     private readonly InputAction m_Player_SkipWave;
     private readonly InputAction m_Player_NextCheckpoint;
+    private readonly InputAction m_Player_NextLevel;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -999,6 +1054,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Invulnerability => m_Wrapper.m_Player_Invulnerability;
         public InputAction @SkipWave => m_Wrapper.m_Player_SkipWave;
         public InputAction @NextCheckpoint => m_Wrapper.m_Player_NextCheckpoint;
+        public InputAction @NextLevel => m_Wrapper.m_Player_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1041,6 +1097,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NextCheckpoint.started += instance.OnNextCheckpoint;
             @NextCheckpoint.performed += instance.OnNextCheckpoint;
             @NextCheckpoint.canceled += instance.OnNextCheckpoint;
+            @NextLevel.started += instance.OnNextLevel;
+            @NextLevel.performed += instance.OnNextLevel;
+            @NextLevel.canceled += instance.OnNextLevel;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1078,6 +1137,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NextCheckpoint.started -= instance.OnNextCheckpoint;
             @NextCheckpoint.performed -= instance.OnNextCheckpoint;
             @NextCheckpoint.canceled -= instance.OnNextCheckpoint;
+            @NextLevel.started -= instance.OnNextLevel;
+            @NextLevel.performed -= instance.OnNextLevel;
+            @NextLevel.canceled -= instance.OnNextLevel;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1170,6 +1232,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInvulnerability(InputAction.CallbackContext context);
         void OnSkipWave(InputAction.CallbackContext context);
         void OnNextCheckpoint(InputAction.CallbackContext context);
+        void OnNextLevel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

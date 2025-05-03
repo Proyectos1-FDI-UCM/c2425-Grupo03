@@ -127,6 +127,7 @@ public class CheckpointManager : MonoBehaviour
         GameManager.Instance.SetCheckpoint(checkpointTransform);
         // Asigna la referencia del último punto a este checkpoint
 
+        //Actualizar el indice del checkpoint actual
         _currentCheckPointIndex = checkpointTransform.GetComponent<Checkpoint>().GetCheckPointIndex();
     }
 
@@ -150,24 +151,27 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Añadir la informacion del checkpoint al array
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="position"></param>
+
     public void AddCheckPointData(int index, Vector3 position)
     {
         _checkPointDatas[index].position = position;  
     }
 
-    public void ResetCurrentCheckpointIndex()
+    /// <summary>
+    /// Resetear el array de los checkpoints
+    /// </summary>
+    public void ResetCheckpoint()
     {
+        _checkPointDatas = new CheckPointData[FindObjectsByType(typeof(Checkpoint), FindObjectsSortMode.None).Length];
+        InitCheckPointDatas(ref _checkPointDatas);
         _currentCheckPointIndex = -1;
     }
     #endregion
-
-    //public void PrintCheckPointData()
-    //{
-    //    for(int i = 0; i < _checkPointDatas.Length; i++)
-    //    {
-    //        Debug.Log($"Checkpoint {i}: {_checkPointDatas[i].position}");
-    //    }
-    //}
 
     /// <summary>
     /// Ir al siguiente checkpoint disponible

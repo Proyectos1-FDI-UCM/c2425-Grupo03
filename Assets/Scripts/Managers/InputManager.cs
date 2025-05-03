@@ -92,11 +92,6 @@ public class InputManager : MonoBehaviour
     private InputAction _cancelPause;
 
     /// <summary>
-    /// Accion para controlar invulnerabilidad del jugador
-    /// </summary>
-    private InputAction _invulnerability;
-
-    /// <summary>
     /// Evento de salto
     /// </summary>
     private UnityEvent _OnJumpStarted = new UnityEvent();
@@ -388,9 +383,7 @@ public class InputManager : MonoBehaviour
         _pause.performed += ctx => _OnPausePressed?.Invoke();
         _cancelPause.performed += ctx => _OnPauseCancel?.Invoke();
 
-
-        ////Asignar la accion de invulnerabilidad
-        //_invulnerability = _theController.Player.Invulnerability;
+        //Me da perza crear un InputAction para cada uno
 
         //Cuando se ejecuta la accion de invulnerabilidad, ejecuta el metodo _invulnerability_performed
         _theController.Player.Invulnerability.performed += _invulnerability_performed;
@@ -401,6 +394,9 @@ public class InputManager : MonoBehaviour
         //Cuando se ejecuta la accion de ir al siguiente Checkpoint, ejecuta el metodo
         _theController.Player.NextCheckpoint.performed += NextCheckpoint_performed;
 
+        //Cuando se ejecuta la accion de ir al siguiente nivel, ejecuta el metodo 
+        _theController.Player.NextLevel.performed += NextLevel_performed;
+
 
 
         // Para el disparo solo cacheamos la acción de disparo.
@@ -410,11 +406,27 @@ public class InputManager : MonoBehaviour
         //_fire = _theController.Player.Fire;
     }
 
+    /// <summary>
+    /// Metodo subscrito a la accion de ir al siguiente nivel
+    /// </summary>
+    /// <param name="obj"></param>
+    private void NextLevel_performed(InputAction.CallbackContext obj)
+    {
+        GameManager.Instance.NextLevel();
+    }
+    /// <summary>
+    /// Metodo subscrito a la accion de ir al siguiente checkpoint
+    /// </summary>
+    /// <param name="obj"></param>
     private void NextCheckpoint_performed(InputAction.CallbackContext obj)
     {
         CheckpointManager.Instance.NextCheckpoint();
     }
 
+    /// <summary>
+    /// Metodo subscrito a la accion de saltar zona de combate
+    /// </summary>
+    /// <param name="obj"></param>
     private void SkipWave_performed(InputAction.CallbackContext obj)
     {
         _skipWaveEvent?.Invoke();
