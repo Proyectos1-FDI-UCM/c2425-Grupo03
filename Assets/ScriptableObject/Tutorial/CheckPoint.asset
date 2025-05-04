@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CheckPoint
   m_EditorClassIdentifier: 
   _tutorialTitle: Esto es un checkpoint
-  _tutorialDescription: Cuando mueras, vas a reaparecer desde el ultimo checkpoint
-    activado
+  _tutorialDescription: "Cuando mueras, vas a reaparecer desde el \xFAltimo checkpoint
+    activado. Tambi\xE9n regeneran tu vida."
   _tutorialVideo: {fileID: 32900000, guid: 37c8315cbc58dc248a9d615027e065e1, type: 3}
-  _tutorialID: Checkpoint

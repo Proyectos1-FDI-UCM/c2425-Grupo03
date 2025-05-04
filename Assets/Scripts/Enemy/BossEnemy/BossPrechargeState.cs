@@ -16,25 +16,20 @@ public class BossPrechargeState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Tiempo que tarda el estado
+    /// </summary>
     [SerializeField]
     float _timeToCharge;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Cuando termina el estado
+    /// </summary>
     float _prechargeStateEnd;
 
-    #endregion
-
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-    
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-    
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -45,6 +40,7 @@ public class BossPrechargeState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        // calculamos cuando termina el estado y ponemos la animación
         _prechargeStateEnd = Time.time + _timeToCharge;
         Ctx.Animator.SetBool("IsPreparingCharge", true);
 
@@ -55,8 +51,8 @@ public class BossPrechargeState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        // Termina la animación
         Ctx.Animator.SetBool("IsPreparingCharge", false);
-
     }
     #endregion
 
@@ -83,6 +79,7 @@ public class BossPrechargeState : BaseState
     {
         if(Time.time > _prechargeStateEnd)
         {
+            // Cambiamos a la carga contra el jugador
             Ctx.ChangeState(Ctx.GetStateByName("Charging"));
         }
     }

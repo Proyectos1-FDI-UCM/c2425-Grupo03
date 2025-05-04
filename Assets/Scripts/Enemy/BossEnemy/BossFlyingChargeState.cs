@@ -17,45 +17,88 @@ public class BossFlyingChargeState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Daño causado al jugador
+    /// </summary>
+    [Header("Damage")]
     [SerializeField]
+    [Tooltip("Damage dealt when in contact with player")]
     float _damage;
 
+    [Header("Animation Speed")]
+    /// <summary>
+    /// Velocidad durante la animación
+    /// </summary>
     [SerializeField]
+    [Tooltip("Speed while moving through the Animation Points and not charging")]
     float _speed;
 
+    /// <summary>
+    /// Velocidad durante la carga contra el juador
+    /// </summary>
     [SerializeField]
+    [Tooltip("Speed when the boss charges agains the player")]
     float _chargeSpeed;
 
+    [Header("Charge Properties")]
+    
+    ///<summary>
+    /// Punto en la animación donde comienza la carga
+    /// </summary>
     [SerializeField]
-    float _chargeStart;
+    [Tooltip("Point in Animation Poins where the charge starts")]
+    int _chargeStart;
 
+    ///<summary>
+    /// Punto en la animación donde termina la carga contra el jugador
+    /// </summary>
     [SerializeField]
-    float _chargeEnd;
+    [Tooltip("Point in Animation Poins where the charge stops")]
+    int _chargeEnd;
 
+    /// <summary>
+    /// Tiempo de retraso antes de cargar contra el jugador
+    /// </summary>
     [SerializeField]
+    [Tooltip("Time delayed before charging")]
     float _chargeDelayTime;
 
+    /// <summary>
+    /// Collider que hará daño al jugador
+    /// </summary>
+    [Header("Hit Collider")]
     [SerializeField]
+    [Tooltip("Collider to enable when on this state")]
     CircleCollider2D _hitCollider;
 
+    /// <summary>
+    /// Puntos por los que se movera el boss durante este estado
+    /// </summary>
+    [Header("Animation points")]
     [SerializeField]
     Transform[] _animationPoints;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Posición actual en los puntos de animación
+    /// </summary>
     int _currPointIndex;
+
+    /// <summary>
+    /// Tiempo para comenzar la carga tras llegar al punto de comienzo
+    /// </summary>
     float _beginChargeTime;
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    /// <summary>
+    /// Al entrar en contacto con el jugador le hace daño
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out HealthManager healthManager))
@@ -74,8 +117,11 @@ public class BossFlyingChargeState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        // activamos el collider para hacer daño
         _hitCollider.enabled = true;
+        // animación
         Ctx.Animator.SetTrigger("FlyingCharge");
+        // setup del movimiento
         _currPointIndex = 0;
         _beginChargeTime = 0;
     }
@@ -85,6 +131,7 @@ public class BossFlyingChargeState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        // quitamos el collider para que no haga más contactos
         _hitCollider.enabled = false;
         Ctx.Animator.ResetTrigger("FlyingCharge");
     }
@@ -102,20 +149,32 @@ public class BossFlyingChargeState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        // Por cada punto de la animación (siempre que no estemos esperando a cargar)
         if( _currPointIndex < _animationPoints.Length && Time.time > _beginChargeTime)
         {
-            float speed = _speed;
+            // Calculamos la velocidad
+            float speed;
             if(_currPointIndex >= _chargeStart && _currPointIndex < _chargeEnd)
             {
+                // Si estamos entre los puntos de comienzo de carga y fin de carga
+                // ponemos la velocidad de carga
                 speed = _chargeSpeed;
             }
+            else
+            {
+                speed = _speed;
+            }
 
+            // Aplicamos la velocidad para mover el jefe
             Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, (Vector2)_animationPoints[_currPointIndex].position, speed * Time.deltaTime);
 
+            // Si hemos llegado al siguiente punto cambiamos para movernos al siguiente
             if(Ctx.Rigidbody.position == (Vector2)_animationPoints[_currPointIndex].position)
             {
                 _currPointIndex++;
 
+                // Si hemos llegado al comienzo de la carga establecemos cuando debe volver a comenzar a moverse
+                // para hacer un delay antes de empezar a cargar
                 if(_currPointIndex == _chargeStart)
                 {
                     _beginChargeTime = Time.time + _chargeDelayTime;
@@ -132,6 +191,7 @@ public class BossFlyingChargeState : BaseState
     {
         if (_currPointIndex >= _animationPoints.Length)
         {
+            // Cambiamos al ataque de disparo
             Ctx.ChangeState(Ctx.GetStateByName("Shooting"));
         }
     }

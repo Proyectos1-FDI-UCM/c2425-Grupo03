@@ -15,6 +15,9 @@ public class BossVulnerableState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Tiempo que está vulnerable
+    /// </summary>
     [SerializeField]
     [Min(0)]
     float _vulnerableTime;
@@ -22,14 +25,15 @@ public class BossVulnerableState : BaseState
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+    /// <summary>
+    /// Referencia al healthManager por comodidad
+    /// </summary>
     HealthManager _healthManager;
-    float _stateEndTime;
-    #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
+    /// <summary>
+    /// Tiempo en el que termina el estado
+    /// </summary>
+    float _stateEndTime;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -42,20 +46,19 @@ public class BossVulnerableState : BaseState
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
 
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        // calcula fin del estado
         _stateEndTime = Time.time + _vulnerableTime;
+
+        // pone el jefe vulnerable
         _healthManager.Inmune = false;
+
+        // pone velocidad a 0 por si se estaba moviendo
         Ctx.Rigidbody.velocity = Vector3.zero;
         Ctx.Animator.SetBool("IsVulnerable", true);
     }
@@ -65,6 +68,7 @@ public class BossVulnerableState : BaseState
     /// </summary>
     public override void ExitState()
     {
+        // vuelve a ponerlo en inmune
         _healthManager.Inmune = true;
         Ctx.Animator.SetBool("IsVulnerable", false);
     }
@@ -89,6 +93,7 @@ public class BossVulnerableState : BaseState
     {
         if(Time.time > _stateEndTime)
         {
+            // Cambia a idle
             Ctx.ChangeState(Ctx.GetStateByName("Idle"));
         }
     }

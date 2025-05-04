@@ -7,7 +7,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Video;
 // Añadir aquí el resto de directivas using
 
@@ -23,11 +23,12 @@ public class TutorialController : MonoBehaviour
     // Documentar cada atributo que aparece aquí.
     // Puesto que son atributos globales en la clase debes usar "_" + camelCase para su nombre.
     [SerializeField] GameObject tutorialPanel;
-    [SerializeField] Text titleText;
-    [SerializeField] Text descriptionText;
-    [SerializeField] VideoPlayer videoPlayer;
+    [SerializeField] TextMeshProUGUI _titleText;
+    [SerializeField] TextMeshProUGUI _descriptionText;
+    [SerializeField] VideoPlayer _videoPlayer;
     [SerializeField] GameObject _tutorial;
     [SerializeField] GameObject _skipBottom;
+    [SerializeField] AudioClip _acceptSound;
 
     [SerializeField] TutorialObject []_tutorialObjects;
 
@@ -102,12 +103,12 @@ public class TutorialController : MonoBehaviour
             _tutorial.SetActive(true);
 
             //init
-            titleText.text = tutorial.GetTutorialTitle();
-            descriptionText.text = tutorial.GetTutorialDescription();
-            videoPlayer.clip = tutorial.GetTutorialVideo();
+            _titleText.text = tutorial.GetTutorialTitle();
+            _descriptionText.text = tutorial.GetTutorialDescription();
+            _videoPlayer.clip = tutorial.GetTutorialVideo();
 
 
-            videoPlayer.Play();
+            _videoPlayer.Play();
 
             PauseGame();
             _playerTutorialsMask[index] = true;
@@ -127,11 +128,12 @@ public class TutorialController : MonoBehaviour
         InputManager.Instance.EnablePlayerInput();
         InputManager.Instance.DisableMenuInput();
         Time.timeScale = 1f;
+        SoundManager.Instance.PlaySFX(_acceptSound, transform, 1);
     }
     public void HideTutorial()
     {
         _tutorial.SetActive(false);
-        videoPlayer.Stop();
+        _videoPlayer.Stop();
         ContinueGame();
     }
 

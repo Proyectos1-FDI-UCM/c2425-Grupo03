@@ -18,10 +18,22 @@ public class BossTransitionState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Posición en la que finalizar la transición de estado
+    /// </summary>
     [SerializeField]
     Transform _secondPhasePosition;
+
+    /// <summary>
+    /// Velocidad a la que se mueve a la posición final
+    /// </summary>
     [SerializeField]
     float _speed;
+
+    /// <summary>
+    /// Tiempo mínimo que tarda en cambiar a la fase 2
+    /// Comeinza a contar desde el comienzo del estado
+    /// </summary>
     [SerializeField]
     float _timeToBeginPhase2;
 
@@ -29,35 +41,23 @@ public class BossTransitionState : BaseState
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+
+    /// <summary>
+    /// Tiempo en el que termina la transición
+    /// </summary>
     float _endOfTransition;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
-    
-    // ---- MÉTODOS DE MONOBEHAVIOUR ----
-    #region Métodos de MonoBehaviour
-    
-    #endregion
-
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
     
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
     public override void EnterState()
     {
+        //setup
         _endOfTransition = Time.time + _timeToBeginPhase2;
         Ctx.Animator.SetTrigger("PhaseTransition");
     }
@@ -82,6 +82,7 @@ public class BossTransitionState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
+        // Mueve al jefe hacia la posición designada
         Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, (Vector2)_secondPhasePosition.position, _speed * Time.deltaTime);
     }
 
@@ -93,6 +94,7 @@ public class BossTransitionState : BaseState
     {
         if(Ctx.Rigidbody.position == (Vector2)_secondPhasePosition.position && Time.time > _endOfTransition)
         {
+            // Cambiamos a la carga del aire tras llegar a la posición designada y haya pasado el tiempo designado
             Ctx.ChangeState(Ctx.GetStateByName("Flying Charge"));
         }
     }

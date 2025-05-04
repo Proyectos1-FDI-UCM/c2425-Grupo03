@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: ChageAttack
   m_EditorClassIdentifier: 
   _tutorialTitle: Como usar ataque cargado
-  _tutorialDescription: 'Manten pulsado "J" (teclado) o "X" (Xbox) para hacer ataque
-    cargado
-
-'
+  _tutorialDescription: Manten pulsado [J] (Teclado) o [X] (Xbox) para hacer un ataque
+    cargado.
   _tutorialVideo: {fileID: 32900000, guid: b423ba0d79fb0f64082f8031cf00e8bf, type: 3}
-  _tutorialID: chargeAttack

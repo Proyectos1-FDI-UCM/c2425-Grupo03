@@ -15,20 +15,25 @@ public class BossChargingState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+
+    [Header("Movement Speed")]
     /// <summary>
     /// Velocidad del jefe al iniciar la carga contra el jugador
     /// </summary>
     [SerializeField]
     [Min(0f)]
+    [Tooltip("Speed at the beginning of the charge")]
     float _launchSpeed;
 
     /// <summary>
-    /// aceleración de la velocidad
+    /// Aceleración de la velocidad
     /// </summary>
     [SerializeField]
     [Min(0f)]
+    [Tooltip("Deceleration after passing below the player")]
     float _speedDeceleration;
 
+    [Header("Damage")]
     /// <summary>
     /// Daño causado al jugador al entrar en contacto con el jefe
     /// </summary>
@@ -36,36 +41,41 @@ public class BossChargingState : BaseState
     [Min(0f)]
     float _damage;
 
-    /// <summary>
-    /// Frecuencia de golpes mientras esté en contacto con el jugador
-    /// </summary>
-    [SerializeField]
-    [Min(0f)]
-    float _damageFrequency;
 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
 
+    /// <summary>
+    /// Referencia por cómodidad al contexto
+    /// </summary>
     BossStateMachine _ctx;
 
+    /// <summary>
+    /// Flag para determinar si ha chocado con un muro
+    /// </summary>
     bool _hasHitWall;
 
+    /// <summary>
+    /// Flag para determinar si ha chocado contra el jugador
+    /// </summary>
     bool _hasHitPlayer;
 
+    /// <summary>
+    /// Flag para determinar si ha pasado por debajo del jugador
+    /// </summary>
     bool _hasMissedPlayer;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHABIOUR ----
     #region Métodos de Monobehaviour
+    /// <summary>
+    /// Trigger que detecta solo al jugador
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<PlayerStateMachine>() != null)
@@ -74,14 +84,24 @@ public class BossChargingState : BaseState
         }
         
     }
+    /// <summary>
+    /// Collider que detecta solo las paredes
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             _hasHitWall = true;
+
+            // Mueve el objeto en la dirección contraria un poquito para que pueda volver a hacer OnCollisionEnter2D al volver a cargar en la misma dirección
             Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 0.2f));
         }
     }
+
+    /// <summary>
+    /// Trigger que detecta solo al jugador
+    /// </summary>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerStateMachine>() != null)
@@ -94,29 +114,42 @@ public class BossChargingState : BaseState
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
 
-
+    /// <summary>
+    /// Al entrar en el estado.
+    /// </summary>
     public override void EnterState()
     {
+        // Calcula la dirección en la que debe mirar el jefe
         _ctx.LookingDirection = GetNewLookingDirection();
 
+        // setup de las flags
         _hasHitWall = false;
         _hasHitPlayer = false;
         _hasMissedPlayer = false;
 
+        // Pone la animación correcta
         Ctx.Animator.SetBool("IsCharging", true);
+
+        // Pone la velocidad del jefe
         Ctx.Rigidbody.velocity = new Vector2(_launchSpeed * (int)_ctx.LookingDirection, 0);
     }
-    
 
+    /// <summary>
+    /// Al salir en el estado.
+    /// </summary>
     public override void ExitState()
     {
+        // Calcula la dirección nueva tras terminar de cargar contra el jugador
         _ctx.LookingDirection = GetNewLookingDirection();
+
+        // Termina la animación
         Ctx.Animator.SetBool("IsCharging", false);
     }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
+    /// <returns>La distancia al jugador</returns>
     private float DistanceToPlayer()
     {
         if (_ctx.Player != null)
@@ -128,44 +161,63 @@ public class BossChargingState : BaseState
             return 0;
         }
     }
+
+    /// <returns>La dirección en la que debe mirar el jefe en función de la posición del jugador</returns>
     private BossStateMachine.EnemyLookingDirection GetNewLookingDirection()
     {
-        return DistanceToPlayer() < 0 ? BossStateMachine.EnemyLookingDirection.Left : BossStateMachine.EnemyLookingDirection.Rigth;
+        return DistanceToPlayer() < 0 ? 
+            BossStateMachine.EnemyLookingDirection.Left : BossStateMachine.EnemyLookingDirection.Rigth;
     }
-
+    /// <summary>
+    /// Pone la referencia a la máquina de estados por comodidad
+    /// </summary>
     protected override void OnStateSetUp()
     {
         _ctx = GetCTX<BossStateMachine>();
     }
+
+    /// <summary>
+    /// Actualización cada frame si estamos en este estado
+    /// </summary>
     protected override void UpdateState()
     {
         if (_hasMissedPlayer)
         {
+            // Si falla al jugador comienza a decelerar
             float nextVelocityX = Ctx.Rigidbody.velocity.x - (Mathf.Sign(Ctx.Rigidbody.velocity.x) * _speedDeceleration * Time.deltaTime);
-            nextVelocityX = nextVelocityX > 0 ? Mathf.Max(nextVelocityX, 0) : Mathf.Min(nextVelocityX, 0);
-
-            Ctx.Rigidbody.velocity = new Vector2(nextVelocityX, 0);
             
+            // Nos aseguramos que no pase de 0
+            nextVelocityX = nextVelocityX > 0 ? Mathf.Max(nextVelocityX, 0) : Mathf.Min(nextVelocityX, 0);
+            
+            // Ponemos la nueva velocidad
+            Ctx.Rigidbody.velocity = new Vector2(nextVelocityX, 0);
         }
         else if(GetNewLookingDirection() != _ctx.LookingDirection)
         {
+            // Si debería cambiar de dirección es porque ha fallado
             _hasMissedPlayer = true;
         }
     }
 
+    /// <summary>
+    /// Comprueba si hay que cambiar de estado
+    /// </summary>
     protected override void CheckSwitchState()
     {
         if (_hasHitWall)
         {
+            // Si choca contra un muro vamos al estado vulnerable
             Ctx.ChangeState(Ctx.GetStateByName("Vulnerable"));
         }
         else if(_hasHitPlayer)
         {
+            // Si hemos chocado contra el jugador le quitamos vida y cambiamos a idle
             _ctx.Player?.GetComponent<HealthManager>()?.RemoveHealth(_damage);
             Ctx.ChangeState(Ctx.GetStateByName("Idle"));
         }
         else if (Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.1f && _hasMissedPlayer)
         {
+            // Si hemos fallado pero no hemos chocado contra el muro volvemos a cargar
             Ctx.ChangeState(Ctx.GetStateByName("Precharge"));
         }
     }

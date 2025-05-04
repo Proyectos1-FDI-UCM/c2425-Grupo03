@@ -16,6 +16,9 @@ public class BossIdleState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Tiempo que espera el boss tras detectar al jugador por primera vez
+    /// </summary>
     [SerializeField]
     [Min(0f)]
     float _timeWaitAfterDetection;
@@ -24,24 +27,33 @@ public class BossIdleState : BaseState
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+
+    /// <summary>
+    /// Flag para saber si hemos detectado al jugador o no
+    /// </summary>
     bool _playerDetected = false;
+
+    /// <summary>
+    /// Tiempo en el que terminará el estado
+    /// </summary>
     float _idleStateEnd;
 
     #endregion
 
-    // ---- PROPIEDADES ----
-    #region Propiedades
-    // Documentar cada propiedad que aparece aquí.
-    // Escribir con PascalCase.
-    #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
+    /// <summary>
+    /// Trigger que detecta solo al jugador
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out PlayerStateMachine player))
         {
             _playerDetected = true;
+            // Ponemos la referencia en el contexto para que otros estado tengan acceso
+            // Nosotros somos el "punto de partida" para la pelea del boss
             GetCTX<BossStateMachine>().Player = player;
         }
     }
@@ -61,6 +73,7 @@ public class BossIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        // Setup
         _idleStateEnd = Time.time + _timeWaitAfterDetection;
         Ctx.Animator.SetBool("IsIdle", true);
         Ctx.Rigidbody.velocity = Vector3.zero;
@@ -98,6 +111,7 @@ public class BossIdleState : BaseState
     {
         if(_playerDetected && Time.time > _idleStateEnd)
         {
+            // Cambiamos al estado de precarga
             Ctx.ChangeState(Ctx.GetStateByName("Precharge"));
         }
     }

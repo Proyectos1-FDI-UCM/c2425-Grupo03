@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: CombatArea
   m_EditorClassIdentifier: 
   _tutorialTitle: Area de combate
-  _tutorialDescription: Mata a todos los enemigos para salir
+  _tutorialDescription: "Mata a todos los enemigos para salir del \xE1rea de combate."
   _tutorialVideo: {fileID: 32900000, guid: ee4c04d73d5c0c645be5f95e349dabb0, type: 3}
-  _tutorialID: CombatArea
