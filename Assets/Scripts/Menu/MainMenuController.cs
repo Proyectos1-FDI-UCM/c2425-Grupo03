@@ -93,7 +93,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _playerInput = new PlayerInputActions();
+        _playerInput = InputManager.Instance.GetInputActions();
         _playerInput.UI.Enable();
         
         EventSystem.current.SetSelectedGameObject(_firstButton);

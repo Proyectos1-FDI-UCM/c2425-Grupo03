@@ -811,6 +811,74 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _onCheatEnable
+      value: 
+      objectReference: {fileID: 8300000, guid: 88b90ff44c14ef44fbd8988b0df13722, type: 3}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _onCheatDisable
+      value: 
+      objectReference: {fileID: 8300000, guid: 1dce2313d59854447b8679d43324d633, type: 3}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.data[0].m_Name
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.data[1].m_Name
+      value: m
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.data[2].m_Name
+      value: a
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.data[3].m_Name
+      value: g
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _keyBindings.Array.data[4].m_Name
+      value: i
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[0].m_Name
+      value: up
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[1].m_Name
+      value: up
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[2].m_Name
+      value: buttonNorth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[3].m_Name
+      value: buttonNorth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[4].m_Name
+      value: buttonWest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[5].m_Name
+      value: buttonWest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[6].m_Name
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.data[7].m_Name
+      value: buttonEast
+      objectReference: {fileID: 0}
     - target: {fileID: 1689720327843243917, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

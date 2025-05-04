@@ -5,9 +5,11 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 using System;
+using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 
 /// <summary>
@@ -43,6 +45,26 @@ public class InputManager : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
+    /// <summary>
+    /// Secuencia de teclas a presionar para activar los cheats
+    /// </summary>
+    [SerializeField] InputBinding[] _keyBindings;
+
+    /// <summary>
+    /// Secuencia de botones de mando para activar los cheats
+    /// </summary>
+    [SerializeField] InputBinding[] _gamepadBindings;
+
+    /// <summary>
+    /// Sonido para cuando se activa los cheats
+    /// </summary>
+    [SerializeField] AudioClip _onCheatEnable;
+
+    /// <summary>
+    /// Sonido para cuando se desactiva los cheats
+    /// </summary>
+    [SerializeField] AudioClip _onCheatDisable;
 
     #endregion
 
@@ -105,13 +127,25 @@ public class InputManager : MonoBehaviour
     private UnityEvent _OnPauseCancel = new UnityEvent();
 
     /// <summary>
+    /// Indice de la secuencia en el teclado
+    /// </summary>
+    private int _keySequenceIndex;
+
+    /// <summary>
+    /// Indice de la secuencia con el mando
+    /// </summary>
+    private int _gamepadSequenceIndex;
+
+    /// <summary>
     /// Evento de invulnerabilidad
     /// </summary>
+    [HideInInspector]
     public UnityEvent _invulnerabilityAction;
 
     /// <summary>
     /// Evento de invulnerabilidad
     /// </summary>
+    [HideInInspector]
     public UnityEvent _skipWaveEvent;
 
     #endregion
@@ -386,16 +420,21 @@ public class InputManager : MonoBehaviour
         //Me da perza crear un InputAction para cada uno
 
         //Cuando se ejecuta la accion de invulnerabilidad, ejecuta el metodo _invulnerability_performed
-        _theController.Player.Invulnerability.performed += _invulnerability_performed;
+        _theController.Cheats.Invulnerability.performed += _invulnerability_performed;
 
         //Cuando se ejecuta la accion de saltar el wave, ejecuta el metodo
-        _theController.Player.SkipWave.performed += SkipWave_performed;
+        _theController.Cheats.SkipWave.performed += SkipWave_performed;
 
         //Cuando se ejecuta la accion de ir al siguiente Checkpoint, ejecuta el metodo
-        _theController.Player.NextCheckpoint.performed += NextCheckpoint_performed;
+        _theController.Cheats.NextCheckpoint.performed += NextCheckpoint_performed;
 
         //Cuando se ejecuta la accion de ir al siguiente nivel, ejecuta el metodo 
-        _theController.Player.NextLevel.performed += NextLevel_performed;
+        _theController.Cheats.NextLevel.performed += NextLevel_performed;
+
+        _theController.UI.KeySequence.performed += KeySequence_performed;
+
+        _theController.UI.ControllerSequence.performed += ControllerSequence_performed;
+
 
 
 
@@ -404,6 +443,75 @@ public class InputManager : MonoBehaviour
         // tenemos (FireIsPressed, FireWasPressedThisFrame 
         // y FireWasReleasedThisFrame)
         //_fire = _theController.Player.Fire;
+    }
+
+    /// <summary>
+    /// Metodo para detectar la secuencia de los botones del mando
+    /// </summary>
+    /// <param name="obj"></param>
+    private void ControllerSequence_performed(InputAction.CallbackContext obj)
+    {
+
+        if (obj.control.name == _gamepadBindings[_gamepadSequenceIndex].name)
+        {
+            _gamepadSequenceIndex++;
+
+            Debug.Log("Current index: " + _gamepadSequenceIndex);
+
+            if (_gamepadSequenceIndex == _gamepadBindings.Length)
+            {
+                if (!_theController.Cheats.enabled)
+                {
+                    _theController.Cheats.Enable();
+                    SoundManager.Instance.PlaySFX(_onCheatEnable, transform, 1);
+                }
+                else
+                {
+                    _theController.Cheats.Disable();
+                    SoundManager.Instance.PlaySFX(_onCheatDisable, transform, 1);
+                }
+                Debug.Log("Cheats: " + _theController.Cheats.enabled);
+
+                _gamepadSequenceIndex = 0;
+            }
+        }
+        else
+        {
+            _gamepadSequenceIndex = 0;
+        }
+    }
+    /// <summary>
+    /// Metodo para detectar secuencia de tecla para activar los cheats
+    /// </summary>
+    /// <param name="obj"></param>
+    private void KeySequence_performed(InputAction.CallbackContext obj)
+    {
+
+        if (obj.control.name == _keyBindings[_keySequenceIndex].name)
+        {
+            _keySequenceIndex++;
+
+            if(_keySequenceIndex == _keyBindings.Length)
+            {
+                if (!_theController.Cheats.enabled)
+                {
+                    _theController.Cheats.Enable();
+                    SoundManager.Instance.PlaySFX(_onCheatEnable, transform, 1);
+                }
+                else
+                {
+                    _theController.Cheats.Disable();
+                    SoundManager.Instance.PlaySFX(_onCheatDisable, transform, 1);
+                }
+
+                _keySequenceIndex = 0;
+            }
+        }
+        else
+        {
+            _keySequenceIndex = 0;
+        }
+
     }
 
     /// <summary>
@@ -451,6 +559,16 @@ public class InputManager : MonoBehaviour
         MoveDirection = context.ReadValue<float>();
     }*/
 
+    private void InitializeBindingSequence()
+    {
+        InputAction inputAction = _theController.UI.KeySequence;
+
+        for(int i = 0; i < inputAction.bindings.Count; i++)
+        {
+            int lastSlash = inputAction.bindings[i].effectivePath.LastIndexOf('/');
+            Debug.Log(inputAction.bindings[i].effectivePath.Substring(lastSlash+1));
+        }
+    }
     #endregion
 } // class InputManager 
 // namespace

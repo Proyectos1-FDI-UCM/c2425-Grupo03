@@ -98,42 +98,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Invulnerability"",
-                    ""type"": ""Button"",
-                    ""id"": ""cbde88bb-87d7-4a75-aded-c86ccb14fcc5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SkipWave"",
-                    ""type"": ""Button"",
-                    ""id"": ""097f23eb-8854-4a76-b00a-2fde2d38b815"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NextCheckpoint"",
-                    ""type"": ""Button"",
-                    ""id"": ""24a83ef4-1587-470b-917c-5d09dafac9b1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NextLevel"",
-                    ""type"": ""Button"",
-                    ""id"": ""4ba85def-e8f5-44a1-a44b-ded882df69b7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -433,182 +397,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0537e0d6-8b84-416e-b17a-d215d09a4490"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Invulnerability"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""97563655-338a-48ed-b8f9-284504908df1"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Invulnerability"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""372072de-2013-486b-88e0-1ab05d48964b"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Invulnerability"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""86e8aca6-97f0-480c-85fd-ef5f8a78aa3f"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Invulnerability"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f1fefc07-f6fc-40ef-96f5-7143339440a0"",
-                    ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipWave"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""467b89a7-d1c7-48ce-8d40-1a41f30fcb8a"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipWave"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""f3ebf5e1-2c89-4b01-87b2-a36424a4fb7c"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipWave"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""38d4213f-dd89-47e1-872d-17ae120601c2"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SkipWave"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6d72465f-e120-4514-9626-7fa2e60957e1"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextCheckpoint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""35421458-3e96-45e0-84ab-215ce6b708da"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextCheckpoint"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""b8d20f8a-e81d-4e4d-bcb1-adec6f499012"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextCheckpoint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""b86ac0f2-8595-4d39-952f-141ad84867ba"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextCheckpoint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""178bc7c4-2ded-40cb-9996-2dcbcdc12217"",
-                    ""path"": ""<Keyboard>/v"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""78a66a00-9086-421b-8497-7491bb11fdfd"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLevel"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""1f63d3d0-288c-48af-9307-fd55e4565c82"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""d01e222a-8aa4-4d12-8308-5210985126da"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -638,6 +426,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""c8430a36-9664-4fa2-953c-0cded741846b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeySequence"",
+                    ""type"": ""Button"",
+                    ""id"": ""86901743-dda7-4570-82be-1bdf625537e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ControllerSequence"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f291aa5-ebf6-4bc1-8b76-798b85b0d239"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -941,6 +747,303 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a94aa4f3-9b42-4887-b708-9284af22ca06"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControllerSequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffdd1c11-5664-4e3e-bdcc-28e06823606a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControllerSequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf052131-8f6b-4e99-b1a5-f6239b3b70ce"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControllerSequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6eb59ca-a48a-4d46-bf68-3f8012e1c140"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeySequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d485b8b2-c90f-4561-81a9-94bcd458df48"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeySequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71f01082-a9c7-4989-9aa5-85a7c5668380"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeySequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06336427-5f60-49a9-b3fd-b398056875eb"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeySequence"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Cheats"",
+            ""id"": ""3ddc146c-3752-4394-b2b5-9208240d5f9d"",
+            ""actions"": [
+                {
+                    ""name"": ""Invulnerability"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7c9e6f8-fa36-4756-9f4e-c4f5811895fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipWave"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c61479d-c146-4ee6-beac-672ff1dd62e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextCheckpoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""7453541d-e51e-4a09-894f-24ab504bb2ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""138242eb-49eb-4da0-b8cd-1c99fdb945d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ef0b0c69-2822-41de-81e1-9fb9c97b1b4b"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Invulnerability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""30ab49eb-bd65-45aa-a833-e293001f0eb5"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Invulnerability"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4c558ea0-cc6f-4336-becc-a64179829beb"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Invulnerability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""eec179d7-8a3e-41f4-afb3-4b7098a3095f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Invulnerability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2697412-c6ca-45b5-bc56-ef5d01e9ddd9"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipWave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""17b1b36d-3878-4676-9f55-00127c818166"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipWave"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""db058784-2b9b-438a-aaae-24710da98c29"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipWave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""d68d76d9-62de-4e2b-8a05-ce3c60cfdab4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipWave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2fbc84d-26a6-476f-bc13-add5850de49f"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""44aee85e-2c0e-44c6-a38f-297c5b18cc8f"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCheckpoint"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""734343f5-df48-4320-be0e-c0765918fa2e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""2bc49002-8671-4c6c-91c2-38c4d90a969e"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextCheckpoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ab2e631-8a61-4550-a464-c05e7dc4eeb1"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""1cd6aca8-8e88-49bb-8a73-8e096d911389"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4bb1145d-5c45-4059-b613-bb93195472d0"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""eb7989e6-0a15-414b-a17a-ce0c68eb357e"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -957,15 +1060,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_SuperDash = m_Player.FindAction("SuperDash", throwIfNotFound: true);
         m_Player_MoveCamera = m_Player.FindAction("MoveCamera", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
-        m_Player_Invulnerability = m_Player.FindAction("Invulnerability", throwIfNotFound: true);
-        m_Player_SkipWave = m_Player.FindAction("SkipWave", throwIfNotFound: true);
-        m_Player_NextCheckpoint = m_Player.FindAction("NextCheckpoint", throwIfNotFound: true);
-        m_Player_NextLevel = m_Player.FindAction("NextLevel", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_KeySequence = m_UI.FindAction("KeySequence", throwIfNotFound: true);
+        m_UI_ControllerSequence = m_UI.FindAction("ControllerSequence", throwIfNotFound: true);
+        // Cheats
+        m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
+        m_Cheats_Invulnerability = m_Cheats.FindAction("Invulnerability", throwIfNotFound: true);
+        m_Cheats_SkipWave = m_Cheats.FindAction("SkipWave", throwIfNotFound: true);
+        m_Cheats_NextCheckpoint = m_Cheats.FindAction("NextCheckpoint", throwIfNotFound: true);
+        m_Cheats_NextLevel = m_Cheats.FindAction("NextLevel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1035,10 +1142,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SuperDash;
     private readonly InputAction m_Player_MoveCamera;
     private readonly InputAction m_Player_Menu;
-    private readonly InputAction m_Player_Invulnerability;
-    private readonly InputAction m_Player_SkipWave;
-    private readonly InputAction m_Player_NextCheckpoint;
-    private readonly InputAction m_Player_NextLevel;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1051,10 +1154,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SuperDash => m_Wrapper.m_Player_SuperDash;
         public InputAction @MoveCamera => m_Wrapper.m_Player_MoveCamera;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
-        public InputAction @Invulnerability => m_Wrapper.m_Player_Invulnerability;
-        public InputAction @SkipWave => m_Wrapper.m_Player_SkipWave;
-        public InputAction @NextCheckpoint => m_Wrapper.m_Player_NextCheckpoint;
-        public InputAction @NextLevel => m_Wrapper.m_Player_NextLevel;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1088,18 +1187,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
-            @Invulnerability.started += instance.OnInvulnerability;
-            @Invulnerability.performed += instance.OnInvulnerability;
-            @Invulnerability.canceled += instance.OnInvulnerability;
-            @SkipWave.started += instance.OnSkipWave;
-            @SkipWave.performed += instance.OnSkipWave;
-            @SkipWave.canceled += instance.OnSkipWave;
-            @NextCheckpoint.started += instance.OnNextCheckpoint;
-            @NextCheckpoint.performed += instance.OnNextCheckpoint;
-            @NextCheckpoint.canceled += instance.OnNextCheckpoint;
-            @NextLevel.started += instance.OnNextLevel;
-            @NextLevel.performed += instance.OnNextLevel;
-            @NextLevel.canceled += instance.OnNextLevel;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1128,18 +1215,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
-            @Invulnerability.started -= instance.OnInvulnerability;
-            @Invulnerability.performed -= instance.OnInvulnerability;
-            @Invulnerability.canceled -= instance.OnInvulnerability;
-            @SkipWave.started -= instance.OnSkipWave;
-            @SkipWave.performed -= instance.OnSkipWave;
-            @SkipWave.canceled -= instance.OnSkipWave;
-            @NextCheckpoint.started -= instance.OnNextCheckpoint;
-            @NextCheckpoint.performed -= instance.OnNextCheckpoint;
-            @NextCheckpoint.canceled -= instance.OnNextCheckpoint;
-            @NextLevel.started -= instance.OnNextLevel;
-            @NextLevel.performed -= instance.OnNextLevel;
-            @NextLevel.canceled -= instance.OnNextLevel;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1164,6 +1239,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Navigate;
     private readonly InputAction m_UI_Submit;
     private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_KeySequence;
+    private readonly InputAction m_UI_ControllerSequence;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1171,6 +1248,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @KeySequence => m_Wrapper.m_UI_KeySequence;
+        public InputAction @ControllerSequence => m_Wrapper.m_UI_ControllerSequence;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1189,6 +1268,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @KeySequence.started += instance.OnKeySequence;
+            @KeySequence.performed += instance.OnKeySequence;
+            @KeySequence.canceled += instance.OnKeySequence;
+            @ControllerSequence.started += instance.OnControllerSequence;
+            @ControllerSequence.performed += instance.OnControllerSequence;
+            @ControllerSequence.canceled += instance.OnControllerSequence;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1202,6 +1287,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @KeySequence.started -= instance.OnKeySequence;
+            @KeySequence.performed -= instance.OnKeySequence;
+            @KeySequence.canceled -= instance.OnKeySequence;
+            @ControllerSequence.started -= instance.OnControllerSequence;
+            @ControllerSequence.performed -= instance.OnControllerSequence;
+            @ControllerSequence.canceled -= instance.OnControllerSequence;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1219,6 +1310,76 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Cheats
+    private readonly InputActionMap m_Cheats;
+    private List<ICheatsActions> m_CheatsActionsCallbackInterfaces = new List<ICheatsActions>();
+    private readonly InputAction m_Cheats_Invulnerability;
+    private readonly InputAction m_Cheats_SkipWave;
+    private readonly InputAction m_Cheats_NextCheckpoint;
+    private readonly InputAction m_Cheats_NextLevel;
+    public struct CheatsActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CheatsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Invulnerability => m_Wrapper.m_Cheats_Invulnerability;
+        public InputAction @SkipWave => m_Wrapper.m_Cheats_SkipWave;
+        public InputAction @NextCheckpoint => m_Wrapper.m_Cheats_NextCheckpoint;
+        public InputAction @NextLevel => m_Wrapper.m_Cheats_NextLevel;
+        public InputActionMap Get() { return m_Wrapper.m_Cheats; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CheatsActions set) { return set.Get(); }
+        public void AddCallbacks(ICheatsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CheatsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Add(instance);
+            @Invulnerability.started += instance.OnInvulnerability;
+            @Invulnerability.performed += instance.OnInvulnerability;
+            @Invulnerability.canceled += instance.OnInvulnerability;
+            @SkipWave.started += instance.OnSkipWave;
+            @SkipWave.performed += instance.OnSkipWave;
+            @SkipWave.canceled += instance.OnSkipWave;
+            @NextCheckpoint.started += instance.OnNextCheckpoint;
+            @NextCheckpoint.performed += instance.OnNextCheckpoint;
+            @NextCheckpoint.canceled += instance.OnNextCheckpoint;
+            @NextLevel.started += instance.OnNextLevel;
+            @NextLevel.performed += instance.OnNextLevel;
+            @NextLevel.canceled += instance.OnNextLevel;
+        }
+
+        private void UnregisterCallbacks(ICheatsActions instance)
+        {
+            @Invulnerability.started -= instance.OnInvulnerability;
+            @Invulnerability.performed -= instance.OnInvulnerability;
+            @Invulnerability.canceled -= instance.OnInvulnerability;
+            @SkipWave.started -= instance.OnSkipWave;
+            @SkipWave.performed -= instance.OnSkipWave;
+            @SkipWave.canceled -= instance.OnSkipWave;
+            @NextCheckpoint.started -= instance.OnNextCheckpoint;
+            @NextCheckpoint.performed -= instance.OnNextCheckpoint;
+            @NextCheckpoint.canceled -= instance.OnNextCheckpoint;
+            @NextLevel.started -= instance.OnNextLevel;
+            @NextLevel.performed -= instance.OnNextLevel;
+            @NextLevel.canceled -= instance.OnNextLevel;
+        }
+
+        public void RemoveCallbacks(ICheatsActions instance)
+        {
+            if (m_Wrapper.m_CheatsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICheatsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CheatsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CheatsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CheatsActions @Cheats => new CheatsActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -1229,15 +1390,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSuperDash(InputAction.CallbackContext context);
         void OnMoveCamera(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnInvulnerability(InputAction.CallbackContext context);
-        void OnSkipWave(InputAction.CallbackContext context);
-        void OnNextCheckpoint(InputAction.CallbackContext context);
-        void OnNextLevel(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnKeySequence(InputAction.CallbackContext context);
+        void OnControllerSequence(InputAction.CallbackContext context);
+    }
+    public interface ICheatsActions
+    {
+        void OnInvulnerability(InputAction.CallbackContext context);
+        void OnSkipWave(InputAction.CallbackContext context);
+        void OnNextCheckpoint(InputAction.CallbackContext context);
+        void OnNextLevel(InputAction.CallbackContext context);
     }
 }
