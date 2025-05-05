@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UI;
 // Añadir aquí el resto de directivas using
 
 
@@ -25,11 +26,11 @@ public class BossAirVulnerableState : BaseState
     float _vulnerableTime;
 
     /// <summary>
-    /// Posición en la que estará vulnerable
+    /// Daño causado al impactar contra el jugador
     /// </summary>
     [SerializeField]
-    [Tooltip("World position where the boss will be vulnerable")]
-    Transform _vulnerablePoint;
+    [Min(0)]
+    float _damage;
 
     /// <summary>
     /// Velocidad en la que se mueve hacia el punto de vulnerabilidad
@@ -37,7 +38,28 @@ public class BossAirVulnerableState : BaseState
     [SerializeField]
     [Min(0)]
     [Tooltip("Speed at which the boss will move towards the vulnerable position")]
-    float _movementSpeed;
+    float _launchSpeed;
+
+    [SerializeField]
+    [Min(0)]
+    float _returnSpeed;
+
+    /// <summary>
+    /// Collider a activar para que haga daño al jugador al caer
+    /// </summary>
+    [SerializeField]
+    CircleCollider2D _hitCollider;
+
+    /// <summary>
+    /// Tiempo que tarda en salir disparado contra el jugador
+    /// </summary>
+    [SerializeField]
+    [Min(0)]
+    float _timeToLaunch;
+
+    [SerializeField]
+    [Min(0)]
+    float _prepChargeDistance;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -75,6 +97,12 @@ public class BossAirVulnerableState : BaseState
     /// </summary>
     Vector2 _originalPos;
 
+    /// <summary>
+    /// Posición contra la que queremos dirigirnos
+    /// </summary>
+    Vector2 _movement;
+
+    float _launchTime;
     #endregion
 
 
@@ -96,7 +124,17 @@ public class BossAirVulnerableState : BaseState
     {
         // Guarda la posición original
         _originalPos = Ctx.Rigidbody.position;
+
+        // coge la posición del jugador
+        Vector2 targetPos = GetCTX<BossStateMachine>().Player.transform.position;
+
+        // Se mueve hacia el jugador
+        _movement = (targetPos - _originalPos).normalized * _launchSpeed;
         
+
+        // Activa el collider de daño
+        _hitCollider.enabled = true;
+
         // Comienza la animación en 0
         _animationState = 0;
 
@@ -105,6 +143,8 @@ public class BossAirVulnerableState : BaseState
         
         // Pone la animación correcta en el animator
         Ctx.Animator.SetBool("IsVulnerable", true);
+
+        _launchTime = Time.time + _timeToLaunch;
     }
 
     /// <summary>
@@ -127,30 +167,46 @@ public class BossAirVulnerableState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        // Estado de ir al punto de vulnerabilidad
-        if (_animationState == 0) 
+        if(_animationState == 0)
         {
-            Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, (Vector2)_vulnerablePoint.position, _movementSpeed * Time.deltaTime);
-
-            // Una vez llegue al punto designado calcula el tiempo que debe mantenerse ahí y cambia al siguiente estado
-            if (Ctx.Rigidbody.position == (Vector2)_vulnerablePoint.position)
+            Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position,
+                                                    (Ctx.Rigidbody.position - _movement) * _prepChargeDistance,
+                                                    (_prepChargeDistance/_launchTime) * Time.deltaTime);
+            if (Time.time > _launchTime)
             {
+                Ctx.Rigidbody.velocity = _movement;
+                _animationState++;
+            }
+        }
+        // Estado de ir al punto de vulnerabilidad
+        else if (_animationState == 1) 
+        {
+            if(Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.1f )
+            {
+                // Si el jefe choca con una pared cambia su dirección en el eje x
+                Ctx.Rigidbody.velocity = _movement * new Vector2(-0.5f, 1);
+            }
+            // Una vez llegue al punto designado calcula el tiempo que debe mantenerse ahí y cambia al siguiente estado
+            if (Mathf.Abs(Ctx.Rigidbody.velocity.y) < 0.1f)
+            {
+                Ctx.Rigidbody.velocity = Vector2.zero; // Para el movimiento del jefe
                 _endOfVulnerability = Time.time + _vulnerableTime;
                 _animationState++;
+                _hitCollider.enabled = false; // Desactiva el collider de daño
             }
         }
 
         // Estado de quedarse en el sitio un tiempo
-        else if( _animationState == 1 && Time.time > _endOfVulnerability)
+        else if( _animationState == 2 && Time.time > _endOfVulnerability)
         {
             // Una vez termine el tiempo designado de vulnerabilidad cambiamos al estado de volver al punto original
             _animationState++;
         }
 
         // Estado de volver al punto original
-        else if(_animationState == 2)
+        else if(_animationState == 3)
         {
-            Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, _originalPos, _movementSpeed * Time.deltaTime);
+            Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, _originalPos, _returnSpeed * Time.deltaTime);
         }
         
     }
@@ -161,7 +217,7 @@ public class BossAirVulnerableState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        if (_animationState == 2 && Ctx.Rigidbody.position == _originalPos)
+        if (_animationState == 3 && Ctx.Rigidbody.position == _originalPos)
         {
             // Cambia al siguiente ataque si ha vuelto a la posición original
             Ctx.ChangeState(Ctx.GetStateByName("Flying Charge"));

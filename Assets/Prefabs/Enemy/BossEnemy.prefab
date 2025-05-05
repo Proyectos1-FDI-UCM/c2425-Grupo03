@@ -137,7 +137,6 @@ MonoBehaviour:
   _launchSpeed: 20
   _speedDeceleration: 30
   _damage: 20
-  _damageFrequency: 0.5
 --- !u!114 &7364117485847292337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,8 +1083,12 @@ MonoBehaviour:
   _isRootState: 1
   _name: Air Vulnerable
   _vulnerableTime: 3
-  _vulnerablePoint: {fileID: 4455230573362804332}
-  _movementSpeed: 5
+  _damage: 21
+  _launchSpeed: 0
+  _returnSpeed: 0
+  _hitCollider: {fileID: 5978990238963814379}
+  _timeToLaunch: 0
+  _prepChargeDistance: 0
 --- !u!114 &5245259757967515696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,7 +1216,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 577f461372a83264495caa3a986bc31b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
