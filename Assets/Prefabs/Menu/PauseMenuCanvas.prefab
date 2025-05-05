@@ -101,7 +101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Master
+  m_text: "M\xE1ster"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
   m_sharedMaterial: {fileID: -633549122019935788, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
@@ -2086,9 +2086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Music
-
-'
+  m_text: "M\xFAsica\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
   m_sharedMaterial: {fileID: -633549122019935788, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
