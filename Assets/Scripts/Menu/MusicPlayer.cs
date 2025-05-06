@@ -26,6 +26,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] AudioClip _menuMusic;
     [SerializeField] AudioClip _levelMusic;
+    [SerializeField] private AudioClip _tutorialMusic;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -80,6 +81,12 @@ public class MusicPlayer : MonoBehaviour
     public void PlayLevelSound()
     {
         _audioSource.clip = _levelMusic;
+        _audioSource.Play();
+    }
+
+    public void PlayTutorialSound()
+    {
+        _audioSource.clip = _tutorialMusic;
         _audioSource.Play();
     }
     #endregion

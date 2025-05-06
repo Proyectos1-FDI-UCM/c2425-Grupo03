@@ -156,11 +156,23 @@ public class GameManager : MonoBehaviour
     public void GoActualLevel()
     {
         ChangeScene(_levels[_actualLevel]);
-        MusicPlayer.Instance.PlayLevelSound();
+        if (_actualLevel == 1)
+        {
+            MusicPlayer.Instance.PlayTutorialSound();
+        }
+        else
+        {
+            MusicPlayer.Instance.PlayLevelSound();
+        }
     }
 
     public void AddActualLevel()
     {
+        if (_actualLevel == 1)
+        {
+            MusicPlayer.Instance.PlayLevelSound();
+        }
+
         if (_actualLevel < _levels.Count)
         {
             _actualLevel++;
