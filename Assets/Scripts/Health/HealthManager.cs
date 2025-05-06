@@ -162,12 +162,13 @@ public class HealthManager : MonoBehaviour
         if (_health - removedHealth <= 0)
         {
             _health = 0;
+            CanBeKnockbacked = false;
             _onDeath.Invoke();
+
         }
         else
         {
             _health = _health - removedHealth;
-            
         }
 
         if (initialHealth != _health)
