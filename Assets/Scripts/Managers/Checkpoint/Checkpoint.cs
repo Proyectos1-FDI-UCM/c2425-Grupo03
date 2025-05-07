@@ -22,7 +22,6 @@ public class Checkpoint : MonoBehaviour
     /// Índice del checkpoint para identificar si ya ha sido activado
     /// </summary>
     [SerializeField] int _checkPointIndex;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -89,6 +88,11 @@ public class Checkpoint : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+
+        healthManager.SetHealth(int.MaxValue); // Curará al jugador por completo y al instante sin importar la vida que tenga.
+        Debug.Log("Jugador curado con éxito");
+
         if (collision.gameObject.GetComponent<PlayerStateMachine>() != null && !_isActivated)
         {
             _isActivated = true;

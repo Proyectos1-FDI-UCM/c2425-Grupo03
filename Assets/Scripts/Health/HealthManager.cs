@@ -205,6 +205,14 @@ public class HealthManager : MonoBehaviour
     }
     #endregion
 
+    public float GetHealth()
+    {
+        return _health;
+    }
+    public float GetMaxHealth()
+    {
+        return _maxHealth;
+    }
 
 } // class Health 
 // namespace
