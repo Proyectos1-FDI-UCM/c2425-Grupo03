@@ -181,11 +181,25 @@ public class HealthManager : MonoBehaviour
         }
     }
 
+    public void Heal(float addedHealth)
+    {
+        if (_health + addedHealth > _maxHealth)
+        {
+            _health = _maxHealth;
+        }
+        else
+        {
+            _health += addedHealth;
+        }
+
+        _onHealed.Invoke(addedHealth);
+    }
+
     /// <summary>
     /// Poner vida a la entidad, hacer la comprobación de no superar la vida máxima ni ser inferior que 0.
     /// </summary>
     /// <param name="setHealth"></param>
-    public void SetHealth(float setHealth)
+    private void SetHealth(float setHealth)
     {
 
         if(setHealth > _maxHealth)

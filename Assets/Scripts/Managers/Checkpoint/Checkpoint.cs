@@ -88,24 +88,39 @@ public class Checkpoint : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
-
-        healthManager.SetHealth(int.MaxValue); // Curará al jugador por completo y al instante sin importar la vida que tenga.
-        Debug.Log("Jugador curado con éxito");
-
-        if (collision.gameObject.GetComponent<PlayerStateMachine>() != null && !_isActivated)
+        /// <summary>
+        /// Comprobamos si la colisión proviene del jugador al tocar el checkpoint
+        /// </summary>
+        if (collision.gameObject.GetComponent<PlayerStateMachine>() != null)
         {
-            _isActivated = true;
-
-            //Notificar al CheckpointManager que este es el último checkpoint
-            CheckpointManager.Instance.SetCheckpoint(this.transform);
-
-            // Guarda el checkpoint en el GameManager
-            GameManager.Instance.AddCheckpoint(_checkPointIndex);
-
-            if (_animator != null)
+            /// <summary>
+            /// Cogemos el HealthManager del jugador si la condición previa es cierta
+            /// para devolverle toda la vida
+            /// </summary>
+            HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+            if (healthManager?.GetHealth() != healthManager?.GetMaxHealth()) // La curación solo ocurre cuando el jugador no tiene la barra de salud llena
             {
-                _animator.SetTrigger("CpAppear");
+                healthManager?.Heal(int.MaxValue); // Curará al jugador por completo y al instante sin importar la vida que tenga.
+            }
+            /// <summary>
+            /// El jugador se curará en el checkpoint esté activado o no.
+            /// Esta condición es para cuando el jugador pase por un checkpoint
+            /// nuevo para que se ajuste como el nuevo punto de aparición del jugador.
+            /// </summary>
+            if (!_isActivated)
+            {
+                _isActivated = true;
+
+                //Notificar al CheckpointManager que este es el último checkpoint
+                CheckpointManager.Instance.SetCheckpoint(this.transform);
+
+                // Guarda el checkpoint en el GameManager
+                GameManager.Instance.AddCheckpoint(_checkPointIndex);
+
+                if (_animator != null)
+                {
+                    _animator.SetTrigger("CpAppear");
+                }
             }
         }
     }
