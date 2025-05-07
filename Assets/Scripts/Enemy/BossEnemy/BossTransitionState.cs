@@ -31,16 +31,27 @@ public class BossTransitionState : BaseState
     float _speed;
 
     /// <summary>
+    /// Tiempo que tarda en comenzar a volar
+    /// </summary>
+    [SerializeField]
+    float _waitTimeBeforeFlying;
+
+    /// <summary>
     /// Tiempo mínimo que tarda en cambiar a la fase 2
     /// Comeinza a contar desde el comienzo del estado
     /// </summary>
     [SerializeField]
-    float _timeToBeginPhase2;
+    float _waitTimeAfterFlying;
 
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
+
+    /// <summary>
+    /// Tiempo en el que comienza a volar
+    /// </summary>
+    float _beginFlyingTime;
 
     /// <summary>
     /// Tiempo en el que termina la transición
@@ -58,7 +69,10 @@ public class BossTransitionState : BaseState
     public override void EnterState()
     {
         //setup
-        _endOfTransition = Time.time + _timeToBeginPhase2;
+        _beginFlyingTime = Time.time + _waitTimeBeforeFlying;
+        _endOfTransition = _beginFlyingTime + _waitTimeAfterFlying;
+
+        // Cambiamos la animación a animación de transición
         Ctx.Animator.SetTrigger("PhaseTransition");
     }
     
@@ -82,8 +96,11 @@ public class BossTransitionState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-        // Mueve al jefe hacia la posición designada
-        Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, (Vector2)_secondPhasePosition.position, _speed * Time.deltaTime);
+        if(Time.time > _beginFlyingTime)
+        {
+            // Mueve al jefe hacia la posición designada
+            Ctx.Rigidbody.position = Vector2.MoveTowards(Ctx.Rigidbody.position, (Vector2)_secondPhasePosition.position, _speed * Time.deltaTime);
+        }
     }
 
     /// <summary>

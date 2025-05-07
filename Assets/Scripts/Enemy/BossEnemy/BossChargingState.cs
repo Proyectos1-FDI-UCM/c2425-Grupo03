@@ -95,7 +95,7 @@ public class BossChargingState : BaseState
             _hasHitWall = true;
 
             // Mueve el objeto en la dirección contraria un poquito para que pueda volver a hacer OnCollisionEnter2D al volver a cargar en la misma dirección
-            Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 0.2f));
+            Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 2f));
         }
     }
 
