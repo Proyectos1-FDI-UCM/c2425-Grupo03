@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         _actualLevel = 1;
+        MusicPlayer.Instance.PlayMenuSound();
     }
     #endregion
 
