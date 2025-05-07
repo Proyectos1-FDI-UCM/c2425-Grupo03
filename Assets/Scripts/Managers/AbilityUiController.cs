@@ -74,7 +74,6 @@ public class AbilityUiController : MonoBehaviour
         //Detecta que dispositivo esta en uso al inicio del juego
         InputManager.Instance._deviceChange.AddListener(UpdateControlDisplay);
 
-        DetectInputDevice(true);
         UpdateControlDisplay();
     }
 
@@ -104,25 +103,6 @@ public class AbilityUiController : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    /// <summary>
-    /// Metodo que detecta si el jugador esta usando teclado o mando
-    /// </summary>
-    private void DetectInputDevice(bool forceUpdate = false)
-    {
-        // Si hay mando conectado
-        Gamepad gamepad = Gamepad.current;
-
-        //Si hay mando conectado y se esta usando o teclado detectado
-        _isControllerActive = gamepad != null && (gamepad.IsActuated() || Keyboard.current == null);
-
-        // Si el tipo de control ha cambiado
-        if (_isControllerActive != _isUsingController || forceUpdate)
-        {
-            _isUsingController = _isControllerActive;
-            UpdateControlDisplay();
-        }
-    }
-
 
     /// <summary>
     /// Cambia el texto mostrado segun el dispositivo que se esta utilizando
@@ -133,15 +113,15 @@ public class AbilityUiController : MonoBehaviour
         //Mando
         if (device is Gamepad)
         {
-            _abilityOneText.text = "LB";
-            _abilityTwoText.text = "RB";
+            _abilityOneText.text = "<sprite name=\"XBoxLB\">";
+            _abilityTwoText.text = "<sprite name=\"XBoxRB\">";
         }
 
         //Teclado
         else
         {
-            _abilityOneText.text = "U"; 
-            _abilityTwoText.text = "I";
+            _abilityOneText.text = "<sprite name=\"KeyU\">"; 
+            _abilityTwoText.text = "<sprite name=\"KeyI\">";
         }
     }
 

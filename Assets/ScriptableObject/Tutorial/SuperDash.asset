@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SuperDash
   m_EditorClassIdentifier: 
   _tutorialTitle: Habilidad SuperDash
-  _tutorialDescription: "Pulsa [U] (Teclado) o [LB] (Xbox).\nDash hacia delante que
-    da\xF1a a enemigos."
+  _tutorialDescription: "Pulsa <sprite name=\"KeyU\"> o <sprite name=\"XBoxLB\">.\nDash
+    hacia delante que da\xF1a a enemigos."
   _tutorialVideo: {fileID: 32900000, guid: c687f57da1e0db6498e4a01e7b8d25f9, type: 3}
