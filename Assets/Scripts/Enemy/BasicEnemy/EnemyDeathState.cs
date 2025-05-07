@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// El estado de muerte del jugador
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

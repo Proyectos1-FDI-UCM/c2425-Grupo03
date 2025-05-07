@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Estado de SuperDash del jugador
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

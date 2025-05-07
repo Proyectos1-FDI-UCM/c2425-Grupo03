@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
+// Script para cargar una escena con transicion
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

@@ -55,14 +55,6 @@ public class AbilityLockTest : MonoBehaviour
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
             if (collision.GetComponent<PlayerStateMachine>() != null) {

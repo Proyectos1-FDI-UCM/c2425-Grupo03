@@ -72,14 +72,6 @@ public class VideoManager : MonoBehaviour
         videoPlayer.loopPointReached += EndReached;
         MusicPlayer.Instance.PauseMusic();
     }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
