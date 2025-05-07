@@ -2373,14 +2373,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7505046141698675102, guid: 2775b9d387bbe974a8d93d0d6d989999, type: 3}
-      propertyPath: _menuMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 7b01356d940de3c4788584a16b59ca02, type: 3}
-    - target: {fileID: 7505046141698675102, guid: 2775b9d387bbe974a8d93d0d6d989999, type: 3}
-      propertyPath: _levelMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 9f19103a2c2e2dc46bfd780b154c0d88, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
