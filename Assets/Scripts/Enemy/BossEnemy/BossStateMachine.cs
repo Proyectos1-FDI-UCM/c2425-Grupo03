@@ -72,7 +72,7 @@ public class BossStateMachine : StateMachine
     public void StartPhase2(float damage)
     {
         // Queremos que solo se ejecute cuando tenga menos de la mitad de su vida
-        if(_healthManager.Health > _healthManager.MaxHealth / 2)
+        if (_healthManager.Health > _healthManager.MaxHealth / 2)
             return;
 
         _healthManager.Inmune = true;
@@ -97,6 +97,8 @@ public class BossStateMachine : StateMachine
             _healthManager._onDamaged.AddListener(StartPhase2);
             _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
         }
+
+        MusicPlayer.Instance.PlayBossPhase1Sound();
     }
     #endregion   
 

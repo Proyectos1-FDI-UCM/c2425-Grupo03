@@ -74,6 +74,7 @@ public class BossTransitionState : BaseState
 
         // Cambiamos la animación a animación de transición
         Ctx.Animator.SetTrigger("PhaseTransition");
+        MusicPlayer.Instance.PlayBossPhase2Sound();
     }
     
     /// <summary>

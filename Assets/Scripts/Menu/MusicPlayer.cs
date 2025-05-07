@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -24,9 +25,12 @@ public class MusicPlayer : MonoBehaviour
     public static MusicPlayer Instance;
 
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] AudioClip _menuMusic;
-    [SerializeField] AudioClip _levelMusic;
+    [SerializeField] private AudioSource _audioSource2;
+    [SerializeField] private AudioClip _menuMusic;
+    [SerializeField] private AudioClip _levelMusic;
     [SerializeField] private AudioClip _tutorialMusic;
+    [SerializeField] private AudioClip _bossPhase1Music;
+    [SerializeField] private AudioClip _bossPhase2Music;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -37,6 +41,10 @@ public class MusicPlayer : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    private AudioSource _currentSource;
+    private AudioSource _nextSource;
+    private Coroutine _crossfadeCoroutine;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -57,6 +65,8 @@ public class MusicPlayer : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            _currentSource = _audioSource;
+            _nextSource = _audioSource2;
         }
     }
     #endregion
@@ -66,28 +76,88 @@ public class MusicPlayer : MonoBehaviour
 
     public void PauseMusic()
     {
-        _audioSource.Pause();
+        _currentSource.Stop();
+        _nextSource.Stop();
     }
 
     public void PlayMusic()
     {
-        _audioSource.Play();
+        _currentSource.Play();
     }
     public void PlayMenuSound()
     {
-        _audioSource.clip = _menuMusic;
-        _audioSource.Play();
+        /*_audioSource.Stop();
+       _audioSource.clip = _menuMusic;
+       _audioSource.Play();*/
+        CrossfadeTo(_menuMusic, 1.0f);
     }
     public void PlayLevelSound()
     {
-        _audioSource.clip = _levelMusic;
-        _audioSource.Play();
+        /*_audioSource.Stop();
+       _audioSource.clip = _levelMusic;
+       _audioSource.Play();*/
+        CrossfadeTo(_levelMusic, 1.0f);
     }
 
     public void PlayTutorialSound()
     {
+        /*_audioSource.Stop();
         _audioSource.clip = _tutorialMusic;
-        _audioSource.Play();
+        _audioSource.Play();*/
+        CrossfadeTo(_tutorialMusic, 1.0f);
+    }
+
+    public void PlayBossPhase1Sound()
+    {
+        /*_audioSource.Stop();
+        _audioSource.clip = _bossPhase1Music;
+        _audioSource.Play();*/
+        CrossfadeTo(_bossPhase1Music, 1.0f);
+    }
+
+    public void PlayBossPhase2Sound()
+    {
+        /*_audioSource.Stop();
+        _audioSource.clip = _bossPhase2Music;
+        _audioSource.Play();*/
+        CrossfadeTo(_bossPhase2Music, 1.0f);
+    }
+        
+    public void CrossfadeTo(AudioClip newClip, float duration)
+    {
+        if (_crossfadeCoroutine != null)
+            StopCoroutine(_crossfadeCoroutine);
+
+        _crossfadeCoroutine = StartCoroutine(CrossfadeCoroutine(newClip, duration));
+    }
+
+    /// <summary>
+    /// Hace un crossfade de la musica vieja a la musica nueva
+    /// </summary>
+    /// <param name="newClip">musica nueva</param>
+    /// <param name="duration">cuanto dura el crossfade</param>
+    /// <returns></returns>
+    private IEnumerator CrossfadeCoroutine(AudioClip newClip, float duration)
+    {
+        _nextSource.clip = newClip;
+        _nextSource.volume = 0f;
+        _nextSource.Play();
+
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = time / duration;
+            _currentSource.volume = Mathf.Lerp(1f, 0f, t);
+            _nextSource.volume = Mathf.Lerp(0f, 1f, t);
+            yield return null;
+        }
+
+        _currentSource.Stop();
+
+        var temp = _currentSource;
+        _currentSource = _nextSource;
+        _nextSource = temp;
     }
     #endregion
 
