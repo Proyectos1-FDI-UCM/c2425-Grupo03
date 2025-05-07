@@ -122,6 +122,7 @@ public class EnemyChaseState : BaseState
 
         // Pone la animación de andar
         _animator?.SetBool("IsChasing", false);
+        _animator?.SetBool("IsIdle", false);
 
         // Para el sonido de andar
         //_audioSource?.Stop();
