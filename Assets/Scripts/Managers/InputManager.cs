@@ -5,7 +5,6 @@
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
 using System;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -147,6 +146,22 @@ public class InputManager : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent _skipWaveEvent;
+
+    /// <summary>
+    /// Evento de cambio de dispositivo de input
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _deviceChange;
+
+    /// <summary>
+    /// El dispositivo del input actual
+    /// </summary>
+    private InputDevice _device;
+
+    /// <summary>
+    /// Devuelve el dispositivo de input actual
+    /// </summary>
+    public InputDevice Device {  get { return _device; } }
 
     #endregion
 
@@ -417,6 +432,8 @@ public class InputManager : MonoBehaviour
         _pause.performed += ctx => _OnPausePressed?.Invoke();
         _cancelPause.performed += ctx => _OnPauseCancel?.Invoke();
 
+
+
         //Me da perza crear un InputAction para cada uno
 
         //Cuando se ejecuta la accion de invulnerabilidad, ejecuta el metodo _invulnerability_performed
@@ -435,7 +452,12 @@ public class InputManager : MonoBehaviour
 
         _theController.UI.ControllerSequence.performed += ControllerSequence_performed;
 
+        //Cuando realiza cualquier accion, ejecuta el metodo Callback_performed
+        //Se deberia poder hacerlo con el contexto general del InputAction.CallbackContext, pero no se como cogerlo desde aqui
+        _theController.Player.Callback.performed += Callback_performed;
 
+        //Inicializar el dispositivo de input
+        _device = null;
 
 
         // Para el disparo solo cacheamos la acción de disparo.
@@ -446,20 +468,38 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Metodo para realizar cualquier cosa siempre y cuando tenga que ver con un cambio de dispositivo
+    /// </summary>
+    /// <param name="obj"></param>
+    private void Callback_performed(InputAction.CallbackContext obj)
+    {
+        //Si el InputDevice se ha cambiado
+        if(obj.control.device != _device)
+        {
+            _device = obj.control.device;
+            
+            _deviceChange.Invoke();
+        }
+
+    }
+
+    /// <summary>
     /// Metodo para detectar la secuencia de los botones del mando
     /// </summary>
     /// <param name="obj"></param>
     private void ControllerSequence_performed(InputAction.CallbackContext obj)
     {
-
+        //Si el boton pulsado coincide con el de la secuencia
         if (obj.control.name == _gamepadBindings[_gamepadSequenceIndex].name)
         {
             _gamepadSequenceIndex++;
 
             Debug.Log("Current index: " + _gamepadSequenceIndex);
 
+            //Si se ha hecho toda la secuencia, activa o desactiva el cheats
             if (_gamepadSequenceIndex == _gamepadBindings.Length)
             {
+                //Si no esta activado
                 if (!_theController.Cheats.enabled)
                 {
                     _theController.Cheats.Enable();
@@ -472,9 +512,11 @@ public class InputManager : MonoBehaviour
                 }
                 Debug.Log("Cheats: " + _theController.Cheats.enabled);
 
+                //Resetear la secuencia
                 _gamepadSequenceIndex = 0;
             }
         }
+        //Resetear la secuencia
         else
         {
             _gamepadSequenceIndex = 0;

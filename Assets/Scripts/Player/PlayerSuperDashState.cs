@@ -288,7 +288,7 @@ public class PlayerSuperDashState : BaseState
     {
         foreach (RaycastHit2D enemy in enemyInArea)
         {
-            enemy.collider.GetComponent<HealthManager>().RemoveHealth(_damage);
+            enemy.collider.GetComponent<HealthManager>()?.RemoveHealth(_damage);
         }
         _damageDone = true;
     }
