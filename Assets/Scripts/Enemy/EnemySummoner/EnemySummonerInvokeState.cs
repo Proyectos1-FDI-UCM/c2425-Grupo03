@@ -97,6 +97,9 @@ public class EnemySummonerInvokeState : BaseState
             _animator.SetBool("IsInvoking", true);
         }
 
+        //Para el movimiento del invocador para invocar
+        Ctx.Rigidbody.velocity = Vector3.zero;
+
         //Calcula el tiempo que tarda en invocar
         _invokeTime = Time.time + _waitTimeInvoke;
     }

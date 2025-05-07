@@ -143,7 +143,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.9818872}
+  m_Offset: {x: -0.038614273, y: -0.9818872}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -154,7 +154,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.08406067}
+  m_Size: {x: 0.61888885, y: 0.08406067}
   m_EdgeRadius: 0
 --- !u!114 &134160376055564889
 MonoBehaviour:
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 2948423097268125715}
   - component: {fileID: 1236092815231644709}
   - component: {fileID: 3956167893243451051}
-  - component: {fileID: 5659520966948018642}
+  - component: {fileID: 5365806414736804866}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -386,8 +386,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageText: {fileID: 2881444604744599054, guid: 9bd8fd1e7e34f2b47850ef501817ec3e, type: 3}
   _textColor: {r: 0.8543254, g: 0.67154855, b: 0.96981126, a: 1}
---- !u!61 &5659520966948018642
-BoxCollider2D:
+--- !u!70 &5365806414736804866
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -419,18 +419,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 0.97, y: 1.78}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.92, y: 2}
+  m_Direction: 0
 --- !u!1 &8833475570477809297
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +570,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: 
   _enemyWalkingSpeed: 2
+  _walkSound: {fileID: 0}
 --- !u!114 &7663378202541641437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,11 +749,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 820
+      value: 0.9841
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 461.2
+      value: 0.2354
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -794,11 +785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 230.6
+      value: 2.088
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -817,8 +808,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6895305305087013080, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895305305087013080, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -228.50708
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7107927689330528878, guid: 5e57bb3b0cbea294ca8c4f09840d1ca7, type: 3}
       propertyPath: m_PresetInfoIsWorld

@@ -112,7 +112,10 @@ public class EnemySummonerShootState : BaseState
 
         //Coger animator del contexto
         _animator = _ctx?.GetComponent<Animator>();
-   
+
+        //Para el movimiento del invocador para disparar
+        Ctx.Rigidbody.velocity = Vector3.zero;
+
         // activar animator
         _animator?.SetBool("IsAttack", true);
 
