@@ -47,10 +47,6 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     private float _health = 0f;
 
-    /// <summary>
-    /// si esta muerto 
-    /// </summary>
-    private bool _death;
     #endregion
 
 
@@ -118,7 +114,6 @@ public class HealthManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _death = false;
         //Dar una vida inicial a la entidad
         SetHealth(_initialHealth);
     }

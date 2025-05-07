@@ -335,6 +335,9 @@ MonoBehaviour:
   _onHealed:
     m_PersistentCalls:
       m_Calls: []
+  _onInmune:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &411743475415990822
 Animator:
   serializedVersion: 5

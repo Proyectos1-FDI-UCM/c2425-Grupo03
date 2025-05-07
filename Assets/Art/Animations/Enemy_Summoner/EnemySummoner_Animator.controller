@@ -249,7 +249,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyFalling_Animation
+  m_Name: SummonerFalling_Animation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -263,7 +263,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cb88053210e5bae4db2c2948143ffcb8, type: 2}
+  m_Motion: {fileID: 7400000, guid: 528734ff47c8bcd48a833254fe6533bf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -481,7 +481,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyKnockback_Animation
+  m_Name: SummonerKnockback_Animation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -495,7 +495,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c25c386260122ce47bcaeef7841f5d22, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5d930716ca470264daa1f97347de74a3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

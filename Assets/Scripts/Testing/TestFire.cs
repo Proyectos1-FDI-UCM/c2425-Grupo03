@@ -19,13 +19,6 @@ public class TestFire : MonoBehaviour
     // ---- ATRIBUTOS DEL INSPECTOR ----
 
     #region Atributos del Inspector (serialized fields)
-    
-    /// <summary>
-    /// Si está activado, se muestran todos los eventos de que
-    /// la acción está siendo realizada (uno por frame)
-    /// </summary>
-    [SerializeField]
-    private bool displayIsPressed = false;
 
     #endregion
 
