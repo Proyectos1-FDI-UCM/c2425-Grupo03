@@ -93,6 +93,9 @@ public class EnemySummonerAttackState : BaseState
         //Coger animator del contexto
         _animator = _ctx?.GetComponent<Animator>();
 
+        //Para el movimiento del invocador antes de atacar
+        Ctx.Rigidbody.velocity = Vector3.zero;
+
         // Pone la animación de idle
         _animator?.SetBool("IsIdle", true);
 

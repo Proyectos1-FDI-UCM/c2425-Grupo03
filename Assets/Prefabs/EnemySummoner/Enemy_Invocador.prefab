@@ -128,7 +128,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0393676}
+  m_Offset: {x: 0.029239655, y: -0.0393676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -139,7 +139,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.68, y: 0.18617806}
+  m_Size: {x: 0.23151016, y: 0.18617806}
   m_EdgeRadius: 0
 --- !u!114 &9068335304273517605
 MonoBehaviour:
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3469114430030775719}
   - component: {fileID: 711761439667990703}
-  - component: {fileID: 3936274529366890522}
+  - component: {fileID: 2164677731374963930}
   - component: {fileID: 5279051425098570370}
   - component: {fileID: 411743475415990822}
   - component: {fileID: 4104814656814512056}
@@ -267,8 +267,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3936274529366890522
-BoxCollider2D:
+--- !u!70 &2164677731374963930
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -279,7 +279,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -299,19 +299,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.8817464}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.16}
-    oldSize: {x: 3.38, y: 3.35}
-    newSize: {x: 3.38, y: 3.35}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7452998, y: 1.7634928}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0.88}
+  m_Size: {x: 0.75, y: 1.76}
+  m_Direction: 0
 --- !u!114 &5279051425098570370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,11 +834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 820
+      value: 0.9304
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 461.2
+      value: 0.2209
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_LocalPosition.x
@@ -880,11 +870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: 0.049
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 230.6
+      value: 1.899
       objectReference: {fileID: 0}
     - target: {fileID: 4918993076396944502, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -899,8 +889,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6895305305087013080, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895305305087013080, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -228.683
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7107927689330528878, guid: 80a553c7c4df5f6458164168b9875498, type: 3}
       propertyPath: m_PresetInfoIsWorld

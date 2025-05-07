@@ -77,6 +77,9 @@ public class EnemySummonerIdleState : BaseState
     /// </summary>
     public override void EnterState()
     {
+        //Para el movimiento del invocador para estar en idle
+        Ctx.Rigidbody.velocity = Vector3.zero;
+
         _animator?.SetBool("IsIdle", true);
     }
     
