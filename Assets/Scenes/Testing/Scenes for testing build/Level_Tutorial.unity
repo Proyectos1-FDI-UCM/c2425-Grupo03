@@ -352,6 +352,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1379077963478629951, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
+      propertyPath: _gamepadBindings.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1689720327843243917, guid: bccf4d20e67084cd6bf813eea5af27d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

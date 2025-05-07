@@ -44,6 +44,8 @@ public class TutorialController : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     bool[] _playerTutorialsMask;
+
+    private TutorialObject _currentTutorial;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -97,21 +99,30 @@ public class TutorialController : MonoBehaviour
     // Ejemplo: GetPlayerController
     public void ShowTutorial(int index)
     {
-        TutorialObject tutorial = _tutorialObjects[index];
+        _currentTutorial = _tutorialObjects[index];
         if (!_playerTutorialsMask[index])
         {
+
+            _currentTutorial.ChangeButton();
+
+            InputManager.Instance._deviceChange.AddListener(_currentTutorial.ChangeButton);
+            
+
             _tutorial.SetActive(true);
 
             //init
-            _titleText.text = tutorial.GetTutorialTitle();
-            _descriptionText.text = tutorial.GetTutorialDescription();
-            _videoPlayer.clip = tutorial.GetTutorialVideo();
+            _titleText.text = _currentTutorial.GetTutorialTitle();
+            _descriptionText.text = _currentTutorial.GetTutorialDescription();
+            _videoPlayer.clip = _currentTutorial.GetTutorialVideo();
 
 
             _videoPlayer.Play();
 
             PauseGame();
+            
             _playerTutorialsMask[index] = true;
+
+            InputManager.Instance._deviceChange.AddListener(UpdateButton);
         }
     }
 
@@ -145,6 +156,13 @@ public class TutorialController : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    private void UpdateButton()
+    {
+        _descriptionText.text = _currentTutorial.GetTutorialDescription();
+    }
+
+
 
     #endregion
 

@@ -134,27 +134,17 @@ MonoBehaviour:
     m_Groups: 
     m_Action: 
     m_Flags: 0
-  - m_Name: left
-    m_Id: 
-    m_Path: 
-    m_Interactions: 
-    m_Processors: 
-    m_Groups: 
-    m_Action: 
-    m_Flags: 0
-  - m_Name: buttonEast
-    m_Id: 
-    m_Path: 
-    m_Interactions: 
-    m_Processors: 
-    m_Groups: 
-    m_Action: 
-    m_Flags: 0
   _onCheatEnable: {fileID: 8300000, guid: 88b90ff44c14ef44fbd8988b0df13722, type: 3}
   _onCheatDisable: {fileID: 8300000, guid: 1dce2313d59854447b8679d43324d633, type: 3}
   _invulnerabilityAction:
     m_PersistentCalls:
       m_Calls: []
   _skipWaveEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _deviceChange:
+    m_PersistentCalls:
+      m_Calls: []
+  _deviceChangeMenu:
     m_PersistentCalls:
       m_Calls: []

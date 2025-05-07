@@ -7,6 +7,7 @@
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Video;
 // Añadir aquí el resto de directivas using
 
@@ -25,6 +26,8 @@ public class TutorialObject : ScriptableObject
     [SerializeField] string _tutorialTitle;
     [SerializeField][TextArea] string _tutorialDescription;
     [SerializeField] VideoClip _tutorialVideo;
+    [SerializeField] string _keyboardButton;
+    [SerializeField] string _controllerButton;
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -34,6 +37,7 @@ public class TutorialObject : ScriptableObject
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
     public string GetTutorialTitle()
     {
         return _tutorialTitle;
@@ -48,6 +52,24 @@ public class TutorialObject : ScriptableObject
     {
         return _tutorialVideo;
     }
+
+    public void ChangeButton()
+    {
+        if (_keyboardButton != "" && _controllerButton != "")
+        {
+            if(InputManager.Instance.Device is Gamepad)
+            {
+                _tutorialDescription = _tutorialDescription.Replace(_keyboardButton, _controllerButton);
+                Debug.Log(_tutorialDescription);
+            }
+            else
+            {
+                _tutorialDescription = _tutorialDescription.Replace(_controllerButton,_keyboardButton);
+                Debug.Log(_tutorialDescription);
+            }
+        }
+    }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----

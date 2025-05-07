@@ -754,6 +754,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Callback"",
+                    ""type"": ""Button"",
+                    ""id"": ""99baa3a4-564f-436f-9c77-152c84b7aa65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1130,6 +1139,303 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""KeySequence"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""5d0697e0-16bb-4344-b83c-ac08ff538dfc"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""857fc33d-d300-44b0-89fd-f5bd8e9c503b"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""79e3989c-0c36-4ea2-84e3-dc8686a7399e"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""468c9ab1-ae65-4711-95b4-c1f6b029c5b9"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ca1aa829-40cb-47aa-a231-d66fd5a5f6ed"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d47fff72-d3cc-4089-a4b9-7fafac13e150"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""573caef1-dc5d-41a9-869d-30bfce5db5a2"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d0c329ef-9698-4e4e-ac04-004e637933ff"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7c941931-3361-4657-b28e-92095e6906e7"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""753401e2-cfc1-428f-85fe-789e5fe46daf"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Joystick"",
+                    ""id"": ""b48fcb69-dffb-4e00-8923-e480a5a2024a"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""33477fd1-062a-4075-babe-39fe479d0dbd"",
+                    ""path"": ""<Joystick>/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8dd3f911-d07b-4a28-95da-7ec0a5d85169"",
+                    ""path"": ""<Joystick>/stick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c51f4dd3-8bf6-4c5d-bf99-32f341f699ab"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""47802d0d-8052-43c6-a349-ce9d1d393fb6"",
+                    ""path"": ""<Joystick>/stick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""d46bf3c3-f1a6-4daf-b607-d77021e0eda3"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4f2f95d2-bd21-4d3b-a886-c63e3ddaf31a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""31a485b2-1f9f-4352-8016-563e198c5f89"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""873b6ac7-d149-439c-9103-d694edc37ddd"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""c94ab59e-9851-4e16-9d9a-f9277794011f"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7a8f9fd7-ca0d-4777-922f-b116319503fd"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3ed6bc7a-89e1-4200-b437-bcb6f5f1b261"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""52891b9b-3675-4223-bdbe-2ca29d1b3631"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6b02e01a-0885-40eb-82e0-58e02386ec79"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f49387c8-2de8-47e9-b9bb-5a4299de3b48"",
+                    ""path"": ""*/{Submit}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35537f39-727c-48e0-a7de-2371bee3d73a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02d1cc7b-4146-444d-a04c-6333568c5daa"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Callback"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1391,6 +1697,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
         m_UI_KeySequence = m_UI.FindAction("KeySequence", throwIfNotFound: true);
         m_UI_ControllerSequence = m_UI.FindAction("ControllerSequence", throwIfNotFound: true);
+        m_UI_Callback = m_UI.FindAction("Callback", throwIfNotFound: true);
         // Cheats
         m_Cheats = asset.FindActionMap("Cheats", throwIfNotFound: true);
         m_Cheats_Invulnerability = m_Cheats.FindAction("Invulnerability", throwIfNotFound: true);
@@ -1573,6 +1880,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Cancel;
     private readonly InputAction m_UI_KeySequence;
     private readonly InputAction m_UI_ControllerSequence;
+    private readonly InputAction m_UI_Callback;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1582,6 +1890,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
         public InputAction @KeySequence => m_Wrapper.m_UI_KeySequence;
         public InputAction @ControllerSequence => m_Wrapper.m_UI_ControllerSequence;
+        public InputAction @Callback => m_Wrapper.m_UI_Callback;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1606,6 +1915,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ControllerSequence.started += instance.OnControllerSequence;
             @ControllerSequence.performed += instance.OnControllerSequence;
             @ControllerSequence.canceled += instance.OnControllerSequence;
+            @Callback.started += instance.OnCallback;
+            @Callback.performed += instance.OnCallback;
+            @Callback.canceled += instance.OnCallback;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1625,6 +1937,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ControllerSequence.started -= instance.OnControllerSequence;
             @ControllerSequence.performed -= instance.OnControllerSequence;
             @ControllerSequence.canceled -= instance.OnControllerSequence;
+            @Callback.started -= instance.OnCallback;
+            @Callback.performed -= instance.OnCallback;
+            @Callback.canceled -= instance.OnCallback;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1740,6 +2055,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnKeySequence(InputAction.CallbackContext context);
         void OnControllerSequence(InputAction.CallbackContext context);
+        void OnCallback(InputAction.CallbackContext context);
     }
     public interface ICheatsActions
     {

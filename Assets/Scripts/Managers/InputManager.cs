@@ -154,6 +154,12 @@ public class InputManager : MonoBehaviour
     public UnityEvent _deviceChange;
 
     /// <summary>
+    /// Evento de cambio de dispositivo de input en el menu
+    /// </summary>
+    [HideInInspector]
+    public UnityEvent _deviceChangeMenu;
+
+    /// <summary>
     /// El dispositivo del input actual
     /// </summary>
     private InputDevice _device;
@@ -454,7 +460,9 @@ public class InputManager : MonoBehaviour
 
         //Cuando realiza cualquier accion, ejecuta el metodo Callback_performed
         //Se deberia poder hacerlo con el contexto general del InputAction.CallbackContext, pero no se como cogerlo desde aqui
-        _theController.Player.Callback.performed += Callback_performed;
+        _theController.Player.Callback.performed += PlayerCallback_performed;
+
+        _theController.UI.Callback.performed += PlayerCallback_performed;
 
         //Inicializar el dispositivo de input
         _device = null;
@@ -471,16 +479,12 @@ public class InputManager : MonoBehaviour
     /// Metodo para realizar cualquier cosa siempre y cuando tenga que ver con un cambio de dispositivo
     /// </summary>
     /// <param name="obj"></param>
-    private void Callback_performed(InputAction.CallbackContext obj)
+    private void PlayerCallback_performed(InputAction.CallbackContext obj)
     {
-        //Si el InputDevice se ha cambiado
-        if(obj.control.device != _device)
+        if (DeviceChange(obj))
         {
-            _device = obj.control.device;
-            
             _deviceChange.Invoke();
         }
-
     }
 
     /// <summary>
@@ -601,16 +605,19 @@ public class InputManager : MonoBehaviour
         MoveDirection = context.ReadValue<float>();
     }*/
 
-    private void InitializeBindingSequence()
+    private bool DeviceChange(InputAction.CallbackContext obj)
     {
-        InputAction inputAction = _theController.UI.KeySequence;
-
-        for(int i = 0; i < inputAction.bindings.Count; i++)
+        if (obj.control.device != _device)
         {
-            int lastSlash = inputAction.bindings[i].effectivePath.LastIndexOf('/');
-            Debug.Log(inputAction.bindings[i].effectivePath.Substring(lastSlash+1));
+            _device = obj.control.device;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
+
     #endregion
 } // class InputManager 
 // namespace

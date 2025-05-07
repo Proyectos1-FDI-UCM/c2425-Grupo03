@@ -183,6 +183,7 @@ public class CheckpointManager : MonoBehaviour
         if (_currentCheckPointIndex + 1 < _checkPointDatas.Length)
         {
             player.transform.position = _checkPointDatas[_currentCheckPointIndex + 1].position;
+            _currentCheckPointIndex = _checkPointDatas[_currentCheckPointIndex].index;
         }
     }
 
