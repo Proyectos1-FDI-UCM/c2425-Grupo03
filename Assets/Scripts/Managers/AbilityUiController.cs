@@ -43,13 +43,6 @@ public class AbilityUiController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    /// <summary>
-    /// Si el jugador esta usando mando o no
-    /// </summary>
-    private bool _isUsingController;
-
-    private bool _isControllerActive;
-
     #endregion
 
     // ---- PROPIEDADES ----
@@ -71,18 +64,8 @@ public class AbilityUiController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        //Detecta que dispositivo esta en uso al inicio del juego
+        //Subscribir la actualizacion de HUD al cambio de dispositivo
         InputManager.Instance._deviceChange.AddListener(UpdateControlDisplay);
-
-        UpdateControlDisplay();
-    }
-
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        //DetectInputDevice();
     }
     #endregion
 
