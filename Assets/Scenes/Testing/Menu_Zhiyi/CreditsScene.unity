@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollSpeed: 270
   _rectTransform: {fileID: 1926476100}
-  _scrollAmount: 2200
+  _scrollAmount: 2150
 --- !u!1001 &2072168157
 PrefabInstance:
   m_ObjectHideFlags: 0
