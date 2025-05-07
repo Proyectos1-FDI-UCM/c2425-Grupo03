@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   _tutorialTitle: Dash
-  _tutorialDescription: 'Pulsa [K] (teclado) o [X] (Xbox).
+  _tutorialDescription: 'Pulsa <sprite name="KeyK"> o <sprite name="XBoxB">.
 
-    Esquivas los ataques
-    avanzando hacia delante'
+    Esquivas
+    los ataques avanzando hacia delante'
   _tutorialVideo: {fileID: 32900000, guid: 5513fa0716d57e740aa1216e984b2fd7, type: 3}
