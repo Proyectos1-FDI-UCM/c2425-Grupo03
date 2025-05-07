@@ -440,7 +440,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 5.999117, y: 114}
-  m_SizeDelta: {x: 250, y: 80}
+  m_SizeDelta: {x: 320, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &891835741
 MonoBehaviour:
@@ -1077,9 +1077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814f8c4fe9693164685b2c7c58375dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scrollSpeed: 200
+  _scrollSpeed: 270
   _rectTransform: {fileID: 1926476100}
-  _scrollAmount: 2000
+  _scrollAmount: 2200
 --- !u!1001 &2072168157
 PrefabInstance:
   m_ObjectHideFlags: 0
