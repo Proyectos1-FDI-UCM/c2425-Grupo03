@@ -72,6 +72,8 @@ public class AbilityUiController : MonoBehaviour
     void Start()
     {
         //Detecta que dispositivo esta en uso al inicio del juego
+        InputManager.Instance._deviceChange.AddListener(UpdateControlDisplay);
+
         DetectInputDevice(true);
         UpdateControlDisplay();
     }
@@ -81,7 +83,7 @@ public class AbilityUiController : MonoBehaviour
     /// </summary>
     void Update()
     {
-        DetectInputDevice();
+        //DetectInputDevice();
     }
     #endregion
 
@@ -127,8 +129,9 @@ public class AbilityUiController : MonoBehaviour
     /// </summary>
     private void UpdateControlDisplay()
     {
+        InputDevice device = InputManager.Instance.Device;
         //Mando
-        if (_isUsingController)
+        if (device is Gamepad)
         {
             _abilityOneText.text = "LB";
             _abilityTwoText.text = "RB";
