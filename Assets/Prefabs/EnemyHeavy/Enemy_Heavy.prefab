@@ -129,7 +129,7 @@ MonoBehaviour:
   _name: AttackState
   _attackWidth: 2
   _attackHeight: 3
-  _distanceWithPlayer: 0.5
+  _distanceWithPlayer: 0.6
   _attackTime: 2.083
   _damage: 30
   _waitDamageTime: 0.833
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: 
-  _enemyWalkingSpeed: 2
-  _waitTimeToAttack: 0.5
+  _enemyWalkingSpeed: 3
+  _waitTimeToAttack: 0.3
   _heavyStep: {fileID: 8300000, guid: 3bbae1ee36a053a418fa0d142418370d, type: 3}
 --- !u!114 &9020828698283325866
 MonoBehaviour:
