@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo //Poner descripcion
+// Scriptable Object
 // Chenlinjia Yi
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

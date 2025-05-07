@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo //Poner descripcion
-// Responsable de la creación de este archivo //Poner nombre
+// Script para comprobar si el jugador esta en el suelo
+// Adrian Isasi //Poner nombre
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
