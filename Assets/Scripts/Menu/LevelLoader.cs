@@ -131,7 +131,7 @@ public class LevelLoader : MonoBehaviour
     // mayúscula, incluida la primera letra)
 
     /// <summary>
-    /// Corutina que 
+    /// Corutina que hace la carga del nivel con la animacion
     /// </summary>
     /// <returns></returns>
     private IEnumerator LoadLevel(string sceneName, float transitionTime = 1)
@@ -160,6 +160,11 @@ public class LevelLoader : MonoBehaviour
         CheckpointManager.Instance?.ResetCheckpoint();
     }
 
+    /// <summary>
+    /// Corutina para hacer la transicion para la muerte
+    /// </summary>
+    /// <param name="transitionTime"></param>
+    /// <returns></returns>
     private IEnumerator OnDeath(float transitionTime = 1)
     {
         //Hacer la transicion
