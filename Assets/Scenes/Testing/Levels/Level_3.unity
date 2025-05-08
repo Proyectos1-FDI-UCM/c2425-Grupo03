@@ -20685,7 +20685,7 @@ PrefabInstance:
       objectReference: {fileID: 1799273163}
     - target: {fileID: 3899209201123286482, guid: 277df3346fb220149bebc88b5fcf466e, type: 3}
       propertyPath: _zoom
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5011580616860519535, guid: 277df3346fb220149bebc88b5fcf466e, type: 3}
       propertyPath: m_LocalPosition.x
