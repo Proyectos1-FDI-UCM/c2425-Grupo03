@@ -7,6 +7,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 // Añadir aquí el resto de directivas using
 
 
@@ -172,6 +173,8 @@ public class BossAirVulnerableState : BaseState
             {
                 Ctx.Rigidbody.velocity = _movement;
                 _animationState++;
+                transform.right = _movement;
+
             }
         }
         // Estado de ir al punto de vulnerabilidad
@@ -190,6 +193,7 @@ public class BossAirVulnerableState : BaseState
                 _animationState++;
                 _hitCollider.enabled = false; // Desactiva el collider de daño
                 Ctx.Animator.SetBool("IsVulnerable", true);
+                Ctx.transform.rotation = Quaternion.identity;
             }
         }
 
