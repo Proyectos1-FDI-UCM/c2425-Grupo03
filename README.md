@@ -17,7 +17,7 @@ Pero ni siquiera las habilidades del príncipe pudieron evitar las leyes element
 <hr style="border: 1px solid #000; width: 50%; height: 2px;">
 
 ## Controles
-![Control (2ç)](https://github.com/user-attachments/assets/7321cd5c-e526-401a-a1f4-830afbada1dc)
+![Control (3)](https://github.com/user-attachments/assets/96d6be5f-d86c-4c87-a4f8-f8c39d09e617)
 
 
 ## Issues
