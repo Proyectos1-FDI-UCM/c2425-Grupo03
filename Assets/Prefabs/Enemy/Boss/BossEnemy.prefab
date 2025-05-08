@@ -136,7 +136,7 @@ MonoBehaviour:
   _name: Charging
   _launchSpeed: 20
   _speedDeceleration: 30
-  _damage: 20
+  _damage: 19
   _spinnerSound: {fileID: 8300000, guid: ba51108a49d492e45b0a373bd4917078, type: 3}
   _hitWall: {fileID: 8300000, guid: bcfc167d01ee60b489f81316bea6fef9, type: 3}
 --- !u!114 &7364117485847292337
@@ -1042,7 +1042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: Flying Charge
-  _damage: 13
+  _damage: 21
   _speed: 5
   _chargeSpeed: 25
   _chargeStart: 2
@@ -1447,8 +1447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e45015d898a31245bb28423a3dca145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 2000
-  _initialHealth: 2000
+  _maxHealth: 3600
+  _initialHealth: 3600
   _onDeath:
     m_PersistentCalls:
       m_Calls: []

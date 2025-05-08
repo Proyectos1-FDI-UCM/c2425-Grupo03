@@ -156,9 +156,13 @@ public class BossChargingState : BaseState
         Ctx.Animator.SetBool("IsCharging", false);
         _audioSource.Stop();
         if (_audioSource != null)
+        {
             Destroy(_audioSource);
-
-        SoundManager.Instance.PlaySFX(_hitWall, transform, 1);
+        }
+        if (_hasHitPlayer || _hasHitWall)
+        {
+            SoundManager.Instance.PlaySFX(_hitWall, transform, 1);
+        }
     }
 
     private void OverradeUpdate()
