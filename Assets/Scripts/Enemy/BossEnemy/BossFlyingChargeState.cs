@@ -152,6 +152,9 @@ public class BossFlyingChargeState : BaseState
     {
         // quitamos el collider para que no haga más contactos
         _hitCollider.enabled = false;
+
+        if (_audioSource != null)
+            Destroy(_audioSource);
     }
     public void Update()
     {

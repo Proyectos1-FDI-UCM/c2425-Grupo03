@@ -159,8 +159,7 @@ public class BossAirVulnerableState : BaseState
     /// </summary>
     public override void ExitState()
     {
-        // Hace invulnerable al jefe
-        _healthManager.Inmune = true;
+        
     }
     #endregion
 
@@ -223,6 +222,9 @@ public class BossAirVulnerableState : BaseState
             // Una vez termine el tiempo designado de vulnerabilidad cambiamos al estado de volver al punto original
             _animationState++;
             Ctx.Animator.SetBool("IsVulnerable", false);
+            // Hace invulnerable al jefe
+            _healthManager.Inmune = true;
+
         }
 
         // Estado de volver al punto original
