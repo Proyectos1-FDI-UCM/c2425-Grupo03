@@ -23,11 +23,11 @@ public class BossDeathState : BaseState
     [SerializeField]
     float _timeToDestroy;
     #endregion
-
+  
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
 
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -38,6 +38,9 @@ public class BossDeathState : BaseState
         {
             hm.Inmune = true;
         }
+  
+        //Establece la animación de morir
+        Ctx.Animator.SetBool("IsDead", true);
 
         // Nos destruimos tras un tiempo
         Destroy(transform.root.gameObject, _timeToDestroy);
