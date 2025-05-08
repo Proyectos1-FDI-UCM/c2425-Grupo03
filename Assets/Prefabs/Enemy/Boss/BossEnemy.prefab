@@ -1091,6 +1091,7 @@ MonoBehaviour:
   _damage: 21
   _launchSpeed: 20
   _returnSpeed: 7
+  _groundImpact: {fileID: 8300000, guid: a1c04f2c07fbecd42b4b1bc049509b05, type: 3}
   _hitCollider: {fileID: 5978990238963814379}
   _timeToLaunch: 1
   _prepChargeDistance: 100
@@ -1109,6 +1110,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: Death
   _timeToDestroy: 3
+  _death: {fileID: 8300000, guid: c8afacf57ed895941bc1c3949290e8bd, type: 3}
 --- !u!1 &6429425174636916550
 GameObject:
   m_ObjectHideFlags: 0

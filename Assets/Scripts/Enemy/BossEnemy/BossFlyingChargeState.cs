@@ -84,6 +84,7 @@ public class BossFlyingChargeState : BaseState
     [Header("Animation points")]
     [SerializeField]
     Transform[] _animationPoints;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -144,6 +145,8 @@ public class BossFlyingChargeState : BaseState
     {
         // quitamos el collider para que no haga más contactos
         _hitCollider.enabled = false;
+
+        
     }
     #endregion
     

@@ -22,8 +22,11 @@ public class BossDeathState : BaseState
     /// </summary>
     [SerializeField]
     float _timeToDestroy;
+
+    [SerializeField]
+    AudioClip _death;
     #endregion
-  
+
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
 
@@ -41,7 +44,7 @@ public class BossDeathState : BaseState
   
         //Establece la animación de morir
         Ctx.Animator.SetBool("IsDead", true);
-
+        SoundManager.Instance.PlaySFX(_death, transform, 1);
         // Nos destruimos tras un tiempo
         Destroy(transform.root.gameObject, _timeToDestroy);
     }
