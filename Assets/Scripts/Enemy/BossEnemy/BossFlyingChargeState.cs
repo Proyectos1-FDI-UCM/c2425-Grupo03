@@ -84,6 +84,8 @@ public class BossFlyingChargeState : BaseState
     [Header("Animation points")]
     [SerializeField]
     Transform[] _animationPoints;
+    [SerializeField]
+    AudioClip _capulloSound;
 
     #endregion
 
@@ -103,6 +105,8 @@ public class BossFlyingChargeState : BaseState
     /// Tiempo de delay tras terminar la carga
     /// </summary>
     float _endChargeTime;
+
+    AudioSource _audioSource;
     #endregion
 
 
@@ -145,11 +149,21 @@ public class BossFlyingChargeState : BaseState
     {
         // quitamos el collider para que no haga más contactos
         _hitCollider.enabled = false;
-
-        
     }
+    public void Update()
+    {
+        if (Time.timeScale == 0)
+        {
+            _audioSource?.Pause();
+        }
+        else if (Time.timeScale != 0)
+        {
+            _audioSource?.UnPause();
+        }
+    }
+
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -193,11 +207,13 @@ public class BossFlyingChargeState : BaseState
                     Ctx.Animator.SetTrigger("Compress");
                     Ctx.Animator.SetBool("IsAirCharging", true);
                     _beginChargeTime = Time.time + _chargeDelayTime;
+                    _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_capulloSound, transform, 0.7f);
                 }
                 else if(_currPointIndex == _chargeEnd)
                 {
                     _endChargeTime = Time.time + _chargeEndWaitTime;
                     Ctx.Animator.SetBool("IsAirCharging", false);
+                    _audioSource.Stop();
                 }
             }
         }

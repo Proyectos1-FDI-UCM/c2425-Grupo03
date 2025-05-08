@@ -46,7 +46,7 @@ public class BossDeathState : BaseState
         Ctx.Animator.SetBool("IsDead", true);
         SoundManager.Instance.PlaySFX(_death, transform, 1);
         // Nos destruimos tras un tiempo
-        Destroy(transform.root.gameObject, _timeToDestroy);
+        Destroy(transform.parent.gameObject, _timeToDestroy);
     }
     
     /// <summary>
