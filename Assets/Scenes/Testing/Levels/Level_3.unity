@@ -10398,6 +10398,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6316555840184535816, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6316555840184535816, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7190595127501015636, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_Name
       value: BossEnemy
@@ -10409,6 +10417,10 @@ PrefabInstance:
     - target: {fileID: 7560755369044458182, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_LocalPosition.y
       value: 7.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7759529923382285823, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
