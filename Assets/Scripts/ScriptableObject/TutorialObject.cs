@@ -45,6 +45,18 @@ public class TutorialObject : ScriptableObject
 
     public string GetTutorialDescription()
     {
+        if (_keyboardButton != "" && _controllerButton != "")
+        {
+            if (InputManager.Instance.Device is Gamepad)
+            {
+                _tutorialDescription = _tutorialDescription.Replace(_keyboardButton, _controllerButton);
+            }
+            else
+            {
+                _tutorialDescription = _tutorialDescription.Replace(_controllerButton, _keyboardButton);
+            }
+        }
+
         return _tutorialDescription;
     }
 
@@ -60,12 +72,10 @@ public class TutorialObject : ScriptableObject
             if(InputManager.Instance.Device is Gamepad)
             {
                 _tutorialDescription = _tutorialDescription.Replace(_keyboardButton, _controllerButton);
-                Debug.Log(_tutorialDescription);
             }
             else
             {
                 _tutorialDescription = _tutorialDescription.Replace(_controllerButton,_keyboardButton);
-                Debug.Log(_tutorialDescription);
             }
         }
     }

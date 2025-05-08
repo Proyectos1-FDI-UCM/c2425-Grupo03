@@ -103,10 +103,11 @@ public class TutorialController : MonoBehaviour
         if (!_playerTutorialsMask[index])
         {
 
-            _currentTutorial.ChangeButton();
+            //_currentTutorial.ChangeButton();
+            UpdateButton();
 
-            InputManager.Instance._deviceChange.AddListener(_currentTutorial.ChangeButton);
-            
+            //InputManager.Instance._deviceChange.AddListener(_currentTutorial.ChangeButton);
+            InputManager.Instance._deviceChange.AddListener(UpdateButton);
 
             _tutorial.SetActive(true);
 
@@ -115,14 +116,12 @@ public class TutorialController : MonoBehaviour
             _descriptionText.text = _currentTutorial.GetTutorialDescription();
             _videoPlayer.clip = _currentTutorial.GetTutorialVideo();
 
-
             _videoPlayer.Play();
 
             PauseGame();
             
             _playerTutorialsMask[index] = true;
 
-            InputManager.Instance._deviceChange.AddListener(UpdateButton);
         }
     }
 
