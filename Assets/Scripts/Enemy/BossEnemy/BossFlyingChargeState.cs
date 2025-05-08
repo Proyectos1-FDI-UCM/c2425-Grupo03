@@ -119,8 +119,6 @@ public class BossFlyingChargeState : BaseState
     {
         // activamos el collider para hacer daño
         _hitCollider.enabled = true;
-        // animación
-        Ctx.Animator.SetTrigger("FlyingCharge");
         // setup del movimiento
         _currPointIndex = 0;
         _beginChargeTime = 0;
@@ -133,7 +131,6 @@ public class BossFlyingChargeState : BaseState
     {
         // quitamos el collider para que no haga más contactos
         _hitCollider.enabled = false;
-        Ctx.Animator.ResetTrigger("FlyingCharge");
     }
     #endregion
     
@@ -177,7 +174,13 @@ public class BossFlyingChargeState : BaseState
                 // para hacer un delay antes de empezar a cargar
                 if(_currPointIndex == _chargeStart)
                 {
+                    Ctx.Animator.SetTrigger("Compress");
+                    Ctx.Animator.SetBool("IsAirCharging", true);
                     _beginChargeTime = Time.time + _chargeDelayTime;
+                }
+                else if(_currPointIndex == _chargeEnd)
+                {
+                    Ctx.Animator.SetBool("IsAirCharging", false);
                 }
             }
         }

@@ -131,7 +131,6 @@ public class BossAirVulnerableState : BaseState
         // Se mueve hacia el jugador
         _movement = (targetPos - _originalPos).normalized * _launchSpeed;
         
-
         // Activa el collider de daño
         _hitCollider.enabled = true;
 
@@ -140,9 +139,9 @@ public class BossAirVulnerableState : BaseState
 
         // Hace que puedas golpear al jefe
         _healthManager.Inmune = false;
-        
+
         // Pone la animación correcta en el animator
-        Ctx.Animator.SetBool("IsVulnerable", true);
+        Ctx.Animator.SetTrigger("Falling");
 
         _launchTime = Time.time + _timeToLaunch;
     }
@@ -154,9 +153,6 @@ public class BossAirVulnerableState : BaseState
     {
         // Hace invulnerable al jefe
         _healthManager.Inmune = true;
-
-        // Termina la animación de vulnerable
-        Ctx.Animator.SetBool("IsVulnerable", false);
     }
     #endregion
 
@@ -193,6 +189,7 @@ public class BossAirVulnerableState : BaseState
                 _endOfVulnerability = Time.time + _vulnerableTime;
                 _animationState++;
                 _hitCollider.enabled = false; // Desactiva el collider de daño
+                Ctx.Animator.SetBool("IsVulnerable", true);
             }
         }
 
@@ -201,6 +198,7 @@ public class BossAirVulnerableState : BaseState
         {
             // Una vez termine el tiempo designado de vulnerabilidad cambiamos al estado de volver al punto original
             _animationState++;
+            Ctx.Animator.SetBool("IsVulnerable", false);
         }
 
         // Estado de volver al punto original

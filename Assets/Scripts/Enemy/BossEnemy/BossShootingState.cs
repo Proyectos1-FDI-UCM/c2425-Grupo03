@@ -117,6 +117,7 @@ public class BossShootingState : BaseState
         _timeToShoot = Time.time + _waitTimeBeforeShot;
         _timeToEndState = _timeToShoot + _waitTimeAfterShot;
         _hasShot = false;
+        Ctx.Animator.SetTrigger("Compress");
     }
     
     /// <summary>
