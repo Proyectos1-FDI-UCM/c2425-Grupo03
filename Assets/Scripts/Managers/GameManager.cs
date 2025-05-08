@@ -292,7 +292,6 @@ public class GameManager : MonoBehaviour
     {
         if(_actualLevel + 1 <= _levels.Count)
         {
-            Debug.Log("Yep");
             LevelLoader levelLoader = FindFirstObjectByType<LevelLoader>();
             levelLoader.ChangeScene(_levels[_actualLevel + 1]);
             CheckpointManager.Instance.ResetCurrentCheckpointManager();
