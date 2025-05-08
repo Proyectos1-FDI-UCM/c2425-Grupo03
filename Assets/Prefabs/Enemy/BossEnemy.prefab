@@ -1091,7 +1091,7 @@ MonoBehaviour:
   _launchSpeed: 20
   _returnSpeed: 7
   _hitCollider: {fileID: 5978990238963814379}
-  _timeToLaunch: 0.2
+  _timeToLaunch: 1
   _prepChargeDistance: 100
 --- !u!114 &5245259757967515696
 MonoBehaviour:
