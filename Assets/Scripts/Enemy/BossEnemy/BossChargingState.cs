@@ -103,6 +103,7 @@ public class BossChargingState : BaseState
 
             // Mueve el objeto en la dirección contraria un poquito para que pueda volver a hacer OnCollisionEnter2D al volver a cargar en la misma dirección
             Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 2f));
+            CameraManager.Instance.ShakeCamera(0.5f, 0.6f);
         }
 
     }
