@@ -169,7 +169,6 @@ public class CheckpointManager : MonoBehaviour
     {
         _checkPointDatas = new CheckPointData[FindObjectsByType(typeof(Checkpoint), FindObjectsSortMode.None).Length];
         InitCheckPointDatas(ref _checkPointDatas);
-        _currentCheckPointIndex = -1;
     }
     #endregion
 
@@ -183,8 +182,12 @@ public class CheckpointManager : MonoBehaviour
         if (_currentCheckPointIndex + 1 < _checkPointDatas.Length)
         {
             player.transform.position = _checkPointDatas[_currentCheckPointIndex + 1].position;
-            _currentCheckPointIndex = _checkPointDatas[_currentCheckPointIndex].index;
         }
+    }
+
+    public void ResetCurrentCheckpointManager()
+    {
+        _currentCheckPointIndex = -1;
     }
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
