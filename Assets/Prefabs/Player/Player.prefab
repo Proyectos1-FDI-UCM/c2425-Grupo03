@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ef5ce5f64e2d6fe44887a7eb5c2a0e73, type: 3}
   - {fileID: 8300000, guid: bdfa7c6b450df674796a6debb060e2b0, type: 3}
   - {fileID: 8300000, guid: 4b7d657d41949a8459a6b6469c509457, type: 3}
+  _bonesVfx: {fileID: 8967974042026416408, guid: b832f0d66d3614e44a328efa3ef9309c, type: 3}
 --- !u!114 &4886483801494157451
 MonoBehaviour:
   m_ObjectHideFlags: 0
