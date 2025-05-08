@@ -164,6 +164,18 @@ public class BossChargingState : BaseState
 
         SoundManager.Instance.PlaySFX(_hitWall, transform, 1);
     }
+
+    public void Update()
+    {
+        if (Time.timeScale == 0)
+        {
+            _audioSource?.Pause();
+        }
+        else if (Time.timeScale != 0)
+        {
+            _audioSource?.UnPause();
+        }
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
