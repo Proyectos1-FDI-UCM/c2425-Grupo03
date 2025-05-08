@@ -207,7 +207,7 @@ public class BossFlyingChargeState : BaseState
                     Ctx.Animator.SetTrigger("Compress");
                     Ctx.Animator.SetBool("IsAirCharging", true);
                     _beginChargeTime = Time.time + _chargeDelayTime;
-                    _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_capulloSound, transform, 0.7f);
+                    _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_capulloSound, transform, 0.3f);
                 }
                 else if(_currPointIndex == _chargeEnd)
                 {

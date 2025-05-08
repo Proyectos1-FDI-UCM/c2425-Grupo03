@@ -991,6 +991,7 @@ MonoBehaviour:
   _speed: 7
   _waitTimeBeforeFlying: 2.7
   _waitTimeAfterFlying: 4
+  _compose: {fileID: 8300000, guid: 412e2e29fa3533b41b4303774bffbcad, type: 3}
 --- !u!58 &5978990238963814379
 CircleCollider2D:
   m_ObjectHideFlags: 0
