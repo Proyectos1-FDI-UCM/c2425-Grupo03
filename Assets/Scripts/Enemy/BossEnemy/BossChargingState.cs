@@ -154,20 +154,25 @@ public class BossChargingState : BaseState
         // Termina la animación
         Ctx.Animator.SetBool("IsCharging", false);
         _audioSource.Stop();
+        if (_audioSource != null)
+            Destroy(_audioSource);
 
         SoundManager.Instance.PlaySFX(_hitWall, transform, 1);
     }
 
-    public void Update()
+    private void OverradeUpdate()
     {
-        if (Time.timeScale == 0)
+        if(_audioSource != null)
         {
-            _audioSource?.Pause();
-        }
-        else if (Time.timeScale != 0)
-        {
-            _audioSource?.UnPause();
-        }
+            if (Time.timeScale == 0)
+            {
+                _audioSource?.Pause();
+            }
+            else if (Time.timeScale != 0)
+            {
+                _audioSource?.UnPause();
+            }
+        } 
     }
     #endregion
 

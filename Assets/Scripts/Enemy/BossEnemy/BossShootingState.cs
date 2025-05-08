@@ -53,6 +53,9 @@ public class BossShootingState : BaseState
     [Min(0)]
     float _waitTimeAfterShot;
 
+    [SerializeField]
+    AudioClip _shoot;
+
 
     #endregion
 
@@ -118,6 +121,7 @@ public class BossShootingState : BaseState
         _timeToEndState = _timeToShoot + _waitTimeAfterShot;
         _hasShot = false;
         Ctx.Animator.SetTrigger("Compress");
+        SoundManager.Instance.PlaySFX(_shoot, transform, 1);
     }
     
     /// <summary>

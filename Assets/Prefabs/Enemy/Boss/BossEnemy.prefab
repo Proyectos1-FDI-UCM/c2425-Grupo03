@@ -154,6 +154,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: Vulnerable
   _vulnerableTime: 5
+  _maullar: {fileID: 8300000, guid: 7925d9bc7b850874fbe1b51b262e5104, type: 3}
 --- !u!114 &2752679266411328061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1057,7 @@ MonoBehaviour:
   - {fileID: 7221304008732065832}
   - {fileID: 7560755369044458182}
   _capulloSound: {fileID: 8300000, guid: e7bccf0fecf3db447928444a8d5ea08b, type: 3}
+  _compone: {fileID: 8300000, guid: 470fffd266473b34e8b702f1628ca53b, type: 3}
 --- !u!114 &928946770693244490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,6 +1077,7 @@ MonoBehaviour:
   _distanceFromCenter: 1.5
   _waitTimeBeforeShot: 1
   _waitTimeAfterShot: 2
+  _shoot: {fileID: 8300000, guid: 26cc0c27a029d6542b370d23aa0d4f97, type: 3}
 --- !u!114 &1846329822205265439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,6 +1100,8 @@ MonoBehaviour:
   _hitCollider: {fileID: 5978990238963814379}
   _timeToLaunch: 1
   _prepChargeDistance: 100
+  _roar: {fileID: 8300000, guid: 4c99a0836842a4f4aa096f071fda1692, type: 3}
+  _whaleCry: {fileID: 8300000, guid: c8afacf57ed895941bc1c3949290e8bd, type: 3}
 --- !u!114 &5245259757967515696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1117,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: Death
   _timeToDestroy: 3
-  _death: {fileID: 8300000, guid: c8afacf57ed895941bc1c3949290e8bd, type: 3}
+  _death: {fileID: 8300000, guid: 93f73be662686664493bf671ce13ca3b, type: 3}
 --- !u!1 &6429425174636916550
 GameObject:
   m_ObjectHideFlags: 0

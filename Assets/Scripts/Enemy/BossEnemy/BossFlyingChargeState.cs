@@ -86,6 +86,9 @@ public class BossFlyingChargeState : BaseState
     Transform[] _animationPoints;
     [SerializeField]
     AudioClip _capulloSound;
+    [SerializeField]
+    AudioClip _compone;
+
 
     #endregion
 
@@ -152,13 +155,16 @@ public class BossFlyingChargeState : BaseState
     }
     public void Update()
     {
-        if (Time.timeScale == 0)
+        if (_audioSource != null)
         {
-            _audioSource?.Pause();
-        }
-        else if (Time.timeScale != 0)
-        {
-            _audioSource?.UnPause();
+            if (Time.timeScale == 0)
+            {
+                _audioSource?.Pause();
+            }
+            else if (Time.timeScale != 0)
+            {
+                _audioSource?.UnPause();
+            }
         }
     }
 
@@ -207,13 +213,27 @@ public class BossFlyingChargeState : BaseState
                     Ctx.Animator.SetTrigger("Compress");
                     Ctx.Animator.SetBool("IsAirCharging", true);
                     _beginChargeTime = Time.time + _chargeDelayTime;
-                    _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_capulloSound, transform, 0.3f);
+                    _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_capulloSound, transform, 0.01f);
+                    SoundManager.Instance.PlaySFX(_compone, transform, 0.8f);
                 }
                 else if(_currPointIndex == _chargeEnd)
                 {
                     _endChargeTime = Time.time + _chargeEndWaitTime;
                     Ctx.Animator.SetBool("IsAirCharging", false);
-                    _audioSource.Stop();
+                    _audioSource?.Stop();
+                    if (_audioSource != null)
+                        Destroy(_audioSource);
+                }
+            }
+            if (_audioSource != null)
+            {
+                if (Time.timeScale == 0)
+                {
+                    _audioSource?.Pause();
+                }
+                else if (Time.timeScale != 0)
+                {
+                    _audioSource?.UnPause();
                 }
             }
         }

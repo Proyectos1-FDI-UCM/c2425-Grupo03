@@ -108,6 +108,23 @@ public class BossStateMachine : StateMachine
     public void StopWindSFX()
     {
         _audioSource?.Stop();
+        Destroy(_audioSource);
+    }
+
+    private void OverradeUpdate()
+    {
+        if (_audioSource != null)
+        {
+            if (Time.timeScale == 0)
+            {
+                _audioSource?.Pause();
+            }
+            else if (Time.timeScale != 0)
+            {
+                _audioSource?.UnPause();
+            }
+        }
+
     }
     #endregion
 
