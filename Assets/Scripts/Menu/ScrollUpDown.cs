@@ -49,14 +49,14 @@ public class ScrollUpDown : MonoBehaviour
     {
         Vector2 input = _action.ReadValue<Vector2>();
 
-        if (input == Vector2.up && _currScrollAmount < _scrollAmount)
+        if (input == Vector2.down && _currScrollAmount < _scrollAmount)
         {
-            _rectTransform.position += Vector3.up * _scrollSpeed * Time.deltaTime;
+            _rectTransform.localPosition += Vector3.up * _scrollSpeed * Time.deltaTime;
             _currScrollAmount += _scrollSpeed * Time.deltaTime;
         }
-        else if (input == Vector2.down && _currScrollAmount > 0)
+        else if (input == Vector2.up && _currScrollAmount > 0)
         {
-            _rectTransform.position += Vector3.down * _scrollSpeed * Time.deltaTime;
+            _rectTransform.localPosition += Vector3.down * _scrollSpeed * Time.deltaTime;
             _currScrollAmount -= _scrollSpeed * Time.deltaTime;
         }
         
