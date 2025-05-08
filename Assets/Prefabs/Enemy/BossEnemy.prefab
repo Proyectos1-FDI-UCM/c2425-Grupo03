@@ -137,6 +137,8 @@ MonoBehaviour:
   _launchSpeed: 20
   _speedDeceleration: 30
   _damage: 20
+  _spinnerSound: {fileID: 8300000, guid: ba51108a49d492e45b0a373bd4917078, type: 3}
+  _hitWall: {fileID: 8300000, guid: bcfc167d01ee60b489f81316bea6fef9, type: 3}
 --- !u!114 &7364117485847292337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +169,7 @@ MonoBehaviour:
   _isRootState: 1
   _name: Precharge
   _timeToCharge: 2
+  _preSpinner: {fileID: 8300000, guid: 04674983df355234fa18965ba4c2cce5, type: 3}
 --- !u!61 &3281272698354675203
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -41,6 +41,15 @@ public class BossChargingState : BaseState
     [Min(0f)]
     float _damage;
 
+    /// <summary>
+    /// el sonido de girar
+    /// </summary>
+    [SerializeField]AudioClip _spinnerSound;
+    /// <summary>
+    /// el sonido de impactar
+    /// </summary>
+    [SerializeField] AudioClip _hitWall;
+
 
     #endregion
 
@@ -67,6 +76,12 @@ public class BossChargingState : BaseState
     /// </summary>
     bool _hasMissedPlayer;
 
+    /// <summary>
+    /// Audiosource que reproduce los pasos
+    /// </summary>
+    AudioSource _audioSource;
+
+   
     #endregion
 
 
@@ -132,6 +147,7 @@ public class BossChargingState : BaseState
 
         // Pone la velocidad del jefe
         Ctx.Rigidbody.velocity = new Vector2(_launchSpeed * (int)_ctx.LookingDirection, 0);
+        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_spinnerSound, transform, 0.6f);
     }
 
     /// <summary>
@@ -144,6 +160,9 @@ public class BossChargingState : BaseState
 
         // Termina la animación
         Ctx.Animator.SetBool("IsCharging", false);
+        _audioSource.Stop();
+
+        SoundManager.Instance.PlaySFX(_hitWall, transform, 1);
     }
     #endregion
 

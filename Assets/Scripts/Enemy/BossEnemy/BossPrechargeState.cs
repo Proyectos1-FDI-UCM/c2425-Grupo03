@@ -21,6 +21,8 @@ public class BossPrechargeState : BaseState
     /// </summary>
     [SerializeField]
     float _timeToCharge;
+    [SerializeField] AudioClip _preSpinner;    
+    
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -30,11 +32,13 @@ public class BossPrechargeState : BaseState
     /// </summary>
     float _prechargeStateEnd;
 
+    AudioSource _audioSource;
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-    
+
     /// <summary>
     /// Metodo llamado cuando al transicionar a este estado.
     /// </summary>
@@ -43,7 +47,7 @@ public class BossPrechargeState : BaseState
         // calculamos cuando termina el estado y ponemos la animación
         _prechargeStateEnd = Time.time + _timeToCharge;
         Ctx.Animator.SetBool("IsPreparingCharge", true);
-
+        //_audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_preSpinner, transform, 1);
     }
 
     /// <summary>
@@ -53,6 +57,7 @@ public class BossPrechargeState : BaseState
     {
         // Termina la animación
         Ctx.Animator.SetBool("IsPreparingCharge", false);
+       // _audioSource.Stop();
     }
     #endregion
 
