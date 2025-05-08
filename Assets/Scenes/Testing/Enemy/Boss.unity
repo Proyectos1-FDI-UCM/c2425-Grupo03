@@ -967,10 +967,6 @@ PrefabInstance:
       propertyPath: _movementSpeed
       value: 20
       objectReference: {fileID: 0}
-    - target: {fileID: 1905342587705591683, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: _chargeDelayTime
-      value: 1.45
-      objectReference: {fileID: 0}
     - target: {fileID: 2049255564615837526, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_Value
       value: 1
@@ -1023,34 +1019,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.148
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 7.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 3.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 7.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 4009294406818100263, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4965282738945188373, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1086,18 +1054,6 @@ PrefabInstance:
     - target: {fileID: 5503510613777978913, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5978990238963814379, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_Radius
-      value: 0.74189484
-      objectReference: {fileID: 0}
-    - target: {fileID: 5978990238963814379, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.08405197
-      objectReference: {fileID: 0}
-    - target: {fileID: 5978990238963814379, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
-      propertyPath: m_Offset.y
-      value: 1.3423897
       objectReference: {fileID: 0}
     - target: {fileID: 6310291015554632335, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_Pivot.x
