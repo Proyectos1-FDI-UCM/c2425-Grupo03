@@ -173,27 +173,37 @@ public class BossAirVulnerableState : BaseState
             {
                 Ctx.Rigidbody.velocity = _movement;
                 _animationState++;
-                transform.right = _movement;
-
+                
+                // Cambia la rotación para apuntar hacia el jugador
+                float angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg;
+                Ctx.Rigidbody.rotation = angle+90;
             }
         }
         // Estado de ir al punto de vulnerabilidad
         else if (_animationState == 1) 
         {
-            if(Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.1f )
+            if(Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.01f )
             {
                 // Si el jefe choca con una pared cambia su dirección en el eje x
                 Ctx.Rigidbody.velocity = _movement * new Vector2(-0.5f, 1);
+                // Actualiza la rotación
+                float angle = Mathf.Atan2(_movement.y, (-_movement/2).x) * Mathf.Rad2Deg;
+                Ctx.Rigidbody.rotation = angle+90;
             }
             // Una vez llegue al punto designado calcula el tiempo que debe mantenerse ahí y cambia al siguiente estado
-            if (Mathf.Abs(Ctx.Rigidbody.velocity.y) < 0.1f)
+            if (Mathf.Abs(Ctx.Rigidbody.velocity.y) < 0.001f)
             {
-                Ctx.Rigidbody.velocity = Vector2.zero; // Para el movimiento del jefe
+                // Para el movimiento
+                Ctx.Rigidbody.velocity = Vector2.zero;
+                // Calcula el tiempo del nuevo estado
                 _endOfVulnerability = Time.time + _vulnerableTime;
+                // Cambia estado
                 _animationState++;
-                _hitCollider.enabled = false; // Desactiva el collider de daño
+                // Desactiva el collider de daño
+                _hitCollider.enabled = false; 
                 Ctx.Animator.SetBool("IsVulnerable", true);
-                Ctx.transform.rotation = Quaternion.identity;
+                // Resetea la rotación
+                Ctx.Rigidbody.rotation = 0;
             }
         }
 

@@ -97,21 +97,14 @@ public class BossChargingState : BaseState
         {
             _hasHitPlayer = true;
         }
-        
-    }
-    /// <summary>
-    /// Collider que detecta solo las paredes
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Platform") && Ctx.CurrState == this)
         {
             _hasHitWall = true;
 
             // Mueve el objeto en la dirección contraria un poquito para que pueda volver a hacer OnCollisionEnter2D al volver a cargar en la misma dirección
             Ctx.Rigidbody.MovePosition(Ctx.Rigidbody.position - (Vector2.right * (int)_ctx.LookingDirection * 2f));
         }
+
     }
 
     /// <summary>

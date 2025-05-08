@@ -199,7 +199,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.043216705, y: 1.4320881}
@@ -1023,9 +1023,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.2}
+  m_Offset: {x: 0.08405197, y: 1.3423897}
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 0.74189484
 --- !u!114 &1905342587705591683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1045,8 @@ MonoBehaviour:
   _chargeSpeed: 25
   _chargeStart: 2
   _chargeEnd: 3
-  _chargeDelayTime: 1.85
+  _chargeDelayTime: 1.45
+  _chargeEndWaitTime: 1.5
   _hitCollider: {fileID: 5978990238963814379}
   _animationPoints:
   - {fileID: 7921664686148877677}
@@ -1067,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: Shooting
-  _bulletPrefab: {fileID: 4938195516033765096, guid: 52cfce6fd32bcba48b74cf21eafa33c4, type: 3}
+  _bulletPrefab: {fileID: 4938195516033765096, guid: 9a2046b90bbdff84798257fe39ebd0f1, type: 3}
   _bulletNumber: 7
   _distanceFromCenter: 1.5
   _waitTimeBeforeShot: 1
@@ -1264,7 +1265,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000009536743, y: 1.2588382}
+  m_Offset: {x: 0.28937244, y: 0.24585485}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.54, y: 0.148}
@@ -1275,7 +1276,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.6120052, y: 2.6615992}
+  m_Size: {x: 0.37529945, y: 0.5486746}
   m_EdgeRadius: 0
 --- !u!61 &5253441585740385333
 BoxCollider2D:

@@ -64,6 +64,13 @@ public class BossFlyingChargeState : BaseState
     float _chargeDelayTime;
 
     /// <summary>
+    /// Tiempo de espera tras terminar la carga
+    /// </summary>
+    [SerializeField]
+    [Tooltip("Time waited after doing the charge")]
+    float _chargeEndWaitTime;
+
+    /// <summary>
     /// Collider que hará daño al jugador
     /// </summary>
     [Header("Hit Collider")]
@@ -90,6 +97,11 @@ public class BossFlyingChargeState : BaseState
     /// Tiempo para comenzar la carga tras llegar al punto de comienzo
     /// </summary>
     float _beginChargeTime;
+
+    /// <summary>
+    /// Tiempo de delay tras terminar la carga
+    /// </summary>
+    float _endChargeTime;
     #endregion
 
 
@@ -122,6 +134,7 @@ public class BossFlyingChargeState : BaseState
         // setup del movimiento
         _currPointIndex = 0;
         _beginChargeTime = 0;
+        _endChargeTime = 0;
     }
     
     /// <summary>
@@ -147,7 +160,7 @@ public class BossFlyingChargeState : BaseState
     protected override void UpdateState()
     {
         // Por cada punto de la animación (siempre que no estemos esperando a cargar)
-        if( _currPointIndex < _animationPoints.Length && Time.time > _beginChargeTime)
+        if( _currPointIndex < _animationPoints.Length && Time.time > _beginChargeTime && Time.time > _endChargeTime)
         {
             // Calculamos la velocidad
             float speed;
@@ -180,6 +193,7 @@ public class BossFlyingChargeState : BaseState
                 }
                 else if(_currPointIndex == _chargeEnd)
                 {
+                    _endChargeTime = Time.time + _chargeEndWaitTime;
                     Ctx.Animator.SetBool("IsAirCharging", false);
                 }
             }
