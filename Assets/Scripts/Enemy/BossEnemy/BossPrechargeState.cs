@@ -59,6 +59,11 @@ public class BossPrechargeState : BaseState
         Ctx.Animator.SetBool("IsPreparingCharge", false);
        // _audioSource.Stop();
     }
+
+    private void Start()
+    {
+        MusicPlayer.Instance.PlayBossPhase1Sound();
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
