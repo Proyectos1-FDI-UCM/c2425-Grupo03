@@ -988,7 +988,9 @@ MonoBehaviour:
     Yi\nHe Deng\nSantiago Salto Morodojen\nZhiyi Zhou</color>\n\n<b><size=24>Artistas</b></size>\n\n<color=#D3D3D3>Adri\xE1n
     Isasi Mart\xEDnez\nAlexandra Len\u021Ba\nSantiago Salto Morodojen</color>\n\n<b><size=24>Animadores</b></size>\n\n<color=#D3D3D3>Adri\xE1n
     Isasi Mart\xEDnez\nAlexandra Len\u021Ba\nSantiago Salto Morodojen</color>\n\n<b><size=24>M\xFAsica</b></size>\n\n<color=#D3D3D3>Daria
-    Anastassia Len\u021Ba</color>\n\n<b><size=24>SFX</b></size>\n\n<color=#D3D3D3>a_kn\r\nAdamGDA\nAlonsotm\r\nArtninja\r\nAudioPapkin\nBanana_Sounds21354\r\nBertsz\r\nCaroVegas\r\nchecholio\r\ncogfirestudios\r\nData_pion\r\nDavidDumaisAudio\r\nfreesound_community\nkyles\nLittleRobotSoundFactory\r\nMaxDemianAGL\r\nmdietz3840\r\nmerrick079\r\nqubodup\r\nrendensh\r\nRobinhood76\r\nSoundBiterSFX\r\nstudiobonk\r\ntschapajew\r\nwesleyextreme_gamer</color>"
+    Anastassia Len\u021Ba</color>\n\n<b><size=24>SFX</b></size>\n\n<color=#D3D3D3>Chenlinjia
+    Yi\r \n&\na_kn\r\nAdamGDA\nAlonsotm\r\nArtninja\r\nAudioPapkin\nBanana_Sounds21354\r\nBertsz\r\nCaroVegas\r\nchecholio\r\ncogfirestudios\r\nData_pion\r\nDavidDumaisAudio\r\nfreesound_community\nkyles\nLittleRobotSoundFactory\r\nMaxDemianAGL\r\nmdietz3840\r\nmerrick079\r\nqubodup\r\nrendensh\r\nRobinhood76\r\nSoundBiterSFX\r\nstudiobonk\r\ntschapajew\r\nwesleyextreme_gamer\nbe-steele\r\nbspiller5
+    (Freesound)\r\ncclaretc (Freesound)\r\nDRAGON_STUDIO\r\ninsanity54\r\nmelissapons\r\nRibhavAgrawal\r\nspookymodem\r\nsupernd\r\nZIP.Creates</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
   m_sharedMaterial: {fileID: -633549122019935788, guid: 7a8206d1903a4784493b8447f782d2e5, type: 2}
@@ -1079,7 +1081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollSpeed: 270
   _rectTransform: {fileID: 1926476100}
-  _scrollAmount: 2150
+  _scrollAmount: 1700
 --- !u!1001 &2072168157
 PrefabInstance:
   m_ObjectHideFlags: 0

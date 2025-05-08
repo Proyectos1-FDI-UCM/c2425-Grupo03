@@ -63,6 +63,11 @@ public class BossAirVulnerableState : BaseState
     [SerializeField]
     [Min(0)]
     float _prepChargeDistance;
+
+    [SerializeField]
+    AudioClip _roar;
+    [SerializeField]
+    AudioClip _whaleCry;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -186,6 +191,7 @@ public class BossAirVulnerableState : BaseState
         {
             if(Mathf.Abs(Ctx.Rigidbody.velocity.x) < 0.01f )
             {
+                SoundManager.Instance.PlaySFX(_roar, transform, 1f);
                 // Si el jefe choca con una pared cambia su dirección en el eje x
                 Ctx.Rigidbody.velocity = _movement * new Vector2(-0.5f, 1);
                 // Actualiza la rotación
@@ -207,6 +213,7 @@ public class BossAirVulnerableState : BaseState
                 Ctx.Animator.SetBool("IsVulnerable", true);
                 // Resetea la rotación
                 Ctx.Rigidbody.rotation = 0;
+                SoundManager.Instance.PlaySFX(_whaleCry,transform, 1f);
             }
         }
 

@@ -45,7 +45,7 @@ public class TutorialObject : ScriptableObject
 
     public string GetTutorialDescription()
     {
-        if (_keyboardButton != null && _controllerButton != null)
+        if (_keyboardButton != null && _keyboardButton != "" && _controllerButton != null && _controllerButton != "")
         {
             if (InputManager.Instance.Device is Gamepad)
             {

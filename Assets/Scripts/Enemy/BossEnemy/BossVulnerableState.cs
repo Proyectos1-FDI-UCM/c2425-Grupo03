@@ -21,6 +21,8 @@ public class BossVulnerableState : BaseState
     [SerializeField]
     [Min(0)]
     float _vulnerableTime;
+    [SerializeField]
+    AudioClip _maullar;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -58,9 +60,12 @@ public class BossVulnerableState : BaseState
         // pone el jefe vulnerable
         _healthManager.Inmune = false;
 
+
+
         // pone velocidad a 0 por si se estaba moviendo
         Ctx.Rigidbody.velocity = Vector3.zero;
         Ctx.Animator.SetBool("IsVulnerable", true);
+        SoundManager.Instance.PlaySFX(_maullar, transform, 0.7f);
     }
     
     /// <summary>
@@ -70,6 +75,7 @@ public class BossVulnerableState : BaseState
     {
         // vuelve a ponerlo en inmune
         _healthManager.Inmune = true;
+
         Ctx.Animator.SetBool("IsVulnerable", false);
     }
     #endregion
