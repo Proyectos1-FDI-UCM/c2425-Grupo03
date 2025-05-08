@@ -23,6 +23,13 @@ public class BossStateMachine : StateMachine
         Left = -1,
     }
 
+    // ---- ATRIBUTOS EN EL INSPECTOR ----
+    #region Atributos del Inspector 
+    [SerializeField] AudioClip _changeStateHowl;
+    [SerializeField] AudioClip[] _damaged;
+
+    #endregion
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
 
@@ -55,7 +62,7 @@ public class BossStateMachine : StateMachine
             transform.localScale = new Vector3((float)value, 1, 1);
         } 
     }
-
+    
     /// <summary>
     /// Referencia al jugador. La establece la fase de idle.
     /// </summary>
@@ -83,6 +90,16 @@ public class BossStateMachine : StateMachine
         // Cambiamos al estado de transición
         ChangeState(GetStateByName("Transition"));
     }
+
+    public void PlayChangeStateHowl()
+    {
+        SoundManager.Instance.PlaySFX(_changeStateHowl, transform, 1);
+    }
+
+    public void PlayDamagedSFX(float damage)
+    {
+        SoundManager.Instance.PlayRandomSFX(_damaged,transform, 1);
+    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
@@ -94,6 +111,7 @@ public class BossStateMachine : StateMachine
             // Setup del healthmanager
             _healthManager.Inmune = true;
             _healthManager.CanBeKnockbacked = false;
+            _healthManager._onDamaged.AddListener(PlayDamagedSFX);
             _healthManager._onDamaged.AddListener(StartPhase2);
             _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
         }

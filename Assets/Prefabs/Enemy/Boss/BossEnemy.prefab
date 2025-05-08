@@ -1206,6 +1206,11 @@ MonoBehaviour:
   - {fileID: 928946770693244490}
   - {fileID: 1846329822205265439}
   - {fileID: 5245259757967515696}
+  _changeStateHowl: {fileID: 8300000, guid: 25c85d537b894d54b947b22bf42141f7, type: 3}
+  _damaged:
+  - {fileID: 8300000, guid: 1c82d26adff10754eb08fe13d3fdb37b, type: 3}
+  - {fileID: 8300000, guid: f069aff62161aa549b0706936c02da12, type: 3}
+  - {fileID: 8300000, guid: 93eb3c0272aa67f4a99e62286977f1d3, type: 3}
 --- !u!50 &2866308624493229999
 Rigidbody2D:
   serializedVersion: 4
