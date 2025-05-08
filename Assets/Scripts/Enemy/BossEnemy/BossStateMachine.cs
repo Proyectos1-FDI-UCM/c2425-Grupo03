@@ -27,7 +27,7 @@ public class BossStateMachine : StateMachine
     #region Atributos del Inspector 
     [SerializeField] AudioClip _changeStateHowl;
     [SerializeField] AudioClip[] _damaged;
-
+    [SerializeField] AudioClip _block;
     [SerializeField] AudioClip _wind;
     #endregion
 
@@ -95,6 +95,10 @@ public class BossStateMachine : StateMachine
         _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_wind, transform, 0.5f);
     }
 
+    public void BlockDamageSFX()
+    {
+        SoundManager.Instance.PlaySFX(_block, transform, 0.5f);   
+    }
     public void PlayChangeStateHowl()
     {
         SoundManager.Instance.PlaySFX(_changeStateHowl, transform, 1);
@@ -141,7 +145,10 @@ public class BossStateMachine : StateMachine
             _healthManager._onDamaged.AddListener(StartPhase2);
             _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
             _healthManager._onDeath.AddListener(StopWindSFX);
+            _healthManager._onInmune.AddListener(BlockDamageSFX);
         }
+
+
     }
     #endregion   
 

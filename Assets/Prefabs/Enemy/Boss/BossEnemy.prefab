@@ -1295,6 +1295,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1c82d26adff10754eb08fe13d3fdb37b, type: 3}
   - {fileID: 8300000, guid: f069aff62161aa549b0706936c02da12, type: 3}
   - {fileID: 8300000, guid: 93eb3c0272aa67f4a99e62286977f1d3, type: 3}
+  _block: {fileID: 8300000, guid: 67427ad5ea45c044f8a1df91da2cafdc, type: 3}
   _wind: {fileID: 8300000, guid: 04674983df355234fa18965ba4c2cce5, type: 3}
 --- !u!50 &2866308624493229999
 Rigidbody2D:
