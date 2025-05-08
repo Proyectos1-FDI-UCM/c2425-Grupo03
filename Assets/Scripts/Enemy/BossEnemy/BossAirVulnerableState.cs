@@ -45,6 +45,8 @@ public class BossAirVulnerableState : BaseState
     [Min(0)]
     float _returnSpeed;
 
+    [SerializeField]
+    AudioClip _groundImpact;
     /// <summary>
     /// Collider a activar para que haga daño al jugador al caer
     /// </summary>
@@ -193,6 +195,7 @@ public class BossAirVulnerableState : BaseState
             // Una vez llegue al punto designado calcula el tiempo que debe mantenerse ahí y cambia al siguiente estado
             if (Mathf.Abs(Ctx.Rigidbody.velocity.y) < 0.001f)
             {
+                SoundManager.Instance.PlaySFX(_groundImpact, transform, 1);
                 // Para el movimiento
                 Ctx.Rigidbody.velocity = Vector2.zero;
                 // Calcula el tiempo del nuevo estado

@@ -43,6 +43,9 @@ public class BossTransitionState : BaseState
     [SerializeField]
     float _waitTimeAfterFlying;
 
+    [SerializeField]
+    AudioClip _compose;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -75,6 +78,7 @@ public class BossTransitionState : BaseState
         // Cambiamos la animación a animación de transición
         Ctx.Animator.SetTrigger("PhaseTransition");
         MusicPlayer.Instance.PlayBossPhase2Sound();
+        SoundManager.Instance.PlaySFX(_compose,transform,1);
     }
     
     /// <summary>
