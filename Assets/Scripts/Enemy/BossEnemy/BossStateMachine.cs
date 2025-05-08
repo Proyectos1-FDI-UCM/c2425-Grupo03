@@ -28,6 +28,7 @@ public class BossStateMachine : StateMachine
     [SerializeField] AudioClip _changeStateHowl;
     [SerializeField] AudioClip[] _damaged;
 
+    [SerializeField] AudioClip _wind;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -42,6 +43,7 @@ public class BossStateMachine : StateMachine
     /// Dirección en la que está mirando el boss
     /// </summary>
     private EnemyLookingDirection _enemyLookingDirection = EnemyLookingDirection.Left;
+    private AudioSource _audioSource;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -89,6 +91,8 @@ public class BossStateMachine : StateMachine
 
         // Cambiamos al estado de transición
         ChangeState(GetStateByName("Transition"));
+
+        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_wind, transform, 0.5f);
     }
 
     public void PlayChangeStateHowl()
@@ -99,6 +103,11 @@ public class BossStateMachine : StateMachine
     public void PlayDamagedSFX(float damage)
     {
         SoundManager.Instance.PlayRandomSFX(_damaged,transform, 1);
+    }
+
+    public void StopWindSFX()
+    {
+        _audioSource?.Stop();
     }
     #endregion
 
@@ -114,6 +123,7 @@ public class BossStateMachine : StateMachine
             _healthManager._onDamaged.AddListener(PlayDamagedSFX);
             _healthManager._onDamaged.AddListener(StartPhase2);
             _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
+            _healthManager._onDeath.AddListener(StopWindSFX);
         }
 
         MusicPlayer.Instance.PlayBossPhase1Sound();

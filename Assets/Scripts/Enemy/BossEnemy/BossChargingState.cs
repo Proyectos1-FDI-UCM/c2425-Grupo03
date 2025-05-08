@@ -140,7 +140,7 @@ public class BossChargingState : BaseState
 
         // Pone la velocidad del jefe
         Ctx.Rigidbody.velocity = new Vector2(_launchSpeed * (int)_ctx.LookingDirection, 0);
-        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_spinnerSound, transform, 0.6f);
+        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_spinnerSound, transform, 0.3f);
     }
 
     /// <summary>

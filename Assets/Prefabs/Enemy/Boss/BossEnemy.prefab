@@ -991,6 +991,7 @@ MonoBehaviour:
   _speed: 7
   _waitTimeBeforeFlying: 2.7
   _waitTimeAfterFlying: 4
+  _compose: {fileID: 8300000, guid: 412e2e29fa3533b41b4303774bffbcad, type: 3}
 --- !u!58 &5978990238963814379
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1054,6 +1055,7 @@ MonoBehaviour:
   - {fileID: 7759529923382285823}
   - {fileID: 7221304008732065832}
   - {fileID: 7560755369044458182}
+  _capulloSound: {fileID: 8300000, guid: e7bccf0fecf3db447928444a8d5ea08b, type: 3}
 --- !u!114 &928946770693244490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,6 +1215,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1c82d26adff10754eb08fe13d3fdb37b, type: 3}
   - {fileID: 8300000, guid: f069aff62161aa549b0706936c02da12, type: 3}
   - {fileID: 8300000, guid: 93eb3c0272aa67f4a99e62286977f1d3, type: 3}
+  _wind: {fileID: 8300000, guid: 04674983df355234fa18965ba4c2cce5, type: 3}
 --- !u!50 &2866308624493229999
 Rigidbody2D:
   serializedVersion: 4
