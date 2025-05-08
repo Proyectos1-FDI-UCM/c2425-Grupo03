@@ -16,18 +16,19 @@ Pero ni siquiera las habilidades del príncipe pudieron evitar las leyes element
 
 <hr style="border: 1px solid #000; width: 50%; height: 2px;">
 
+## Controles
+![Control (1)](https://github.com/user-attachments/assets/56afcfdd-b45a-4c3f-8f1a-730ca558805d)
+
 ## Issues
 Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* aquí: <a href="https://github.com/Proyectos1-FDI-UCM/c2425-Grupo03/issues"><img src="https://github.com/user-attachments/assets/57153cf5-d9c0-459d-97b4-0e61efc2e9d9" alt="Link a Itch.io" style="width:80px;height:30px;"></a>. Asegúrate de que el bug que has encontrado no se ha reportado ya.
 
 ## Enlaces
 <h4 align="center">Itch.io</h4>
 
+
 <p align="center">
 <a href="https://cr00kie.itch.io/kingless-dungeon"><img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Link a Itch.io" style="width:80px;height:80px;text-align: center;"></a>
 </p>
-
-<h4 align="center">Githu Pages</h4>
-<p align="center"> [WIP] </p>
 
 ## Equipo
 - [Adrián Isasi](https://github.com/Cr00kie)
