@@ -65,21 +65,6 @@ public class TutorialObject : ScriptableObject
         return _tutorialVideo;
     }
 
-    public void ChangeButton()
-    {
-        if (_keyboardButton != "" && _controllerButton != "")
-        {
-            if(InputManager.Instance.Device is Gamepad)
-            {
-                _tutorialDescription = _tutorialDescription.Replace(_keyboardButton, _controllerButton);
-            }
-            else
-            {
-                _tutorialDescription = _tutorialDescription.Replace(_controllerButton,_keyboardButton);
-            }
-        }
-    }
-
     #endregion
 
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----

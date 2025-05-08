@@ -213,6 +213,7 @@ public class BossAirVulnerableState : BaseState
                 // Resetea la rotación
                 Ctx.Rigidbody.rotation = 0;
                 SoundManager.Instance.PlaySFX(_whaleCry,transform, 1f);
+                CameraManager.Instance.ShakeCamera(0.5f,0.5f);
             }
         }
 
