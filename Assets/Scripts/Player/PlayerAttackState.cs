@@ -48,6 +48,7 @@ public class PlayerAttackState : BaseState
     [SerializeField] private AudioClip[] _airHitList;
 
 
+
     [Header("Propiedad del combo")]
 
     /// <summary>
@@ -237,6 +238,7 @@ public class PlayerAttackState : BaseState
 
                 if (health?.RemoveHealth((int)_damage + extraDamage) == true)
                 {
+                    _ctx.InstantiateBonesVFX();
                     _chargeScript?.AddCharge((_abilityChargePercentage / 100) * _damage);
                 }
             }

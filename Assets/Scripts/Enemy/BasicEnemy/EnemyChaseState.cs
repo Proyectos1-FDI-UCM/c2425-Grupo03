@@ -126,7 +126,8 @@ public class EnemyChaseState : BaseState
 
         // Para el sonido de andar
         //_audioSource?.Stop();
-        Destroy(_audioSource);
+        if (_audioSource != null)
+            Destroy(_audioSource);
     }
     #endregion
     

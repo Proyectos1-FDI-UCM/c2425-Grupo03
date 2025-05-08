@@ -142,8 +142,6 @@ public class BossStateMachine : StateMachine
             _healthManager._onDeath.AddListener(() => { ChangeState(GetStateByName("Death")); });
             _healthManager._onDeath.AddListener(StopWindSFX);
         }
-
-        MusicPlayer.Instance.PlayBossPhase1Sound();
     }
     #endregion   
 

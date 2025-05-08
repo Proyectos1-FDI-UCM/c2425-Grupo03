@@ -39,6 +39,11 @@ public class PlayerStateMachine : StateMachine
     #region Atributos del Inspector (serialized fields)
     // Documentar cada atributo que aparece aquí.
     [SerializeField] AudioClip[] _playerDamaged;
+
+    /// <summary>
+    /// vfx ataque
+    /// </summary>
+    [SerializeField] GameObject _bonesVfx;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -122,6 +127,11 @@ public class PlayerStateMachine : StateMachine
     public void PlayerDamagedSFX(float damage)
     {
         SoundManager.Instance.PlayRandomSFX(_playerDamaged, transform, 0.8f);
+    }
+    public void InstantiateBonesVFX()
+    {
+        Instantiate(_bonesVfx, transform.position + 1 * Vector3.right * (int)LookingDirection,
+                       Quaternion.Euler(-22, 90 * (int) LookingDirection, 90 * (int)LookingDirection));
     }
     #region Subscripciones e invocaciones de eventos de animación
     /// <summary>

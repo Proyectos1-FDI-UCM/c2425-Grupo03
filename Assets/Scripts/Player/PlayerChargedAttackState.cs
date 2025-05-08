@@ -152,6 +152,7 @@ public class PlayerChargedAttackState : BaseState
  
             if (health?.RemoveHealth((int)_chargedDamage) == true)
             {
+                _ctx.InstantiateBonesVFX();
                 GetComponentInParent<PlayerCharge>()?.AddCharge((_abilityChargePercentage / 100) * _chargedDamage);
             }
         }
@@ -185,6 +186,7 @@ public class PlayerChargedAttackState : BaseState
             _animator?.SetBool("IsChargeAttacking", true);
             _animator?.SetBool("IsCharging", false);
             _attacked = true;
+            
         }
     }
 

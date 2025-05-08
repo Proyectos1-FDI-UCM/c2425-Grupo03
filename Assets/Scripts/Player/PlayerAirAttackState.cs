@@ -141,6 +141,7 @@ public class PlayerAirAttackState : BaseState
     {
         SoundManager.Instance.PlaySFX(_airHit, transform, 1);
 
+
         //Coger la informacion de los enemigos que estan en el area de ataque
         Vector2 position = transform.position + (new Vector3(_attackRadius, 0) * _direction);
         Collider2D[] enemiesInArea = Physics2D.OverlapCircleAll(position, _attackRadius, 1 << 10);
@@ -176,6 +177,7 @@ public class PlayerAirAttackState : BaseState
 
                 if (health?.RemoveHealth((int)_damage) == true)
                 {
+                    _ctx.InstantiateBonesVFX();
                     _chargeScript?.AddCharge((_abilityChargePercentage / 100) * _damage);
                 }
             }
