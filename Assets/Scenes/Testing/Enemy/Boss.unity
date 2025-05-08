@@ -967,6 +967,10 @@ PrefabInstance:
       propertyPath: _movementSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1905342587705591683, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
+      propertyPath: _chargeDelayTime
+      value: 1.45
+      objectReference: {fileID: 0}
     - target: {fileID: 2049255564615837526, guid: ffb74941f98c9814eb5dd85c128ba518, type: 3}
       propertyPath: m_Value
       value: 1

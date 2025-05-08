@@ -1045,7 +1045,7 @@ MonoBehaviour:
   _chargeSpeed: 25
   _chargeStart: 2
   _chargeEnd: 3
-  _chargeDelayTime: 1.8
+  _chargeDelayTime: 1.85
   _hitCollider: {fileID: 5978990238963814379}
   _animationPoints:
   - {fileID: 7921664686148877677}
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRootState: 1
   _name: Death
-  _timeToDestroy: 1
+  _timeToDestroy: 3
 --- !u!1 &6429425174636916550
 GameObject:
   m_ObjectHideFlags: 0
