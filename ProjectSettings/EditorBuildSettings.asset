@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing/PrototipeLevel_Adrian.unity
     guid: cc8d7fe05d9e6be4ba998b08ebd954f0
   - enabled: 1
-    path: Assets/Scenes/Testing/Menu_Zhiyi/MainMenu_Zhiyi.unity
+    path: Assets/Scenes/Final/Menu/MainMenu.unity
     guid: 09d43e79412ab234783fa2705d956911
   - enabled: 0
     path: Assets/Scenes/Testing/Menu_Zhiyi/LevelTest_Zhiyi.unity
@@ -18,27 +18,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing/Menu_Zhiyi/HUD.unity
     guid: 272a76a3823e3c343bbee8e2fe980ad7
   - enabled: 0
-    path: Assets/Scenes/Testing/Levels/Level_1.unity
+    path: Assets/Scenes/Testing/Levels/Level_old.unity
     guid: f2ca71fc4fc34be4cabad8fd660b31f6
   - enabled: 1
-    path: Assets/Scenes/Testing/Levels/Level_2.unity
+    path: Assets/Scenes/Final/Level/Level_1.unity
     guid: 62e37bec2cd556f49ada3b414acdf242
   - enabled: 1
-    path: Assets/Scenes/Testing/Levels/Level_3.unity
+    path: Assets/Scenes/Final/Level/Level_2.unity
     guid: 078c240c8c03cc444899cd3d9dbccc4c
   - enabled: 1
-    path: Assets/Scenes/Testing/Menu_Zhiyi/CreditsScene.unity
+    path: Assets/Scenes/Final/Menu/Credits.unity
     guid: abe17e20d2379f547b6c7720cafc24b5
   - enabled: 0
     path: Assets/Scenes/Testing/Scenes for testing build/TestingLevel.unity
     guid: 7f110e12995a2d74ea416325236fa7cd
   - enabled: 1
-    path: "Assets/Scenes/Testing/Cinem\xE1ticas/Intro.unity"
+    path: Assets/Scenes/Final/Cinematic/Intro.unity
     guid: a5ae7b586acb21e49b404a657baefef0
   - enabled: 1
-    path: "Assets/Scenes/Testing/Cinem\xE1ticas/Outro.unity"
+    path: Assets/Scenes/Final/Cinematic/Outro.unity
     guid: 7f8fb6f07b9ab9b488bc57098e61890a
   - enabled: 1
-    path: Assets/Scenes/Testing/Scenes for testing build/Level_Tutorial.unity
+    path: Assets/Scenes/Final/Level/Level_Tutorial.unity
     guid: c265d9f1badaad14484da53dd63eeaba
   m_configObjects: {}

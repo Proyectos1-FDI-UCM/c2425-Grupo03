@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Script para tener un vacío que mate provisionalmente
-// Adrián Isasi
+// Metodo a llamar cuando termina una zona de combate
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,9 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Daña al jugador y le quita toda la vida si toca con él
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-public class VoidDamageTest : MonoBehaviour
+public class EndOfWaves : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -30,6 +31,11 @@ public class VoidDamageTest : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// El gameobject del waveController
+    /// </summary>
+    private GameObject _waveController;
+
     #endregion
 
     // ---- PROPIEDADES ----
@@ -37,25 +43,10 @@ public class VoidDamageTest : MonoBehaviour
     // Documentar cada propiedad que aparece aquí.
     // Escribir con PascalCase.
     #endregion
-
+    
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Si es el jugador
-        if(collision.gameObject.GetComponent<PlayerStateMachine>() != null)
-        {
-            HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
 
-            //Si el jugador tiene invulnerabilidad
-            if(healthManager.Inmune == true)
-            {
-                //Quitarle invulnerabilidad
-                healthManager.Inmune = false;
-            }
-        }
-        collision.gameObject.GetComponent<HealthManager>()?.RemoveHealth(int.MaxValue);
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -65,6 +56,18 @@ public class VoidDamageTest : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+
+    //Coge el waveController
+    public void SetWaveController(GameObject waveController)
+    {
+        _waveController = waveController;
+    }
+
+    //Destruye el waveController
+    public void DestroyWaveController()
+    {
+        Destroy(_waveController);
+    }
 
     #endregion
 
@@ -77,5 +80,5 @@ public class VoidDamageTest : MonoBehaviour
 
     #endregion
 
-} // class VoidDamageTest 
+} // class EndOfWaves 
 // namespace
