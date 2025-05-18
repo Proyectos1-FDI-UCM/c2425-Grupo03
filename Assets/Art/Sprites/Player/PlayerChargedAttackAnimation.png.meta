@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c0b1cad7b9b2224dbedd853aee38e43
+guid: 4b84284d976522449bf8758a17f4a61c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,19 +100,19 @@ TextureImporter:
       name: PlayerChargedAttackAnimation_0
       rect:
         serializedVersion: 2
-        x: 9
+        x: 10
         y: 369
         width: 156
         height: 185
       alignment: 9
-      pivot: {x: 0.49035507, y: 0.4651443}
+      pivot: {x: 0.48094139, y: 0.4959824}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0ab94c473ad8774d80a00269275e0a9
-      internalID: 489854456
+      spriteID: a7b52f2794acd114486e65b34e3cd156
+      internalID: 49909403
       vertices: []
       indices: 
       edges: []
@@ -126,14 +126,14 @@ TextureImporter:
         width: 218
         height: 177
       alignment: 9
-      pivot: {x: 0.6302205, y: 0.47433868}
+      pivot: {x: 0.6321193, y: 0.5246549}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60bec4a616dbb394a9b1b4e98e4718a1
-      internalID: -1305734835
+      spriteID: 9b478fb7d1c8c6f4a83d976f51de97a9
+      internalID: 629821951
       vertices: []
       indices: 
       edges: []
@@ -147,14 +147,14 @@ TextureImporter:
         width: 242
         height: 178
       alignment: 9
-      pivot: {x: 0.67830515, y: 0.47235638}
+      pivot: {x: 0.67852503, y: 0.5122581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9faf2619cd00de4e9a474636f6cf386
-      internalID: 1412992352
+      spriteID: c1f513bf5f2493e489dcb765d1046455
+      internalID: 2113976996
       vertices: []
       indices: 
       edges: []
@@ -168,14 +168,14 @@ TextureImporter:
         width: 269
         height: 178
       alignment: 9
-      pivot: {x: 0.6969927, y: 0.47660932}
+      pivot: {x: 0.7076523, y: 0.5196132}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 037c277ace0a0d64d988b939d803cec4
-      internalID: -1297886800
+      spriteID: 93037ed0c46a5944fa86d0073e01494e
+      internalID: -1792777711
       vertices: []
       indices: 
       edges: []
@@ -189,14 +189,14 @@ TextureImporter:
         width: 262
         height: 179
       alignment: 9
-      pivot: {x: 0.6921438, y: 0.48308387}
+      pivot: {x: 0.69987524, y: 0.53900725}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c2b458a7a9ce0345a84c5d00d8b352f
-      internalID: 183814769
+      spriteID: 3ef2172b28d789141bb8278330854f66
+      internalID: 1420246835
       vertices: []
       indices: 
       edges: []
@@ -210,14 +210,14 @@ TextureImporter:
         width: 267
         height: 178
       alignment: 9
-      pivot: {x: 0.69705075, y: 0.47873577}
+      pivot: {x: 0.7026692, y: 0.5171613}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2893b59951f9e9045981812c921b3179
-      internalID: -285708681
+      spriteID: 5318a5fb7798b7041bef8bf9680e8744
+      internalID: 1075602741
       vertices: []
       indices: 
       edges: []
@@ -226,19 +226,19 @@ TextureImporter:
       name: PlayerChargedAttackAnimation_6
       rect:
         serializedVersion: 2
-        x: 1642
-        y: 375
+        x: 1643
+        y: 372
         width: 265
-        height: 175
+        height: 178
       alignment: 9
-      pivot: {x: 0.7013948, y: 0.4740454}
+      pivot: {x: 0.69761246, y: 0.5171613}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13a07eab5640bf64d8c29f5945e0722b
-      internalID: 546463845
+      spriteID: 13fe5fd9d61ef6a40accc68d7177c3d3
+      internalID: -480838361
       vertices: []
       indices: 
       edges: []
@@ -248,18 +248,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1948
-        y: 376
+        y: 375
         width: 265
-        height: 178
+        height: 179
       alignment: 9
-      pivot: {x: 0.69853795, y: 0.48086223}
+      pivot: {x: 0.6992593, y: 0.5219415}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a569aefc925fd6a4b915c9f524d1252a
-      internalID: 1609964118
+      spriteID: 1ea7166e97f52ce438125e2f66f2736c
+      internalID: -1843495235
       vertices: []
       indices: 
       edges: []
@@ -268,19 +268,19 @@ TextureImporter:
       name: PlayerChargedAttackAnimation_9
       rect:
         serializedVersion: 2
-        x: 2237
+        x: 2233
         y: 374
-        width: 259
+        width: 263
         height: 178
       alignment: 9
-      pivot: {x: 0.6929069, y: 0.47448283}
+      pivot: {x: 0.69745594, y: 0.5073549}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fd3e597b321cbc4bb51b76a42a20a5b
-      internalID: -1187116970
+      spriteID: 44b9c1fbe30e4e74181e051fd52338d6
+      internalID: -360844102
       vertices: []
       indices: 
       edges: []
@@ -294,14 +294,14 @@ TextureImporter:
         width: 231
         height: 166
       alignment: 9
-      pivot: {x: 0.7769178, y: 0.4315956}
+      pivot: {x: 0.7777052, y: 0.46582437}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3303440d9c0b79e4b815b107761ed48f
-      internalID: -1254777202
+      spriteID: 7bf96382cfaed4242b30d3af056ac786
+      internalID: -549821835
       vertices: []
       indices: 
       edges: []
@@ -311,18 +311,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2863
-        y: 383
+        y: 379
         width: 151
-        height: 163
+        height: 167
       alignment: 9
-      pivot: {x: 0.69552106, y: 0.43730268}
+      pivot: {x: 0.6767853, y: 0.48299512}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 211cdcd6d6e5cdb4697ce9942feff0ae
-      internalID: 149232411
+      spriteID: 7f6ee34e68206d546a597b0a78462d84
+      internalID: 241728452
       vertices: []
       indices: 
       edges: []
@@ -336,14 +336,14 @@ TextureImporter:
         width: 308
         height: 292
       alignment: 9
-      pivot: {x: 0.25617647, y: 0.2660855}
+      pivot: {x: 0.26468182, y: 0.2909001}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ecf2be8701a0d24d95f83ac4f42f95d
-      internalID: 343130631
+      spriteID: 0b7409e4ae69f524192875f60f2c166d
+      internalID: -659007593
       vertices: []
       indices: 
       edges: []
@@ -354,17 +354,17 @@ TextureImporter:
         serializedVersion: 2
         x: 366
         y: 2
-        width: 233
+        width: 235
         height: 242
       alignment: 9
-      pivot: {x: 0.671897, y: 0.3034636}
+      pivot: {x: 0.6629415, y: 0.32606047}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90d47f35eb9718249a973db232355574
-      internalID: 1444710797
+      spriteID: 43b0e310af371fa49bc4e65168e5d810
+      internalID: -581333131
       vertices: []
       indices: 
       edges: []
@@ -378,14 +378,14 @@ TextureImporter:
         width: 280
         height: 178
       alignment: 9
-      pivot: {x: 0.7171186, y: 0.47187346}
+      pivot: {x: 0.71489304, y: 0.5032503}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1922be6a058f9d4aa192d9bf880f7e1
-      internalID: 180129969
+      spriteID: a99dde4a895dc0143a9d457acc518eb9
+      internalID: 1645211297
       vertices: []
       indices: 
       edges: []
@@ -394,19 +394,19 @@ TextureImporter:
       name: PlayerChargedAttackAnimation_19
       rect:
         serializedVersion: 2
-        x: 999
-        y: 2
-        width: 270
+        x: 992
+        y: 3
+        width: 277
         height: 178
       alignment: 9
-      pivot: {x: 0.7066171, y: 0.4758916}
+      pivot: {x: 0.7151315, y: 0.50000006}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61fd65ae6c88dec44a7a871dff87be53
-      internalID: -159680941
+      spriteID: 68d18ea3590cb2a438bdf64c74a558c0
+      internalID: 1633951147
       vertices: []
       indices: 
       edges: []
@@ -422,28 +422,28 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerChargedAttackAnimation_0: 489854456
-      PlayerChargedAttackAnimation_1: -1305734835
-      PlayerChargedAttackAnimation_10: -1254777202
-      PlayerChargedAttackAnimation_11: 149232411
-      PlayerChargedAttackAnimation_12: 343130631
-      PlayerChargedAttackAnimation_13: 1104051765
-      PlayerChargedAttackAnimation_14: 1444710797
-      PlayerChargedAttackAnimation_15: -1833644914
-      PlayerChargedAttackAnimation_16: 180129969
-      PlayerChargedAttackAnimation_17: 1428090246
-      PlayerChargedAttackAnimation_18: 1281875639
-      PlayerChargedAttackAnimation_19: -159680941
-      PlayerChargedAttackAnimation_2: 1412992352
-      PlayerChargedAttackAnimation_20: 229481112
-      PlayerChargedAttackAnimation_21: 2035245858
-      PlayerChargedAttackAnimation_3: -1297886800
-      PlayerChargedAttackAnimation_4: 183814769
-      PlayerChargedAttackAnimation_5: -285708681
-      PlayerChargedAttackAnimation_6: 546463845
-      PlayerChargedAttackAnimation_7: 1609964118
-      PlayerChargedAttackAnimation_8: 662690437
-      PlayerChargedAttackAnimation_9: -1187116970
+      PlayerChargedAttackAnimation_0: 49909403
+      PlayerChargedAttackAnimation_1: 629821951
+      PlayerChargedAttackAnimation_10: -549821835
+      PlayerChargedAttackAnimation_11: 241728452
+      PlayerChargedAttackAnimation_12: -659007593
+      PlayerChargedAttackAnimation_13: 133171126
+      PlayerChargedAttackAnimation_14: -581333131
+      PlayerChargedAttackAnimation_15: 964318639
+      PlayerChargedAttackAnimation_16: 1645211297
+      PlayerChargedAttackAnimation_17: -1380952161
+      PlayerChargedAttackAnimation_18: 259436212
+      PlayerChargedAttackAnimation_19: 1633951147
+      PlayerChargedAttackAnimation_2: 2113976996
+      PlayerChargedAttackAnimation_20: -1101738844
+      PlayerChargedAttackAnimation_21: 883346284
+      PlayerChargedAttackAnimation_3: -1792777711
+      PlayerChargedAttackAnimation_4: 1420246835
+      PlayerChargedAttackAnimation_5: 1075602741
+      PlayerChargedAttackAnimation_6: -480838361
+      PlayerChargedAttackAnimation_7: -1843495235
+      PlayerChargedAttackAnimation_8: 1195576178
+      PlayerChargedAttackAnimation_9: -360844102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

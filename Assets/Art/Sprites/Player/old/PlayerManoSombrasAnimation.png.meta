@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8461c5ea091dcfe4db069c74b0beb686
+guid: 029236d6f6d8eb447bd0a00da33b2340
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -100,19 +100,19 @@ TextureImporter:
       name: PlayerManoSombrasAnimation_0
       rect:
         serializedVersion: 2
-        x: 182
-        y: 327
-        width: 88
-        height: 203
+        x: 183
+        y: 331
+        width: 86
+        height: 188
       alignment: 9
-      pivot: {x: 0.6145909, y: 0.466012}
+      pivot: {x: 0.6183686, y: 0.48822883}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10c8ac97c25f60041b03b81b74653006
-      internalID: 2085928491
+      spriteID: 4413730438d08de44b3621b368ea0957
+      internalID: -159514699
       vertices: []
       indices: 
       edges: []
@@ -122,18 +122,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 327
-        y: 328
+        y: 330
         width: 100
-        height: 192
-      alignment: 9
-      pivot: {x: 0.5530734, y: 0.5193499}
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 428fc4e33d67d564b91f6c1be6301cbe
-      internalID: -1829311954
+      spriteID: 5caf05d2f9d8b254199ce279d859b3bb
+      internalID: 1271978278
       vertices: []
       indices: 
       edges: []
@@ -143,18 +143,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 473
-        y: 328
+        y: 330
         width: 179
-        height: 191
+        height: 189
       alignment: 9
-      pivot: {x: 0.3962242, y: 0.48888505}
+      pivot: {x: 0.39862266, y: 0.46955687}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da4df5b4b2847d9428b61e0228316c06
-      internalID: -41116262
+      spriteID: 2a9647e4d73de434e8f3b56b66442a03
+      internalID: 2139966839
       vertices: []
       indices: 
       edges: []
@@ -164,18 +164,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 663
-        y: 325
+        y: 329
         width: 189
-        height: 193
+        height: 189
       alignment: 9
-      pivot: {x: 0.39890707, y: 0.4945002}
+      pivot: {x: 0.41335398, y: 0.4672151}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 021634c6e3f95904db714c6fcb527336
-      internalID: 480843587
+      spriteID: 8c9ecccb8eb010a4ab792e8d17cd3e41
+      internalID: 1845706563
       vertices: []
       indices: 
       edges: []
@@ -184,19 +184,19 @@ TextureImporter:
       name: PlayerManoSombrasAnimation_4
       rect:
         serializedVersion: 2
-        x: 851
-        y: 325
-        width: 196
-        height: 191
+        x: 853
+        y: 328
+        width: 194
+        height: 188
       alignment: 9
-      pivot: {x: 0.38627002, y: 0.4916639}
+      pivot: {x: 0.39049128, y: 0.4670407}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4b2481866d1c734b8158f7c28408a57
-      internalID: -997402851
+      spriteID: 432cce2c7a5652149b267285eaacde8d
+      internalID: 1284343080
       vertices: []
       indices: 
       edges: []
@@ -206,18 +206,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1102
-        y: 321
+        y: 324
         width: 193
-        height: 191
+        height: 188
       alignment: 9
-      pivot: {x: 0.40650174, y: 0.48888522}
+      pivot: {x: 0.40597677, y: 0.46939492}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 127b0352fbf1df341bdacfe261688123
-      internalID: 1183632265
+      spriteID: d1b74236960183d459490c78f239a707
+      internalID: 1558552750
       vertices: []
       indices: 
       edges: []
@@ -227,18 +227,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1311
-        y: 321
+        y: 325
         width: 199
-        height: 191
+        height: 187
       alignment: 9
-      pivot: {x: 0.41465506, y: 0.4972213}
+      pivot: {x: 0.41770744, y: 0.46449763}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e2586021b9cab941bbb9a215b1653a8
-      internalID: 430991025
+      spriteID: 1a95dd5f3d40362489067219b336a27c
+      internalID: 535001565
       vertices: []
       indices: 
       edges: []
@@ -248,18 +248,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1582
-        y: 331
+        y: 333
         width: 206
-        height: 199
+        height: 197
       alignment: 9
-      pivot: {x: 0.42136478, y: 0.4681473}
+      pivot: {x: 0.4183557, y: 0.428106}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a18f97203db8b1b4b837886a235c566b
-      internalID: -1233705220
+      spriteID: 08b2402d3caaed44d8dd38b6de7468d2
+      internalID: 1122277519
       vertices: []
       indices: 
       edges: []
@@ -269,18 +269,81 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1798
-        y: 325
-        width: 229
-        height: 192
+        y: 330
+        width: 220
+        height: 187
       alignment: 9
-      pivot: {x: 0.487697, y: 0.49999985}
+      pivot: {x: 0.5040233, y: 0.45739713}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f008626400c52854e85c32bb4dbd1995
-      internalID: 2065342977
+      spriteID: 38ec0d084b8846146a880f785ea70e7e
+      internalID: -600492168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerManoSombrasAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 7
+        width: 299
+        height: 213
+      alignment: 9
+      pivot: {x: 0.269836, y: 0.39134878}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 161b29a2cced3014180b951eb693a017
+      internalID: 2094159703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerManoSombrasAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 11
+        width: 322
+        height: 254
+      alignment: 9
+      pivot: {x: 0.24650356, y: 0.31704667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01d21fb3261250541aae7e631fc66746
+      internalID: -995277858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerManoSombrasAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 6
+        width: 349
+        height: 262
+      alignment: 9
+      pivot: {x: 0.2325373, y: 0.31337917}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc0693cd6ea2fd47a698abf63e74217
+      internalID: -1353583558
       vertices: []
       indices: 
       edges: []
@@ -289,145 +352,82 @@ TextureImporter:
       name: PlayerManoSombrasAnimation_16
       rect:
         serializedVersion: 2
-        x: 551
-        y: 7
-        width: 303
-        height: 213
-      alignment: 9
-      pivot: {x: 0.26301962, y: 0.4175555}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a52a01e8ac4d824ea375cb41d88d2fb
-      internalID: 304685809
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_19
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 7
-        width: 325
-        height: 265
-      alignment: 9
-      pivot: {x: 0.24923828, y: 0.34256983}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 376899267bf10704aa4222f32de97b68
-      internalID: -182721136
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_20
-      rect:
-        serializedVersion: 2
-        x: 1259
-        y: 2
-        width: 348
-        height: 268
-      alignment: 9
-      pivot: {x: 0.22678033, y: 0.3298517}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e3baf8162d48bc448f73052196e427e
-      internalID: -1860906046
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_21
-      rect:
-        serializedVersion: 2
         x: 2112
-        y: 11
-        width: 442
-        height: 279
+        y: 14
+        width: 438
+        height: 269
       alignment: 9
-      pivot: {x: 0.15098827, y: 0.35742468}
+      pivot: {x: 0.14946757, y: 0.34726274}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10525e58cbf59684dafbb1f4c3bf945b
-      internalID: 1785356332
+      spriteID: 39ee1d195fa37c542aeda0aab48632f2
+      internalID: -775018221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_22
+      name: PlayerManoSombrasAnimation_9
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 3
         width: 201
-        height: 200
+        height: 197
       alignment: 9
-      pivot: {x: 0.6497309, y: 0.45212048}
+      pivot: {x: 0.67573655, y: 0.40880162}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38d02b1953a081142bf50f0cfe853d48
-      internalID: -1270278505
+      spriteID: 1828331b22166d64d886e697521ee0de
+      internalID: 1693574323
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_23
+      name: PlayerManoSombrasAnimation_10
       rect:
         serializedVersion: 2
         x: 291
-        y: 3
+        y: 10
         width: 152
-        height: 197
+        height: 190
       alignment: 9
-      pivot: {x: 0.47750032, y: 0.50000006}
+      pivot: {x: 0.5140234, y: 0.42307124}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7aa576efa1175904b9d9134c69fbcb65
-      internalID: 380873064
+      spriteID: 14475ea2c0dc45e4da9e24fdf55b75e4
+      internalID: -746444481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerManoSombrasAnimation_24
+      name: PlayerManoSombrasAnimation_15
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 425
-        height: 293
+        x: 1701
+        y: 8
+        width: 401
+        height: 280
       alignment: 9
-      pivot: {x: 0.2260587, y: 0.331124}
+      pivot: {x: 0.19121842, y: 0.30669448}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1282b2975ef40a942899e616ee4d67d2
-      internalID: -1140131252
+      spriteID: cd4c08931ed69724ebd13f1ad725418a
+      internalID: 1130983574
       vertices: []
       indices: 
       edges: []
@@ -443,31 +443,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerManoSombrasAnimation_0: 2085928491
-      PlayerManoSombrasAnimation_1: -1829311954
-      PlayerManoSombrasAnimation_10: 457692091
-      PlayerManoSombrasAnimation_11: -1913976482
-      PlayerManoSombrasAnimation_12: -703507539
-      PlayerManoSombrasAnimation_13: 1626517751
-      PlayerManoSombrasAnimation_14: -1213980542
-      PlayerManoSombrasAnimation_15: -1145801897
-      PlayerManoSombrasAnimation_16: 304685809
-      PlayerManoSombrasAnimation_17: 69998988
-      PlayerManoSombrasAnimation_18: -1276568864
-      PlayerManoSombrasAnimation_19: -182721136
-      PlayerManoSombrasAnimation_2: -41116262
-      PlayerManoSombrasAnimation_20: -1860906046
-      PlayerManoSombrasAnimation_21: 1785356332
-      PlayerManoSombrasAnimation_22: -1270278505
-      PlayerManoSombrasAnimation_23: 380873064
-      PlayerManoSombrasAnimation_24: -1140131252
-      PlayerManoSombrasAnimation_3: 480843587
-      PlayerManoSombrasAnimation_4: -997402851
-      PlayerManoSombrasAnimation_5: 1183632265
-      PlayerManoSombrasAnimation_6: 430991025
-      PlayerManoSombrasAnimation_7: -1233705220
-      PlayerManoSombrasAnimation_8: 2065342977
-      PlayerManoSombrasAnimation_9: -1815651534
+      PlayerManoSombrasAnimation_0: -159514699
+      PlayerManoSombrasAnimation_1: 1271978278
+      PlayerManoSombrasAnimation_10: -746444481
+      PlayerManoSombrasAnimation_11: 70849746
+      PlayerManoSombrasAnimation_12: 2094159703
+      PlayerManoSombrasAnimation_13: -995277858
+      PlayerManoSombrasAnimation_14: -1353583558
+      PlayerManoSombrasAnimation_15: 1130983574
+      PlayerManoSombrasAnimation_16: -775018221
+      PlayerManoSombrasAnimation_17: -1866415413
+      PlayerManoSombrasAnimation_18: 249515222
+      PlayerManoSombrasAnimation_2: 2139966839
+      PlayerManoSombrasAnimation_3: 1845706563
+      PlayerManoSombrasAnimation_4: 1284343080
+      PlayerManoSombrasAnimation_5: 1558552750
+      PlayerManoSombrasAnimation_6: 535001565
+      PlayerManoSombrasAnimation_7: 1122277519
+      PlayerManoSombrasAnimation_8: -600492168
+      PlayerManoSombrasAnimation_9: 1693574323
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
