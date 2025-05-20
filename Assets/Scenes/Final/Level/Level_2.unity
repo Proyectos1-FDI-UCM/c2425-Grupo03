@@ -34606,6 +34606,10 @@ PrefabInstance:
       propertyPath: _transition.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6963699538857583608, guid: 67a95beba8ef6574689c38bc223cd52a, type: 3}
+      propertyPath: m_Name
+      value: Transition
+      objectReference: {fileID: 0}
     - target: {fileID: 9183699875986978095, guid: 67a95beba8ef6574689c38bc223cd52a, type: 3}
       propertyPath: m_Name
       value: LevelLoader

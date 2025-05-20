@@ -416,12 +416,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289810500}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -400, y: -351.9849, z: 0}
+  m_LocalScale: {x: 0.7561437, y: 0.7561437, z: 0.7561437}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 523489468}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &289810504
 MonoBehaviour:
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 523489465}
   - component: {fileID: 523489469}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,6 +551,7 @@ RectTransform:
   - {fileID: 782060550}
   - {fileID: 795086860}
   - {fileID: 1706675573}
+  - {fileID: 289810503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -570,8 +571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5771d42c96651f442b92750da34a7547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playSceneName: Level_2
-  _creditsSceneName: CreditsScene
+  _playSceneName: Level_1
+  _creditsSceneName: Credits
   _introScene: Intro
   _mainMenuSceneName: 
   _playArrow: {fileID: 1278574344}
@@ -1443,7 +1444,7 @@ GameObject:
   - component: {fileID: 1840419430}
   - component: {fileID: 1840419433}
   m_Layer: 5
-  m_Name: CreditsButtom
+  m_Name: CreditsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1800,7 +1801,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 2132946473}
   - {fileID: 523489468}
-  - {fileID: 289810503}
   - {fileID: 7887988406079469445}
   - {fileID: 1820114202}
   - {fileID: 1070137049}
