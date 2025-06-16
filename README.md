@@ -42,6 +42,7 @@ Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* 
   </tr>
 </table>
 
+
 ## Equipo
 - [Adrián Isasi](https://github.com/Cr00kie)
 - [Alejandro Menéndez](https://github.com/Alexscratch1)
