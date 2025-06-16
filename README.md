@@ -24,10 +24,13 @@ Si has detectado un error, crea un nuevo Issue con la plantilla de *Bug Report* 
 
 ## Enlaces
 <h4 align="center">Itch.io</h4>
-
-
 <p align="center">
 <a href="https://cr00kie.itch.io/kingless-dungeon"><img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Link a Itch.io" style="width:80px;height:80px;text-align: center;"></a>
+</p>
+
+<h4 align="center">Steam</h4>
+<p align="center">
+<a href="[https://cr00kie.itch.io/kingless-dungeon](https://store.steampowered.com/app/3772720/Kingless_Dungeon/?beta=0)"><img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Link a Itch.io" style="width:80px;height:80px;text-align: center;"></a>
 </p>
 
 ## Equipo
