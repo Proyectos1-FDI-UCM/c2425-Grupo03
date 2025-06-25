@@ -164,8 +164,6 @@ public class WaveController : MonoBehaviour
         }
     }
 
-    #endregion
-
     /// <summary>
     /// Metodo que sirve para destruir el waveController directamente
     /// </summary>
@@ -179,6 +177,18 @@ public class WaveController : MonoBehaviour
         CameraManager.Instance.EnqueueInstruction(new CameraFollowPlayer(1, 6));
         Destroy(this.gameObject);
     }
+    #endregion
+
+
+    // ---- MÉTODOS PÚBLICOS ----
+    #region Métodos públicos
+
+    public bool CheckWaveState()
+    {
+        return _endWaves;
+    }
+    
+    #endregion
 
 } // class WaveController 
 // namespace

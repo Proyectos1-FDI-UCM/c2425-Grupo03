@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using System;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +22,12 @@ public class PlayerCharge : MonoBehaviour
     /// El porcentaje del daño que se va a quitar de la barra de carga.
     /// </summary>
 
-    
+    [SerializeField] private float OverchargeMultiplier = 0.5f;
+
+    [SerializeField] private float OverchargePenaltyMult = 2f;
+
+    [SerializeField] private float OverchargeOnWavesMultiplier = 0.5f;
+
     [Header("Mano de la sombra")]
     /// <summary>
     /// El valor máximo de la carga de Mano de La Sombra
@@ -43,19 +49,29 @@ public class PlayerCharge : MonoBehaviour
     /// 
     [SerializeField] private float _removedChargePercentage;
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     /// <summary>
     /// Una estructura que define la habilidad.
     /// </summary>
     public struct Ability {
+
         public float currentCharge;
         public bool isCharged;
         public float maxCharge;
+
+        public float currentOvercharge;
+        public bool isOvercharged;
+
+        public float maxOvercharge;
+
+
     }
     private static Ability _abilityManoDeLasSombras;
     private static Ability _abilitySuperDash;
+
+    private WaveController wavecontroller;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -71,11 +87,15 @@ public class PlayerCharge : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public UnityEvent _onChargeChangeSuperDash;
+    [HideInInspector]
+    public UnityEvent _onOverchargeChangeSuperDash;
     /// <summary>
     /// Evento para cuando cambia el valor de la carga de Mano de las Sombras.
     /// </summary>
     [HideInInspector]
     public UnityEvent _onChargeChangeManoSombras;
+    [HideInInspector]
+    public UnityEvent _onOverchargeChangeManoSombras;
     #endregion
     
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -89,12 +109,28 @@ public class PlayerCharge : MonoBehaviour
         GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
         
         _abilityManoDeLasSombras.currentCharge = 0;
+        _abilityManoDeLasSombras.currentOvercharge = 0;
+
+
         _abilityManoDeLasSombras.isCharged = false;
+        _abilityManoDeLasSombras.isOvercharged = false;
+
+
         _abilityManoDeLasSombras.maxCharge = _maxChargeManoDeLasSombras;
+        _abilityManoDeLasSombras.maxOvercharge = _maxChargeManoDeLasSombras;
+
+
 
         _abilitySuperDash.currentCharge = 0;
+        _abilitySuperDash.currentOvercharge = 0;
+
+
         _abilitySuperDash.isCharged = false;
+        _abilitySuperDash.isOvercharged = false;
+
+
         _abilitySuperDash.maxCharge = _maxChargeSuperDash;
+        _abilitySuperDash.maxOvercharge = _maxChargeSuperDash;
 
     }
     #endregion
@@ -111,9 +147,27 @@ public class PlayerCharge : MonoBehaviour
             AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
             _onChargeChangeManoSombras.Invoke();
         }
-        if (!_abilitySuperDash.isCharged) {
+        else if (!_abilityManoDeLasSombras.isOvercharged)
+        {
+            chargePoints *= OverchargeMultiplier;
+            if (wavecontroller.CheckWaveState()) chargePoints *= OverchargeOnWavesMultiplier;
+
+            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            _onOverchargeChangeManoSombras.Invoke();
+        }
+
+        if (!_abilitySuperDash.isCharged)
+        {
             AddChargeAbility(ref _abilitySuperDash, chargePoints);
             _onChargeChangeSuperDash.Invoke();
+        }
+        else if (!_abilitySuperDash.isOvercharged)
+        {
+            chargePoints *= OverchargeMultiplier;
+            if (wavecontroller.CheckWaveState()) chargePoints *= OverchargeOnWavesMultiplier;
+
+            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            _onOverchargeChangeSuperDash.Invoke();
         }
     }
     /// <summary>
@@ -124,15 +178,33 @@ public class PlayerCharge : MonoBehaviour
     {
         // Calcula los puntos de carga que quitar
         float chargePoints = -(_removedChargePercentage / 100 * removedHealth);
-        if (!_abilityManoDeLasSombras.isCharged) {
-        // Quita de la mano de las sombras.
+        if (!_abilityManoDeLasSombras.isCharged) 
+        {
+            // Quita de Mano de las ombras.
+
             AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
             _onChargeChangeManoSombras.Invoke();
         }
-        if (!_abilitySuperDash.isCharged) {
-        // Quita del Super Dash.
+        else if (!_abilityManoDeLasSombras.isOvercharged)
+        {
+            chargePoints *= OverchargePenaltyMult;
+
+            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            _onOverchargeChangeManoSombras.Invoke();
+        }
+        if (!_abilitySuperDash.isCharged)
+        {
+            // Quita del Super Dash.
+
             AddChargeAbility(ref _abilitySuperDash, chargePoints);
             _onChargeChangeSuperDash.Invoke();
+        }
+        else if (!_abilitySuperDash.isOvercharged)
+        {
+            chargePoints *= OverchargePenaltyMult;
+
+            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            _onOverchargeChangeSuperDash.Invoke();
         }
     }
     /// <summary>
@@ -140,8 +212,16 @@ public class PlayerCharge : MonoBehaviour
     /// </summary>
     public void ResetSuperDash()
     {
-        _abilitySuperDash.currentCharge = 0;
-        _abilitySuperDash.isCharged = false;
+        _abilitySuperDash.currentCharge = _abilitySuperDash.currentOvercharge;
+
+        _abilitySuperDash.currentOvercharge = 0;
+
+        if (!_abilitySuperDash.isOvercharged) _abilitySuperDash.isCharged = false;
+
+        _abilitySuperDash.isOvercharged = false;
+
+        _onOverchargeChangeSuperDash.Invoke();
+
         _onChargeChangeSuperDash.Invoke();
     }
     /// <summary>
@@ -149,8 +229,16 @@ public class PlayerCharge : MonoBehaviour
     /// </summary>
     public void ResetManoDeLasSombras()
     {
-        _abilityManoDeLasSombras.currentCharge = 0;
-        _abilityManoDeLasSombras.isCharged = false;
+        _abilityManoDeLasSombras.currentCharge = _abilityManoDeLasSombras.currentOvercharge;
+
+        _abilityManoDeLasSombras.currentOvercharge = 0;
+
+        if (!_abilityManoDeLasSombras.isOvercharged) _abilityManoDeLasSombras.isCharged = false;
+
+        _abilityManoDeLasSombras.isOvercharged = false;
+
+        _onOverchargeChangeManoSombras.Invoke();
+
         _onChargeChangeManoSombras.Invoke();
     }
 
@@ -164,10 +252,20 @@ public class PlayerCharge : MonoBehaviour
     /// <param name="ability">La habilidad a cual se le aplica el cambio.</param>
     /// <param name="chargePoints">El número de puntos de carga para añadir.</param>
     private void AddChargeAbility(ref Ability ability, float chargePoints) {
-        if (!ability.isCharged) {
+        if (!ability.isCharged) 
+        {
             ability.currentCharge = Math.Clamp(ability.currentCharge + chargePoints, 0, ability.maxCharge);
-            if (ability.currentCharge >= ability.maxCharge) {
+            if (ability.currentCharge >= ability.maxCharge) 
+            {
                 ability.isCharged = true;
+            }
+        }
+        else if (!ability.isOvercharged) 
+        {
+            ability.currentOvercharge = Math.Clamp(ability.currentOvercharge + chargePoints, 0, ability.maxOvercharge);
+            if (ability.currentOvercharge >= ability.maxOvercharge)
+            {
+                ability.isOvercharged = true;
             }
         }
     }

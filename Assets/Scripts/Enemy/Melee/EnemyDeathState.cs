@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// El estado de muerte del jugador
+// El estado de muerte del enemigo
 // He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25

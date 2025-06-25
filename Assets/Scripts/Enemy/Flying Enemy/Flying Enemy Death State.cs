@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// El enemigo invocador muere
-// Santiago Salto Molodojen
+// El estado de muerte del enemigo
+// He Deng
 // Kingless Dungeon
 // Proyectos 1 - Curso 2024-25
 //---------------------------------------------------------
@@ -10,9 +10,9 @@ using UnityEngine;
 
 
 /// <summary>
-/// Estado de muerte del Invocador
+/// El estado de muerte del enemigo, espera un tiempo hasta que se "muera"
 /// </summary>
-public class EnemySummonerDeathState : BaseState
+public class FlyingEnemyDeathState : BaseState
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,14 +23,16 @@ public class EnemySummonerDeathState : BaseState
     /// El tiempo de espera
     /// </summary>
     [SerializeField, Min(0)] private float _waitTime;
+
     /// <summary>
-    /// Coge los objetos relacionados con el invocador para eliminarlos
+    /// Sonido para la muerte del enemigo
     /// </summary>
-    [SerializeField] GameObject _prefabEntero;
+    [SerializeField] AudioClip _enemyDeath;
+
     /// <summary>
-    /// Sonido del invocador al morir
+    /// Sonido de tirar el arma del enemigo
     /// </summary>
-    [SerializeField] AudioClip _deathSound;
+    [SerializeField] AudioClip _enemyDropWeapon;
 
     #endregion
 
@@ -49,9 +51,10 @@ public class EnemySummonerDeathState : BaseState
     private float _deadTime;
 
     /// <summary>
-    /// Referencia del tipo EnemySummonerStatemachine del contexto.
+    /// Referencia del tipo EnemyStatemachine del contexto.
     /// </summary>
-    private EnemySummonerStateMachine _ctx;
+    private FlyingEnemyStateMachine _ctx;
+
 
     /// <summary>
     /// El animator del enemigo
@@ -74,32 +77,37 @@ public class EnemySummonerDeathState : BaseState
     /// </summary>
     public override void EnterState()
     {
-
-        SoundManager.Instance.PlaySFX(_deathSound, transform, 0.05f);
         //Coge una referencia de la máquina de estados para evitar hacer más upcasting
-        _ctx = GetCTX<EnemySummonerStateMachine>();
+        _ctx = GetCTX<FlyingEnemyStateMachine>();
 
-        //Coger animator del contexto
-        _animator = _ctx.GetComponent<Animator>();
+        if (_ctx != null)
+        {
+            // Pone el objeto en la capa default para que no pueda ser golpeado
+            _ctx.gameObject.layer = 0;
+
+            //Coger animator del contexto
+            _animator = _ctx.GetComponent<Animator>();
+            // Comienza la animación de muerte
+            _animator?.SetBool("IsDead", true);
+        }
 
         //Calcular el tiempo de la muerte
         _deadTime = Time.time + _waitTime;
 
-        //Establece la animación de morir
-        _animator.SetBool("IsDead", true);
-
-
+        // Reproduce los sonidos al morir
+        SoundManager.Instance.PlaySFX(_enemyDeath, transform, 0.2f);
+        SoundManager.Instance.PlaySFX(_enemyDropWeapon, transform, 0.2f);
     }
-    
+
     /// <summary>
     /// Metodo llamado antes de cambiar a otro estado.
     /// </summary>
     public override void ExitState()
     {
-        
+
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
     #region Métodos Privados o Protegidos
     // Documentar cada método que aparece aquí
@@ -115,7 +123,7 @@ public class EnemySummonerDeathState : BaseState
         //Tras el tiempo de espera el enemigo "muere"
         if (Time.time > _deadTime)
         {
-            Destroy(_prefabEntero);   
+            Destroy(_ctx.gameObject);
         }
     }
 
@@ -125,11 +133,10 @@ public class EnemySummonerDeathState : BaseState
     /// </summary>
     protected override void CheckSwitchState()
     {
-        
+
     }
 
     #endregion   
 
-
-} // class EnemyInvocadorDeathState 
+} // class EnemyDeathState 
 // namespace
