@@ -346,6 +346,9 @@ MonoBehaviour:
   - {fileID: 2133665469649698233}
   - {fileID: 7440391460798179512}
   _blockSound: {fileID: 8300000, guid: 67427ad5ea45c044f8a1df91da2cafdc, type: 3}
+  _enemyDamaged: {fileID: 0}
+  _orbdropchance: 0.4
+  _MagicOrb: {fileID: 6717412914903630746, guid: 85b5f438f51bee24798d1abcb355e80e, type: 3}
 --- !u!114 &8464606913913831553
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,6 +48,10 @@ public class FlyingEnemyStateMachine : StateMachine
     /// </summary>
     [SerializeField]
     AudioClip _enemyDamaged;
+
+    [SerializeField, Range(0, 1)] private float _orbdropchance;
+
+    [SerializeField] GameObject _MagicOrb;
     #endregion
 
 
@@ -158,10 +162,11 @@ public class FlyingEnemyStateMachine : StateMachine
     /// </summary>
     public void DeathState()
     {
-        ChangeState(gameObject.GetComponentInChildren<EnemyDeathState>());
+        if (_orbdropchance >= Random.Range(0.001f, 1f)) Instantiate(_MagicOrb, transform.position, Quaternion.identity);
+        ChangeState(gameObject.GetComponentInChildren<FlyingEnemyDeathState>());
     }
 
     #endregion
 
-} // class EnemyStateMachine 
+} // class FlyingEnemyStateMachine 
 // namespace

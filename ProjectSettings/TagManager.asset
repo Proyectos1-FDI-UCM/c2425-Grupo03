@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Collectable
   - Water
   - UI
   - Player
@@ -21,7 +21,7 @@ TagManager:
   - Removable
   - Void
   - EnemyDistance
-  - 
+  - EnemyBomb
   - 
   - 
   - 

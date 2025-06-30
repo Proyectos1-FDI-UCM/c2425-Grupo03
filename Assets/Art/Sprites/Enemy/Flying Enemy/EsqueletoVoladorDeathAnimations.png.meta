@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: 537891e97b12bf24ba182e4a7935b87b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 37
+        width: 92
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f74ed672c0cb73940abec50705e540fb
+      internalID: 1899427175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 44
+        width: 85
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983da6045f1e4334d8bcd920f667da9c
+      internalID: 1429794118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_3
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 41
+        width: 90
+        height: 163
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed1fc2f04126ad40b9bc9c8c8a65429
+      internalID: 114253365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_4
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 40
+        width: 80
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02bfa9de188ca2244b5915ae493a6e6f
+      internalID: -993210159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_7
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 40
+        width: 72
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75bd459f987835944a37b888c03db7c1
+      internalID: -1716315958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_5
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 40
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 598e1a37297714648ab3f4b7f53e69cf
+      internalID: -566520164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EsqueletoVoladorDeathAnimations_6
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 40
+        width: 77
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 755a0b7fef9a4ff4c95ae5cc038d99e2
+      internalID: 1048703769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      EsqueletoVoladorDeathAnimations_0: 1899427175
+      EsqueletoVoladorDeathAnimations_1: 1429794118
+      EsqueletoVoladorDeathAnimations_10: 772933659
+      EsqueletoVoladorDeathAnimations_11: -383664403
+      EsqueletoVoladorDeathAnimations_12: 1221614234
+      EsqueletoVoladorDeathAnimations_13: -178749972
+      EsqueletoVoladorDeathAnimations_14: -1132807987
+      EsqueletoVoladorDeathAnimations_15: 905141060
+      EsqueletoVoladorDeathAnimations_16: 1500149294
+      EsqueletoVoladorDeathAnimations_17: 165524657
+      EsqueletoVoladorDeathAnimations_18: 217803402
+      EsqueletoVoladorDeathAnimations_19: 495810414
+      EsqueletoVoladorDeathAnimations_2: -1729837028
+      EsqueletoVoladorDeathAnimations_20: 723936013
+      EsqueletoVoladorDeathAnimations_21: 1732065175
+      EsqueletoVoladorDeathAnimations_22: -184662084
+      EsqueletoVoladorDeathAnimations_23: 806776629
+      EsqueletoVoladorDeathAnimations_24: 1321761703
+      EsqueletoVoladorDeathAnimations_25: -1452064579
+      EsqueletoVoladorDeathAnimations_26: -1882637547
+      EsqueletoVoladorDeathAnimations_28: -27725039
+      EsqueletoVoladorDeathAnimations_29: 1555009665
+      EsqueletoVoladorDeathAnimations_3: 114253365
+      EsqueletoVoladorDeathAnimations_30: 1849976885
+      EsqueletoVoladorDeathAnimations_31: 1729035597
+      EsqueletoVoladorDeathAnimations_32: 1351970740
+      EsqueletoVoladorDeathAnimations_33: 561845466
+      EsqueletoVoladorDeathAnimations_34: 1020823129
+      EsqueletoVoladorDeathAnimations_35: 1381592499
+      EsqueletoVoladorDeathAnimations_36: 1394956774
+      EsqueletoVoladorDeathAnimations_37: 1944758979
+      EsqueletoVoladorDeathAnimations_38: -295145647
+      EsqueletoVoladorDeathAnimations_39: 1115399288
+      EsqueletoVoladorDeathAnimations_4: -993210159
+      EsqueletoVoladorDeathAnimations_40: 714284403
+      EsqueletoVoladorDeathAnimations_41: 2126396204
+      EsqueletoVoladorDeathAnimations_42: 516654633
+      EsqueletoVoladorDeathAnimations_43: 1559562549
+      EsqueletoVoladorDeathAnimations_44: 1931092211
+      EsqueletoVoladorDeathAnimations_45: 609931873
+      EsqueletoVoladorDeathAnimations_47: -35502239
+      EsqueletoVoladorDeathAnimations_48: -1544859141
+      EsqueletoVoladorDeathAnimations_49: 193969276
+      EsqueletoVoladorDeathAnimations_5: -566520164
+      EsqueletoVoladorDeathAnimations_50: -46619434
+      EsqueletoVoladorDeathAnimations_51: 1264117966
+      EsqueletoVoladorDeathAnimations_52: -1855967968
+      EsqueletoVoladorDeathAnimations_53: -608021347
+      EsqueletoVoladorDeathAnimations_6: 1048703769
+      EsqueletoVoladorDeathAnimations_7: -1716315958
+      EsqueletoVoladorDeathAnimations_9: 122832254
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

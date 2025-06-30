@@ -16,7 +16,7 @@ MonoBehaviour:
   _tutorialDescription: 'Pulsa <sprite name="KeyK"> .
 
     Esquivas los ataques avanzando
-    hacia delante'
-  _tutorialVideo: {fileID: 32900000, guid: 5513fa0716d57e740aa1216e984b2fd7, type: 3}
+    hacia delante. Puedes hacerlo tanto en el suelo como en el aire'
+  _tutorialVideo: {fileID: 32900000, guid: 1f671147053b8894597c9fbc5ff68cfa, type: 3}
   _keyboardButton: <sprite name="KeyK">
   _controllerButton: <sprite name="XBoxB">

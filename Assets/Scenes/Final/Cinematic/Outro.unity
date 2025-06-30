@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadGame: 0
-  _sceneToLoad: MainMenu_Zhiyi
+  _sceneToLoad: MainMenu
 --- !u!82 &1305398207
 AudioSource:
   m_ObjectHideFlags: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   _playSceneName: Level_1
   _creditsSceneName: 
   _introScene: 
-  _mainMenuSceneName: MainMenu_Zhiyi
+  _mainMenuSceneName: MainMenu
   _playArrow: {fileID: 358384633}
   _exitArrow: {fileID: 0}
   _creditsArrow: {fileID: 0}

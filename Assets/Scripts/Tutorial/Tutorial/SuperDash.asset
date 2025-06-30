@@ -15,6 +15,6 @@ MonoBehaviour:
   _tutorialTitle: Habilidad SuperDash
   _tutorialDescription: "Pulsa <sprite name=\"KeyU\"> .\nDash hacia delante que da\xF1a
     a enemigos."
-  _tutorialVideo: {fileID: 32900000, guid: c687f57da1e0db6498e4a01e7b8d25f9, type: 3}
+  _tutorialVideo: {fileID: 32900000, guid: 11516c4320b36704d9dbafccc094fdac, type: 3}
   _keyboardButton: <sprite name="KeyU">
   _controllerButton: <sprite name="XBoxLB">

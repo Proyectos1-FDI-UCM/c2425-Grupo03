@@ -32,6 +32,18 @@ public class HeavyEnemyStateMachine : StateMachine
         Left = -1,
     }
     [SerializeField] AudioClip _blockSound;
+    // ---- ATRIBUTOS DEL INSPECTOR ----
+    #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// El sonido reproducido al ser golpeado
+    /// </summary>
+    [SerializeField]
+    AudioClip _enemyDamaged;
+
+    [SerializeField, Range(0, 1)] private float _orbdropchance;
+
+    [SerializeField] GameObject _MagicOrb;
+    #endregion
 
     // ---- PROPIEDADES ----
     #region Propiedades
@@ -155,6 +167,7 @@ public class HeavyEnemyStateMachine : StateMachine
     /// </summary>
     public void DeathState()
     {
+        if (_orbdropchance >= Random.Range(0.001f, 1f)) Instantiate(_MagicOrb, transform.position, Quaternion.identity);
         ChangeState(gameObject.GetComponentInChildren<HeavyEnemyDeathState>());
     }
 

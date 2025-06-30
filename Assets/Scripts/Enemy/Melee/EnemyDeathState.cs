@@ -34,8 +34,10 @@ public class EnemyDeathState : BaseState
     /// </summary>
     [SerializeField] AudioClip _enemyDropWeapon;
 
+
+
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -82,6 +84,7 @@ public class EnemyDeathState : BaseState
 
         if (_ctx != null)
         {
+
             // Pone el objeto en la capa default para que no pueda ser golpeado
             _ctx.gameObject.layer = 0;
 
@@ -89,6 +92,8 @@ public class EnemyDeathState : BaseState
             _animator = _ctx.GetComponent<Animator>();
             // Comienza la animación de muerte
             _animator?.SetBool("IsDead", true);
+
+
         }
 
         //Calcular el tiempo de la muerte
@@ -123,6 +128,7 @@ public class EnemyDeathState : BaseState
         //Tras el tiempo de espera el enemigo "muere"
         if(Time.time > _deadTime)
         {
+
             Destroy(_ctx.gameObject);
         }
     }
@@ -135,7 +141,6 @@ public class EnemyDeathState : BaseState
     {
         
     }
-
     #endregion   
 
 } // class EnemyDeathState 

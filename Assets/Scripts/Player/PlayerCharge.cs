@@ -6,9 +6,10 @@
 //---------------------------------------------------------
 
 using System;
-using UnityEditorInternal;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Antes de cada class, descripción de qué es y para qué sirve,
@@ -19,14 +20,16 @@ public class PlayerCharge : MonoBehaviour
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
     /// <summary>
-    /// El porcentaje del daño que se va a quitar de la barra de carga.
+    /// El multiplicador de carga al sobrecargar una habilidad
     /// </summary>
 
     [SerializeField] private float OverchargeMultiplier = 0.5f;
 
-    [SerializeField] private float OverchargePenaltyMult = 2f;
+    /// <summary>
+    /// El multiplicador del daño que se va a quitar de la barra de carga sobrecargada al sufrir daño.
+    /// </summary>
 
-    [SerializeField] private float OverchargeOnWavesMultiplier = 0.5f;
+    [SerializeField] private float OverchargePenaltyMult = 2f;
 
     [Header("Mano de la sombra")]
     /// <summary>
@@ -55,7 +58,8 @@ public class PlayerCharge : MonoBehaviour
     /// <summary>
     /// Una estructura que define la habilidad.
     /// </summary>
-    public struct Ability {
+    public struct Ability
+    {
 
         public float currentCharge;
         public bool isCharged;
@@ -64,14 +68,10 @@ public class PlayerCharge : MonoBehaviour
         public float currentOvercharge;
         public bool isOvercharged;
 
-        public float maxOvercharge;
-
 
     }
     private static Ability _abilityManoDeLasSombras;
     private static Ability _abilitySuperDash;
-
-    private WaveController wavecontroller;
     #endregion
 
     // ---- PROPIEDADES ----
@@ -97,7 +97,7 @@ public class PlayerCharge : MonoBehaviour
     [HideInInspector]
     public UnityEvent _onOverchargeChangeManoSombras;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
     /// <summary>
@@ -107,7 +107,7 @@ public class PlayerCharge : MonoBehaviour
     void Start()
     {
         GetComponent<HealthManager>()._onDamaged.AddListener(RemoveCharge);
-        
+
         _abilityManoDeLasSombras.currentCharge = 0;
         _abilityManoDeLasSombras.currentOvercharge = 0;
 
@@ -117,8 +117,6 @@ public class PlayerCharge : MonoBehaviour
 
 
         _abilityManoDeLasSombras.maxCharge = _maxChargeManoDeLasSombras;
-        _abilityManoDeLasSombras.maxOvercharge = _maxChargeManoDeLasSombras;
-
 
 
         _abilitySuperDash.currentCharge = 0;
@@ -130,7 +128,6 @@ public class PlayerCharge : MonoBehaviour
 
 
         _abilitySuperDash.maxCharge = _maxChargeSuperDash;
-        _abilitySuperDash.maxOvercharge = _maxChargeSuperDash;
 
     }
     #endregion
@@ -141,32 +138,82 @@ public class PlayerCharge : MonoBehaviour
     /// Añade carga a la barra.
     /// </summary>
     /// <param name="chargePoints">Los puntos que se van a añadir a la barra.</param>
-    public void AddCharge(float chargePoints) 
-    {   
-        if (!_abilityManoDeLasSombras.isCharged) {
+    
+    public float GetAbilityCharge(Ability ability)
+    {
+        return ability.currentCharge;
+    }
+    public float GetMaxAbilityCharge(Ability ability)
+    {
+        return ability.maxCharge;
+    }
+    public void ChargeRandomAbility(float orbMultiplier)
+    {
+        if (Random.Range(0, 2) == 0)
+        {
+            float maxcharge = GetMaxAbilityCharge(_abilitySuperDash);
+            float maxOvercharge = GetMaxAbilityCharge(_abilitySuperDash);
+            if (!_abilitySuperDash.isCharged)
+            {
+                AddChargeToOne(ref _abilitySuperDash, maxcharge);
+                AddOverchargeToOne(ref _abilitySuperDash, maxOvercharge * orbMultiplier);
+                _onChargeChangeSuperDash.Invoke();
+                _onOverchargeChangeSuperDash.Invoke();
+            }
+            else AddOverchargeToOne(ref _abilitySuperDash, maxOvercharge); _onOverchargeChangeSuperDash.Invoke();
+        }
+        else
+        {
+            float maxcharge = GetMaxAbilityCharge(_abilityManoDeLasSombras);
+            float maxOvercharge = GetMaxAbilityCharge(_abilityManoDeLasSombras);
+            if (!_abilityManoDeLasSombras.isCharged)
+            {
+                AddChargeToOne(ref _abilityManoDeLasSombras, maxcharge);
+                AddOverchargeToOne(ref _abilityManoDeLasSombras, maxOvercharge * orbMultiplier);
+                _onChargeChangeManoSombras.Invoke();
+                _onOverchargeChangeManoSombras.Invoke();
+            }
+            else AddOverchargeToOne(ref _abilityManoDeLasSombras, maxOvercharge); _onOverchargeChangeManoSombras.Invoke();
+        }
+    }
+    public void AddChargeToOne(ref Ability ability, float chargepoints)
+    {
+        AddChargeAbility(ref ability, chargepoints);
+    }
+    public void AddOverchargeToOne(ref Ability ability, float chargepoints)
+    {
+        AddOverchargeAbility(ref ability, chargepoints);
+    }
+    public void AddCharge(float chargePoints)
+    {
+        if (!_abilityManoDeLasSombras.isCharged)
+        {
             AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+
             _onChargeChangeManoSombras.Invoke();
         }
         else if (!_abilityManoDeLasSombras.isOvercharged)
         {
             chargePoints *= OverchargeMultiplier;
-            if (wavecontroller.CheckWaveState()) chargePoints *= OverchargeOnWavesMultiplier;
 
-            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            AddOverchargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+
             _onOverchargeChangeManoSombras.Invoke();
         }
+
 
         if (!_abilitySuperDash.isCharged)
         {
             AddChargeAbility(ref _abilitySuperDash, chargePoints);
+
             _onChargeChangeSuperDash.Invoke();
         }
         else if (!_abilitySuperDash.isOvercharged)
         {
             chargePoints *= OverchargeMultiplier;
-            if (wavecontroller.CheckWaveState()) chargePoints *= OverchargeOnWavesMultiplier;
 
-            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            AddOverchargeAbility(ref _abilitySuperDash, chargePoints);
+
             _onOverchargeChangeSuperDash.Invoke();
         }
     }
@@ -178,7 +225,7 @@ public class PlayerCharge : MonoBehaviour
     {
         // Calcula los puntos de carga que quitar
         float chargePoints = -(_removedChargePercentage / 100 * removedHealth);
-        if (!_abilityManoDeLasSombras.isCharged) 
+        if (!_abilityManoDeLasSombras.isCharged)
         {
             // Quita de Mano de las ombras.
 
@@ -189,7 +236,7 @@ public class PlayerCharge : MonoBehaviour
         {
             chargePoints *= OverchargePenaltyMult;
 
-            AddChargeAbility(ref _abilityManoDeLasSombras, chargePoints);
+            AddOverchargeAbility(ref _abilityManoDeLasSombras, chargePoints);
             _onOverchargeChangeManoSombras.Invoke();
         }
         if (!_abilitySuperDash.isCharged)
@@ -203,7 +250,7 @@ public class PlayerCharge : MonoBehaviour
         {
             chargePoints *= OverchargePenaltyMult;
 
-            AddChargeAbility(ref _abilitySuperDash, chargePoints);
+            AddOverchargeAbility(ref _abilitySuperDash, chargePoints);
             _onOverchargeChangeSuperDash.Invoke();
         }
     }
@@ -251,26 +298,32 @@ public class PlayerCharge : MonoBehaviour
     /// </summary>
     /// <param name="ability">La habilidad a cual se le aplica el cambio.</param>
     /// <param name="chargePoints">El número de puntos de carga para añadir.</param>
-    private void AddChargeAbility(ref Ability ability, float chargePoints) {
-        if (!ability.isCharged) 
+    private void AddChargeAbility(ref Ability ability, float chargePoints)
+    {
+        if (!ability.isCharged)
         {
             ability.currentCharge = Math.Clamp(ability.currentCharge + chargePoints, 0, ability.maxCharge);
-            if (ability.currentCharge >= ability.maxCharge) 
+            if (ability.currentCharge >= ability.maxCharge)
             {
                 ability.isCharged = true;
             }
         }
-        else if (!ability.isOvercharged) 
+    }
+
+    private void AddOverchargeAbility(ref Ability ability, float chargePoints)
+    {
+        if (!ability.isOvercharged)
         {
-            ability.currentOvercharge = Math.Clamp(ability.currentOvercharge + chargePoints, 0, ability.maxOvercharge);
-            if (ability.currentOvercharge >= ability.maxOvercharge)
+            ability.currentOvercharge = Math.Clamp(ability.currentOvercharge + chargePoints, 0, ability.maxCharge);
+            if (ability.currentOvercharge >= ability.maxCharge)
             {
                 ability.isOvercharged = true;
             }
         }
     }
-    #endregion
+}
+        #endregion
 
 
-} // class PlayerChargeScript 
+     // class PlayerChargeScript 
 // namespace

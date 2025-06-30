@@ -196,6 +196,8 @@ MonoBehaviour:
   - {fileID: 9102361743377871757}
   - {fileID: 134160376055564889}
   _enemyDamaged: {fileID: 8300000, guid: 08a49fadf270249488ff5d000bde870c, type: 3}
+  _orbdropchance: 0.12
+  _MagicOrb: {fileID: 6717412914903630746, guid: 85b5f438f51bee24798d1abcb355e80e, type: 3}
 --- !u!70 &5920572504925010725
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

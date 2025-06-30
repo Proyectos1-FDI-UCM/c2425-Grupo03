@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0385731e465cc5a40b6f57b24a46fb0d, type: 3}
+  m_Name: Sobrecarga de habilidades
+  m_EditorClassIdentifier: 
+  _tutorialTitle: Sobrecarga tus habilidades
+  _tutorialDescription: "Adem\xE1s, si sigues haciendo da\xF1o con una barra de habilidad
+    cargada, podr\xE1s sobrecargar tu habilidad con una barra morada, permiti\xE9ndote
+    usar esa habilidad hasta una vez m\xE1s. Es mucho m\xE1s dif\xEDcil de recargar
+    que la blanca, sin embargo."
+  _tutorialVideo: {fileID: 32900000, guid: f1872bfa4f5b9bc4ea9c44c333723d2f, type: 3}
+  _keyboardButton: 
+  _controllerButton: 

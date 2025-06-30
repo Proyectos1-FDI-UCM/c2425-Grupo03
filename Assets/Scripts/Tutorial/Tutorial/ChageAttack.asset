@@ -15,6 +15,6 @@ MonoBehaviour:
   _tutorialTitle: Como usar ataque cargado
   _tutorialDescription: Manten pulsado <sprite name="KeyJ"> para hacer un ataque
     cargado.
-  _tutorialVideo: {fileID: 32900000, guid: b423ba0d79fb0f64082f8031cf00e8bf, type: 3}
+  _tutorialVideo: {fileID: 32900000, guid: 58ec0cb614bfddb4db696259bb8ac705, type: 3}
   _keyboardButton: ' <sprite name="KeyJ">'
   _controllerButton: <sprite name="XBoxX">

@@ -143,7 +143,6 @@ public class EnemyChaseState : BaseState
     /// </summary>
     protected override void UpdateState()
     {
-
         if (_ctx != null)
         {   //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
             diffX = _ctx.PlayerTransform.position.x - _ctx.transform.position.x;

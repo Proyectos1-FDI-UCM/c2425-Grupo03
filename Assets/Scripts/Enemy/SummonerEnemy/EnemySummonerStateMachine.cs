@@ -42,6 +42,9 @@ public class EnemySummonerStateMachine : StateMachine
     /// </summary>
     [SerializeField] AudioClip _enemyDamaged;
 
+    [SerializeField, Range(0, 1)] private float _orbdropchance;
+
+    [SerializeField] GameObject _MagicOrb;
 
     [SerializeField] GameObject _spellVFX;
     #endregion
@@ -151,6 +154,7 @@ public class EnemySummonerStateMachine : StateMachine
     /// </summary>
     public void DeathState()
     {
+        if (_orbdropchance >= Random.Range(0.001f, 1f)) Instantiate(_MagicOrb, transform.position, Quaternion.identity);
         ChangeState(gameObject.GetComponentInChildren<EnemySummonerDeathState>());
     }
 

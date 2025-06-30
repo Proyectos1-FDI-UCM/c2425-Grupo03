@@ -17,6 +17,6 @@ MonoBehaviour:
 
     Primero atrae enemigos
     y  los empuja.'
-  _tutorialVideo: {fileID: 32900000, guid: c51375dd03a793a4b9ef5deb85ea57ff, type: 3}
+  _tutorialVideo: {fileID: 32900000, guid: 0369b1add59bec0459c48f553e49dbca, type: 3}
   _keyboardButton: <sprite name="KeyI">
   _controllerButton: <sprite name="XBoxRB">

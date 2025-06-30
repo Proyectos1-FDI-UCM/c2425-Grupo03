@@ -16,6 +16,6 @@ MonoBehaviour:
   _tutorialDescription: 'Presiona <sprite name="KeyJ"> para atacar.
 
 '
-  _tutorialVideo: {fileID: 32900000, guid: 32852ba16f3fbc042939b1705c2438f8, type: 3}
+  _tutorialVideo: {fileID: 32900000, guid: 7fa4bef7b95a2cb419145e55fb5113cc, type: 3}
   _keyboardButton: <sprite name="KeyJ">
   _controllerButton: <sprite name="XBoxX">

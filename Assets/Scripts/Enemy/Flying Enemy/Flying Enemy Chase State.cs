@@ -1,0 +1,290 @@
+//---------------------------------------------------------
+// Estado de persecución del enemigo volador.
+// Si el jugador sale del rango de detección se para, pero si entra en el rango de ataque continúa.
+// Alejandro Menéndez Fierro
+// Kingless Dungeon
+// Proyectos 1 - Curso 2024-25
+//---------------------------------------------------------
+
+using UnityEngine;
+// Añadir aquí el resto de directivas using
+
+
+/// <summary>
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
+/// </summary>
+public class FlyingEnemyChaseState : BaseState
+{
+    // ---- ATRIBUTOS DEL INSPECTOR ----
+    #region Atributos del Inspector (serialized fields)
+    /// <summary>
+    /// Velocidad a la que camina el enemigo.
+    /// </summary>
+    [SerializeField]
+    [Tooltip("Enemy horizontal speed in units per second")]
+    float _enemyHorizontalSpeed;
+    [SerializeField]
+    [Tooltip("Enemy vertical speed in units per second")]
+    float _enemyVerticalSpeed;
+
+    private float _minrangeforUp;
+    private float _maxrangeforUp;
+    private float _rangeforDown;
+
+    #endregion
+
+    // ---- ATRIBUTOS PRIVADOS ----
+    #region Atributos Privados (private fields)
+    /// <summary>
+    /// Referencia del tipo EnemyStatemachine del contexto.
+    /// </summary>
+    FlyingEnemyStateMachine _ctx;
+
+    /// <summary>
+    /// Referencia del rigidbody del enemigo.
+    /// </summary>
+    Rigidbody2D _rb;
+
+    /// <summary>
+    /// El animator del enemigo
+    /// </summary>
+    private Animator _animator;
+
+    /// <summary>
+    /// El audio source con el sonido que reproduce el enemigo al andar.
+    /// </summary>
+    [SerializeField] AudioClip _flySound;
+
+    private AudioSource _audioSource;
+
+    private float diffX;
+    private float diffY;
+
+    #endregion
+
+    static float verticalmove;
+    // ---- MÉTODOS DE MONOBEHAVIOUR ----
+    #region Métodos de MonoBehaviour
+
+    private void Start()
+    {
+
+        //Coge una referencia de la máquina de estados para evitar hacer más upcasting
+        _ctx = GetCTX<FlyingEnemyStateMachine>();
+
+        if (_ctx != null)
+        {
+            //Coger animator del contexto
+            _animator = _ctx.GetComponent<Animator>();
+
+            //Coge la referencia al rigidbody por comodidad
+            _rb = _ctx.Rigidbody;
+        }
+        //Coge la referencia al audio source para reproducir sonido de andar.
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (_ctx != null)
+        {
+            //Si el jugador sale del trigger pone el range a false.
+            _ctx.IsPlayerInChaseRange = false;
+        }
+        // Para de reproducir el sonido de andar
+        //_audioSource?.Stop();
+
+    }
+    #endregion
+
+    // ---- MÉTODOS PÚBLICOS ----
+    #region Métodos públicos
+    // Documentar cada método que aparece aquí con ///<summary>
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
+    // Ejemplo: GetPlayerController
+
+    /// <summary>
+    /// Metodo llamado cuando al transicionar a este estado.
+    /// </summary>
+    public override void EnterState()
+    {
+        _minrangeforUp = _ctx.AttackDistance / 2 - 1;
+        _maxrangeforUp = _ctx.AttackDistance - 1;
+        _rangeforDown = _maxrangeforUp;
+
+        _animator?.SetBool("IsAttack", false);
+        _animator?.SetBool("IsChasing", true);
+
+        // Reproduce sonido de volar
+        //_audioSource?.Play();
+        _audioSource = SoundManager.Instance.PlaySFXWithAudioSource(_flySound, transform, 0.5f);
+    }
+
+    /// <summary>
+    /// Metodo llamado antes de cambiar a otro estado.
+    /// </summary>
+    public override void ExitState()
+    {
+        if (_rb != null)
+        {
+            //Al salir del estado de chase, el enemigo nunca se debería mover
+            _rb.velocity = Vector3.zero;
+        }
+
+        // Pone la animación de andar
+        _animator?.SetBool("IsChasing", false);
+        _animator?.SetBool("IsIdle", false);
+
+        // Para el sonido de andar
+        //_audioSource?.Stop();
+        if (_audioSource != null)
+            Destroy(_audioSource);
+    }
+    #endregion
+
+    // ---- MÉTODOS PRIVADOS O PROTEGIDOS ----
+    #region Métodos Privados o Protegidos
+    // Documentar cada método que aparece aquí
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Metodo llamado cada frame cuando este es el estado activo de la maquina de estados.
+    /// </summary>
+    protected override void UpdateState()
+    {
+
+        if (_ctx != null)
+        {   //Actualizamos la dirección en la que mira el enemigo en función de la posición respecto al jugador
+            diffX = _ctx.PlayerTransform.position.x - _ctx.transform.position.x;
+            diffY = _ctx.PlayerTransform.position.y - _ctx.transform.position.y;
+
+            //Solo cambia de direccion si hay diferencia en la posicion X
+            if (Mathf.Abs(diffX) > 0.1f)
+            {
+                _ctx.LookingDirection = diffX > 0 ?
+                FlyingEnemyStateMachine.EnemyLookingDirection.Right : FlyingEnemyStateMachine.EnemyLookingDirection.Left;
+
+                // Invierte el sprite en función de la dirección en la que mira el jugador
+                _ctx.SpriteRenderer.flipX = _ctx.LookingDirection == FlyingEnemyStateMachine.EnemyLookingDirection.Left;
+            }
+            if ((Mathf.Abs(diffY) > _minrangeforUp && Mathf.Abs(diffY) < _maxrangeforUp || _ctx.PlayerTransform.position.y > _ctx.transform.position.y) && CheckRoof())
+            {
+                verticalmove = 1;
+            }
+            else if (Mathf.Abs(diffY) > _rangeforDown && CheckGround())
+            {
+                verticalmove = -1;
+            }
+            else verticalmove = 0;
+        }
+
+        //Comprobacion de que si ha entrado en pausa el juego
+        if (Time.timeScale == 0)
+        {
+            _audioSource.Pause();
+        }
+        else if (Time.timeScale != 0)
+        {
+            _audioSource.UnPause();
+        }
+
+        if (_rb != null)
+        {
+            //Si todavía hay plataforma se mueve, sino se detiene
+            if (CheckEnemyInFront())
+            {
+                _animator.SetBool("IsChasing", true);
+                _animator.SetBool("IsIdle", false);
+
+                _rb.velocity = new Vector2(_enemyHorizontalSpeed * (short)_ctx.LookingDirection, _enemyVerticalSpeed * verticalmove);
+                //if (!_audioSource.isPlaying)
+                //    _audioSource?.Play();
+            }
+            else
+            {
+                _animator.SetBool("IsChasing", false);
+                _animator.SetBool("IsIdle", true);
+                // _rb.velocity = new Vector2(0, _rb.velocity.y);
+                // if (_audioSource.isPlaying)
+                // _audioSource?.Stop();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Método que hace un raycast en la dirección encima del enemigo
+    /// </summary>
+    /// <returns>Devuelve <c>true</c> si no hay techo encima del enemigo </returns>
+    private bool CheckRoof()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y),
+                 Vector2.up, 1.2f, LayerMask.GetMask("Platform"));
+
+        return hit.collider == null;
+    }
+    /// <summary>
+    /// Método que hace un raycast en la dirección debajo del enemigo
+    /// </summary>
+    /// <returns>Devuelve <c>true</c> si no hay suelo debajo del enemigo</returns>
+    private bool CheckGround()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y),
+                 Vector2.down, 1.2f, LayerMask.GetMask("Platform"));
+
+        return hit.collider == null;
+    }
+    /// <summary>
+    /// Lo mismo que CheckGround pero para cuando vaya a disparar (porque podría
+    /// haber una plataforma debajo de el enemigo)
+    private bool CheckGroundForShoot()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y),
+                 Vector2.down, _ctx.AttackDistance / 2, LayerMask.GetMask("Platform"));
+
+        return hit.collider == null;
+    }
+    /// <summary>
+    /// Método para que el enemigo no empuje a otros enemigos.
+    /// Hace un raycast en la dirección que mira el enemigo.
+    /// </summary>
+    /// <returns>Devuelve <c>true</c> si el enemigo puede moverse en la dirección en la que mira</returns>
+    private bool CheckEnemyInFront()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(gameObject.transform.position.x + (float)_ctx.LookingDirection * 0.12f, gameObject.transform.position.y + 0.5f),
+            Vector2.right * (float)_ctx.LookingDirection, 0.1f, LayerMask.GetMask("EnemyDistance"));
+
+        return hit.collider == null || hit.collider.gameObject.GetComponent<EnemySummonerStateMachine>() != null;
+    }
+
+    /// <summary>
+    /// Metodo llamado tras UpdateState para mirar si hay que cambiar a otro estado.
+    /// Principalmente es para mantener la logica de cambio de estado separada de la logica del estado en si
+    /// </summary>
+    protected override void CheckSwitchState()
+    {
+        if (!_ctx.IsPlayerInChaseRange)
+        {
+            //Si el jugador sale de la distancia de persecución vuelve al estado inactivo.
+            _animator?.SetBool("IsChasing", false);
+            Ctx.ChangeState(Ctx.GetStateByType<FlyingEnemyIdleState>());
+        }
+
+        else if (Mathf.Abs(diffY) < _ctx.AttackDistance)
+        {
+            if (_ctx.PlayerTransform.position.x - 0.5 <= _ctx.transform.position.x && _ctx.PlayerTransform.position.x + 0.5 > _ctx.transform.position.x && CheckGroundForShoot())
+            {
+                //Si el jugador esta en el rango de ataque, pasa a atacar
+                _animator?.SetBool("IsChasing", false);
+                _animator?.SetBool("IsAttack", true);
+                Ctx.ChangeState(Ctx.GetStateByType<FlyingEnemyAttackState>());
+            }
+        }
+    }
+
+    #endregion   
+
+} // class EnemyChaseState 
+// namespace

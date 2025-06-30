@@ -182,11 +182,6 @@ public class WaveController : MonoBehaviour
 
     // ---- MÉTODOS PÚBLICOS ----
     #region Métodos públicos
-
-    public bool CheckWaveState()
-    {
-        return _endWaves;
-    }
     
     #endregion
 

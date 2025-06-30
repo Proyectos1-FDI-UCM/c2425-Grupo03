@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0385731e465cc5a40b6f57b24a46fb0d, type: 3}
+  m_Name: "AtaqueA\xE9reo"
+  m_EditorClassIdentifier: 
+  _tutorialTitle: "Ataque a\xE9reo"
+  _tutorialDescription: "Presionar <sprite name=\"KeyJ\"> en el aire har\xE1 un ataque
+    m\xE1s lento pero con m\xE1s rango y fuerza que lo mantendr\xE1 sin caer al suelo
+    mientras dure. Esto lo hace especialmente efectivo contra los enemigos que vuelan."
+  _tutorialVideo: {fileID: 32900000, guid: c2c003d134d16934397945b9822428e6, type: 3}
+  _keyboardButton: ' <sprite name="KeyJ">'
+  _controllerButton: <sprite name="XBoxX">

@@ -199,7 +199,7 @@ public class UIManager : MonoBehaviour
 
 
         // Calculamos el porcentaje de carga
-        float OverchargePercentageOne = _currentOverchargeOne / _playerCharge.SuperDash.maxOvercharge;
+        float OverchargePercentageOne = _currentOverchargeOne / _playerCharge.SuperDash.maxCharge;
 
         // Cambiamos la carga
         _abilityOneSliderOV.value = OverchargePercentageOne;
@@ -228,7 +228,7 @@ public class UIManager : MonoBehaviour
 
         // Calculamos el porcentaje de carga
 
-        float OverchargePercentageTwo = _currentOverchargeTwo / _playerCharge.ManoDeLasSombras.maxOvercharge;
+        float OverchargePercentageTwo = _currentOverchargeTwo / _playerCharge.ManoDeLasSombras.maxCharge;
 
         // Cambiamos la carga
 

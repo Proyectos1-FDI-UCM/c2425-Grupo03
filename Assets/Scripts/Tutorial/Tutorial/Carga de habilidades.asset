@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0385731e465cc5a40b6f57b24a46fb0d, type: 3}
+  m_Name: Carga de habilidades
+  m_EditorClassIdentifier: 
+  _tutorialTitle: Recarga tus habilidades
+  _tutorialDescription: "Hacer da\xF1o a los enemigos otorgar\xE1 energ\xEDa a tus
+    habilidades. Cuando la barra blanca est\xE1 llena, puedes soltar la habilidad
+    escogida. Ahora se te introducir\xE1n tus dos habilidades especiales."
+  _tutorialVideo: {fileID: 32900000, guid: b24b2ba7a76569d4c955c15bad813412, type: 3}
+  _keyboardButton: 
+  _controllerButton: 
